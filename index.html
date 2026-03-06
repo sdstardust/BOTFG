@@ -3,1069 +3,736 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>กระดูกของพระเจ้า</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<title>sdstardust — นิยายออนไลน์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700;900&family=Noto+Sans+Thai:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --void: #080608;
-    --parchment: #ddd3be;
-    --fade: #9a9080;
-    --blood: #7a1515;
-    --ember: #c4622a;
-    --ash: #3d3545;
-    --bone: #c8bfaa;
-    --curse: #4a2060;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--void); color: var(--parchment); font-family: 'Sarabun', sans-serif; font-weight: 300; overflow-x: hidden; }
-  .hero { min-height: 100vh; display: grid; place-items: center; position: relative; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 60%, rgba(122,21,21,0.22) 0%, transparent 65%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(74,32,96,0.18) 0%, transparent 50%), radial-gradient(ellipse 50% 30% at 80% 20%, rgba(196,98,42,0.08) 0%, transparent 50%); }
-  .fracture-line { position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent 0%, rgba(196,98,42,0.4) 40%, rgba(122,21,21,0.6) 60%, transparent 100%); transform: rotate(2deg); }
-  .hero-content { position: relative; text-align: center; padding: 4rem 2rem; z-index: 2; }
-  .genre-tag { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.55em; color: var(--ember); opacity: 0.7; text-transform: uppercase; border: 1px solid rgba(196,98,42,0.25); padding: 0.4rem 1.2rem; margin-bottom: 3rem; animation: appear 1.5s ease both; }
-  h1.title { font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 9vw, 6.5rem); font-weight: 900; line-height: 1; letter-spacing: -0.02em; color: var(--bone); text-shadow: 0 0 80px rgba(122,21,21,0.7), 0 0 160px rgba(122,21,21,0.3), 0 4px 8px rgba(0,0,0,0.9); margin-bottom: 0.3em; animation: appear 1.5s ease 0.2s both; }
-  h1.title span { display: block; font-size: 0.45em; font-weight: 400; letter-spacing: 0.1em; color: var(--fade); opacity: 0.7; margin-top: 0.5em; }
-  .tagline { margin-top: 2.5rem; font-size: 0.9rem; line-height: 1.9; color: var(--fade); max-width: 400px; margin-left: auto; margin-right: auto; font-style: italic; animation: appear 1.5s ease 0.5s both; }
-  .scroll-cue { margin-top: 4rem; font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.5em; color: var(--ember); opacity: 0.4; animation: breathe 3s ease-in-out infinite; }
-  .section { max-width: 800px; margin: 0 auto; padding: 5rem 2rem; }
-  .section-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.55em; color: var(--ember); opacity: 0.6; text-transform: uppercase; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1.2rem; }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(196,98,42,0.3), transparent); }
-  h2 { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 600; color: var(--bone); margin-bottom: 2.5rem; line-height: 1.3; }
-  .synopsis p { font-size: 1rem; line-height: 2.1; color: #c0b49a; margin-bottom: 1.5rem; }
-  .world-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; margin: 3rem 0; border: 1px solid rgba(196,98,42,0.1); }
-  .world-card { padding: 1.8rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(196,98,42,0.08); transition: background 0.3s; }
-  .world-card:hover { background: rgba(122,21,21,0.06); }
-  .world-card .icon { font-size: 1.4rem; margin-bottom: 1rem; opacity: 0.7; }
-  .world-card h3 { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--ember); margin-bottom: 0.8rem; font-weight: 600; }
-  .world-card p { font-size: 0.85rem; line-height: 1.8; color: var(--fade); }
-  .char-list { display: flex; flex-direction: column; gap: 1.5rem; margin: 2rem 0; }
-  .char-card { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding: 1.5rem; border-left: 2px solid var(--blood); background: rgba(122,21,21,0.04); }
-  .char-card.secondary { border-left-color: var(--curse); }
-  .char-card.neutral { border-left-color: var(--ash); }
-  .char-num { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 900; color: var(--blood); opacity: 0.3; line-height: 1; }
-  .char-card.secondary .char-num { color: var(--curse); }
-  .char-card.neutral .char-num { color: var(--ash); }
-  .char-name { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--bone); margin-bottom: 0.3rem; font-weight: 600; }
-  .char-role { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--ember); opacity: 0.6; text-transform: uppercase; margin-bottom: 0.8rem; }
-  .char-desc { font-size: 0.9rem; line-height: 1.9; color: var(--fade); }
-  .outline-list { list-style: none; margin: 2rem 0; counter-reset: chapter; }
-  .outline-item { counter-increment: chapter; display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.8rem; padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); align-items: baseline; }
-  .outline-item::before { content: counter(chapter, upper-roman); font-family: 'Cinzel', serif; font-size: 0.65rem; color: var(--ember); opacity: 0.5; }
-  .outline-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.8rem; }
-  .outline-title { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--bone); white-space: nowrap; }
-  .outline-title::after { content: ' —'; color: var(--ember); opacity: 0.4; }
-  .outline-desc { font-size: 0.82rem; line-height: 1.7; color: var(--fade); }
-  .divider { text-align: center; padding: 2rem 0; color: var(--ember); opacity: 0.25; letter-spacing: 1.2em; font-size: 0.7rem; }
-  .story-wrap { background: linear-gradient(to bottom, rgba(122,21,21,0.04), transparent); border-top: 1px solid rgba(122,21,21,0.15); }
-  .chapter-header { text-align: center; padding: 5rem 2rem 3rem; }
-  .chapter-num { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.6em; color: var(--ember); opacity: 0.6; text-transform: uppercase; margin-bottom: 1.5rem; }
-  .chapter-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 5vw, 3rem); font-weight: 600; color: var(--bone); line-height: 1.2; text-shadow: 0 0 40px rgba(122,21,21,0.4); }
-  .chapter-epigraph { max-width: 400px; margin: 2.5rem auto 0; font-style: italic; font-size: 0.85rem; line-height: 1.9; color: var(--fade); opacity: 0.7; }
-  .story-body { max-width: 680px; margin: 0 auto; padding: 2rem 2rem 8rem; }
-  .story-body p { font-size: 1.05rem; line-height: 2.1; font-weight: 300; color: #c4b99e; margin-bottom: 2rem; text-align: justify; }
-  .dropcap::first-letter { font-family: 'Cinzel', serif; font-size: 5rem; font-weight: 900; float: left; line-height: 0.8; margin-right: 0.1em; margin-top: 0.08em; color: var(--blood); text-shadow: 0 0 30px rgba(122,21,21,0.8); }
-  .story-body blockquote { margin: 2.5rem 0 2.5rem 2rem; padding-left: 1.5rem; border-left: 2px solid rgba(196,98,42,0.4); font-style: italic; font-size: 0.95rem; line-height: 2; color: #9a9080; }
-  .em { color: var(--bone); font-weight: 400; }
-  .dark { color: var(--blood); font-weight: 400; }
-  .whisp { color: #7a8090; font-style: italic; }
-  .scene-break { text-align: center; margin: 3rem 0; color: rgba(196,98,42,0.3); letter-spacing: 1.5em; font-size: 0.65rem; }
-  .end-scroll { text-align: center; padding: 3rem 0 6rem; }
-  .end-scroll p { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.5em; color: var(--ember); opacity: 0.35; margin: 0; }
-  @keyframes appear { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes breathe { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
-  .ash-particle { position: fixed; border-radius: 50%; background: var(--ember); pointer-events: none; animation: ashfall linear infinite; opacity: 0; }
-  @keyframes ashfall { 0% { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 0; } 5% { opacity: 0.2; } 95% { opacity: 0.05; } 100% { transform: translateY(105vh) translateX(40px) rotate(180deg); opacity: 0; } }
+:root {
+  --void: #04030a;
+  --deep: #080614;
+  --surface: #0e0b1e;
+  --card: #110e20;
+  --border: rgba(180,140,255,0.1);
+  --border-hover: rgba(180,140,255,0.35);
+  --star: #e8deff;
+  --dust: rgba(232,222,255,0.5);
+  --muted: rgba(232,222,255,0.3);
+  --purple: #9b6dff;
+  --purple-soft: #c4a8ff;
+  --rose: #ff6b9d;
+  --teal: #4ecdc4;
+  --gold: #f0c060;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--star);
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nebula {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+.nebula-1 {
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, rgba(80,30,160,0.4) 0%, transparent 70%);
+  top: -150px; left: -200px;
+  animation: nebulaDrift 25s ease-in-out infinite alternate;
+}
+.nebula-2 {
+  width: 500px; height: 600px;
+  background: radial-gradient(ellipse, rgba(180,40,100,0.25) 0%, transparent 70%);
+  top: 30%; right: -150px;
+  animation: nebulaDrift 30s ease-in-out infinite alternate-reverse;
+}
+.nebula-3 {
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(20,80,120,0.3) 0%, transparent 70%);
+  bottom: 10%; left: 20%;
+  animation: nebulaDrift 20s ease-in-out infinite alternate;
+}
+@keyframes nebulaDrift {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(40px, 30px) scale(1.1); }
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.4rem 5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(180deg, rgba(4,3,10,0.98) 0%, transparent 100%);
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--star);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.logo em { color: var(--purple-soft); font-style: italic; font-weight: 300; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--purple-soft); }
+
+.hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 6rem;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border: 1px solid var(--border-hover);
+  padding: 0.35rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--purple-soft);
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: riseIn 1s ease 0.2s forwards;
+}
+.hero-badge::before { content: 'star '; }
+.hero-badge::after  { content: ' star'; }
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 11vw, 8.5rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+  opacity: 0;
+  animation: riseIn 1.2s ease 0.4s forwards;
+}
+.hero-title strong {
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--purple-soft) 0%, var(--rose) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-tagline {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 460px;
+  margin: 1.5rem auto 3rem;
+  opacity: 0;
+  animation: riseIn 1.2s ease 0.6s forwards;
+}
+.hero-actions {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  opacity: 0;
+  animation: riseIn 1.2s ease 0.8s forwards;
+}
+.btn-glow {
+  background: linear-gradient(135deg, #7040e0, #b060ff);
+  color: #fff;
+  padding: 0.8rem 2.2rem;
+  border: none;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(130,60,255,0.3);
+}
+.btn-glow:hover { box-shadow: 0 0 50px rgba(130,60,255,0.6); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent;
+  color: var(--dust);
+  padding: 0.8rem 2.2rem;
+  border: 1px solid var(--border-hover);
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--purple-soft); color: var(--purple-soft); transform: translateY(-2px); }
+
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  opacity: 0;
+  animation: riseIn 1s ease 1.5s forwards;
+}
+.scroll-hint span { font-size: 0.6rem; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; }
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(180deg, var(--purple-soft), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity: 0.3; } 50% { opacity: 1; }
+}
+
+.ticker-wrap {
+  position: relative; z-index: 1;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  background: rgba(15,10,30,0.6);
+}
+.ticker-track {
+  display: flex; gap: 0;
+  white-space: nowrap;
+  animation: ticker 22s linear infinite;
+}
+.ticker-item {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding: 0 2rem;
+  flex-shrink: 0;
+}
+.ticker-sep { color: var(--purple); }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.wrap { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 5rem 4rem; }
+.section-eye {
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  color: var(--purple);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.7rem;
+}
+.section-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 3rem;
+}
+
+.pill-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.pill {
+  padding: 0.38rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.pill:hover, .pill.active {
+  border-color: var(--purple);
+  color: var(--purple-soft);
+  background: rgba(155,109,255,0.08);
+}
+
+.featured {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5rem;
+  background: var(--card);
+  transition: border-color 0.4s;
+  text-decoration: none;
+  color: inherit;
+}
+.featured:hover { border-color: var(--border-hover); }
+.feat-cover {
+  position: relative;
+  min-height: 460px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.feat-cover-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0a0520 0%, #1a0a35 40%, #080215 100%);
+}
+.feat-cover-glow {
+  position: absolute;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155,109,255,0.25) 0%, transparent 70%);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+.feat-icon { position: relative; z-index: 2; font-size: 5.5rem; filter: drop-shadow(0 0 30px rgba(155,109,255,0.5)); }
+.feat-badge {
+  position: absolute; top: 1rem; left: 1rem; z-index: 3;
+  font-size: 0.6rem; letter-spacing: 0.25em;
+  color: var(--gold);
+  border: 1px solid rgba(240,192,96,0.4);
+  padding: 0.25rem 0.7rem;
+  text-transform: uppercase;
+  background: rgba(240,192,96,0.08);
+}
+.feat-body {
+  padding: 3rem 3.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.feat-genre-row { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: 2px;
+}
+.tag-horror   { background: rgba(255,80,80,0.12);   color: #ff8080;        border: 1px solid rgba(255,80,80,0.2); }
+.tag-romance  { background: rgba(255,107,157,0.12); color: var(--rose);    border: 1px solid rgba(255,107,157,0.2); }
+.tag-fantasy  { background: rgba(155,109,255,0.12); color: var(--purple-soft); border: 1px solid rgba(155,109,255,0.2); }
+.tag-thriller { background: rgba(78,205,196,0.12);  color: var(--teal);    border: 1px solid rgba(78,205,196,0.2); }
+
+.feat-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+.feat-author { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 1.8rem; }
+.feat-author span { color: var(--purple-soft); }
+.feat-desc {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 0.9rem; line-height: 2;
+  color: var(--dust); margin-bottom: 2.2rem;
+}
+.feat-stats {
+  display: flex; gap: 2.5rem; margin-bottom: 2.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 600;
+  color: var(--purple-soft); display: block;
+  line-height: 1; margin-bottom: 0.2rem;
+}
+.stat-label { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+.read-link {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  color: var(--purple-soft);
+  font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(196,168,255,0.3);
+  padding-bottom: 0.2rem;
+  transition: all 0.3s; width: fit-content;
+}
+.read-link:hover { color: var(--star); border-color: var(--star); letter-spacing: 0.3em; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1.2rem;
+}
+.ncard {
+  display: block; text-decoration: none; color: inherit;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  position: relative;
+}
+.ncard:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 60px rgba(0,0,0,0.6), 0 0 30px rgba(155,109,255,0.08);
+}
+.ncard-cover {
+  height: 270px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; font-size: 3.8rem;
+}
+.ncard-cover-bg { position: absolute; inset: 0; transition: transform 0.6s ease; }
+.ncard:hover .ncard-cover-bg { transform: scale(1.07); }
+.ncard-icon { position: relative; z-index: 2; transition: filter 0.4s; }
+.ncard:hover .ncard-icon { filter: drop-shadow(0 0 20px currentColor); }
+.ncard-status {
+  position: absolute; top: 0.6rem; right: 0.6rem; z-index: 3;
+  font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 0.18rem 0.55rem; border-radius: 2px;
+}
+.s-ongoing { background: rgba(155,109,255,0.2); color: var(--purple-soft); border: 1px solid rgba(155,109,255,0.3); }
+.s-done    { background: rgba(78,205,196,0.15);  color: var(--teal);        border: 1px solid rgba(78,205,196,0.25); }
+.s-new     { background: rgba(240,192,96,0.15);  color: var(--gold);        border: 1px solid rgba(240,192,96,0.25); }
+.s-hiatus  { background: rgba(255,107,157,0.1);  color: var(--rose);        border: 1px solid rgba(255,107,157,0.2); }
+
+.ncard-hover-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(4,3,10,0.9) 0%, transparent 55%);
+  opacity: 0; transition: opacity 0.3s; z-index: 4;
+  display: flex; align-items: flex-end; padding: 1rem;
+}
+.ncard:hover .ncard-hover-overlay { opacity: 1; }
+.ncard-hover-text { font-size: 0.68rem; letter-spacing: 0.25em; color: var(--purple-soft); text-transform: uppercase; }
+
+.ncard-body { padding: 1rem 1.2rem 1.3rem; }
+.ncard-genre { font-size: 0.58rem; letter-spacing: 0.25em; color: var(--purple); text-transform: uppercase; display: block; margin-bottom: 0.35rem; }
+.ncard-title { font-family: 'Noto Serif Thai', serif; font-size: 0.95rem; font-weight: 600; line-height: 1.35; color: var(--star); margin-bottom: 0.25rem; }
+.ncard-ch { font-size: 0.68rem; color: var(--muted); }
+.ncard-ch span { color: var(--dust); }
+
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 3rem 5rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+  background: rgba(4,3,10,0.8);
+}
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--star); letter-spacing: 0.05em; }
+.footer-logo em { color: var(--purple-soft); font-style: italic; }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--purple-soft); }
+.footer-copy { font-size: 0.68rem; letter-spacing: 0.06em; color: rgba(232,222,255,0.18); }
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 2rem; }
+  .nav-links { display: none; }
+  .wrap { padding: 3rem 1.5rem; }
+  .featured { grid-template-columns: 1fr; }
+  .feat-cover { min-height: 240px; }
+  .feat-body { padding: 2rem 1.5rem; }
+  footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+}
 </style>
 </head>
 <body>
 
-<script>
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('div');
-    p.className = 'ash-particle';
-    const sz = Math.random() > 0.6 ? 3 : 1.5;
-    p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}vw;animation-duration:${10+Math.random()*20}s;animation-delay:${Math.random()*15}s`;
-    document.body.appendChild(p);
-  }
-</script>
+<div class="nebula nebula-1"></div>
+<div class="nebula nebula-2"></div>
+<div class="nebula nebula-3"></div>
+<canvas id="starfield"></canvas>
+
+<nav>
+  <a class="logo" href="index.html">sd<em>stardust</em></a>
+  <ul class="nav-links">
+    <li><a href="#novels">นิยาย</a></li>
+    <li><a href="#featured">แนะนำ</a></li>
+    <li><a href="#">ล่าสุด</a></li>
+    <li><a href="#">เกี่ยวกับ</a></li>
+  </ul>
+</nav>
 
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="fracture-line"></div>
-  <div class="hero-content">
-    <div class="genre-tag">Dark Fantasy · Post-Apocalypse · Dark Magic</div>
-    <h1 class="title">กระดูกของพระเจ้า<span>BONES OF THE FALLEN GOD</span></h1>
-    <p class="tagline">เมื่อพระเจ้าตาย โลกไม่ได้สิ้นสุด<br>มันเพียงเริ่มต้นเน่าเปื่อย</p>
-    <div class="scroll-cue">✦ &nbsp; โครงเรื่องและบทที่หนึ่ง–เจ็ด &nbsp; ✦</div>
+  <div class="hero-badge">นิยายกูเองอ่ะ</div>
+  <h1 class="hero-title">sd<strong>stardust</strong></h1>
+  <p class="hero-tagline">ดินแดนแห่งตัวอักษรและจักรวาลอันมืดมิด<br>เรื่องราวที่จะทำให้หัวใจสั่นไหว</p>
+  <div class="hero-actions">
+    <a href="#featured" class="btn-glow">เริ่มอ่านเลย</a>
+    <a href="#novels" class="btn-outline">ดูนิยายทั้งหมด</a>
+  </div>
+  <div class="scroll-hint">
+    <span>เลื่อนลง</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<div class="section synopsis">
-  <div class="section-label">Synopsis</div>
-  <h2>เรื่องย่อ</h2>
-  <p>สองร้อยปีก่อน พระเจ้าองค์เดียวของโลก — <strong>อาร์คาน</strong> — ถูกสังหารโดยสภาเจ็ดนักมายากลที่เชื่อว่าพระเจ้าขัดขวางการเติบโตของมนุษย์ กระดูกยักษ์ของพระองค์กลายเป็นภูเขา แม่น้ำ และที่ราบ เลือดพระเจ้าซึมลงดินจนดินเองมีจิตใจ — จิตใจที่หิวโหยและเกลียดชัง</p>
-  <p>โลกกลายเป็นซากปรักหักพังที่มีชีวิต ลัทธิอาร์คานเติบโตในซอกหลืบของอารยธรรมที่พังทลาย ปกปิดความจริงเกี่ยวกับการตายของพระเจ้า และกำจัดทายาทของสภาเจ็ดทีละคน</p>
-  <p><strong>อีเซล</strong> อายุยี่สิบห้า นักรักษาที่ร่างกายเน่าทุกครั้งที่รักษาคนอื่น ออกเดินทางสู่หัวใจพระเจ้าที่ยังเต้นอยู่ใต้เมืองต้องห้าม ไม่ใช่เพื่อช่วยโลก แต่เพื่อขอโทษ — และค้นพบว่าการขอโทษกับการขอให้ได้รับการยกโทษนั้นไม่ใช่สิ่งเดียวกัน</p>
-</div>
-
-<div class="section">
-  <div class="section-label">World Building</div>
-  <h2>โลกหลังหายนะ — ยุคกระดูก</h2>
-  <div class="world-grid">
-    <div class="world-card"><div class="icon">🦴</div><h3>แผ่นดินผุ</h3><p>ดินที่มีจิตสำนึกบิดเบือน ป่าไม้เติบโตย้อนลงดิน รากขึ้นบนอากาศ สัตว์กลายพันธุ์ดื่มจากสายเลือดพระเจ้าใต้ดิน</p></div>
-    <div class="world-card"><div class="icon">🩸</div><h3>เลือดมนตร์</h3><p>เวทมนตร์ได้จากการตัดเนื้อตัวเอง ยิ่งบาดแผลลึก ยิ่งอำนาจมาก ลัทธิสอนให้สาวกเสียสละอวัยวะเพื่อ "สมทบ" กับร่างพระเจ้า</p></div>
-    <div class="world-card"><div class="icon">🏚️</div><h3>เมืองลอยฟ้า</h3><p>เมืองมนุษย์สร้างบนแท่นกระดูกพระเจ้าขนาดยักษ์ ห้อยอยู่เหนือดินพิษ เชื่อมกันด้วยสะพานลวดและความหวังที่เปราะบาง</p></div>
-    <div class="world-card"><div class="icon">👁️</div><h3>ลัทธิอาร์คาน</h3><p>องค์กรที่มีอำนาจสูงสุด อ้างตนเป็น "ผู้รักษาพระศพ" ปกปิดความจริงเกี่ยวกับการตายของพระเจ้า และกำจัดผู้ที่ค้นพบความจริงนั้น</p></div>
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">สยองขวัญ <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">โรแมนติก <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">แฟนตาซี <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">ผจญภัย <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">ระทึกขวัญ <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">sdstardust <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">สยองขวัญ <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">โรแมนติก <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">แฟนตาซี <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">ผจญภัย <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">ระทึกขวัญ <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">sdstardust <span class="ticker-sep">✦</span></span>
   </div>
 </div>
 
-<div class="section">
-  <div class="section-label">Characters</div>
-  <h2>ตัวละครหลัก</h2>
-  <div class="char-list">
-    <div class="char-card">
-      <div class="char-num">01</div>
-      <div><div class="char-name">อีเซล เวย์น</div><div class="char-role">ฮีโร่ · นักรักษาผู้แบกคำสาป</div><p class="char-desc">ทุกครั้งที่รักษาผู้อื่น เนื้อของเขาเน่าลงหนึ่งนิ้ว มือซ้ายเหลือเพียงกระดูก เขาไม่แสวงหาการรักษาตัวเอง — เขาแสวงหาความเข้าใจว่าทำไมการทำดีจึงต้องแลกด้วยตัวเอง</p></div>
+<div id="featured" class="wrap reveal">
+  <span class="section-eye">✦ หนังสือแนะนำ</span>
+  <h2 class="section-h">เรื่องเด่นประจำเดือน</h2>
+  <span class="section-eye">ไอสัสมีแค่ 2 เรื่อง</span>
+
+  <a class="featured" href="/SOTS/SOTS_ep1.html">
+    <div class="feat-cover">
+      <div class="feat-cover-bg"></div>
+      <div class="feat-cover-glow"></div>
+      <div class="feat-icon">🌑</div>
+      <span class="feat-badge">✦ แนะนำ</span>
     </div>
-    <div class="char-card secondary">
-      <div class="char-num">02</div>
-      <div><div class="char-name">ไซยา "ลิ้น-ดาบ"</div><div class="char-role">ผู้ร่วมทาง · อดีตนักบวชลัทธิ</div><p class="char-desc">หนีออกจากลัทธิอาร์คานหลังรู้ความจริงที่ลัทธิปกปิด ลิ้นของเธอถูกสับเปลี่ยนด้วยลิ้นกระดูกที่พูดความจริงเสมอ — แม้เธอจะไม่ต้องการ ทายาทของผู้ลงมือสังหารพระเจ้า</p></div>
+    <div class="feat-body">
+      <div class="feat-genre-row">
+        <span class="tag tag-romance">โรแมนติก</span>
+        <span class="tag tag-thriller">ระทึกขวัญ</span>
+      </div>
+      <h2 class="feat-title">เงาแห่งราชัน</h2>
+      <p class="feat-author">โดย <span>sdstardust</span></p>
+      <p class="feat-desc">เมื่อเธอสังเกตว่าผู้ร่วมทางของเธอ... ไม่เป็นไปดั่งคำล่ำลือ</p>
+      <div class="feat-stats">
+        <div><span class="stat-num">4</span><span class="stat-label">ตอน</span></div>
+        <div><span class="stat-num">4.9</span><span class="stat-label">★ คะแนน</span></div>
+        <div><span class="stat-num">18.4K</span><span class="stat-label">ผู้อ่าน</span></div>
+      </div>
+      <span class="read-link">อ่านตอนที่ 1 →</span>
     </div>
-    <div class="char-card neutral">
-      <div class="char-num">03</div>
-      <div><div class="char-name">ผู้รับใช้แห่งรอยแตก</div><div class="char-role">ผู้ร้าย · นักบวชชั้นสูงลัทธิ</div><p class="char-desc">ร่างกายครึ่งหนึ่งกลายเป็นหิน เชื่อจริงๆ ว่าการ "ทำให้พระเจ้ากลับมา" คือสิ่งที่จะช่วยโลก และนั่นทำให้เขาอันตรายกว่าคนที่ทำเพราะความโลภ</p></div>
-    </div>
-    <div class="char-card secondary">
-      <div class="char-num">04</div>
-      <div><div class="char-name">เวน</div><div class="char-role">ผู้ร่วมทาง · เด็กหญิงจากหมู่บ้านเงียบ</div><p class="char-desc">อายุสิบขวบ เกือบสมทบกับต้นไม้เลือดพระเจ้า แต่เลือกเดินออกมากับอีเซลแทน ไม่ถามคำถามที่ไม่มีคำตอบ แต่จำทุกอย่างที่เห็น</p></div>
-    </div>
+  </a>
+</div>
+
+<div id="novels" class="wrap reveal">
+  <span class="section-eye">✦ คลังนิยาย</span>
+  <h2 class="section-h">นิยายทั้งหมด</h2>
+
+  <div class="pill-row">
+    <button class="pill active" onclick="filterNovels('all',this)">ทั้งหมด</button>
+    <button class="pill" onclick="filterNovels('สยองขวัญ',this)">สยองขวัญ</button>
+    <button class="pill" onclick="filterNovels('โรแมนติก',this)">โรแมนติก</button>
+    <button class="pill" onclick="filterNovels('แฟนตาซี',this)">แฟนตาซี</button>
+    <button class="pill" onclick="filterNovels('ผจญภัย',this)">ผจญภัย</button>
+    <button class="pill" onclick="filterNovels('ระทึกขวัญ',this)">ระทึกขวัญ</button>
+    <button class="pill" onclick="filterNovels('ตอนเดียวจบ',this)">ตอนเดียวจบ</button>
   </div>
+
+  <div class="grid" id="novelGrid">
+
+    <a class="ncard" href="/SOTS/SOTS_ep1.html" data-genre="โรแมนติก">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#080010 0%,#150520 100%);"></div>
+        <span class="ncard-icon" style="color:#b080ff;">🌑</span>
+        <span class="ncard-status s-ongoing">กำลังเขียน</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">โรแมนติก</span>
+        <div class="ncard-title">เงาแห่งราชัน</div>
+        <div class="ncard-ch">ตอนล่าสุด: <span>ตอนที่ 4</span></div>
+      </div>
+    </a>
+
+    <a class="ncard" href="/BOTFG/BOTFG_1.html" data-genre="ตอนเดียวจบ">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#130422 0%,#2c0808 100%);"></div>
+        <span class="ncard-icon" style="color:#c2072a;">🦴</span>
+        <span class="ncard-status s-ongoing">จบแล้ว</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">ระทึกขวัญ</span>
+        <div class="ncard-title">กระดูกของพระเจ้า</div>
+        <div class="ncard-ch">ตอนทั้งหมด <span>ตอนที่ 7</span></div>
+      </div>
+    </a>
+
+    <!-- <a class="ncard" href="novel-2.html" data-genre="โรแมนติก">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#1a0818 0%,#2a0d25 100%);"></div>
+        <span class="ncard-icon" style="color:#ff6b9d;">🌹</span>
+        <span class="ncard-status s-done">จบแล้ว</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">โรแมนติก</span>
+        <div class="ncard-title">ดาวตกในคืนที่เธอร้องไห้</div>
+        <div class="ncard-ch">ทั้งหมด: <span>38 ตอน</span></div>
+      </div>
+    </a>
+
+    <a class="ncard" href="novel-3.html" data-genre="แฟนตาซี">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#060d1a 0%,#0d1530 100%);"></div>
+        <span class="ncard-icon" style="color:#7ec8ff;">🐉</span>
+        <span class="ncard-status s-ongoing">กำลังเขียน</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">แฟนตาซี</span>
+        <div class="ncard-title">จักรวาลที่เจ็ดแห่งดวงดาว</div>
+        <div class="ncard-ch">ตอนล่าสุด: <span>ตอนที่ 29</span></div>
+      </div>
+    </a>
+
+    <a class="ncard" href="novel-4.html" data-genre="ระทึกขวัญ">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#0a0a0a 0%,#1a0808 100%);"></div>
+        <span class="ncard-icon" style="color:#ff8080;">🕯️</span>
+        <span class="ncard-status s-new">ใหม่!</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">ระทึกขวัญ</span>
+        <div class="ncard-title">ห้องหมายเลข 404</div>
+        <div class="ncard-ch">ตอนล่าสุด: <span>ตอนที่ 7</span></div>
+      </div>
+    </a>
+
+    <a class="ncard" href="novel-5.html" data-genre="โรแมนติก">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#12080f 0%,#200d18 100%);"></div>
+        <span class="ncard-icon" style="color:#ffb3d4;">💌</span>
+        <span class="ncard-status s-ongoing">กำลังเขียน</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">โรแมนติก</span>
+        <div class="ncard-title">จดหมายที่ส่งถึงไม่ถึง</div>
+        <div class="ncard-ch">ตอนล่าสุด: <span>ตอนที่ 14</span></div>
+      </div>
+    </a>
+
+    <a class="ncard" href="novel-6.html" data-genre="สยองขวัญ">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#050010 0%,#100020 100%);"></div>
+        <span class="ncard-icon" style="color:#c084fc;">🪞</span>
+        <span class="ncard-status s-done">จบแล้ว</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">สยองขวัญ</span>
+        <div class="ncard-title">กระจกบอกว่าเธอตายแล้ว</div>
+        <div class="ncard-ch">ทั้งหมด: <span>20 ตอน</span></div>
+      </div>
+    </a>
+
+    <a class="ncard" href="novel-7.html" data-genre="ผจญภัย">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#080f06 0%,#101a08 100%);"></div>
+        <span class="ncard-icon" style="color:#a3e07a;">⚔️</span>
+        <span class="ncard-status s-new">ใหม่!</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">ผจญภัย</span>
+        <div class="ncard-title">ผู้พิทักษ์แห่งขอบโลก</div>
+        <div class="ncard-ch">ตอนล่าสุด: <span>ตอนที่ 4</span></div>
+      </div>
+    </a>
+
+    <a class="ncard" href="novel-8.html" data-genre="แฟนตาซี">
+      <div class="ncard-cover">
+        <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#0a0618 0%,#160d2e 100%);"></div>
+        <span class="ncard-icon" style="color:#e0c0ff;">🌙</span>
+        <span class="ncard-status s-hiatus">หยุดพัก</span>
+      </div>
+      <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
+      <div class="ncard-body">
+        <span class="ncard-genre">แฟนตาซี</span>
+        <div class="ncard-title">ราชินีแห่งดวงจันทร์มืด</div>
+        <div class="ncard-ch">ตอนล่าสุด: <span>ตอนที่ 33</span></div>
+      </div>
+    </a>
+
+  </div> -->
 </div>
 
-<div class="section">
-  <div class="section-label">Story Outline</div>
-  <h2>โครงเรื่อง — ๗ บท</h2>
-  <ol class="outline-list">
-    <li class="outline-item"><div class="outline-row"><span class="outline-title">มือที่เน่า</span><span class="outline-desc">อีเซลรักษาเด็กหญิง เสียนิ้วก้อยไป รับจดหมายนิรนามพร้อมพิกัด "หัวใจ" ลัทธิเริ่มตามรอย</span></div></li>
-    <li class="outline-item"><div class="outline-row"><span class="outline-title">ลงสู่แผ่นดินผุ</span><span class="outline-desc">พบไซยาบนบันไดสะพานลวด ลงสู่แผ่นดินพิษด้วยกัน เรียนรู้ว่าทั้งคู่แบกของตัวเองคนละชิ้น</span></div></li>
-    <li class="outline-item"><div class="outline-row"><span class="outline-title">หมู่บ้านที่กระดูกพูด</span><span class="outline-desc">ชาวบ้านสมทบกับกระดูกพระเจ้าจนสูญเสียตัวตนแต่มีความสุข อีเซลเลือกพาเวนออกมา โดยไม่รู้ว่าทำถูกหรือผิด</span></div></li>
-    <li class="outline-item"><div class="outline-row"><span class="outline-title">ความจริงแรก</span><span class="outline-desc">ไซยาเปิดเผยว่าบรรพบุรุษของอีเซลคือผู้วางแผน และเธอเองคือทายาทของผู้ลงมือสังหาร</span></div></li>
-    <li class="outline-item"><div class="outline-row"><span class="outline-title">เมืองต้องห้าม</span><span class="outline-desc">แทรกซึมลัทธิในฐานะสาวกใหม่ พบผู้รับใช้แห่งรอยแตกที่รู้ตัวตนของอีเซลแต่รอให้เดินเข้าไปเอง</span></div></li>
-    <li class="outline-item"><div class="outline-row"><span class="outline-title">หัวใจที่ยังเต้น</span><span class="outline-desc">หัวใจพระเจ้ามีจิตสำนึก ปฏิเสธการขอโทษ มอบสองทางเลือก อีเซลเรียกร้องทางที่สาม</span></div></li>
-    <li class="outline-item"><div class="outline-row"><span class="outline-title">สิ่งที่เหลืออยู่</span><span class="outline-desc">ลัทธิล่มสลาย ผู้รับใช้วางภาระลง อีเซลตื่นมามีเนื้อครบมือแต่จำชื่อคนที่เขารักษาไม่ได้</span></div></li>
-  </ol>
-</div>
-
-<div class="divider">✦ &nbsp; &nbsp; ✦ &nbsp; &nbsp; ✦</div>
-
-<div class="story-wrap">
-
-<!-- ═══ บทที่หนึ่ง ═══ -->
-<div class="chapter-header">
-  <div class="chapter-num">บทที่หนึ่ง</div>
-  <h2 class="chapter-title">มือที่เน่า</h2>
-  <p class="chapter-epigraph">"นักรักษาที่ดีที่สุดในยุคกระดูก<br>ไม่ใช่คนที่รักษาได้มากที่สุด<br>แต่คือคนที่ยังมีมือเหลืออยู่"<br><em>— คำพังเพยชาวเมืองลอยฟ้า</em></p>
-</div>
-<div class="story-body">
-
-<p class="dropcap">เด็กหญิงร้องเสียงดังพอที่ทำให้นกกลายพันธุ์บนสะพานลวดบินหนี ร่างเล็กๆ นอนบนพื้นหินเปื้อนเขม่า มีสีเทาของดินพิษซึมขึ้นตามเส้นเลือดที่คอ — อาการของคนที่สูดดมไอดินเข้าไปนานเกินไป สองวันอีกก็คงกลายเป็นอีกชิ้นส่วนหนึ่งของกระดูกพระเจ้า</p>
-
-<p>อีเซล เวย์น หมอบลงข้างๆ เธอ ดึงถุงมือหนังออกจากมือซ้าย แล้วหยุดอยู่ครู่หนึ่ง นิ้วทั้งห้าของมือซ้ายเป็นกระดูกขาวล้วน ข้อต่อยังขยับได้ เส้นเอ็นที่เหลืออยู่ทำงานเหมือนหุ่นเชิด เขาพิจารณาตัวเองราวกับมองชิ้นส่วนที่ไม่เป็นของตัวเอง — นิสัยที่ฝึกมาสามปีเพื่อไม่ให้มือสั่น</p>
-
-<p>แม่เด็กคุกเข่าอยู่ข้างๆ หัวเข่าถูพื้นหินจนขาว เธออายุน้อยกว่าที่หน้าตาแสดง อาจจะยี่สิบต้นๆ แต่ดวงตาไม่ใช่ดวงตาคนยี่สิบ มันเป็นดวงตาที่เห็นอะไรบางอย่างมานานเกินไป</p>
-
-<blockquote>
-  "หมอ" เธอเปล่งเสียงแหบแห้ง "ได้โปรด เธอคือทุกอย่างของฉัน ฉันมีเพียง—"<br><br>
-  "รู้แล้ว" อีเซลพูดขัด ไม่ใช่เพราะไม่แยแส แต่เพราะการฟังต่อจะทำให้หยุดทำสิ่งที่กำลังจะทำได้ยากขึ้น "ถอยออกไปหน่อย ไม่ต้องไกลมาก แค่พอที่ฉันจะทำงานได้"
-</blockquote>
-
-<p>แม่เด็กไม่ขยับ เขามองขึ้นไปที่เธอครั้งเดียว ไม่พูดอะไรเพิ่ม ครู่ต่อมาเธอก็ถอยออกไปสองก้าว</p>
-
-<p>เขาวางฝ่ามือกระดูกลงบนหน้าอกเด็ก กระดูกเย็น เด็กหญิงสะดุ้งเล็กน้อยแต่ไม่ร้องอีก ฝ่ามืออีกข้างหนึ่ง — ข้างที่ยังมีเนื้อ — วางทับไว้ข้างบน อุณหภูมิสองด้านต่างกันราวกับมือของสองคน</p>
-
-<p>ตาหลับ หายใจเข้าลึก</p>
-
-<p>ความอบอุ่นไหลออกจากอก มันไม่ได้มาจากหัวใจ มันมาจากที่ไหนสักที่ที่ลึกกว่า — จากบ่อน้ำที่ไม่เคยแห้ง แต่ทุกครั้งที่ตักขึ้นมา ขอบบ่อก็พังลงไปอีกนิด อีเซลรู้สึกถึงความอุ่นนั้นไหลผ่านแขน ผ่านนิ้ว เข้าสู่ร่างเด็กหญิง เส้นเทาๆ ที่คอค่อยๆ จางลง ช้าๆ อย่างที่เขาไม่อยากให้ช้า แต่มันช้าเสมอ เสมอมา</p>
-
-<p>และมือขวาของเขา — <span class="dark">เน่า</span></p>
-
-<p>ไม่ใช่ภาพ ไม่ใช่อุปมา มันเน่าจริงๆ เนื้อที่โคนนิ้วก้อยขวาเริ่มเปลี่ยนสีเป็นเทาอมม่วง เหมือนผลไม้ที่ทิ้งไว้กลางแดดนานเกินไป อีเซลเงยหน้าขึ้นมองตรงๆ ขณะเนื้อยุบลง ขณะกระดูกเริ่มเผยออกจากใต้ผิวหนัง เขาไม่หลับตา ไม่หันหน้าหนี นั่นคือสัญญาที่เขาทำกับตัวเองตั้งแต่ปีแรก — <span class="em">อย่าทำราวกับว่ามันไม่เกิดขึ้น</span></p>
-
-<p>เด็กหญิงหายใจเฮือกขึ้น และร้องไห้ด้วยเสียงเด็กปกติ เสียงที่ไม่ได้ปนเปื้อนอะไร</p>
-
-<p>แม่เด็กวิ่งเข้ามาก่อนที่เขาจะดึงมือออกด้วยซ้ำ กอดลูกไว้แน่น ร้องไห้เสียงดังกว่าเด็กอีก อีเซลลุกขึ้นช้าๆ ใส่ถุงมือหนังกลับ ปิดนิ้วก้อยที่กำลังเปลือยกระดูกไว้ ถุงมือของเขาออกแบบมาสำหรับสิ่งนี้โดยเฉพาะ — หนาพอที่ไม่มีใครเห็น บางพอที่เขายังรู้สึกได้ว่าร่างกายยังมีอยู่</p>
-
-<blockquote>
-  "ค่ารักษาเท่าไหร่" แม่เด็กถาม เงยหน้าขึ้นมาในขณะที่ยังกอดลูกอยู่<br><br>
-  "ไม่เป็นไร"<br><br>
-  เธอส่ายหน้า "ฉันจะหาให้ได้ ไม่ว่าจะเท่าไหร่"<br><br>
-  อีเซลมองเธอ มองเด็กหญิงในอ้อมแขน มองมือของตัวเองที่ซ่อนอยู่ในถุงมือหนัง "เก็บไว้ให้ลูกเถอะ" เขาพูดแล้วหันหลังก่อนที่เธอจะพูดอะไรต่อ
-</blockquote>
-
-<p>เขาไม่ชอบคำขอบคุณ ไม่ใช่เพราะถ่อมตัว แต่เพราะทุกครั้งที่ได้ยิน มันทำให้เขานึกไปถึงสิ่งที่เขาแลกมา และการนึกถึงมันมากเกินไปทำให้การลงมือทำครั้งต่อไปยากขึ้น</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>ตลาดเช้าของเมืองลอยฟ้าวัลแมร์เปิดรับแสงสีส้มขุ่นที่กรองผ่านชั้นหมอกพิษ แสงชนิดนี้ไม่ได้ให้ความอบอุ่น มันแค่บอกให้รู้ว่ายังไม่ถึงคืน พ่อค้าแม่ค้าตั้งแผงขายของตั้งแต่รุ่งสาง เพราะในวัลแมร์ ยิ่งออกมาเร็วยิ่งดี — อากาศในตลาดเปิดดีกว่าในห้องที่ไม่มีการระบาย และหมอกพิษหนาที่สุดช่วงดึก</p>
-
-<p>อีเซลเดินผ่านแผงค้าขายโดยใส่ถุงมือหนังกลับแล้ว ไม่มีใครถามถึงนิ้วก้อยที่หายไป ในวัลแมร์ การสูญเสียอวัยวะไม่ใช่เรื่องพิเศษ แผงขายขาเทียมตั้งอยู่ข้างๆ แผงขายขนมปัง แผงซื้อ-ขายนิ้วที่ยังดีอยู่ตั้งอยู่ถัดไปอีกสองแผง เป็นเรื่องปกติอย่างที่สิ่งผิดปกติจะกลายเป็นเมื่อมันอยู่นานพอ</p>
-
-<p>เขาซื้อขนมปังแผ่นหนึ่งกับน้ำกระบอกเล็ก กินขณะเดิน รสชาติเหมือนเถ้าถ่าน — เหมือนทุกอย่างในช่วงสองปีที่ผ่านมา นับตั้งแต่ต่อมรับรสถูกกระดูกพระเจ้าเล็กๆ ที่หลุดเข้าไปทำลายในน้ำดื่ม ของหวานยังแยกแยะได้ ของขมยังแยกได้ แต่ทุกอย่างมีฐานรสเดียวกัน — เถ้า</p>
-
-<p>บางครั้งเขานึกว่านั่นคือรสชาติของโลกนี้จริงๆ ที่เหลือล้วนเป็นภาพลวงตาที่ลิ้นของคนอื่นสร้างให้ตัวเองเพื่อความอยู่รอด</p>
-
-<p>เขาหยุดที่แผงหนังสือเก่า พลิกดูสองสามเล่ม ไม่ได้อยากซื้อ แค่อยากให้มือมีอะไรทำ พ่อค้าหนังสือ — ชายอ้วนที่ขาขวาเป็นไม้จนถึงสะโพก — มองเขาด้วยตาแคบๆ แต่ไม่พูดอะไร ลูกค้าที่วัลแมร์มีสองประเภท: ประเภทที่ถามราคา และประเภทที่แค่อยากจับของ อีเซลเป็นประเภทหลัง และพ่อค้าหนังสือรู้จักประเภทนั้นดี</p>
-
-<blockquote>
-  "มีอะไรเกี่ยวกับสภาเจ็ดคนไหม" อีเซลถามโดยไม่เงยหน้าจากหนังสือ<br><br>
-  พ่อค้าหนังสือนิ่งไปครู่หนึ่ง "สภาไหน"<br><br>
-  "ก็สภา" อีเซลวางหนังสือลง "สองร้อยปีก่อน"<br><br>
-  "ไม่มี" ชายคนนั้นตอบเร็วเกินไป "และถ้าคิดว่ามี ก็อย่ามาถามที่นี่อีก"
-</blockquote>
-
-<p>อีเซลพยักหน้าและเดินต่อไป ไม่ได้โกรธ ไม่ได้แปลกใจ มันเป็นคำตอบเดิมที่เขาได้มาสิบสองครั้งในสิบสองเมืองที่ผ่านมา ชื่อสภาเจ็ดคนเป็นสิ่งที่คนรู้จักแต่ไม่พูดถึง เหมือนชื่อโรคที่ทำให้เป็นตาย</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>ห้องของเขาในโรงแรมเก่าชั้นสาม หน้าต่างหันออกไปทางสะพานลวดสายใหญ่ที่เชื่อมวัลแมร์กับเมืองถัดไป จดหมายรออยู่บนที่นอน</p>
-
-<p>เขาไม่ล็อกห้อง ใครก็ตามที่ตามรอยเขาได้จนถึงวัลแมร์ไม่จำเป็นต้องมีกุญแจ ซองกระดาษสีน้ำตาลไม่มีตราประทับ ไม่มีชื่อผู้ส่ง มีเพียงพิกัดที่เขียนด้วยหมึกสีแดงซีด — สีของเลือดที่เริ่มแห้ง และประโยคสั้นๆ ใต้พิกัด:</p>
-
-<blockquote>
-  <span class="em">"หัวใจพระเจ้ายังเต้น<br>และมันจำบรรพบุรุษของเจ้าได้"</span>
-</blockquote>
-
-<p>อีเซลนั่งลงบนขอบที่นอน มองจดหมายนานกว่าที่ควร มือขวาที่เพิ่งสูญเสียนิ้วก้อยวางนิ่งบนเข่า ถุงมือหนังกลบทุกอย่างไว้ หน้าต่างที่เปิดไว้รับลมพาเสียงตลาดมาแว่วๆ เสียงต่อรอง เสียงเด็กร้อง เสียงโลหะกระทบกัน เสียงปกติของคนที่ยังมีชีวิตอยู่และยังต้องซื้อของ</p>
-
-<p>เขาคิดถึงนิ้วที่เพิ่งหายไป คิดถึงนิ้วก้อยซ้ายที่หายไปก่อนหน้านั้นสามเดือน คิดถึงนิ้วนางซ้าย นิ้วกลางซ้าย นิ้วชี้ซ้าย และหัวแม่มือซ้ายที่หายไปก่อนหน้านั้นอีก คิดถึงสี่ร้อยสิบแปดคนที่รักษาก่อนเด็กหญิงในวันนี้</p>
-
-<p>เขาพับจดหมายเก็บไว้ในเสื้อ ลุกขึ้น และเริ่มเก็บของ</p>
-
-<p><span class="whisp">ไม่ใช่เพราะเขากล้าหาญ ไม่ใช่เพราะเขาอยากตาย และแน่นอนที่สุด — ไม่ใช่เพราะเขาเชื่อว่าตนเองจะรอดกลับมา</span> แต่เพราะในบรรดาสิ่งที่เขาสูญเสียไปแล้ว — นิ้ว เนื้อ รสชาติ ชื่อที่คนอื่นจำได้ — สิ่งเดียวที่ยังเหลืออยู่คือคำถาม และคำถามนั้นต้องการคำตอบก่อนที่จะไม่มีมือเหลือพอให้เคาะประตู</p>
-
-<p>เขาเก็บของเสร็จภายในหนึ่งชั่วโมง เดินออกจากโรงแรมโดยไม่คืนกุญแจ เจ้าของโรงแรมไม่ถามอะไร ในวัลแมร์ คนที่จ่ายล่วงหน้าและออกไปโดยไม่บอกกล่าวเป็นเรื่องปกติ บางครั้งพวกเขากลับมา บางครั้งไม่</p>
-
-</div>
-<div class="end-scroll" style="padding-bottom:2rem;"><p>✦ &nbsp; จบบทที่หนึ่ง &nbsp; ✦</p></div>
-
-<!-- ═══ บทที่สอง ═══ -->
-<div class="chapter-header">
-  <div class="chapter-num">บทที่สอง</div>
-  <h2 class="chapter-title">ลงสู่แผ่นดินผุ</h2>
-  <p class="chapter-epigraph">"คนที่ลงไปใต้หมอกพิษมีสองประเภท<br>คนที่ไม่รู้ว่ากำลังทำอะไร<br>และคนที่รู้แต่ก็ยังไป"<br><em>— ไซยา "ลิ้น-ดาบ" ก่อนออกเดินทาง</em></p>
-</div>
-<div class="story-body">
-
-<p class="dropcap">สะพานลวดสายสุดท้ายของวัลแมร์ห้อยอยู่เหนือหมอกพิษอย่างไม่มั่นใจในตัวเอง ลวดสานกันเป็นพันเส้นและเคลือบด้วยยางไม้กันสนิม แต่บางจุดสนิมก็ชนะอยู่ดี อีเซลยืนอยู่ที่ขอบ มองลงไปในชั้นสีเทาอมเขียวที่ปกคลุมพื้นดินเบื้องล่าง เหมือนมองลงไปในปากของสิ่งที่มีชีวิตและกำลังหายใจ</p>
-
-<p>เขาผูกผ้าปิดปากหนาสามชั้น ตรวจสอบถุงมือหนัง ตรวจสอบเป้สะพายหลังที่บรรจุสิ่งของสำหรับเดินทางไม่เกินสิบวัน น้ำสะอาดหกกระติก อาหารแห้ง เครื่องมือรักษาพื้นฐาน และกระดาษสำหรับเขียน เขาเก็บของน้อยกว่าคนส่วนใหญ่เพราะรู้ว่ายิ่งน้อยยิ่งเดินได้ไกล</p>
-
-<p>บันไดเหล็กลงจากสะพานพาเขาผ่านชั้นหมอกแรก — อุณหภูมิลดลงทันที ราวกับดำดิ่งลงในน้ำ กลิ่นเปลี่ยนจากกลิ่นตลาดและควันไฟเป็นกลิ่นโลหะและบางอย่างที่ไม่มีชื่อ กลิ่นที่เขาเรียนรู้ที่จะไม่หายใจลึกๆ</p>
-
-<p>เขาไม่รู้ว่ามีคนตามมาจนกระทั่งได้ยินเสียง</p>
-
-<blockquote>
-  "เจ้าลงมาผิดทางนะ" เสียงผู้หญิงดังจากด้านหลัง ไม่ได้กระซิบ ไม่ได้ตะโกน — ระดับเสียงที่คนจะใช้เวลาบอกว่าแก้วน้ำอยู่ทางซ้ายมือ<br><br>
-  อีเซลไม่หันหลัง "ฉันรู้ว่าต้องลงมายังไง"<br><br>
-  "ฉันรู้ว่าเจ้ารู้ แต่เจ้าลงมาผิดทางอยู่ดี บันไดทางตะวันออกมีจุดที่หมอกจางกว่า เจ้าจะไม่ต้องผูกผ้าหนาขนาดนั้น"
-</blockquote>
-
-<p>เขาหยุดและหันกลับไป</p>
-
-<p>หญิงสาวยืนอยู่บนขั้นบันไดเหนือเขาสองขั้น อายุราวยี่สิบต้น ผมสั้นราวกับถูกตัดด้วยมีดแทนกรรไกร สวมเสื้อผ้าหลายชั้นในสีดินและสีเถ้า ไม่ได้พะรุงพะรังแต่ก็ไม่ได้เบา เหมือนคนที่รู้ว่าจะแบกอะไรนานแค่ไหน และมีสิ่งหนึ่งที่อีเซลสังเกตเห็นก่อนอื่น — ปากของเธอเปิดอยู่เล็กน้อยแม้ไม่ได้พูด และตรงกลางปากนั้น แทนที่จะเป็นเนื้อสีชมพู มันเป็น <span class="em">กระดูกขาว</span></p>
-
-<p>ลิ้นกระดูก เขาเคยได้ยินถึงแต่ไม่เคยเห็น ลัทธิอาร์คานทำกับสาวกที่พวกเขาต้องการให้ "พูดเฉพาะความจริง" — ตัดลิ้นเนื้อออก ใส่ลิ้นที่ทำจากกระดูกพระเจ้าแทน ลิ้นชนิดนั้นพูดได้ แต่มันไม่ยอมโกหก</p>
-
-<blockquote>
-  "ฉันชื่อไซยา" เธอพูด ลิ้นกระดูกกระทบฟันออกเสียงแปลกประหลาดเล็กน้อย เหมือนเสียงเหรียญกลิ้งบนพื้นหิน "ที่ที่เจ้าจะไป ฉันก็ไปที่เดียวกัน"<br><br>
-  "เจ้ารู้ว่าฉันจะไปไหน" เขาพูด ไม่ใช่คำถาม<br><br>
-  "ฉันรู้ว่าเจ้าไปที่ที่ฉันต้องการไปเหมือนกัน" เธอแก้ "นั่นคือทั้งหมดที่ฉันจะบอก ตอนนี้"
-</blockquote>
-
-<p>อีเซลมองเธอนานพอที่จะรู้ว่าเธอไม่ได้โกหก — เธอไม่มีทางโกหกได้ นั่นทำให้เธอน่าสงสัยยิ่งกว่าคนที่โกหกได้ทุกประโยค คนที่โกหกได้มีเหตุผลที่เข้าใจได้ คนที่โกหกไม่ได้และยังปิดบังได้นั้นน่ากังวลกว่า</p>
-
-<blockquote>
-  "เจ้ามาจากไหน" เขาถาม<br><br>
-  "จากที่ที่ฉันไม่อยากกลับไป" เธอตอบ "แล้วเจ้ามาจากไหน"<br><br>
-  "จากที่ที่ไม่มีอะไรให้กลับไปหา"<br><br>
-  ไซยาพิจารณาคำตอบนั้นสักครู่ แล้วพยักหน้าเล็กน้อย "ก็คล้ายกัน ไปต่อไหม"
-</blockquote>
-
-<p>เขาไม่บอกว่าใช่ เขาแค่หันหลังและลงต่อไป และเธอก็ตามมา</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>พื้นดินเบื้องล่างหมอกไม่ได้ดูเหมือนดินปกติ มันเป็นสีม่วงอมเทา มีผิวสัมผัสราวกับผิวหนังที่แห้งแตก รอยแตกระหว่างก้อนดินมีแสงสีส้มจางๆ เรืองออกมา — เลือดพระเจ้าที่ยังไม่แข็งตัวเต็มที่แม้จะผ่านมาสองร้อยปี</p>
-
-<p>อีเซลก้าวลงไปบนพื้น รู้สึกถึงความอุ่นใต้ฝ่าเท้าแม้ผ่านชั้นหนังรองเท้าหนา มันเต้นเป็นจังหวะ ช้า และสม่ำเสมอ <span class="whisp">หัวใจ</span> เขาคิด <span class="whisp">ทั้งโลกคือหัวใจที่ยังไม่ยอมตาย</span></p>
-
-<p>ไซยาลงมาถึงพื้นด้วยก้าวที่แน่วแน่กว่าเขา เท้าของเธอไม่ส่งเสียง เหมือนพื้นดินรู้จักเธอ หรือเธอรู้จักพื้นดิน</p>
-
-<blockquote>
-  "เจ้าเดินทางมาแบบนี้บ่อยไหม" เขาถามขณะเริ่มเดิน<br><br>
-  "บ่อยพอที่จะรู้ทาง" เธอตอบ "เจ้าล่ะ"<br><br>
-  "ครั้งแรกที่ลงมาต่ำขนาดนี้"<br><br>
-  "รู้สึกอย่างไร"<br><br>
-  อีเซลนึกถึงความอุ่นใต้ฝ่าเท้า นึกถึงการเต้นช้าๆ ของสิ่งที่อยู่ใต้ดิน "เหมือนกำลังเดินเข้าไปในบางอย่าง"<br><br>
-  "เพราะเจ้ากำลังเดินเข้าไปในบางอย่างจริงๆ" เธอพูดเรียบๆ "แผ่นดินผุคือซากร่างพระเจ้า เวลาเดินอยู่บนนี้คือเวลาที่เดินอยู่บนร่างของบางสิ่งที่ยังไม่สิ้นสุดดี"
-</blockquote>
-
-<p>พวกเขาเดินไปในความเงียบสักพัก เสียงเดียวที่ได้ยินคือเสียงเท้าบนดินแห้ง และเสียงลมพิษที่ผ่านไปเป็นคลื่นต่ำๆ บางครั้งดินตรงหน้าขยับเล็กน้อย ราวกับหายใจ อีเซลเดินอ้อม ไซยาเดินตรง</p>
-
-<blockquote>
-  "เจ้าไม่กลัวบ้างเหรอ" เขาสังเกต<br><br>
-  "ฉันกลัว" เธอพูด "แต่ความกลัวกับการหยุดเป็นคนละเรื่องกัน"
-</blockquote>
-
-<p>เขาไม่ตอบ แต่เขาจำประโยคนั้นไว้</p>
-
-<p>มือซ้ายของเขา — มือกระดูก — เริ่มอุ่นขึ้น ไม่ใช่อุณหภูมิจากภายนอก แต่อุ่นจากข้างใน ราวกับกระดูกที่เคยเป็นของเขาจำอะไรบางอย่างได้ อีเซลกำมือแน่น กดนิ้วกระดูกเข้าหากัน เสียงกรอบแกรบเล็กๆ ดังขึ้นในความเงียบ ไซยาหันมามองแต่ไม่พูดอะไร</p>
-
-<blockquote>
-  "มือเจ้าเป็นแบบนั้นมานานแค่ไหน" เธอถามในที่สุด ขณะที่สายตายังมองข้างหน้า<br><br>
-  "สามปี"<br><br>
-  "มันลามมาแค่ไหน"<br><br>
-  "ถึงข้อมือซ้าย" เขาตอบ "และมือขวา เพิ่งเสียนิ้วก้อยไปเมื่อเช้า"<br><br>
-  ไซยาหันมามองเขาครั้งแรกนับตั้งแต่เดินบนพื้นดิน "เมื่อเช้า ?"<br><br>
-  "รักษาเด็กผู้หญิงในตลาด"<br><br>
-  เธอไม่พูดอะไรอีก แต่มองหน้าเขานานกว่าที่เขาสบายใจ ก่อนที่จะหันหน้ากลับไปข้างหน้า<br><br>
-  "เจ้ารักษาคนมากี่คน" เธอถามต่อ<br><br>
-  อีเซลไม่ตอบทันที เขานับในใจ ไม่ใช่เพราะจำไม่ได้ แต่เพราะการพูดตัวเลขออกมาดังๆ จะทำให้มันจริงในแบบที่ต่างออกไป<br><br>
-  "สี่ร้อยสิบเก้าคน"<br><br>
-  "แล้วเจ้ายังมีนิ้วเหลืออยู่กี่นิ้ว"<br><br>
-  "สาม"
-</blockquote>
-
-<p>เธอไม่พูดอะไรต่อ และนั่นทำให้เขาเคารพเธอขึ้นมาเล็กน้อย คนส่วนใหญ่จะพูดอะไรสักอย่าง — บางคนพูดว่าเสียสละเหลือเกิน บางคนพูดว่าโง่เหลือเกิน ทั้งสองอย่างทำให้เขารู้สึกเหนื่อย</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>พวกเขาพักอยู่ในซากอาคารหินกลางทุ่งพิษเมื่อดวงอาทิตย์ลับหมอกไปสนิท อีเซลจุดตะเกียงน้ำมัน แสงสีเหลืองทำให้ทุกอย่างดูอบอุ่นกว่าความจริง</p>
-
-<p>ไซยานั่งตรงข้ามเขา ล้วงถุงหนังออกมาเทอาหารแห้งใส่ฝ่ามือ เธอเคี้ยวช้าๆ ลิ้นกระดูกทำงานผิดปกติเวลากิน — เธอต้องพลิกอาหารด้วยลิ้นก่อนที่ฟันจะบดได้ ระบบที่ร่างกายเคยทำโดยอัตโนมัติกลายเป็นสิ่งที่ต้องคิดทุกครั้ง อีเซลเผลอมองโดยไม่ได้ตั้งใจ เธอสังเกตเห็น</p>
-
-<blockquote>
-  "เจ้ากำลังสงสัยว่ามันเจ็บไหม" เธอพูดโดยไม่หยุดเคี้ยว<br><br>
-  "ไม่ได้สงสัย"<br><br>
-  "โกหก"<br><br>
-  เขาเงยหน้าขึ้น "ลิ้นเจ้าบอกได้ว่าคนอื่นโกหกด้วยหรือไง"<br><br>
-  "ไม่ได้ แต่ฉันอยู่กับตัวเองมาพอนานที่จะรู้ว่าคนส่วนใหญ่พูดอะไรเมื่อไหร่"<br><br>
-  เธอวางอาหารลง "มันไม่เจ็บ มันชาตั้งแต่วันแรก แต่มันไม่ใช่ปัญหาที่ฉันกังวล"
-</blockquote>
-
-<p>"ปัญหาที่เจ้ากังวลคืออะไร"</p>
-
-<p>ไซยามองตะเกียงนานก่อนตอบ แสงกระทบกระดูกในปากของเธอแวววาวเล็กน้อย ราวกับมีไฟอยู่ข้างใน</p>
-
-<blockquote>
-  "ลิ้นนี้บอกความจริงเสมอ" เธอพูดช้าๆ "ปัญหาคือฉันไม่รู้เสมอไปว่าความจริงที่มันพูดออกมานั้น — เป็นความจริงของฉัน หรือของพระเจ้าที่ตายแล้ว"<br><br>
-  อีเซลมองเธอ "หมายความว่าอะไร"<br><br>
-  "หมายความว่ากระดูกพระเจ้าอาจจำอะไรบางอย่างได้ และบางครั้งฉันไม่รู้ว่าสิ่งที่ลิ้นพูดออกมาเป็นความคิดของฉัน หรือความทรงจำของกระดูกที่ฝังอยู่ในปากฉัน"<br><br>
-  "เจ้าไม่สามารถแยกแยะได้ใช่ไหม"<br><br>
-  เธอหยุดนิ่ง "บางครั้งได้ บางครั้งก็ไม่"
-</blockquote>
-
-<p>ห้องเงียบ ยกเว้นเสียงลมพิษผ่านช่องรอยแตกในกำแพงหิน</p>
-
-<p>อีเซลไม่มีคำตอบให้เธอ เขาไม่แน่ใจว่าจะมีใครมีคำตอบได้ แต่มีคำถามหนึ่งที่ยังค้างอยู่</p>
-
-<blockquote>
-  "ทำไมเจ้าถึงเลือกลิ้น" เขาถาม "ลัทธิรับสิ่งที่สาวกอยากสมทบ ทำไมถึงไม่เลือกอย่างอื่น"<br><br>
-  ไซยาหันมามองเขา ดวงตาสีน้ำตาลธรรมดาในแสงตะเกียงมีอะไรบางอย่างที่เขาอ่านไม่ออก<br><br>
-  "เพราะลิ้นเป็นอวัยวะที่ฉันโกหกมากที่สุด"
-</blockquote>
-
-<p>เขาไม่ถามต่อ และเธอก็ไม่อธิบายเพิ่ม พวกเขาดับตะเกียงและนอนลงในความมืด คนละมุมของห้องเดียวกัน</p>
-
-<p>ใต้ฝ่าเท้าของเขา ผ่านพื้นหิน ผ่านดินที่มีจิตใจ ลึกลงไปในซากร่างของพระเจ้าที่ยังไม่ยอมหยุดเต้น — มีบางอย่างรับรู้ว่าเขามาถึงแล้ว</p>
-
-<p><span class="whisp">และมันรอเขาอยู่ด้วยความอดทนของสิ่งที่ไม่มีแนวคิดเรื่องเวลา</span></p>
-
-</div>
-<div class="end-scroll" style="padding-bottom:2rem;"><p>✦ &nbsp; จบบทที่สอง &nbsp; ✦</p></div>
-
-<!-- ═══ บทที่สาม ═══ -->
-<div class="chapter-header">
-  <div class="chapter-num">บทที่สาม</div>
-  <h2 class="chapter-title">หมู่บ้านที่กระดูกพูด</h2>
-  <p class="chapter-epigraph">"ความสุขที่ซื้อด้วยตัวตน<br>ไม่ใช่ความสุข<br>มันเป็นราคาที่จ่ายหมดแล้ว"<br><em>— จารึกบนกำแพงซากเมืองโอเรน</em></p>
-</div>
-<div class="story-body">
-
-<p class="dropcap">วันที่สองของการเดินทาง ท้องฟ้าเริ่มเปลี่ยนสี ไม่ใช่เพราะดวงอาทิตย์ แต่เพราะหมอกพิษมีความเข้มข้นต่างกันในแต่ละพื้นที่ ตรงไหนหมอกจาง ท้องฟ้าดูเขียวอมเทา ตรงไหนหมอกหนา ทุกอย่างดูม่วงอมน้ำตาล อีเซลเรียนรู้ที่จะอ่านสีของหมอกเหมือนอ่านแผนที่</p>
-
-<p>ไซยาเดินนำหน้าสม่ำเสมอ เธอรู้จักทิศทางในแผ่นดินผุดีกว่าเขา รู้ว่าดินตรงไหนแน่น ดินตรงไหนอ่อน รู้ว่าเสียงประเภทไหนในพุ่มไม้หมายถึงอะไร เขาไม่ถามว่าเธอรู้ได้อย่างไร เพราะเขาเดาได้ว่าคำตอบจะพาไปสู่เรื่องที่เธอยังไม่พร้อมเล่า</p>
-
-<p>กลิ่นของหมู่บ้านมาถึงก่อนภาพ — หวาน หนัก และอุ่น เหมือนผลไม้สุกงอมในห้องปิดมานานเกินไป เหมือนน้ำผึ้งผสมกับอะไรบางอย่างที่ไม่ควรผสม อีเซลผูกผ้าปิดปากให้แน่นขึ้นโดยไม่รู้ตัว ไซยาไม่ทำอะไร เธอแค่หายใจเข้าลึกๆ แล้วหยุดเดิน</p>
-
-<blockquote>
-  "กลิ่นนี้คือกลิ่นของคนที่ไม่กลัวอะไรแล้ว" เธอพูด น้ำเสียงไม่มีอารมณ์ ไม่ดีไม่ร้าย แค่บอก<br><br>
-  "นั่นฟังดูดีนะ" อีเซลพูด<br><br>
-  "มันไม่ดี" เธอหันมามองเขา "มนุษย์ต้องการความกลัวบางอย่างเพื่อยังคงเป็นมนุษย์"
-</blockquote>
-
-<p>เขาไม่ถามว่าหมายความว่าอะไร เพราะตอนที่พวกเขาเห็นหมู่บ้านจริงๆ คำตอบก็ชัดเจนในตัวเอง</p>
-
-<p>บ้านสิบกว่าหลังตั้งอยู่รอบต้นไม้ขนาดยักษ์ที่รากมันโผล่ขึ้นมาเหนือดินราวกับนิ้วมือของยักษ์ รากแต่ละเส้นมีแสงส้มเรืองออกมาจากข้างใน เส้นเลือดของพระเจ้าที่หล่อเลี้ยงต้นไม้ต้นนี้แทนน้ำ ลำต้นหนาเท่าบ้านสามหลัง เปลือกไม้มีสีเดียวกับกระดูก และชาวบ้านราวสามสิบคนนั่งอยู่รายรอบ</p>
-
-<p>บางคนพิงราก บางคนนอนหงายมองฟ้า บางคนนั่งตรงๆ อยู่กับที่ ทุกคนมีรอยยิ้มบนใบหน้า</p>
-
-<p>ไม่มีใครขยับ</p>
-
-<p>ไม่มีเสียงพูด ไม่มีเสียงเด็ก ไม่มีเสียงหม้อต้ม ไม่มีเสียงสิ่งมีชีวิต — มีแต่ลมที่ผ่านใบไม้สีขาวอมส้มของต้นไม้ต้นนั้น เสียงกรอบแกรบต่ำๆ เหมือนกระดูกที่หายใจ</p>
-
-<p>อีเซลเข้าไปใกล้ชายคนหนึ่ง — อายุราวสี่สิบ หน้าตาธรรมดา แต่ผิวหนังที่ข้อมือมีรอยสีเทาเข้มขึ้นเป็นเส้นๆ เหมือนรากไม้เล็กๆ กำลังงอกออกมาจากใต้ผิว และที่ปลายนิ้วของเขา ตรงปลายเล็บ — มันไม่ใช่เล็บอีกต่อไป มันเป็นกระดูกขาวแหลม</p>
-
-<p>ชายคนนั้นเงยหน้าขึ้นมองเขา ดวงตาสีน้ำตาลปกติ แต่รูม่านตาขยายจนเกือบเต็มดวงตา สีดำทะมึนที่ไม่สะท้อนแสง</p>
-
-<blockquote>
-  "มาเข้าร่วมด้วยกันไหม" ชายคนนั้นพูด เสียงช้าและเรียบ เหมือนน้ำไหลผ่านหิน ไม่มีความเร่งรีบ ไม่มีความกังวล "มันไม่เจ็บ พอเจ้าปล่อยให้มันเข้ามา ทุกอย่างก็หายไป"<br><br>
-  "อะไรหายไป" อีเซลถาม<br><br>
-  ชายคนนั้นยิ้ม กว้างกว่าที่ใบหน้าของมนุษย์ควรจะยิ้มได้ มุมปากดึงไปถึงระดับที่ผิวปกติจะเจ็บ แต่เขาไม่เจ็บ "ทุกอย่าง"<br><br>
-  "ทุกอย่างรวมถึงอะไร" อีเซลถามต่อ<br><br>
-  "ความเจ็บปวด ความกลัว ความเหงา ความต้องการ" ชายคนนั้นพูด ประโยคออกมาช้าๆ เหมือนเตรียมไว้แล้ว "ทุกอย่างที่ทำให้การอยู่คนเดียวเป็นเรื่องยาก มันจะหายไป และเจ้าจะไม่อยู่คนเดียวอีกต่อไป"<br><br>
-  "แล้วตัวเจ้าล่ะ หายไปไหม"<br><br>
-  ชายคนนั้นคิดนาน นานกว่าที่ควร "ฉันยังอยู่" เขาพูด "แค่...เบาขึ้น"
-  "เบาขึ้น ?"
-</blockquote>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>ไซยาดึงแขนเขาออกมาเงียบๆ ก่อนที่เขาจะถามอะไรต่อ พวกเขาถอยออกมานอกระยะที่กลิ่นหวานจะหนักเกินไป เธอนั่งลงบนก้อนหินและมองหมู่บ้านด้วยสายตาที่อีเซลอ่านไม่ออก</p>
-
-<blockquote>
-  "เจ้าเคยเห็นอะไรแบบนี้มาก่อน" เขาพูด ไม่ใช่คำถาม<br><br>
-  "ฉันเคยอยู่ในที่แบบนี้มาก่อน" เธอแก้ "ไม่เหมือนกัน แต่คล้ายกันพอที่จะรู้ว่ามันคืออะไร"<br><br>
-  เขาทำได้แค่รอ<br><br>
-  "ลัทธิมีพิธีกรรมที่เรียกว่า 'การสมทบ' ทำกับสาวกชั้นสูง" ไซยาพูดต่อ น้ำเสียงเรียบราวกับอ่านจากหนังสือ "ตัดส่วนหนึ่งของร่างกาย ฝังลงในกระดูกพระเจ้า รอให้พระเจ้าตอบรับ ถ้าพระเจ้าตอบรับ ส่วนนั้นจะงอกกลับมา แต่เป็นกระดูกแทนเนื้อ พวกนั้น—" เธอชี้ไปทางหมู่บ้าน "—ทำแบบนั้น แต่แทนที่จะตัดส่วนเดียว พวกเขาปล่อยให้กระดูกพระเจ้าเติบโตเข้ามาในตัวเอง"<br><br>
-  "ทำไมถึงทำ"<br><br>
-  "เพราะมันหยุดความเจ็บปวด" เธอตอบเรียบๆ "ทั้งหมด ทุกชนิด ดูพวกเขา เจ้าเห็นคนที่ทุกข์ไหม"<br><br>
-  เขามองหมู่บ้าน มองรอยยิ้มบนใบหน้าที่ไม่ขยับ "ไม่เห็น"<br><br>
-  "นั่นแหละคือปัญหา"
-</blockquote>
-
-<p>อีเซลนั่งลงข้างๆ เธอ มองหมู่บ้านที่ไม่มีเสียงนั้น พวกชาวบ้านไม่ได้เจ็บปวด ไม่ได้ร้องไห้ ไม่ได้กลัว พวกเขานั่งรายรอบต้นไม้ที่หล่อเลี้ยงด้วยเลือดพระเจ้า และมีความสุขแบบที่เขาไม่เคยเห็นในใบหน้าใครนับตั้งแต่โลกพัง</p>
-
-<p>และนั่นทำให้มันน่ากลัวที่สุด</p>
-
-<blockquote>
-  "เราควรช่วยพวกเขา" เขาพูด<br><br>
-  "ช่วยให้กลับมาเป็นอะไร" ไซยาถาม ลิ้นกระดูกออกเสียงคำนั้นชัดผิดปกติ "กลับมากลัวหมอกพิษ ? กลับมาหิวโหย ? กลับมามีลูกแล้วเห็นลูกตาย ?"<br><br>
-  "กลับมาเป็นตัวเอง"<br><br>
-  เธอหันมามองเขา "เจ้าแน่ใจไหมว่าสิ่งที่พวกเขาทิ้งไปนั้น คุ้มกับสิ่งที่พวกเขาได้มา"
-</blockquote>
-
-<p>อีเซลไม่มีคำตอบ</p>
-
-<p>มือกระดูกของเขาอุ่นขึ้นอีกครั้ง เขามองลงไปที่มัน — กระดูกขาวที่เคยมีเนื้ออยู่ ที่เขาให้ไปทีละชิ้นเพื่อคนอื่น ชิ้นส่วนที่ตัวเองเลือกสละ ต่างกับชาวบ้านพวกนี้ที่สละตัวตนทั้งหมดในครั้งเดียว</p>
-
-<p><span class="whisp">มันต่างกันจริงๆ ไหม</span> เขาคิด <span class="whisp">หรือว่าทั้งสองทางล้วนเป็นการสูญเสียตัวเอง เพียงแต่ต่างกันที่ความเร็ว</span></p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>เขาตัดสินใจในที่สุดเมื่อเห็นเด็กหญิงคนหนึ่ง อายุราวสิบขวบ นั่งอยู่ที่ขอบหมู่บ้าน ผมสั้นรุงรัง ใส่เสื้อผ้าที่ใหญ่เกินตัว รอยสีเทาเพิ่งเริ่มปรากฏที่ข้อมือเธอ — ไม่ลึก ไม่มาก แค่เริ่มต้น และเธอกำลังก้าวเข้าหาต้นไม้ด้วยก้าวที่ช้าและตั้งใจ ก้าวของคนที่ตัดสินใจแล้ว</p>
-
-<blockquote>
-  "ไม่" อีเซลพูด เสียงออกมาก่อนที่เขาจะคิด
-</blockquote>
-
-<p>เขาลุกขึ้นและเดินเข้าไปในหมู่บ้าน ไซยาไม่ได้ตาม แต่เธอก็ไม่ได้ห้าม</p>
-
-<p>กลิ่นหวานหนักทันทีที่เขาก้าวผ่านแนวบ้านแรก มันไม่ได้เหมือนกลิ่นดอกไม้ มันเหมือนกลิ่นของการวางภาระลง กลิ่นของการนอนหลับพักผ่อนที่ไม่ต้องตื่น เขาก้าวต่อไปทั้งที่รู้ว่ามันดึง ทั้งที่ขาเริ่มอยากหยุด</p>
-
-<p>ชาวบ้านคนหนึ่งหันมามอง ดวงตาดำทะมึน แต่ไม่เป็นภัย ไม่ขวางทาง แค่มอง อีเซลเดินตรงไปยังเด็กหญิงที่อยู่ห่างออกไปสิบก้าว</p>
-
-<p>เขาวางมือบนไหล่เธอเบาๆ เธอหันมา</p>
-
-<blockquote>
-  "ไปกับฉัน" เขาพูด<br><br>
-  เด็กหญิงมองขึ้นมา ดวงตายังไม่ดำทั้งดวง รูม่านตาขยายแค่ครึ่งหนึ่ง เธอยังอยู่ที่นั่น ยังมีตัวตนอยู่ข้างในที่ไหนสักที่<br><br>
-  "มันไม่เจ็บนะ" เธอพูดเบาๆ "พ่อบอก มันไม่เจ็บเลย"<br><br>
-  "ฉันรู้" อีเซลพูด "แต่เจ้าจะไม่ได้เลือกอะไรอีกเลยนะ ถ้าไปแล้ว"<br><br>
-  เด็กหญิงมองต้นไม้ มองเขา มองต้นไม้อีกครั้ง ใบหน้าเธอไม่ได้แสดงความกลัว มันแสดงความลังเล — และนั่นแปลว่าเธอยังเลือกได้อยู่<br><br>
-  "แต่พ่ออยู่ที่นั่น" เธอชี้ไปทางต้นไม้ ตรงที่ชายอ้วนกลางคนพิงรากไม้อยู่ด้วยรอยยิ้มที่ไม่เปลี่ยน "ฉันอยู่คนเดียวแบบนี้ไม่ได้"<br><br>
-  "ฉันรู้"<br><br>
-  เธอมองเขา "เจ้าเป็นใคร"<br><br>
-  "คนที่อยู่คนเดียวได้ แต่ไม่ชอบ" เขาตอบ "เหมือนเจ้าหรือเปล่า"
-</blockquote>
-
-<p>เด็กหญิงไม่ตอบทันที เธอมองเขา มองมือที่อยู่บนไหล่เธอ มองถุงมือหนังที่ปกคลุมอะไรบางอย่างข้างใน</p>
-
-<blockquote>
-  "มือซ้ายเจ้าเป็นอะไร" เธอถาม<br><br>
-  เขาดึงถุงมือออกช้าๆ แสดงมือกระดูกให้ดู เธอไม่สะดุ้ง แค่มอง<br><br>
-  "เจ้าก็เป็นแบบนั้นเหมือนกันหรอ" เธอพูด ไม่ใช่คำถาม<br><br>
-  "ใช่ แต่ฉันยังเป็นตัวเองอยู่" เขาพูด "เธอถามได้ ฉันตอบได้ และฉันยังจำได้ว่าตัวเองชอบอะไร ไม่ชอบอะไร กลัวอะไร"<br><br>
-  "เจ้ากลัวอะไร"<br><br>
-  อีเซลนึกอยู่ครู่ "กลัวว่าสักวันจะไม่มีมือเหลือแม้แต่ข้างเดียว" เขาตอบตรงๆ "แต่ฉันก็ยังกลัวอยู่ และนั่นก็ยังดีกว่าไม่กลัวอะไรเลย"
-  "แต่พ่อ ไม่ได้กลัวอะไรอีกแล้ว"<br><br>
-  "เราไม่รู้ว่านั่น ยังเป็นพ่อของเจ้าอยู่มั้ย และเจ้าไม่จำเป็นต้องเป็นแบบทุกคนที่นี่"
-</blockquote>
-
-<p>เด็กหญิงนิ่งอยู่นาน นานพอที่ชายคนหนึ่งในหมู่บ้านเริ่มขยับมอง นานพอที่ต้นไม้ดูเหมือนจะหันมาสนใจ</p>
-
-<p>แล้วเธอก็เดินออกมากับเขา</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>ไซยายืนรออยู่นอกหมู่บ้านพอดี มองเด็กหญิงแล้วมองอีเซล</p>
-
-<blockquote>
-  "ชื่ออะไร" ไซยาถามเด็กหญิง<br><br>
-  "เวน"<br><br>
-  "เวน ฉันชื่อไซยา" เธอพักสายตาที่อีเซล "และนั่น ยังไม่รู้จะเรียกว่าอะไรดี"<br><br>
-  "อีเซล" เขาพูด<br><br>
-  "อีเซลไม่มีนามสกุลแล้ว" ไซยาพูดต่อกับเวน น้ำเสียงราบเรียบ "เขาทิ้งมันไว้ที่วัลแมร์"
-</blockquote>
-
-<p>อีเซลไม่โต้แย้ง เพราะมันเป็นความจริง นามสกุล เวย์น เป็นน้ำหนักที่เขาแบกโดยไม่ได้เลือก และเขาไม่แน่ใจว่าต้องการพาไปถึงที่หมายหรือเปล่า</p>
-
-<blockquote>
-  "เวนหิวไหม" ไซยาถาม<br><br>
-  เวนพยักหน้า แล้วชะงัก "ฉันลืมไปว่าตัวเองหิวได้"<br><br>
-  ไซยาล้วงถุงหนังออกมา หยิบอาหารแห้งออกมาชิ้นหนึ่ง ยื่นให้ "ถ้าเจ้านึกได้ว่าหิว แปลว่าเจ้าออกมาทันเวลา"
-</blockquote>
-
-<p>เวนรับอาหารและกินโดยไม่พูดอะไร อีเซลมองหมู่บ้านครั้งสุดท้ายก่อนหันหลัง บิดาของเวนยังนั่งพิงรากไม้ ยังยิ้ม ยังมีความสุขแบบที่อีเซลไม่เคยมี</p>
-
-<p>เขาไม่รู้ว่าตัวเองทำถูกหรือไม่ เขารู้แค่ว่าเขาเลือก และการเลือกนั้นทำให้มือขวาชาอยู่นานกว่าปกติ <span class="whisp">ราวกับร่างกายเองก็ไม่แน่ใจว่าสิ่งที่เขาทำนั้นคุ้มกัน</span></p>
-
-<p>พวกเขาเดินต่อไป สามคน บนดินที่มีชีวิต ใต้ท้องฟ้าที่ไม่มีดาว</p>
-
-</div>
-<div class="end-scroll" style="padding-bottom:2rem;"><p>✦ &nbsp; จบบทที่สาม &nbsp; ✦</p></div>
-
-<!-- ═══ บทที่สี่ ═══ -->
-<div class="chapter-header">
-  <div class="chapter-num">บทที่สี่</div>
-  <h2 class="chapter-title">ความจริงแรก</h2>
-  <p class="chapter-epigraph">"ความผิดที่สืบทอดมาไม่ใช่ความผิดของเจ้า<br>แต่มันเป็นภาระของเจ้า<br>และสองสิ่งนั้นไม่เหมือนกัน"<br><em>— ไซยา "ลิ้น-ดาบ" คืนที่สี่ของการเดินทาง</em></p>
-</div>
-<div class="story-body">
-
-<p class="dropcap">เวนเดินระหว่างพวกเขาโดยไม่มีใครบอก เธอเดินระยะพอดีกับทั้งสอง ไม่ชิดอีเซลมากเกินไป ไม่ไกลจากไซยาจนเกินไป เหมือนเธอคำนวณว่าจุดไหนที่ปลอดภัยที่สุดในกลุ่มคนสองคนที่เธอยังไม่รู้จัก</p>
-
-<p>เธอไม่ค่อยถาม แต่เมื่อถาม เธอก็ถามตามตรงและไม่มีนัย</p>
-
-<blockquote>
-  "ไซยา ลิ้นเจ้าเคยโกหกได้ไหม"<br><br>
-  "ไม่เคย"<br><br>
-  "แล้วถ้าเจ้าอยากโกหก"<br><br>
-  ไซยาเดินต่อไปสักครู่ก่อนตอบ "ลิ้นจะฝืนไม่ออก เหมือนพยายามพูดใต้น้ำ"<br><br>
-  เวนพิจารณา "แล้วเจ้าไม่อยากโกหกบ้างเหรอ"<br><br>
-  "อยาก" เธอตอบตรงๆ "บ่อยมาก"
-</blockquote>
-
-<p>เวนพยักหน้า เหมือนได้คำตอบที่ต้องการ แล้วก็ไม่ถามต่อ</p>
-
-<p>คืนที่สาม พวกเขาพักในแอ่งหินที่ลมผ่านน้อยกว่าที่อื่น อีเซลหาฟืนแห้งมาก่อไฟ ฟืนในแผ่นดินผุสีส้มเมื่อติดไฟ ไม่ใช่สีส้มของไฟปกติ แต่เป็นสีส้มแบบเดียวกับแสงที่เรืองออกจากรอยแตกในดิน เขาเผาไหม้อยู่พักหนึ่งก่อนจะชินกับมัน</p>
-
-<p>เวนนอนหลับเร็ว เธอเหนื่อยมากกว่าที่เธอยอมรับ — การเดินทางจากหมู่บ้านออกมาด้วยกล้ามเนื้อที่ไม่ได้ใช้มาหลายวันนั้นหนัก ไซยาปูผ้าห่มให้เธอแล้วกลับมานั่งข้างไฟ</p>
-
-<blockquote>
-  "เธอนิสัยดี" อีเซลพูด<br><br>
-  "เธอแค่ยังไม่รู้ว่าตัวเองอยากอะไร" ไซยาแก้ "เด็กที่ถูกสอนให้รอโดยไม่รู้ว่ารออะไรจะนิสัยดีเสมอ"<br><br>
-  อีเซลมองไซยา "เจ้าพูดเหมือนรู้จักอาการนั้น"<br><br>
-  เธอไม่ตอบ
-</blockquote>
-
-<p>คืนที่สี่ ฝนตกเป็นครั้งแรก ไม่ใช่ฝนปกติ — หยดน้ำมีสีส้มอ่อนๆ เมื่อตกลงบนผิวหนังมันไม่เย็น มันอุ่น และมันทิ้งรอยสีน้ำตาลจางๆ ไว้บนเสื้อผ้า เวนตื่นขึ้นมามองออกไปนอกซุ้มหินที่พวกเขาหลบอยู่ แล้วก็หลับต่อราวกับว่าฝนส้มเป็นเรื่องปกติ</p>
-
-<p>บางทีสำหรับเด็กที่โตมาในแผ่นดินผุ มันก็เป็นเรื่องปกติ</p>
-
-<p>ไซยานั่งลงข้างอีเซลโดยไม่บอกว่าจะมา มองฝนส้มตกลงบนดินพิษ เห็นรอยที่ฝนกระทบดินแล้วดินดูดซับหายไป เหมือนดินกำลังกิน</p>
-
-<blockquote>
-  "มีเรื่องที่ฉันต้องบอกเจ้า" เธอพูด ลิ้นกระดูกออกเสียงประโยคนั้นแบนราบ<br><br>
-  "รู้แล้ว" อีเซลพูดโดยไม่มองเธอ<br><br>
-  เธอหยุด "รู้อะไร"<br><br>
-  "ว่าเจ้ารู้อะไรบางอย่างที่ฉันไม่รู้ตั้งแต่วันแรกที่เจ้าตามมา" เขาพูด "ลิ้นของเจ้าบอกความจริง แต่เจ้าไม่ได้พูดทุกอย่าง การเงียบไม่ใช่การโกหก"<br><br>
-  ไซยานิ่งไปครู่หนึ่ง "เจ้าฉลาดกว่าที่หน้าตาอีกนะ"<br><br>
-  "ไซยา"<br><br>
-  "อะไร"<br><br>
-  "บอกมาสิ ที่เจ้าจะพูด"
-</blockquote>
-
-<p>เธอหันมามองเขา แล้วหันกลับไปมองฝนส้ม</p>
-
-<blockquote>
-  "บรรพบุรุษของเจ้าฆ่าพระเจ้า"
-</blockquote>
-
-<p>ประโยคนั้นสั้น ตรง และหนักราวกับก้อนหินที่หล่นลงในน้ำนิ่ง อีเซลไม่ขยับ ไม่หายใจแรงขึ้น ไม่มีปฏิกิริยาอะไรที่ออกมาภายนอก แต่มือกระดูกของเขากำแน่นขึ้นจนเสียงกรอบแกรบเบาๆ ดังขึ้น</p>
-
-<blockquote>
-  "ฉันรู้ว่าพระเจ้าถูกฆ่า" เขาพูดช้าๆ "ทุกคนรู้"<br><br>
-  "ทุกคนรู้ว่าพระเจ้าตาย" ไซยาแก้ "แต่ลัทธิบอกว่าสิ่งนอกโลกสังหารพระองค์ บางคนบอกว่าพระองค์สังหารตัวเอง ไม่มีใครบอกความจริง"<br><br>
-  "ความจริงคืออะไร"<br><br>
-  "สภาเจ็ดคน" ไซยาพูด "นักเวทย์เจ็ดคนที่รวมตัวกันสองร้อยปีก่อน พวกเขาเชื่อว่าพระเจ้ากำลังทำให้มนุษย์พึ่งพาตนเองไม่ได้ ตราบใดที่พระเจ้ายังมีชีวิต มนุษย์จะไม่เติบโต พวกเขาจึงทำพิธีกรรมที่ไม่เคยมีใครทำมาก่อน และประสบความสำเร็จ"<br><br>
-  "และบรรพบุรุษของฉัน—"<br><br>
-  "เป็นหนึ่งในเจ็ดคนนั้น"
-</blockquote>
-
-<p>อีเซลนึกถึงภาพในบ้านที่วัลแมร์ก่อนออกเดินทาง รูปวาดของชายคนหนึ่งในชุดนักเวทย์โบราณ หน้าตาที่คนในตระกูลพูดถึงด้วยความภูมิใจ — <em>บรรพบุรุษผู้ยิ่งใหญ่ที่เปลี่ยนโลก</em> นั่นคือคำที่พวกเขาใช้เสมอ เขาไม่เคยถามว่าเปลี่ยนอย่างไร</p>
-
-<blockquote>
-  "คำสาปที่มือฉัน—" เขาเริ่ม<br><br>
-  "ไม่ใช่คำสาป" ไซยาพูด "พระเจ้าไม่ได้ลงโทษเจ้า สิ่งที่เกิดขึ้นกับมือเจ้าคือการจำได้ เลือดเวย์นไหลอยู่ในตัวเจ้า และพระเจ้าที่ยังไม่ตายสนิทรู้จักเลือดนั้น ทุกครั้งที่เจ้าใช้พลังรักษา มันตอบสนอง — ดึงเจ้ากลับคืน เนื้อเน่าเพื่อให้กระดูกงอก กระดูกพระเจ้างอกในร่างเจ้าเพื่อดึงทายาทของผู้ฆ่าพระองค์กลับมาหาหัวใจที่ยังเต้น"<br><br>
-  อีเซลนั่งนิ่งกับคำนั้นนาน สี่ร้อยสิบเก้าคน เขานึกถึงตัวเลขที่บอกไซยา นิ้วมือที่หายไปทีละนิ้ว เขาคิดมาตลอดว่ามันเป็นราคาที่เขาเลือกจ่าย<br><br>
-  แต่ถ้าไซยาพูดถูก มันไม่ใช่ราคา มันเป็นโซ่<br><br>
-  "เจ้ารู้เรื่องนี้มาตั้งแต่เมื่อไหร่" เขาถาม<br><br>
-  "ตั้งแต่อยู่ในลัทธิ" ไซยาตอบ "ลัทธิอาร์คานรู้ทุกอย่างเกี่ยวกับสภาเจ็ดคน พวกเขาค้นหาทายาทของทั้งเจ็ดมาตลอดสองร้อยปี"<br><br>
-  "เพราะอะไร"<br><br>
-  "เพราะหัวใจพระเจ้าจะเปิดให้เฉพาะทายาทเท่านั้น"
-</blockquote>
-
-<p>ความเงียบหนักลงทันที</p>
-
-<p>อีเซลมองไซยา มองนานพอที่จะเห็นว่าเธอไม่หลีกสายตา ลิ้นกระดูกไม่ยอมให้เธอโกหก แต่มันไม่ได้บังคับให้เธอพูดทุกอย่าง และนั่นทำให้มีสิ่งที่เธอยังไม่บอก</p>
-
-<blockquote>
-  "เจ้าเป็นทายาทของใครในเจ็ดคน" เขาถามตรงๆ<br><br>
-  ไซยาไม่ตอบทันที แต่ลิ้นกระดูกขยับเล็กน้อย — มันพยายามพูด เธอกัดฟันกลั้นไว้ กล้ามเนื้อที่คางเกร็งขึ้น<br><br>
-  แล้วเธอก็พูด เพราะมันไม่ยอมให้เธอเงียบ<br><br>
-  "คนที่ลงมือสังหาร"
-</blockquote>
-
-<p>ครั้งนี้อีเซลเป็นคนที่ไม่พูดก่อน เขามองออกไปนอกซุ้มหิน มองดินที่กินฝนส้ม มองท้องฟ้าที่ไม่มีดาว เวนนอนหลับในความหลับ ร่างเล็กๆ ที่ออกมาจากหมู่บ้านที่ไม่มีเสียง พ่อของเธอยังนั่งพิงรากไม้และยิ้ม</p>
-
-<blockquote>
-  "เจ้ามาเพราะลัทธิส่งมางั้นเหรอ" เขาถามในที่สุด<br><br>
-  "ฉันมาเพราะหนีจากลัทธิ" ไซยาตอบทันที ลิ้นกระดูกไม่ลังเลกับประโยคนั้น "และเพราะฉันต้องการไปที่หัวใจพระเจ้าเหมือนกัน แต่เหตุผลของฉันไม่เหมือนเหตุผลของเจ้า"<br><br>
-  "เหตุผลของเจ้าคืออะไร"<br><br>
-  เธอมองมือตัวเอง มือที่ยังมีเนื้อครบทั้งสองข้าง<br><br>
-  "ฉันต้องการขอโทษ เหมือนกัน"
-</blockquote>
-
-<p>ความเงียบระหว่างพวกเขาเปลี่ยนรูปร่างหลังจากนั้น ไม่ได้เบาลง ไม่ได้หนักขึ้น มันกลายเป็นอะไรบางอย่างที่ทั้งคู่ยืนอยู่ในนั้นได้โดยไม่ต้องปิดตา</p>
-
-<p>อีเซลไม่บอกว่าพระเจ้าจะให้อภัยเธอ เพราะนั่นไม่ใช่สิ่งที่เธอขอ และไม่ใช่สิ่งที่เขามีสิทธิ์ให้ เขาแค่นั่งต่อไปในซุ้มหิน รับฝนส้มที่ยังตกประปราย และยอมรับว่าตั้งแต่คืนนี้ เขากำลังเดินทางกับคนที่แบกความผิดชุดเดียวกับที่เขาแบก เพียงแต่คนละชิ้น</p>
-
-<p><span class="whisp">และบางทีนั่นก็เป็นสิ่งที่ใกล้เคียงที่สุดกับการไม่ต้องแบกคนเดียว</span></p>
-
-</div>
-<div class="end-scroll" style="padding-bottom:2rem;"><p>✦ &nbsp; จบบทที่สี่ &nbsp; ✦</p></div>
-
-<!-- ═══ บทที่ห้า ═══ -->
-<div class="chapter-header">
-  <div class="chapter-num">บทที่ห้า</div>
-  <h2 class="chapter-title">เมืองต้องห้าม</h2>
-  <p class="chapter-epigraph">"ศรัทธาที่แท้จริงไม่ต้องการหลักฐาน<br>มันต้องการเพียงความกลัว<br>และความกลัวนั้นหาได้ง่ายในยุคกระดูก"<br><em>— บันทึกลับของลัทธิอาร์คาน เล่มที่ ๓</em></p>
-</div>
-<div class="story-body">
-
-<p class="dropcap">พวกเขาใช้เวลาสามวันเดินทางหลังจากคืนฝนส้ม สามวันที่ไม่มีเหตุการณ์ใหญ่ แต่มีเรื่องเล็กๆ น้อยๆ เต็มไปหมด</p>
-
-<p>วันแรก เวนพลาดเท้าลงในรอยแตกของดินพิษ อีเซลดึงขึ้นมาก่อนที่ดินจะดูดขา เธอไม่ร้อง แค่หน้าซีด แล้วถามว่า "ถ้าดินดูดฉันไป ฉันจะกลายเป็นส่วนหนึ่งของพระเจ้าไหม" ไซยาตอบว่า "ไม่ เจ้าแค่จะตาย" เวนพยักหน้าและก้าวระวังขึ้นตั้งแต่นั้น</p>
-
-<p>วันที่สอง พวกเขาเจอกลุ่มพ่อค้าเร่สี่คนที่เดินทางในทิศตรงข้าม หิ้วลังเหล็กเต็มไปด้วยกระดูกพระเจ้าชิ้นเล็กๆ สำหรับขายในเมืองลอยฟ้า พ่อค้าคนนำมองอีเซลด้วยตาสงสัย แต่ไม่พูดอะไร ในแผ่นดินผุ คนที่ถามคำถามมากเกินไปมักอยู่ได้ไม่นาน</p>
-
-<p>วันที่สาม ไซยาบอกเส้นทางว่าควรจะเดินอ้อมหุบเขาลึกทางตะวันออก แต่การอ้อมจะใช้เวลาอีกสองวัน อีเซลถามว่ามีทางตัดไหม เธอบอกว่ามี แต่ทางตัดผ่านสุสานที่กระดูกพระเจ้าหนาแน่นที่สุด มือกระดูกของเขาจะร้อนมาก เขาบอกว่าเดินทางตัด ไซยาบอกว่าเขาโง่ เขาบอกว่าอาจจะ แล้วก็เดินไปทางตัด ทั้งสองคนตามมา</p>
-
-<p>ทางตัดผ่านสุสานใช้เวลาครึ่งวัน มือกระดูกของเขาร้อนจนถุงมือหนังเริ่มสีซีด และเขาเดินโดยไม่พูดอะไรตลอดทาง แต่ไม่หยุด</p>
-
-<p>เมืองออสเทรียนอยู่ในระยะมองเห็นหลังจากนั้น</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>เมืองออสเทรียนตั้งอยู่บนกะโหลกพระเจ้า — ไม่ใช่อุปมา แต่เป็นความจริงที่สถาปนิกออกแบบรอบๆ กระดูกขนาดยักษ์ที่โค้งออกมาจากดิน กะโหลกนั้นใหญ่เกินกว่าจะมองเห็นทั้งหมดในครั้งเดียว ส่วนที่โผล่พ้นดินสูงกว่าหอคอยทุกแห่งในวัลแมร์ และเมืองก็เติบโตอยู่ระหว่างร่องกระดูก ระหว่างรอยต่อของกะโหลก ราวกับเชื้อราที่ขึ้นตามรอยแตกของสิ่งที่เคยศักดิ์สิทธิ์</p>
-
-<p>ไซยาอธิบายแผนขณะพวกเขายืนมองเมืองจากสันเขาห่างออกไปครึ่งลีก เวนนั่งอยู่ข้างหลัง วาดรูปลงบนดินด้วยกิ่งไม้แห้ง ไม่สนใจการสนทนา</p>
-<p><span class="whisp">ระยะทาง "ครึ่งลีก" (Half-League) โดยทั่วไปหมายถึงระยะทางประมาณ
-1.3 ไมล์ หรือประมาณ 2.1 กิโลเมตร โดยอ้างอิงจากหน่วย "ลีกบก" (Land League) ที่นิยมใช้ในอดีต ซึ่งมีค่าประมาณ 2.63 ไมล์ หรือ 4.23 กิโลเมตรต่อ 1 ลีก</span></p>
-
-<blockquote>
-  "ลัทธิรับสาวกใหม่ทุกสิบห้าวัน" ไซยาพูด "พรุ่งนี้เป็นวันที่พวกเราจะรับ พวกเขาจะไม่ตรวจสอบอะไรมาก ถ้าเจ้าพูดถูกคำและก้มหัวถูกเวลา"<br><br>
-  "และเจ้าจำเป็นต้องรู้คำที่ถูกต้อง"<br><br>
-  "ฉันเคยถูกสอนคำเหล่านั้นมาก่อน" เธอพูดเรียบ ไม่มีความภูมิใจ ไม่มีความละอาย<br><br>
-  "มีคำที่ต้องห้ามพูดไหม"<br><br>
-  "อย่าถามเกี่ยวกับสภาเจ็ดคน อย่าถามว่าพระเจ้าตายอย่างไร และอย่าพูดชื่อเวย์น"
-</blockquote>
-
-<p>อีเซลมองเวน เด็กหญิงวาดรูปต้นไม้ รากงอกออกมาเบื้องบน ใบไม้ฝังลงดิน</p>
-
-<blockquote>
-  "เวนอยู่ที่นี่ไม่ได้" เขาพูด<br><br>
-  "รู้" ไซยาตอบ "ห่างออกไปทางตะวันออกสองลีกมีซากหมู่บ้านเก่า มีคนอาศัยอยู่แถวนั้น ฉันเคยรู้จักพวกเขา"<br><br>
-  "เคย" อีเซลจับคำ<br><br>
-  "ก่อนที่ฉันจะเข้าลัทธิ" เธอพูด "ฉันไม่รู้ว่าพวกเขายังอยู่ไหม แต่ถ้ายังอยู่ เราจะให้พวกเขาจะรับเวนไว้ชั่วคราว"<br><br>
-  "เจ้าไว้วางใจพวกเขาไหม"<br><br>
-  ลิ้นกระดูกหยุดนิ่งครู่หนึ่ง "พอได้"
-</blockquote>
-
-<p>อีเซลนั่งลงข้างเวน เด็กหญิงไม่หยุดวาด</p>
-
-<blockquote>
-  "เวน"<br><br>
-  "รู้แล้วว่าจะไม่ให้ไปด้วย" เธอพูดก่อน ยังไม่เงยหน้า<br><br>
-  "ฉันจะกลับมา"<br><br>
-  เธอหยุดวาด แล้วมองขึ้นมา "สัญญาได้ไหม"<br><br>
-  เขานึกถึงนิ้วสามนิ้วที่เหลืออยู่ นึกถึงหัวใจพระเจ้าที่รอเขาอยู่<br><br>
-  "ไม่ได้" เขาตอบตรงๆ "แต่ฉันจะพยายาม"<br><br>
-  เวนมองเขานานพอที่อีเซลเริ่มรู้สึกว่าเธอกำลังตัดสินใจบางอย่าง แล้วเธอพยักหน้า "โอเค"<br><br>
-  "แค่นั้นเหรอ"<br><br>
-  "จะให้ฉันพูดอะไรอีก" เธอถามกลับ "ถ้าเจ้าสัญญาไม่ได้ ฉันก็บังคับให้เจ้าสัญญาไม่ได้ แค่อยากให้รู้ว่าฉันจะรอ"
-</blockquote>
-
-<p>เธอกลับไปวาดรูปต่อ อีเซลลุกขึ้น ไม่พูดอะไรเพิ่ม เพราะไม่มีอะไรที่พูดแล้วจะดีกว่าสิ่งที่เธอพูด</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>พิธีรับสาวกใหม่เริ่มตอนรุ่งเช้า ในลานหินกลางเมืองที่ล้อมรอบด้วยซี่โครงพระเจ้าที่โผล่พ้นดิน นักบวชในชุดขาวอมเทายืนเรียงแถว หน้าปิดด้วยผ้าที่ทำจากเยื่อกระดูกบางๆ แสงส้มเรืองผ่านมาได้เล็กน้อย ทำให้ใบหน้าของพวกเขาดูสว่างจากข้างในราวกับตะเกียง</p>
-
-<p>อีเซลยืนอยู่ในแถวสาวกใหม่สิบสองคน มือทั้งสองข้างซ่อนในเสื้อคลุมยาวที่ไซยาหามาให้ รูปแบบเดียวกับที่สาวกใหม่ใส่กัน ไซยายืนห่างออกไปสองคนในแถวเดียวกัน พวกเขาไม่มองกัน ทำตามที่เธอสอนไว้</p>
-
-<p>สาวกคนข้างๆ อีเซล — ชายหนุ่มอายุราวยี่สิบ — หันมาพูดเบาๆ</p>
-
-<blockquote>
-  "ครั้งแรกรึ"<br><br>
-  "ใช่" อีเซลตอบ<br><br>
-  "กลัวไหม"<br><br>
-  "เล็กน้อย"<br><br>
-  ชายหนุ่มพยักหน้า "ครั้งแรกฉันก็กลัว แต่พอผ่านพิธีแรกแล้วมันดีขึ้น เจ้าจะรู้สึกว่าพระเจ้าอยู่ด้วย"<br><br>
-  อีเซลมองหน้าเขา ดวงตาจริงใจ ศรัทธาจริงๆ ไม่ใช่ความกลัว ไม่ใช่การแสดง<br><br>
-  "เจ้าอยู่ที่นี่มานานแค่ไหน"<br><br>
-  "สองปี" เขาตอบ "ตั้งแต่เมืองฉันพังเพราะดินพิษ ลัทธิช่วยฉันไว้" เขาหยุด "พวกเขาช่วยจริงๆ นะ ไม่ว่าคนอื่นจะพูดอะไร"
-</blockquote>
-
-<p>อีเซลไม่ตอบ เขาแค่พยักหน้า และรู้สึกว่าการโกหกในบางครั้งคือการไม่พูดความจริงออกมา</p>
-
-<p>นักบวชชั้นสูงเดินออกมา ชายสูงอายุที่ด้านซ้ายของร่างกายไม่ใช่เนื้ออีกต่อไป แขน ไหล่ ครึ่งหน้า และส่วนหนึ่งของคอกลายเป็นหินสีเทาเข้ม แต่มันขยับได้ ข้อต่อหินกระทบกันเวลาเดิน เสียงแห้งๆ สม่ำเสมอ</p>
-
-<p><span class="em">ผู้รับใช้แห่งรอยแตก</span></p>
-
-<p>เขาพูดคำที่อีเซลจำไม่ได้เพราะฟังไม่เข้าใจ ภาษาพิธีกรรมที่ไซยาสอนให้เขาจำเพียงบางส่วน เขาก้มหัวตามจังหวะที่ถูกต้อง พูดคำตอบรับในเวลาที่ถูกต้อง ทำทุกอย่างที่ควรทำ</p>
-
-<p>แต่เมื่อผู้รับใช้เดินผ่านแถว ผ่านสาวกทีละคน เขาหยุดตรงหน้าอีเซล</p>
-
-<p>ไม่นาน แค่ครึ่งวินาที</p>
-
-<p>ดวงตาข้างที่ยังเป็นมนุษย์ของเขามองตรง ไม่ได้แสดงอะไร ไม่ได้ตะโกน ไม่ได้สั่งจับ แค่มอง และในครึ่งวินาทีนั้น อีเซลรู้ว่าชายคนนี้รู้ว่าเขาคือใคร</p>
-
-<p>แล้วผู้รับใช้ก็เดินต่อไป</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>ห้องพักสาวกใหม่อยู่ในโพรงกระดูกที่ถูกดัดแปลงเป็นห้องนอน ผนังเป็นกระดูกแท้ ขัดเรียบและเคลือบด้วยยางไม้ เวลากลางคืนเรืองแสงส้มจางๆ ราวกับมีชีวิตอยู่ข้างใน มีเตียงเรียงสิบสองเตียงในห้องเดียว ไม่มีประตูกั้น แค่ผ้าม่านบางๆ ที่แยกจากห้องโถงหลัก</p>
-
-<p>สาวกใหม่คนอื่นหลับเกือบหมดแล้วเมื่อไซยาเข้ามาหาเขา เธอนั่งลงข้างๆ พูดเบาจนแทบเป็นแค่ลมหายใจ</p>
-
-<blockquote>
-  "ผู้รับใช้รู้ว่าเจ้าคือใคร"<br><br>
-  "รู้" อีเซลพูดเท่ากัน "ฉันเห็นเขาหยุด"<br><br>
-  "แล้วเจ้าคิดว่าทำไมเขาถึงไม่จับเจ้า"<br><br>
-  อีเซลมองเพดานกระดูกที่เรืองแสง "เพราะเขาต้องการให้ฉันเดินเข้าไปเอง เขารออยู่แล้ว"<br><br>
-  "ใช่" ไซยาพูด "เขารู้ว่าทายาทของเวย์นจะมาในที่สุด เขาแค่ไม่รู้ว่าเมื่อไหร่"<br><br>
-  "แล้วเราควรทำอะไรก่อน"<br><br>
-  "นอนหลับ" เธอตอบ "พรุ่งนี้เช้าสาวกใหม่จะได้รับมอบหมายงาน งานที่ฉันจะพยายามให้เราได้อยู่ใกล้ห้องศักดิ์สิทธิ์มากที่สุด"<br><br>
-  "ถ้าทำไม่ได้"<br><br>
-  เธอคิดครู่หนึ่ง "ก็หาทางอื่น"
-</blockquote>
-
-<p>เธอลุกขึ้นกลับไปที่เตียงของตัวเอง อีเซลนอนหงายมองเพดานกระดูก แสงส้มเรืองอยู่เบาๆ สม่ำเสมอ เหมือนการหายใจ</p>
-
-<p>เขาหลับตาและฟัง ใต้พื้นกระดูก ลึกลงไปในร่างพระเจ้าที่พวกเขายืนอยู่บน มีเสียงที่ไม่ใช่เสียง — การเต้นของบางอย่างที่ใหญ่และช้า เต้นในจังหวะที่ไม่ตรงกับหัวใจมนุษย์ เต้นในจังหวะที่เขาเริ่มรู้จักแล้ว</p>
-
-<p>มือกระดูกของเขาอุ่นขึ้น เขากำมัน ปล่อย กำ ปล่อย สามครั้ง เหมือนที่เขาทำทุกคืนก่อนนอนตั้งแต่สามปีก่อน ตรวจว่ายังมีอะไรเหลืออยู่</p>
-
-<p><span class="whisp">มันใกล้แล้ว</span> เขาคิด <span class="whisp">อีกไม่นาน</span></p>
-
-</div>
-<div class="end-scroll" style="padding-bottom:2rem;"><p>✦ &nbsp; จบบทที่ห้า &nbsp; ✦</p></div>
-
-<!-- ═══ บทที่หก ═══ -->
-<div class="chapter-header">
-  <div class="chapter-num">บทที่หก</div>
-  <h2 class="chapter-title">หัวใจที่ยังเต้น</h2>
-  <p class="chapter-epigraph">"เจ้าไม่ได้มาขอโทษ<br>เจ้ามาขอให้ข้าบอกว่าไม่เป็นไร<br>และข้าจะไม่บอกเจ้าแบบนั้น"<br><em>— หัวใจพระเจ้า ใต้เมืองออสเทรียน</em></p>
-</div>
-<div class="story-body">
-
-<p class="dropcap">ไซยาได้งานดูแลห้องเก็บของในโซนด้านในของวิหาร อีเซลได้งานขัดถูพื้นในห้องโถง — งานที่พาเขาเดินวนไปทั่วอาคารทุกวัน ทั้งสองคนยิ้มรับงานด้วยหน้าตาสาวกใหม่ที่ขอบคุณ และทำงานด้วยความขยันที่คำนวณมาแล้ว</p>
-
-<p>วันที่สองในวิหาร อีเซลพบทางลง</p>
-
-<p>มันอยู่ใต้แท่นบูชาในห้องที่มีนักบวชเฝ้าอยู่สามคน ห้องที่เขาต้องผ่านทุกวันขณะขัดถูพื้น เขาเห็นรอยต่อในพื้นหินที่ไม่ตรงกับรอยต่ออื่นๆ เห็นว่าหินตรงนั้นไม่มีคราบสนิมเหมือนที่ที่อื่นมี และเห็นว่าเท้าของนักบวชที่เฝ้าไม่เคยเหยียบตรงนั้น</p>
-
-<p>เขาบอกไซยาในคืนนั้น</p>
-
-<blockquote>
-  "สามคน" เธอพูด "ตอนไหนที่เหลือน้อยที่สุด"<br><br>
-  "ตีสาม มีคนเดียวที่อยู่เฝ้า"<br><br>
-  "เจ้าสังเกตได้ดี"<br><br>
-  "ฉันขัดถูพื้นมาสองวันแล้ว ไม่มีอะไรให้ทำนอกจากสังเกต"
-</blockquote>
-
-<p>ไซยาคิดอยู่ครู่หนึ่ง แล้วบอกว่าเธอรู้วิธีทำให้คนเฝ้าออกไปห้าวินาที ห้าวินาทีพอสำหรับการเปิดประตูที่เธอรู้กลไก</p>
-
-<p>เขาถามว่าเธอรู้กลไกได้อย่างไร เธอบอกว่าเคยสอนสาวกชั้นสูงให้ทำความสะอาดห้องนี้ และลิ้นกระดูกจำทุกอย่างที่เธอสอน</p>
-
-<p>เขาไม่ถามต่อ</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>ตีสามของวันที่สาม ไซยานำทางในความมืดสนิท เธอเดินจากความทรงจำ ไม่ต้องการแสง เขาเดินตามมือของเธอที่จับแขนเขาไว้</p>
-
-<p>ห้าวินาทีที่เธอสร้างขึ้นเพียงพอในการเปิดกลไกประตู</p>
-
-<p>บันไดกระดูกลงไปในความมืดที่ค่อยๆ ไม่มืดเพราะแสงส้มจากผนังสว่างขึ้นเรื่อยๆ เหมือนดวงอาทิตย์อีกดวงที่อยู่ใต้ดิน มือกระดูกของเขาร้อนขึ้นทุกขั้นบันได และเขาก็รู้ว่าใกล้แล้ว</p>
-
-<p>แล้วพวกเขาก็ถึง</p>
-
-<p>ห้องนั้นไม่ใหญ่ ผนังกระดูกทุกด้าน เพดานต่ำ และตรงกลาง — แขวนอยู่กลางอากาศโดยไม่มีอะไรยึด — มีก้อนเนื้อสีแดงเข้มขนาดเท่าหัวเด็ก มันเต้น ช้าๆ สม่ำเสมอ และแสงส้มทั้งหมดในเมืองนี้ออกมาจากมัน</p>
-
-<p>อีเซลยืนมองนานโดยไม่ขยับ ไซยายืนอยู่ข้างหลังเขา เขาได้ยินเธอหายใจช้าลง</p>
-
-<blockquote>
-  "ฉันจะรออยู่ที่นี่" เธอพูดเบาๆ<br><br>
-  เขาพยักหน้าโดยไม่หันกลับ แล้วก้าวเข้าไปหนึ่งก้าว
-</blockquote>
-
-<p>มือกระดูกร้อนขึ้นทันที ไม่ใช่ความเจ็บปวด แต่เป็นความรู้จัก — เหมือนกระดูกในมือของเขากำลังจำบางอย่างที่มันเคยเป็นส่วนหนึ่งมาก่อน</p>
-
-<p>แล้วหัวใจพระเจ้าก็พูด ความรู้สึกที่ปรากฏขึ้นในหัวราวกับเคยคิดมาก่อนแล้วแต่เพิ่งจำได้</p>
-
-<blockquote>
-  <span class="em">ทายาทของเวย์น ข้ารอเจ้ามานานมาก</span>
-</blockquote>
-
-<blockquote>
-  "ฉันมาขอโทษ" เขาพูดออกมาดังๆ เสียงของเขาฟังดูเล็กมากในห้องนั้น "สำหรับสิ่งที่บรรพบุรุษของฉันทำ"
-</blockquote>
-
-<p>หัวใจเต้นช้าๆ ต่อไป ไม่ตอบรับ ไม่ปฏิเสธ สามครั้ง ห้าครั้ง</p>
-
-<blockquote>
-  <span class="em">เจ้าไม่ได้มาขอโทษ เจ้ามาขอให้ข้าบอกว่าไม่เป็นไร และข้าจะไม่บอกแบบนั้น</span>
-</blockquote>
-
-<p>อีเซลยืนรับคำนั้น ไม่โต้แย้ง เพราะมันเป็นความจริง เขานึกถึงสี่ร้อยสิบเก้าคนที่รักษา นิ้วที่หายไปทีละนิ้ว ฝนส้มในคืนที่สี่ เวนที่เดินออกมาจากหมู่บ้านเงียบ เขาทำทุกสิ่งเหล่านั้นเพราะต้องการรู้สึกว่าตัวเองไม่ใช่ทายาทของคนผิด</p>
-
-<blockquote>
-  "ถ้าอย่างนั้น ฉันจะทำอะไรได้" เขาถาม เสียงเงียบกว่าเดิม<br><br>
-  <span class="em">ข้าจะให้เจ้าเลือก ทางเลือกแรก — เจ้าตาย ที่นี่ ตอนนี้ เลือดเวย์นหลั่งออกมาจนหมด ข้าจะดูดซับมันกลับเข้ามา และโลกที่กำลังเน่าจะหยุดเน่า มันจะไม่ฟื้น แต่มันจะหยุด เลือกสอง — เจ้ามีชีวิตอยู่ กลับขึ้นไป โลกจะเน่าต่อไปอีกสองร้อยปี จนกว่าจะไม่มีอะไรเหลือ</span><br><br>
-  อีเซลมองหัวใจที่เต้นช้าๆ นานมาก นานพอที่ไซยาข้างหลังเขาเริ่มขยับ<br><br>
-  "นั่นคือตัวเลือกทั้งหมด ?" เขาถาม<br><br>
-  <span class="em">ใช่</span><br><br>
-  "เจ้าโกหก"
-</blockquote>
-
-<p>ความเงียบ</p>
-
-<p>หัวใจเต้นช้าลงเล็กน้อย แค่ครึ่งจังหวะ แต่อีเซลสังเกตเห็น</p>
-
-<blockquote>
-  "เจ้าเป็นพระเจ้า" อีเซลพูดต่อ เสียงไม่ตะโกน แต่ชัดเจน "เจ้าสร้างโลกนี้ เจ้าทำให้ฝนตก ทำให้ดินมีชีวิต ทำให้กระดูกงอก" เขาก้าวเข้าไปอีกก้าว "เจ้าบอกว่าเลือดของฉันสามารถหยุดโลกจากการเน่าได้ แต่เจ้าที่ยังมีหัวใจเต้นอยู่ตรงนี้ ทำอะไรไม่ได้เลยหรือ"<br><br>
-  หัวใจเต้นสามครั้งโดยไม่ตอบ<br><br>
-  "เจ้าไม่ได้ต้องการเลือดฉัน" อีเซลพูดเบาลง "เจ้าต้องการให้ฉันเลือก เพราะพระเจ้าไม่ทำสิ่งใดโดยไม่ได้รับอนุญาตจากมนุษย์ นั่นคือสิ่งที่บรรพบุรุษของฉันทำผิด — พวกเขาไม่ขออนุญาต" เขาหยุด "ฉันขออนุญาต"<br><br>
-  แสงส้มในห้องสว่างขึ้นทันที ไม่มาก แต่พอให้รู้ว่ามีอะไรเปลี่ยน<br><br>
-  <span class="em">แล้วเจ้าต้องการอะไร</span><br><br>
-  เสียงในหัวเปลี่ยนไปเล็กน้อย ยังเป็นเสียงเดิม แต่หนักน้อยลง<br><br>
-  "ฉันต้องการทางที่สาม ไม่ตาย ไม่ยอมแพ้ อะไรก็ตามที่เจ้ายังไม่ได้บอก"
-</blockquote>
-
-<p>หัวใจพระเจ้าเต้นช้าๆ ต่อไป สามครั้ง ห้าครั้ง สิบครั้ง</p>
-
-<p>แล้วมันก็บอก</p>
-
-<p>และอีเซลก็ฟัง ยืนนิ่งอยู่กับที่ ในขณะที่ไซยาข้างหลังเขาไม่ขยับ ไม่พูด ฟังในสิ่งที่เธอไม่ได้ยินแต่รู้ว่ากำลังเกิดขึ้น</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>เมื่ออีเซลหันกลับมา เขาซีดกว่าเดิม แต่ดวงตาไม่ใช่ดวงตาของคนที่เพิ่งแพ้ ไม่ใช่ดวงตาของคนที่ชนะเช่นกัน มันเป็นดวงตาของคนที่เพิ่งลงนามในอะไรบางอย่างที่รู้อยู่เต็มอกว่าจะเปลี่ยนทุกสิ่ง</p>
-
-<blockquote>
-  "ทางที่สามคืออะไร" ไซยาถามเบาๆ<br><br>
-  "ฉันให้มันกลับไป" อีเซลพูด "ทุกอย่างที่กระดูกในร่างฉันจำได้ ความทรงจำของเลือดเวย์น ทุกชิ้นที่มันดึงออกมาจากตัวฉันตลอดสามปี ฉันคืนมันทั้งหมด" เขาหยุด "เพื่อแลกกับบางอย่าง"<br><br>
-  ไซยารอ<br><br>
-  "มันจะปิดรอยแตกในแผ่นดิน ทีละรอย ช้าๆ ใช้เวลานาน แต่มันจะหยุดเน่า" เขาหันมามองเธอ "และฉันจะไม่ตาย แต่ฉันจะลืมอะไรบางอย่าง"<br><br>
-  "ลืม อะไร"<br><br>
-  เขาส่ายหัว "มันไม่บอก บอกแค่ว่าบางอย่าง"
-</blockquote>
-
-<p>ไซยาไม่พูด แต่ลิ้นกระดูกขยับ กลั้นคำถามที่มันรู้อยู่แล้วว่าจะออกมาไม่ได้</p>
-
-<blockquote>
-  "งั้นเจ้าตกลงไปแล้ว"<br><br>
-  "ใช่"<br><br>
-  เธอปิดตาครู่หนึ่ง "แล้วฉันล่ะ ฉันต้องทำอะไร"<br><br>
-  อีเซลมองเธอ "เจ้าไม่ต้องทำอะไร เจ้าได้ทำส่วนของเจ้าแล้ว ตั้งแต่วันที่เจ้าเลือกลิ้น"<br><br>
-  ไซยาเปิดตา และครั้งแรกนับตั้งแต่เดินทางด้วยกัน อีเซลเห็นสิ่งที่เขาไม่เคยเห็นในดวงตาของเธอ ไม่ใช่น้ำตา แต่เป็นบางอย่างที่อยู่ปกปิดน้ำตาอยู่ สิ่งที่คนกลั้นเอาไว้จนลืมว่ากลั้นอะไร<br><br>
-  "เจ้าต้องการอะไรจากฉันก่อนไหม" เธอถาม<br><br>
-  เขาคิดนาน "เจ้าช่วยดูแลเวนได้ไหม ถ้าฉัน—"<br><br>
-  "ได้" เธอตอบก่อนที่เขาจะพูดจบ
-</blockquote>
-
-</div>
-<div class="end-scroll" style="padding-bottom:2rem;"><p>✦ &nbsp; จบบทที่หก &nbsp; ✦</p></div>
-
-<!-- ═══ บทที่เจ็ด ═══ -->
-<div class="chapter-header">
-  <div class="chapter-num">บทที่เจ็ด</div>
-  <h2 class="chapter-title">สิ่งที่เหลืออยู่</h2>
-  <p class="chapter-epigraph">"มนุษย์ไม่ได้จำทุกอย่างเพราะความจำบกพร่อง<br>มนุษย์ลืมเพราะบางอย่างหนักเกินกว่าจะแบกต่อไป<br>และร่างกายรู้เรื่องนี้ก่อนที่ใจจะยอมรับ"<br><em>— บันทึกของไซยา ปีที่สองหลังยุคกระดูก</em></p>
-</div>
-<div class="story-body">
-
-<p class="dropcap">ผู้รับใช้แห่งรอยแตกมาถึงปากบันไดพร้อมสาวกสิบสี่คนในขณะที่อีเซลและไซยากำลังขึ้นมา เขายืนกลางทางเดิน ครึ่งร่างที่เป็นหินจับแสงส้มจากผนัง และดวงตาข้างที่ยังเป็นมนุษย์มองตรงมาที่อีเซล</p>
-
-<p>ไม่มีความโกรธในดวงตานั้น ไม่มีความเกลียดชัง มีเพียงบางอย่างที่อีเซลนึกไม่ออกว่าจะเรียกว่าอะไร จนกว่าเขาจะมองนานพอ</p>
-
-<p>ความเหนื่อย</p>
-
-<blockquote>
-  "หยุด" เขาพูด เสียงหินกระทบหินในลำคอ "ทายาทของเวย์น เจ้าไม่เข้าใจว่าเจ้ากำลังทำอะไร"<br><br>
-  "ฉันเข้าใจดีกว่าเจ้า" อีเซลพูดโดยไม่หยุดเดิน<br><br>
-  "ถ้าหัวใจปิดตัว ลัทธิจะไม่มีอำนาจ" ผู้รับใช้พูด เสียงไม่ได้โกรธ มันพูดด้วยความเชื่อมั่น "และโดยไม่มีลัทธิ คนเหล่านี้จะอยู่อย่างไร พวกเขาต้องการบางอย่างให้ยึด เจ้ากำลังจะพรากสิ่งนั้นไปจากพวกเขา"<br><br>
-  อีเซลหยุดตรงหน้าเขา มองดวงตาข้างที่ยังเป็นมนุษย์ "เจ้าเชื่อจริงๆ ว่าเจ้าช่วยพวกเขาอยู่"<br><br>
-  "ฉันช่วยพวกเขามาเป็นสิบปี" ผู้รับใช้พูด ไม่ใช่การอ้าง แต่เป็นการบอกข้อเท็จจริง "ฉันเห็นคนที่ไม่มีที่ไป ไม่มีอาหาร ไม่มีความหวัง แล้วฉันให้บางอย่างกับพวกเขา"<br><br>
-  "เจ้าให้อะไร"<br><br>
-  "เหตุผลที่ยังมีชีวิตอยู่"<br><br>
-  อีเซลมองเขานาน มองครึ่งร่างที่เป็นหิน มองดวงตาที่เหนื่อย "เจ้าเชื่อจริงๆงั้นเหรอ ว่าเจ้าทำถูก"<br><br>
-  ผู้รับใช้ไม่ตอบ แต่นั่นเป็นคำตอบ<br><br>
-  "ฉันรู้" อีเซลพูดเบาลง "และนั่นแหละทำให้ฉันเสียใจแทนเจ้า"
-</blockquote>
-
-<p>ผู้รับใช้ยกมือหินขึ้นมามองดู สาวกข้างหลังเริ่มขยับ</p>
-
-<p>และหัวใจพระเจ้าก็เริ่ม</p>
-
-<p>มันไม่ได้เริ่มด้วยเสียงดัง ไม่มีแสงวาบ ไม่มีการระเบิด มันเริ่มด้วยความสั่นสะเทือนต่ำๆ ที่ฟันรับรู้ก่อนหู กระดูกในผนัง ในพื้น ในร่างกายของทุกคนในห้องนั้น — ทั้งหมดสั่นพร้อมกันในจังหวะเดียว จังหวะของหัวใจพระเจ้าที่กำลังเต้นแรงขึ้นเป็นครั้งแรกในสองร้อยปี</p>
-
-<p>มือกระดูกของอีเซลร้อนขึ้นจนเขาต้องกัดฟัน แสงส้มพุ่งออกมาจากทุกรอยต่อ ทุกรอยแตก ทุกซอกหลืบ</p>
-
-<p>สาวกของผู้รับใช้ถอยหลังทีละคน กระดูกพระเจ้าที่ฝังอยู่ในร่างกายของแต่ละคนกำลังตอบสนองต่อสิ่งเดียวกัน และร่างกายที่เหลือตามไม่ทัน</p>
-
-<p>ผู้รับใช้ยืนนิ่ง ครึ่งร่างที่เป็นหินสั่นเล็กน้อย เขามองอีเซล มองหัวใจที่เต้นอยู่เบื้องล่าง ในดวงตาข้างที่ยังเป็นมนุษย์มีสิ่งที่อีเซลไม่คาดว่าจะเห็น</p>
-
-<p>ความโล่งใจ</p>
-
-<blockquote>
-  "เจ้าเหนื่อยแล้ว" อีเซลพูดเบาๆ ไม่ใช่คำถาม<br><br>
-  ผู้รับใช้มองเขา มองนานพอที่ไซยาข้างอีเซลเริ่มตึงเครียด<br><br>
-  "สิบปี" เขาพูด เสียงเหนื่อยกว่าที่เคยได้ยิน "ฉันแบกมันมานับสิบปี" เขามองครึ่งร่างที่เป็นหิน "ตั้งแต่วันที่ฉันสมทบ ตั้งแต่วันที่ฉันเชื่อจริงๆ ว่านี่คือสิ่งที่ถูก" เขาหยุด "ฉันยังเชื่ออยู่ แต่ฉันเหนื่อยมากเกินไปที่จะสู้กับคนที่อาจจะถูกกว่าฉัน"<br><br>
-  เขาลดมือหินลง<br><br>
-  แล้วเขาก็นั่งลงกับพื้น ช้าๆ หนักๆ เสียงหินกระทบกระดูกดังก้อง
-</blockquote>
-
-<p>สาวกที่เหลือมองผู้นำที่นั่งลง แล้วก็ถอยออกไปทีละคน ไม่มีใครวิ่งหนี ไม่มีใครสู้ พวกเขาแค่ถอย เหมือนน้ำที่ไหลออกจากรอยแตก</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>อีเซลจำได้เพียงบางส่วนหลังจากนั้น</p>
-
-<p>จำได้ว่าเขาต้องกลับลงไปในห้องนั้น จำได้ว่าไซยาเดินตามแต่หยุดอยู่ที่ปากบันได จำได้ว่าเขาวางมือทั้งสองข้างบนหัวใจพระเจ้า กระดูกซ้ายและเนื้อขวา สองอุณหภูมิสองผิวสัมผัส</p>
-
-<p>จำได้ว่าเขาพูดว่า "ฉันขออนุญาต"</p>
-
-<p>จำได้ว่าแสงส้มสว่างขึ้นจนมองไม่เห็นอะไร จำได้ว่าความอุ่นไหลออกจากมือกระดูกราวกับสิ่งที่เคยถูกกักไว้ถูกปล่อยออกมาทีเดียวทั้งหมด จำได้ว่าไซยาจับแขนเขาไว้จากข้างบนบันได ไม่ยอมปล่อย</p>
-
-<p>และจำได้ว่ามันเจ็บ เจ็บลึก เหมือนมีบางอย่างที่อยู่กับเขามาตลอดสามปีกำลังออกจากร่าง และตอนที่มันออกไป มันพาบางอย่างไปด้วย</p>
-
-<p>แล้วก็มืด</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>เขาตื่นขึ้นมาในซากอาคารนอกเมือง ท้องฟ้าสีเทาอ่อน ไม่มีหมอกพิษ ดินใต้ฝ่ามือแห้งกว่าเดิม เย็นกว่าเดิม ไม่มีการเต้นเบาๆ จากด้านล่าง</p>
-
-<p>ไซยานั่งอยู่ข้างๆ เวนนั่งอีกด้านหนึ่ง เด็กหญิงมองเขาด้วยดวงตาที่เขาจำได้ ดวงตาที่เคยมองต้นไม้เลือดพระเจ้าแล้วเดินออกมากับเขาแทน</p>
-
-<blockquote>
-  "ตื่นแล้วเหรอ" เวนพูด ไม่ถามว่าเป็นยังไง<br><br>
-  "อืม ตื่นแล้ว" เขาตอบ<br><br>
-  "เจ้านอนหลับอยู่สองวัน" เธอบอก<br><br>
-  "สองวัน"<br><br>
-  "ฉันกับไซยาสลับกันเฝ้า" เวนพูด เหมือนมันเป็นเรื่องปกติ เหมือนการเฝ้าคนที่หมดสติอยู่สองวันเป็นสิ่งที่เธอทำได้
-</blockquote>
-
-<p>อีเซลนั่งขึ้น มองมือตัวเอง มือขวามีนิ้วครบห้านิ้ว เนื้อปกติ ไม่มีรอยสีเทา ไม่มีกระดูกโผล่ และมือซ้าย — ที่เคยเป็นกระดูกล้วนทั้งมือ — มีเนื้อคืนมา ไม่เรียบ ไม่สมบูรณ์ มีรอยยับและรอยหย่น เหมือนเนื้อที่งอกขึ้นมาใหม่โดยไม่รู้ว่าควรจะเรียบหรือเปล่า แต่มันเป็นเนื้อ</p>
-
-<p>เขากำมือ ทั้งสองข้าง ช้าๆ</p>
-
-<p>ไม่มีเสียงกรอบแกรบ</p>
-
-<blockquote>
-  "เจ้าจำอะไรได้บ้าง" ไซยาถามเบาๆ<br><br>
-  อีเซลนึกทบทวน ภาพของเมืองวัลแมร์ยังอยู่ ภาพของหมู่บ้านเงียบยังอยู่ ภาพของฝนส้มยังอยู่ ภาพของหัวใจสีแดงเข้มที่แขวนอยู่กลางอากาศยังอยู่ ภาพของไซยาในความมืด ภาพของเวนที่เดินออกจากหมู่บ้าน<br><br>
-  แต่มีบางอย่างที่เขามองหาแล้วไม่พบ<br><br>
-  "ฉันจำชื่อไม่ได้" เขาพูดช้าๆ "ชื่อของสี่ร้อยสิบเก้าคนที่ฉันรักษา ฉันจำได้ว่ามีพวกเขา จำได้ว่ารักษา จำได้ว่าเสียนิ้วครั้งไหนเพื่อใคร" เขาหยุด "แต่ชื่อ ไม่มีแล้ว"<br><br>
-  ไซยาไม่พูดอะไร
-</blockquote>
-
-<p>เวนยื่นมือมาจับมือขวาของเขา มือเล็กๆ ที่อุ่น</p>
-
-<blockquote>
-  "ยังจำชื่อฉันได้ไหม" เธอถาม<br><br>
-  "เวน" เขาตอบทันที<br><br>
-  เธอพยักหน้า "แค่นั้นก็พอแล้ว"<br><br>
-  "เธอไม่โกรธที่ฉันลืมชื่อคนอื่น ?"<br><br>
-  เวนมองเขาด้วยสายตาที่เขาลืมไปว่าเด็กสิบขวบมองได้ขนาดนั้น "เจ้าให้นิ้วของเจ้าไปเพื่อช่วยพวกเขา แล้วตอนนี้เจ้าให้ชื่อของพวกเขาไปด้วย ฉันคิดว่านั่นยุติธรรมมากพอ"
-</blockquote>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>พวกเขาเดินออกจากเมืองออสเทรียนในเช้าวันนั้น ไม่มีใครไล่ตาม</p>
-
-<p>ลัทธิอาร์คานไม่ได้พังทลายในคืนเดียว องค์กรที่ใหญ่ขนาดนั้นไม่พังลงง่ายๆ มันค่อยๆ หดตัว ค่อยๆ สูญเสียความหมาย เมื่อรอยแตกในแผ่นดินเริ่มปิด เมื่อดินพิษเริ่มจาง เมื่อกระดูกพระเจ้าที่เคยเรืองแสงเริ่มหรี่ลง คนก็เริ่มตั้งคำถามว่าถ้าพระเจ้าหายไปแล้ว พวกเขาบูชาอะไรอยู่กันแน่</p>
-
-<p>ผู้รับใช้แห่งรอยแตกยังอยู่ในออสเทรียนเมื่อพวกเขาออกไป อีเซลผ่านลานหินที่เคยทำพิธีรับสาวก ผ่านซี่โครงพระเจ้าที่เคยสว่างด้วยแสงส้ม ตอนนี้มันสว่างน้อยลงกว่าเดิมแล้ว แสงยังอยู่ แต่เบากว่า เหมือนตะเกียงที่น้ำมันกำลังจะหมด</p>
-
-<p>เขาเห็นผู้รับใช้นั่งอยู่ที่ขอบลาน ครึ่งร่างที่เป็นหินสะท้อนแสงเช้า ดวงตาข้างที่ยังเป็นมนุษย์มองออกไปทางไหนก็ไม่รู้</p>
-
-<p>อีเซลหยุด</p>
-
-<blockquote>
-  ผู้รับใช้หันมามอง "เจ้าจะไม่ถามหรือ ฉันว่ารู้สึกอย่างไร"<br><br>
-  "ไม่" อีเซลพูด "แต่เจ้าอยากบอกไหม"<br><br>
-  ชายคนนั้นนึกอยู่ครู่ "ฉันไม่รู้ว่าที่ทำไปถูกหรือผิด" เขาพูด "ฉันยังไม่รู้ และบางทีฉันเองก็ไม่อยากรู้"<br><br>
-  "ฉันก็ไม่รู้เหมือนกัน" อีเซลพูด "เรื่องของตัวเอง"<br><br>
-  ผู้รับใช้มองเขา "แล้วเจ้าทำอย่างไร"<br><br>
-  อีเซลคิดนาน มองเวนที่ยืนรออยู่ มองไซยาที่ยืนข้างเวน "ฉันเดินต่อไป และมีคนเดินด้วย"<br><br>
-  ชายคนนั้นพยักหน้าช้าๆ ไม่ได้บอกว่าเข้าใจ ไม่ได้บอกว่าจะทำแบบเดียวกัน แค่พยักหน้า
-</blockquote>
-
-<p>อีเซลเดินต่อไป</p>
-
-<div class="scene-break">✦ &nbsp; &nbsp; ✦</div>
-
-<p>อีเซลเดินท่ามกลางดินที่เริ่มเปลี่ยน เขามองพื้นดินใต้เท้า มันยังสีม่วงอมเทาอยู่ ยังมีรอยแตกอยู่ แต่แสงส้มในรอยแตกจางลงแล้ว และในบางจุด เขาเห็นสีดำของดินปกติ ดินที่ไม่มีชีวิตเป็นของตัวเอง ดินที่แค่เป็นดิน</p>
-
-<blockquote>
-  "เจ้าจะทำอะไรต่อ" ไซยาถาม<br><br>
-  "ไม่รู้" เขาตอบ "เจ้าล่ะ"<br><br>
-  เธอคิดอยู่พักหนึ่ง "ฉันอยากกลับไปที่ที่ฉันจากมา ก่อนที่ฉันจะเข้าลัทธิ ไม่รู้ว่ายังมีอะไรอยู่ไหม"<br><br>
-  "อยากไปดูไหม"<br><br>
-  ลิ้นกระดูกหยุดนิ่งครู่หนึ่ง แล้วก็ขยับ "อยากมาก"
-</blockquote>
-
-<blockquote>
-  "อีเซล" เวนพูดขึ้นมา<br><br>
-  "อะไร"<br><br>
-  "รสชาติเป็นยังไงบ้าง"<br><br>
-  เขาหยุดเดิน มองหน้าเธอ แล้วหยิบขนมปังที่เหลืออยู่ในเป้กัดดู ไซยาและเวนรอ<br><br>
-  เขากินอยู่ครู่หนึ่ง<br><br>
-  "เหมือนขนมปัง" เขาพูด เสียงแปลกๆ "แค่นั้นเลย เหมือนขนมปังธรรมดา"<br><br>
-  เวนยิ้ม "ดีไหม"<br><br>
-  เขานึกถึงสองปีของรสเถ้า นึกถึงความอุ่นในหัวอกทุกครั้งที่รักษาคน นึกถึงมือสองข้างที่ตอนนี้มีเนื้อครบ<br><br>
-  "ดีมาก" เขาตอบ
-</blockquote>
-
-<p>พวกเขาเดินต่อไป สามคน บนดินที่เริ่มลืมว่าเคยมีชีวิต</p>
-
-<p>ท้องฟ้าเหนือพวกเขายังเป็นสีเทา ยังไม่มีดาว ยังไม่มีพระจันทร์</p>
-
-<p>แต่มันสว่างกว่าเมื่อวาน</p>
-
-<p><span class="whisp">และบางทีนั่นก็เพียงพอแล้ว สำหรับตอนนี้</span></p>
-
-</div>
-
-<div class="end-scroll">
-  <p>✦ &nbsp; จบ &nbsp; ✦</p>
-  <p style="margin-top:1rem; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.4em; opacity:0.25;">กระดูกของพระเจ้า · BONES OF THE FALLEN GOD</p>
-</div>
-
-</div><!-- end story-wrap -->
+<footer>
+  <div class="footer-logo">sd<em>stardust</em></div>
+  <div class="footer-links">
+    <a href="#">หน้าหลัก</a>
+    <a href="#novels">นิยาย</a>
+    <a href="#">ติดต่อ</a>
+  </div>
+  <p class="footer-copy">© 2568 sdstardust · ลิขสิทธิ์เนื้อหาเป็นของผู้เขียน</p>
+</footer>
+
+<script>
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function initStars() {
+  stars = [];
+  const count = Math.floor((canvas.width * canvas.height) / 3800);
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.3 + 0.2,
+      alpha: Math.random() * 0.7 + 0.15,
+      speed: Math.random() * 0.004 + 0.001,
+      phase: Math.random() * Math.PI * 2,
+      hue: Math.random() > 0.8 ? 280 + Math.random()*40 : 220 + Math.random()*50
+    });
+  }
+}
+
+function drawStars(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    const a = s.alpha * (0.55 + 0.45 * Math.sin(t * s.speed * 50 + s.phase));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${s.hue},70%,88%,${a})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+
+resize(); initStars(); requestAnimationFrame(drawStars);
+window.addEventListener('resize', () => { resize(); initStars(); });
+
+function filterNovels(genre, btn) {
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.ncard').forEach(card => {
+    card.style.display = (genre === 'all' || card.dataset.genre === genre) ? 'block' : 'none';
+  });
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
