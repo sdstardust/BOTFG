@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>กระดูกของพระเจ้า — ตัวละคร</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #080608;
+    --bone: #c8bfaa;
+    --fade: #7a7060;
+    --ember: #c4622a;
+    --blood: #7a1515;
+    --curse: #4a2060;
+    --ash: #3d3545;
+    --line: #d4c9b0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Sarabun', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    border-bottom: 1px solid rgba(196,98,42,0.12);
+  }
+
+  .label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.6em;
+    color: var(--ember);
+    opacity: 0.6;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: 600;
+    color: var(--bone);
+    letter-spacing: 0.05em;
+  }
+
+  header p {
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--fade);
+    font-style: italic;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+    transition: background 0.4s;
+  }
+
+  .card:hover {
+    background: rgba(255,255,255,0.015);
+  }
+
+  .card-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .card.hero .card-accent { background: linear-gradient(to right, transparent, var(--blood), transparent); }
+  .card.secondary .card-accent { background: linear-gradient(to right, transparent, var(--curse), transparent); }
+  .card.neutral .card-accent { background: linear-gradient(to right, transparent, var(--ash), transparent); }
+  .card.child .card-accent { background: linear-gradient(to right, transparent, #5a7a5a, transparent); }
+
+  .portrait-wrap {
+    width: 200px;
+    height: 240px;
+    position: relative;
+    margin-bottom: 1.8rem;
+  }
+
+  .portrait-wrap svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* corner marks */
+  .corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: rgba(196,98,42,0.3);
+    border-style: solid;
+  }
+  .corner.tl { top:0; left:0; border-width: 1px 0 0 1px; }
+  .corner.tr { top:0; right:0; border-width: 1px 1px 0 0; }
+  .corner.bl { bottom:0; left:0; border-width: 0 0 1px 1px; }
+  .corner.br { bottom:0; right:0; border-width: 0 1px 1px 0; }
+
+  .char-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bone);
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
+
+  .char-role {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ember);
+    opacity: 0.55;
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+
+  .char-desc {
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: var(--fade);
+    text-align: center;
+    max-width: 220px;
+  }
+
+  .char-quote {
+    margin-top: 1.4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.78rem;
+    font-style: italic;
+    color: rgba(196,98,42,0.5);
+    text-align: center;
+    max-width: 220px;
+    line-height: 1.8;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.5em;
+    color: var(--ember);
+    opacity: 0.2;
+    border-top: 1px solid rgba(196,98,42,0.08);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">Character Design · Line Art</div>
+  <h1>กระดูกของพระเจ้า</h1>
+  <p>ตัวละครหลักในยุคกระดูก</p>
+</header>
+
+<div class="grid">
+
+  <!-- ═══ อีเซล ═══ -->
+  <div class="card hero">
+    <div class="card-accent"></div>
+    <div class="portrait-wrap">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background subtle glow -->
+        <radialGradient id="glow1" cx="50%" cy="45%" r="40%">
+          <stop offset="0%" stop-color="#7a1515" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#7a1515" stop-opacity="0"/>
+        </radialGradient>
+        <rect width="200" height="240" fill="url(#glow1)"/>
+
+        <!-- Body / coat outline -->
+        <path d="M55 240 L55 148 Q52 140 46 135 L30 125 Q22 120 20 110 L18 90" stroke="#c8bfaa" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.6"/>
+        <path d="M145 240 L145 148 Q148 140 154 135 L170 125 Q178 120 180 110 L182 90" stroke="#c8bfaa" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.6"/>
+        <path d="M55 240 Q70 228 100 226 Q130 228 145 240" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.5"/>
+
+        <!-- Coat inner detail -->
+        <path d="M80 240 L78 165 Q82 155 100 152 Q118 155 122 165 L120 240" stroke="#9a9080" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <!-- Belt / strap -->
+        <path d="M60 175 Q100 170 140 175" stroke="#9a9080" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <!-- Button/clasp -->
+        <circle cx="100" cy="168" r="2.5" stroke="#c4622a" stroke-width="0.8" opacity="0.6"/>
+
+        <!-- Neck -->
+        <path d="M88 118 Q88 126 87 130 L87 138 Q88 142 100 144 Q112 142 113 138 L113 130 Q112 126 112 118" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.7"/>
+
+        <!-- Head -->
+        <ellipse cx="100" cy="90" rx="32" ry="36" stroke="#c8bfaa" stroke-width="1.2" fill="none" opacity="0.85"/>
+
+        <!-- Hair - swept back, slightly messy -->
+        <path d="M70 80 Q68 60 78 52 Q88 44 100 44 Q116 44 124 52 Q132 62 130 78" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.7"/>
+        <path d="M70 80 Q66 68 68 58 Q72 50 80 48" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <path d="M130 80 Q134 68 132 56" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <!-- Hair strands -->
+        <path d="M74 70 Q72 62 76 56" stroke="#c8bfaa" stroke-width="0.6" fill="none" opacity="0.35"/>
+        <path d="M126 68 Q128 60 124 54" stroke="#c8bfaa" stroke-width="0.6" fill="none" opacity="0.35"/>
+
+        <!-- Eyes - focused, tired -->
+        <path d="M84 86 Q87 83 92 84 Q97 85 97 88 Q95 91 90 91 Q85 90 84 86Z" stroke="#c8bfaa" stroke-width="0.9" fill="none" opacity="0.8"/>
+        <path d="M103 86 Q106 83 111 84 Q116 85 116 88 Q114 91 109 91 Q104 90 103 86Z" stroke="#c8bfaa" stroke-width="0.9" fill="none" opacity="0.8"/>
+        <!-- Pupils -->
+        <circle cx="90" cy="87.5" r="2" fill="#c8bfaa" opacity="0.6"/>
+        <circle cx="109" cy="87.5" r="2" fill="#c8bfaa" opacity="0.6"/>
+        <!-- Eye bags - tired look -->
+        <path d="M84 91 Q88 93 92 92" stroke="#7a7060" stroke-width="0.6" fill="none" opacity="0.5"/>
+        <path d="M103 91 Q107 93 112 92" stroke="#7a7060" stroke-width="0.6" fill="none" opacity="0.5"/>
+
+        <!-- Nose -->
+        <path d="M97 90 Q98 98 96 103 Q98 105 100 105 Q102 105 104 103 Q102 98 103 90" stroke="#c8bfaa" stroke-width="0.7" fill="none" opacity="0.5"/>
+
+        <!-- Mouth - slight tension -->
+        <path d="M91 112 Q96 115 100 115 Q104 115 109 112" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.6"/>
+
+        <!-- LEFT ARM - skeletal bone hand -->
+        <path d="M55 148 Q50 150 44 158 L38 172 Q35 180 34 192" stroke="#c8bfaa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.65"/>
+        <!-- Sleeve end / cuff -->
+        <path d="M37 190 Q35 195 34 200" stroke="#c8bfaa" stroke-width="1.5" fill="none" opacity="0.6"/>
+        <!-- Bone hand - exposed skeleton -->
+        <path d="M34 200 L30 208 M34 200 L32 210 M34 200 L35 211 M34 200 L37 209 M34 200 L38 206" stroke="#c8bfaa" stroke-width="0.9" stroke-linecap="round" opacity="0.9"/>
+        <!-- Knuckle joints on bone fingers -->
+        <circle cx="30" cy="205" r="1.2" fill="none" stroke="#c8bfaa" stroke-width="0.7" opacity="0.7"/>
+        <circle cx="32" cy="207" r="1.2" fill="none" stroke="#c8bfaa" stroke-width="0.7" opacity="0.7"/>
+        <circle cx="35" cy="208" r="1.2" fill="none" stroke="#c8bfaa" stroke-width="0.7" opacity="0.7"/>
+        <circle cx="37" cy="207" r="1.2" fill="none" stroke="#c8bfaa" stroke-width="0.7" opacity="0.7"/>
+        <!-- Bone texture on wrist/hand -->
+        <path d="M34 198 Q32 196 33 194 Q35 192 37 194 Q38 196 36 198" stroke="#c8bfaa" stroke-width="0.6" fill="none" opacity="0.6"/>
+        <path d="M34 195 Q34 192 36 192" stroke="#c8bfaa" stroke-width="0.5" fill="none" opacity="0.4"/>
+
+        <!-- RIGHT ARM - gloved, normal -->
+        <path d="M145 148 Q150 150 156 158 L162 172 Q165 180 166 192" stroke="#c8bfaa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.65"/>
+        <!-- Glove -->
+        <path d="M163 192 Q165 196 166 200 Q167 206 165 212" stroke="#9a9080" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <!-- Glove fingers implied -->
+        <path d="M165 210 L163 218 M165 210 L166 219 M165 210 L168 217" stroke="#9a9080" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        <!-- Glove stitching -->
+        <path d="M163 200 Q166 198 169 200" stroke="#7a7060" stroke-width="0.5" fill="none" opacity="0.5"/>
+
+        <!-- Shoulder details -->
+        <path d="M58 145 Q65 140 75 138" stroke="#9a9080" stroke-width="0.7" fill="none" opacity="0.35"/>
+        <path d="M142 145 Q135 140 125 138" stroke="#9a9080" stroke-width="0.7" fill="none" opacity="0.35"/>
+
+        <!-- Blood magic indicator - faint glow from left hand area -->
+        <circle cx="34" cy="202" r="8" stroke="#7a1515" stroke-width="0.5" fill="none" opacity="0.25"/>
+        <circle cx="34" cy="202" r="14" stroke="#7a1515" stroke-width="0.3" fill="none" opacity="0.1"/>
+
+        <!-- Ear -->
+        <path d="M68 86 Q64 90 65 96 Q67 102 70 100" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M132 86 Q136 90 135 96 Q133 102 130 100" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+        <!-- Scar/mark near eye - sign of fatigue -->
+        <path d="M81 85 Q80 82 82 81" stroke="#7a7060" stroke-width="0.5" fill="none" opacity="0.45"/>
+      </svg>
+    </div>
+    <div class="char-name">อีเซล เวย์น</div>
+    <div class="char-role">นักรักษาผู้แบกคำสาป · ๒๕ ปี</div>
+    <p class="char-desc">มือซ้ายกลายเป็นกระดูกทั้งมือ มือขวาสวมถุงมือหนังปิดนิ้วที่เหลืออยู่สาม เดินทางด้วยดวงตาที่ไม่ค่อยหลับตาสนิท</p>
+    <div class="char-quote">"ก่อนที่จะไม่มีมือเหลือพอให้เคาะประตู"</div>
+  </div>
+
+  <!-- ═══ ไซยา ═══ -->
+  <div class="card secondary">
+    <div class="card-accent"></div>
+    <div class="portrait-wrap">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <radialGradient id="glow2" cx="50%" cy="45%" r="40%">
+          <stop offset="0%" stop-color="#4a2060" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#4a2060" stop-opacity="0"/>
+        </radialGradient>
+        <rect width="200" height="240" fill="url(#glow2)"/>
+
+        <!-- Body - layered clothing -->
+        <path d="M52 240 L52 145 Q48 138 42 132 L28 120 Q20 112 18 100" stroke="#c8bfaa" stroke-width="1.2" fill="none" opacity="0.6"/>
+        <path d="M148 240 L148 145 Q152 138 158 132 L172 120 Q180 112 182 100" stroke="#c8bfaa" stroke-width="1.2" fill="none" opacity="0.6"/>
+        <path d="M52 240 Q70 230 100 228 Q130 230 148 240" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.5"/>
+
+        <!-- Layered vest/jacket -->
+        <path d="M72 240 L70 162 L100 156 L130 162 L128 240" stroke="#9a9080" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <!-- Collar - high, concealing -->
+        <path d="M82 138 Q82 130 84 126 Q90 120 100 120 Q110 120 116 126 Q118 130 118 138" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.6"/>
+
+        <!-- Neck -->
+        <path d="M88 120 L87 130 Q88 134 100 136 Q112 134 113 130 L112 120" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.6"/>
+
+        <!-- Head - slightly narrower, sharper features -->
+        <ellipse cx="100" cy="88" rx="30" ry="34" stroke="#c8bfaa" stroke-width="1.2" fill="none" opacity="0.85"/>
+
+        <!-- Hair - short, uneven cut, choppy -->
+        <path d="M71 84 Q70 66 78 56 Q88 46 100 46 Q112 46 120 56 Q128 66 129 84" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.7"/>
+        <!-- Choppy cut texture - left side shorter -->
+        <path d="M71 84 Q68 76 70 68 Q72 60 76 56" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M129 84 Q132 72 128 60" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <!-- Uneven strands - shorn roughly -->
+        <path d="M74 72 L70 66 M76 68 L73 62 M120 70 L124 64 M124 76 L128 70" stroke="#c8bfaa" stroke-width="0.6" fill="none" opacity="0.4"/>
+        <!-- Hair at ear level -->
+        <path d="M70 82 Q68 78 70 74" stroke="#c8bfaa" stroke-width="0.7" fill="none" opacity="0.35"/>
+
+        <!-- Eyes - sharp, direct, slightly narrowed -->
+        <path d="M83 85 Q86 81 92 82 Q97 83 97 87 Q95 90 90 90 Q84 89 83 85Z" stroke="#c8bfaa" stroke-width="0.9" fill="none" opacity="0.85"/>
+        <path d="M103 85 Q106 81 112 82 Q117 83 117 87 Q115 90 110 90 Q104 89 103 85Z" stroke="#c8bfaa" stroke-width="0.9" fill="none" opacity="0.85"/>
+        <circle cx="90" cy="86.5" r="2.2" fill="#c8bfaa" opacity="0.65"/>
+        <circle cx="110" cy="86.5" r="2.2" fill="#c8bfaa" opacity="0.65"/>
+
+        <!-- Nose - straight, defined -->
+        <path d="M97 90 Q98 98 97 102 Q99 105 100 105 Q101 105 103 102 Q102 98 103 90" stroke="#c8bfaa" stroke-width="0.7" fill="none" opacity="0.5"/>
+
+        <!-- Mouth - OPEN SLIGHTLY, showing bone tongue -->
+        <!-- Lips -->
+        <path d="M90 112 Q95 110 100 110 Q105 110 110 112" stroke="#c8bfaa" stroke-width="0.9" fill="none" opacity="0.7"/>
+        <path d="M90 112 Q93 116 100 117 Q107 116 110 112" stroke="#c8bfaa" stroke-width="0.7" fill="none" opacity="0.5"/>
+        <!-- Teeth hint -->
+        <path d="M92 113 Q100 112 108 113" stroke="#c8bfaa" stroke-width="0.5" fill="none" opacity="0.4"/>
+        <!-- BONE TONGUE - the key feature -->
+        <path d="M96 115 Q100 117 104 115" stroke="#e8e0d0" stroke-width="1.2" fill="none" opacity="0.9"/>
+        <path d="M97 116 Q100 119 103 116" stroke="#ffffff" stroke-width="0.8" fill="none" opacity="0.7"/>
+        <!-- Bone texture on tongue -->
+        <path d="M98 116 L98 118 M100 116 L100 119 M102 116 L102 118" stroke="#c8bfaa" stroke-width="0.4" opacity="0.5"/>
+
+        <!-- Subtle glow from tongue - bone light -->
+        <ellipse cx="100" cy="117" rx="6" ry="3" stroke="#a0a080" stroke-width="0.4" fill="none" opacity="0.2"/>
+
+        <!-- Ear -->
+        <path d="M70 85 Q66 89 67 95 Q69 101 72 99" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M130 85 Q134 89 133 95 Q131 101 128 99" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+        <!-- Arms - both with flesh, hands visible -->
+        <path d="M52 145 Q46 150 40 160 L35 175 Q32 185 33 198" stroke="#c8bfaa" stroke-width="1.1" fill="none" opacity="0.65"/>
+        <path d="M148 145 Q154 150 160 160 L165 175 Q168 185 167 198" stroke="#c8bfaa" stroke-width="1.1" fill="none" opacity="0.65"/>
+
+        <!-- Hands - both normal -->
+        <path d="M33 198 L29 208 M33 198 L31 210 M33 198 L33 211 M33 198 L35 210 M33 198 L37 208" stroke="#c8bfaa" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+        <path d="M167 198 L163 208 M167 198 L165 210 M167 198 L167 211 M167 198 L169 210 M167 198 L171 208" stroke="#c8bfaa" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+
+        <!-- Weapon/tool at side - knife at belt -->
+        <path d="M128 172 L132 200 Q133 205 131 206 Q129 207 128 204 L125 178" stroke="#9a9080" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M128 172 L130 172" stroke="#9a9080" stroke-width="1.5" opacity="0.4"/>
+
+        <!-- Belt -->
+        <path d="M58 170 Q100 165 142 170" stroke="#7a7060" stroke-width="1" fill="none" opacity="0.45"/>
+      </svg>
+    </div>
+    <div class="char-name">ไซยา "ลิ้น-ดาบ"</div>
+    <div class="char-role">อดีตนักบวชลัทธิ · ผู้ร่วมทาง</div>
+    <p class="char-desc">ผมสั้นตัดหยาบ ปากเปิดอยู่เล็กน้อยเสมอ เผยให้เห็นลิ้นกระดูกพระเจ้าที่พูดได้แต่โกหกไม่ได้</p>
+    <div class="char-quote">"ฉันไม่รู้ว่าความจริงที่มันพูดออกมานั้น<br>เป็นความจริงของฉัน หรือของพระเจ้าที่ตายแล้ว"</div>
+  </div>
+
+  <!-- ═══ ผู้รับใช้ ═══ -->
+  <div class="card neutral">
+    <div class="card-accent"></div>
+    <div class="portrait-wrap">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <radialGradient id="glow3" cx="35%" cy="45%" r="45%">
+          <stop offset="0%" stop-color="#3d3545" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#3d3545" stop-opacity="0"/>
+        </radialGradient>
+        <rect width="200" height="240" fill="url(#glow3)"/>
+
+        <!-- RIGHT SIDE (his left) - STONE -->
+        <!-- Stone arm/shoulder - rigid, geometric cracks -->
+        <path d="M148 240 L148 140 Q155 132 162 124 L175 112 Q183 104 185 92" stroke="#8a8a90" stroke-width="1.4" fill="none" opacity="0.8"/>
+        <!-- Stone texture cracks on right arm -->
+        <path d="M155 190 Q158 186 160 190" stroke="#6a6a70" stroke-width="0.6" fill="none" opacity="0.6"/>
+        <path d="M162 172 Q166 168 168 173 Q165 178 162 172Z" stroke="#7a7a80" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <path d="M170 152 L174 148 M168 158 L172 155" stroke="#6a6a70" stroke-width="0.5" opacity="0.5"/>
+        <path d="M158 200 Q160 196 163 197 Q162 201 158 200" stroke="#6a6a70" stroke-width="0.6" fill="none" opacity="0.5"/>
+
+        <!-- Stone hand - rigid fingers -->
+        <path d="M185 92 L182 102" stroke="#8a8a90" stroke-width="1.3" stroke-linecap="round" opacity="0.75"/>
+        <!-- Stone fingers - stiff, angular -->
+        <path d="M182 102 L178 112 M182 102 L181 113 M182 102 L183 112 M182 102 L186 110" stroke="#8a8a90" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
+        <!-- Stone cracks on hand -->
+        <path d="M181 106 Q183 104 185 107" stroke="#6a6a70" stroke-width="0.5" fill="none" opacity="0.6"/>
+
+        <!-- LEFT SIDE - flesh/normal -->
+        <path d="M52 240 L52 140 Q46 133 40 126 L26 114 Q20 106 18 94" stroke="#c8bfaa" stroke-width="1.2" fill="none" opacity="0.65"/>
+        <!-- Normal hand left side -->
+        <path d="M18 94 L15 104 M18 94 L17 105 M18 94 L19 105 M18 94 L21 103" stroke="#c8bfaa" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+
+        <!-- Body - robes, ceremonial -->
+        <path d="M52 240 Q75 226 100 224 Q125 226 148 240" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.5"/>
+        <!-- Robe folds -->
+        <path d="M78 240 L76 168 Q80 158 100 155 Q120 158 124 168 L122 240" stroke="#9a9080" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <!-- Ceremonial symbol on chest -->
+        <circle cx="100" cy="170" r="6" stroke="#c4622a" stroke-width="0.7" fill="none" opacity="0.5"/>
+        <path d="M100 164 L100 176 M94 170 L106 170" stroke="#c4622a" stroke-width="0.5" opacity="0.4"/>
+
+        <!-- Neck - older, wrinkled left, stone right -->
+        <path d="M88 118 L87 128 Q90 132 100 133 Q110 132 113 128 L112 118" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.7"/>
+        <!-- Stone merges at neck right side -->
+        <path d="M108 120 Q114 118 116 122" stroke="#8a8a90" stroke-width="0.8" fill="none" opacity="0.6"/>
+
+        <!-- Head - older face -->
+        <ellipse cx="100" cy="88" rx="31" ry="35" stroke="#c8bfaa" stroke-width="1.2" fill="none" opacity="0.85"/>
+
+        <!-- Stone texture on RIGHT HALF of face -->
+        <!-- Stone line dividing face vertically through center -->
+        <path d="M100 56 Q101 72 100 88 Q100 104 100 122" stroke="#8a8a90" stroke-width="0.5" fill="none" opacity="0.35" stroke-dasharray="2,3"/>
+        <!-- Stone patches on right cheek/jaw -->
+        <path d="M110 96 Q118 92 122 98 Q120 105 112 104 Q106 102 110 96Z" stroke="#7a7a80" stroke-width="0.6" fill="none" opacity="0.5"/>
+        <path d="M114 78 Q120 74 124 80 Q122 86 116 84 Q112 82 114 78Z" stroke="#7a7a80" stroke-width="0.5" fill="none" opacity="0.45"/>
+        <!-- Stone cracks on right face -->
+        <path d="M116 84 L118 90 M120 80 L122 84" stroke="#6a6a70" stroke-width="0.5" opacity="0.5"/>
+        <path d="M112 104 L114 110 Q113 114 112 118" stroke="#7a7a80" stroke-width="0.6" fill="none" opacity="0.45"/>
+
+        <!-- Hair - older, thin, grey -->
+        <path d="M70 80 Q70 62 78 54 Q88 46 100 46 Q112 46 122 54 Q130 62 130 80" stroke="#9a9080" stroke-width="1" fill="none" opacity="0.6"/>
+        <!-- Thinning hair strands -->
+        <path d="M74 74 Q72 66 76 58" stroke="#9a9080" stroke-width="0.6" fill="none" opacity="0.35"/>
+        <path d="M82 66 Q80 58 84 52" stroke="#9a9080" stroke-width="0.5" fill="none" opacity="0.3"/>
+        <!-- Stone on right side of head too -->
+        <path d="M120 78 Q124 70 124 62" stroke="#8a8a90" stroke-width="0.7" fill="none" opacity="0.4"/>
+
+        <!-- Left eye - human, tired but believing -->
+        <path d="M80 87 Q83 83 89 84 Q94 85 94 89 Q92 93 87 92 Q81 91 80 87Z" stroke="#c8bfaa" stroke-width="0.9" fill="none" opacity="0.85"/>
+        <circle cx="87" cy="88.5" r="2.2" fill="#c8bfaa" opacity="0.65"/>
+        <!-- Wrinkle lines around left eye -->
+        <path d="M78 86 Q76 83 78 81" stroke="#7a7060" stroke-width="0.5" fill="none" opacity="0.45"/>
+        <path d="M79 92 Q77 94 79 96" stroke="#7a7060" stroke-width="0.5" fill="none" opacity="0.35"/>
+
+        <!-- Right eye - STONE, inert but slightly glowing -->
+        <path d="M106 87 Q109 83 115 84 Q120 85 120 89 Q118 93 113 92 Q107 91 106 87Z" stroke="#8a8a90" stroke-width="0.9" fill="none" opacity="0.7"/>
+        <!-- Stone eye - no pupil, filled -->
+        <ellipse cx="113" cy="88.5" rx="3" ry="2.5" fill="#7a7a80" opacity="0.5"/>
+        <!-- Faint ember glow in stone eye -->
+        <ellipse cx="113" cy="88.5" rx="1.5" ry="1" fill="#c4622a" opacity="0.2"/>
+
+        <!-- Nose -->
+        <path d="M97 92 Q98 100 97 104 Q99 106 100 106 Q101 106 103 104 Q102 100 103 92" stroke="#c8bfaa" stroke-width="0.7" fill="none" opacity="0.5"/>
+
+        <!-- Mouth - firm, older, set with conviction -->
+        <path d="M88 114 Q94 117 100 117 Q106 117 112 114" stroke="#c8bfaa" stroke-width="0.9" fill="none" opacity="0.65"/>
+        <!-- Tight-lipped resolve -->
+        <path d="M90 114 Q95 112 100 112 Q105 112 110 114" stroke="#c8bfaa" stroke-width="0.6" fill="none" opacity="0.4"/>
+
+        <!-- Wrinkles on left side -->
+        <path d="M74 88 Q72 92 74 96" stroke="#7a7060" stroke-width="0.5" fill="none" opacity="0.3"/>
+        <path d="M82 108 Q80 112 82 115" stroke="#7a7060" stroke-width="0.5" fill="none" opacity="0.3"/>
+
+        <!-- Ear left -->
+        <path d="M70 86 Q66 90 67 96 Q69 102 72 100" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <!-- Ear right - stone -->
+        <path d="M130 86 Q134 90 133 96 Q131 102 128 100" stroke="#8a8a90" stroke-width="0.8" fill="none" opacity="0.6"/>
+        <!-- Stone cracks on right ear -->
+        <path d="M131 90 Q133 92 131 94" stroke="#6a6a70" stroke-width="0.4" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="char-name">ผู้รับใช้แห่งรอยแตก</div>
+    <div class="char-role">นักบวชชั้นสูง · ผู้ร้ายผู้เชื่อจริง</div>
+    <p class="char-desc">ครึ่งซ้ายยังเป็นมนุษย์ ครึ่งขวากลายเป็นหิน สิบปีที่แบกศรัทธาที่หนักเกินกว่าร่างกายมนุษย์จะรับไหว</p>
+    <div class="char-quote">"ฉันเหนื่อยมากเกินไปที่จะสู้กับคนที่อาจจะถูกกว่าฉัน"</div>
+  </div>
+
+  <!-- ═══ เวน ═══ -->
+  <div class="card child">
+    <div class="card-accent"></div>
+    <div class="portrait-wrap">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <radialGradient id="glow4" cx="50%" cy="50%" r="40%">
+          <stop offset="0%" stop-color="#4a6050" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#4a6050" stop-opacity="0"/>
+        </radialGradient>
+        <rect width="200" height="240" fill="url(#glow4)"/>
+
+        <!-- Body - oversized clothing, child frame -->
+        <path d="M62 240 L62 158 Q58 150 52 144 L38 134" stroke="#c8bfaa" stroke-width="1.1" fill="none" opacity="0.55"/>
+        <path d="M138 240 L138 158 Q142 150 148 144 L162 134" stroke="#c8bfaa" stroke-width="1.1" fill="none" opacity="0.55"/>
+        <path d="M62 240 Q80 232 100 230 Q120 232 138 240" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.45"/>
+
+        <!-- Oversized shirt - too big for her -->
+        <path d="M68 240 L66 170 Q70 160 100 158 Q130 160 134 170 L132 240" stroke="#9a9080" stroke-width="0.8" fill="none" opacity="0.35"/>
+        <!-- Drooping collar -->
+        <path d="M82 148 Q78 140 80 134 Q88 126 100 126 Q112 126 120 134 Q122 140 118 148" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.55"/>
+
+        <!-- Neck - slim, child -->
+        <path d="M90 126 L90 132 Q92 136 100 137 Q108 136 110 132 L110 126" stroke="#c8bfaa" stroke-width="0.9" fill="none" opacity="0.6"/>
+
+        <!-- Head - rounder, child proportions -->
+        <ellipse cx="100" cy="94" rx="34" ry="36" stroke="#c8bfaa" stroke-width="1.2" fill="none" opacity="0.85"/>
+
+        <!-- Hair - messy, short, unkempt - like it was cut by herself -->
+        <path d="M67 94 Q68 72 78 60 Q88 50 100 50 Q112 50 122 60 Q132 72 133 94" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.7"/>
+        <!-- Very messy strands going different directions -->
+        <path d="M72 86 Q68 76 72 68 Q70 64 68 60" stroke="#c8bfaa" stroke-width="0.7" fill="none" opacity="0.45"/>
+        <path d="M128 84 Q132 74 130 64" stroke="#c8bfaa" stroke-width="0.7" fill="none" opacity="0.45"/>
+        <!-- Sticking up strands -->
+        <path d="M88 52 L86 46 M94 50 L93 44 M100 50 L100 43 M107 52 L108 46 M114 56 L117 51" stroke="#c8bfaa" stroke-width="0.6" stroke-linecap="round" opacity="0.4"/>
+        <!-- Side tufts -->
+        <path d="M68 86 L64 82 M70 78 L66 76" stroke="#c8bfaa" stroke-width="0.5" fill="none" opacity="0.35"/>
+        <path d="M132 84 L136 80 M130 76 L134 74" stroke="#c8bfaa" stroke-width="0.5" fill="none" opacity="0.35"/>
+
+        <!-- Eyes - child eyes, larger relative to face, observant -->
+        <path d="M80 92 Q84 87 91 88 Q97 89 97 93 Q95 98 89 97 Q82 96 80 92Z" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.85"/>
+        <path d="M103 92 Q107 87 114 88 Q120 89 120 93 Q118 98 112 97 Q105 96 103 92Z" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.85"/>
+        <!-- Bigger pupils - child -->
+        <circle cx="88.5" cy="93" r="2.8" fill="#c8bfaa" opacity="0.7"/>
+        <circle cx="111.5" cy="93" r="2.8" fill="#c8bfaa" opacity="0.7"/>
+        <!-- Eye shine - child's curious eyes -->
+        <circle cx="90" cy="91.5" r="0.8" fill="#ffffff" opacity="0.4"/>
+        <circle cx="113" cy="91.5" r="0.8" fill="#ffffff" opacity="0.4"/>
+
+        <!-- Nose - small, child -->
+        <path d="M98 98 Q99 104 98 107 Q100 109 100 109 Q100 109 102 107 Q101 104 102 98" stroke="#c8bfaa" stroke-width="0.6" fill="none" opacity="0.4"/>
+
+        <!-- Mouth - neutral, not smiling, observing -->
+        <path d="M91 118 Q96 120 100 120 Q104 120 109 118" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.55"/>
+
+        <!-- Ear -->
+        <path d="M67 92 Q63 96 64 102 Q66 108 69 106" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M133 92 Q137 96 136 102 Q134 108 131 106" stroke="#c8bfaa" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+        <!-- Arms - thin, child, with grey mark on wrist -->
+        <path d="M62 158 Q56 164 50 174 L44 190 Q42 200 42 212" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M138 158 Q144 164 150 174 L156 190 Q158 200 158 212" stroke="#c8bfaa" stroke-width="1" fill="none" opacity="0.6"/>
+
+        <!-- Small hands -->
+        <path d="M42 212 L39 220 M42 212 L41 222 M42 212 L43 222 M42 212 L45 220" stroke="#c8bfaa" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+        <path d="M158 212 L155 220 M158 212 L157 222 M158 212 L159 222 M158 212 L161 220" stroke="#c8bfaa" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+
+        <!-- Grey mark at left wrist - the fading bone-root mark -->
+        <path d="M46 208 Q44 204 46 202 Q48 200 50 202" stroke="#8a9080" stroke-width="0.8" fill="none" opacity="0.55"/>
+        <path d="M47 206 Q46 203 48 203" stroke="#7a8070" stroke-width="0.6" fill="none" opacity="0.4"/>
+
+        <!-- Stick in right hand - she was drawing -->
+        <path d="M158 212 L166 230" stroke="#7a7060" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+
+        <!-- Small drawn mark on ground (implied) - she's always drawing -->
+        <path d="M158 236 Q168 238 178 234" stroke="#7a7060" stroke-width="0.5" fill="none" opacity="0.25"/>
+      </svg>
+    </div>
+    <div class="char-name">เวน</div>
+    <div class="char-role">เด็กหญิงจากหมู่บ้านเงียบ · ๑๐ ปี</div>
+    <p class="char-desc">ผมยุ่งเหยิงราวกับตัดเอง เสื้อผ้าใหญ่กว่าตัว รอยสีเทาจางที่ข้อมือซ้ายยังไม่หายสนิท มักถือกิ่งไม้สำหรับวาดรูปบนดิน</p>
+    <div class="char-quote">"เจ้ายังจำชื่อฉันได้ไหม"<br>"เวน" — "ก็พอแล้ว"</div>
+  </div>
+
+</div>
+
+<footer>กระดูกของพระเจ้า · BONES OF THE FALLEN GOD · Character Line Art</footer>
+
+</body>
+</html>

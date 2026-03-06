@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน | ตอนที่ 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a5f28;
+    --crimson: #8b1a1a;
+    --crimson-light: #c0392b;
+    --crimson-glow: #e05555;
+    --dark: #0a0708;
+    --dark-mid: #140f10;
+    --parchment: #f5ead8;
+    --parchment-dark: #d4c4a0;
+    --text-body: #e8dcc8;
+    --text-dim: #9a8a70;
+    --stone: #3a3035;
+    --stone-light: #5a4a50;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--dark);
+    color: var(--text-body);
+    font-family: 'Sarabun', serif;
+    font-weight: 300;
+    line-height: 1.95;
+    font-size: 17px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 30%, rgba(139,26,26,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 85% 70%, rgba(139,26,26,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(58,48,53,0.4) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ember particles */
+  .embers {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .ember {
+    position: absolute;
+    border-radius: 50%;
+    animation: rise var(--dur, 8s) ease-in infinite;
+    animation-delay: var(--delay, 0s);
+    opacity: 0;
+  }
+  @keyframes rise {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-120vh) translateX(var(--drift, 30px)) scale(0.2); opacity: 0; }
+  }
+
+  .stars {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .star {
+    position: absolute; background: var(--gold-light);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s); opacity: 0;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: var(--bright, 0.5); transform: scale(1); }
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .header-ornament { text-align: center; margin-bottom: 20px; animation: fadeDown 1.2s ease both; }
+  .ornament-line {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; color: var(--crimson); font-size: 20px; letter-spacing: 8px;
+  }
+  .ornament-line::before, .ornament-line::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--crimson), transparent);
+  }
+
+  .series-title {
+    font-family: 'Cinzel', serif; font-size: 11px;
+    letter-spacing: 6px; color: var(--gold-dim);
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 16px; animation: fadeDown 1.2s ease 0.1s both;
+  }
+  .main-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(32px, 6vw, 52px); color: var(--gold);
+    text-align: center; line-height: 1.3;
+    text-shadow: 0 0 40px rgba(201,168,76,0.4), 0 2px 4px rgba(0,0,0,0.9);
+    margin-bottom: 10px; animation: fadeDown 1.2s ease 0.2s both;
+  }
+  .subtitle {
+    font-family: 'Cinzel', serif; font-size: 13px;
+    letter-spacing: 4px; color: var(--text-dim);
+    text-align: center; margin-bottom: 50px;
+    animation: fadeDown 1.2s ease 0.3s both;
+  }
+  .chapter-badge {
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px; margin-bottom: 16px;
+    animation: fadeDown 1s ease 0.4s both;
+  }
+  .chapter-badge span {
+    font-family: 'Cinzel', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
+  }
+  .badge-gem {
+    width: 6px; height: 6px;
+    background: var(--crimson-light);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--crimson-glow);
+  }
+  .chapter-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(18px, 3.5vw, 26px); color: var(--parchment);
+    text-align: center; margin-bottom: 50px;
+    text-shadow: 0 0 20px rgba(245,234,216,0.15);
+    animation: fadeDown 1s ease 0.5s both;
+  }
+
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; margin: 40px 0;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139,26,26,0.5), transparent);
+  }
+  .divider-gem {
+    width: 5px; height: 5px; background: var(--crimson);
+    transform: rotate(45deg); flex-shrink: 0;
+    box-shadow: 0 0 6px var(--crimson-light);
+  }
+
+  .content { animation: fadeUp 1.4s ease 0.6s both; }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    text-indent: 2em;
+  }
+
+  p.drop-cap::first-letter {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 4.5em; font-weight: 700;
+    color: var(--crimson-light);
+    float: left; line-height: 0.75;
+    margin: 8px 12px -4px 0;
+    text-shadow: 0 0 20px rgba(192,57,43,0.6);
+  }
+
+  .scene-title {
+    font-family: 'Cinzel', serif; font-size: 13px;
+    letter-spacing: 4px; color: var(--crimson-light);
+    text-align: center; text-transform: uppercase;
+    margin: 50px 0 30px; opacity: 0.85;
+  }
+
+  .dialogue { color: #ddd0b8; text-indent: 2em; }
+  .dramatic { color: var(--gold-light); font-style: italic; }
+  .inner-thought { color: var(--text-dim); font-style: italic; }
+
+  .quote-block {
+    border-left: 2px solid var(--crimson);
+    padding: 16px 24px; margin: 36px 0;
+    background: rgba(139,26,26,0.06);
+    font-style: italic; color: var(--parchment-dark);
+    text-indent: 0 !important;
+  }
+  .quote-block p { text-indent: 0; margin-bottom: 12px; }
+  .quote-block p:last-child { margin-bottom: 0; }
+
+  .combat {
+    background: rgba(139,26,26,0.07);
+    border: 1px solid rgba(139,26,26,0.25);
+    border-radius: 2px; padding: 24px; margin: 30px 0;
+  }
+  .combat p { margin-bottom: 20px; }
+  .combat p:last-child { margin-bottom: 0; }
+
+  .revelation {
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px; padding: 24px; margin: 30px 0;
+  }
+  .revelation p { text-indent: 0; margin-bottom: 16px; }
+  .revelation p:last-child { margin-bottom: 0; }
+
+  .tender {
+    background: rgba(201,168,76,0.04);
+    border-left: 2px solid rgba(201,168,76,0.35);
+    padding: 20px 28px; margin: 36px 0;
+  }
+  .tender p { text-indent: 0; margin-bottom: 14px; }
+  .tender p:last-child { margin-bottom: 0; }
+
+  .chapter-end {
+    text-align: center; margin-top: 70px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(139,26,26,0.25);
+    animation: fadeUp 1s ease 1s both;
+  }
+  .chapter-end .end-mark {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px; color: var(--crimson);
+    letter-spacing: 6px; display: block; margin-bottom: 12px;
+  }
+  .next-teaser {
+    font-size: 13px; color: var(--text-dim);
+    font-style: italic; letter-spacing: 1px;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--crimson); border-radius: 3px; opacity: 0.5; }
+
+  em { font-style: italic; color: var(--gold-light); }
+  strong { font-weight: 600; color: var(--parchment); }
+
+  @media (max-width: 600px) {
+    .container { padding: 40px 24px 80px; }
+    p { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="embers" id="embers"></div>
+
+<div class="container">
+
+  <div class="header-ornament">
+    <div class="ornament-line">⚔ ✦ ⚔</div>
+  </div>
+
+  <p class="series-title">นิยายแฟนตาซีโรแมนติก</p>
+  <h1 class="main-title">เงาแห่งราชัน</h1>
+  <p class="subtitle">Shadow of the Sovereign</p>
+
+  <div class="chapter-badge">
+    <div class="badge-gem"></div>
+    <span>ตอนที่ ๓</span>
+    <div class="badge-gem"></div>
+  </div>
+
+  <h2 class="chapter-title">ป้อมปราการและความจริงที่ซ่อนอยู่</h2>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="content">
+
+    <p class="drop-cap">Blackmoor Keep ปรากฏขึ้นจากหมอกตอนบ่ายแก่ๆ</p>
+
+    <p>มันไม่ใช่ปราสาทที่สวยงาม ไม่มีหอคอยสูงระฟ้าหรือธงสีสดใส มีแต่กำแพงหินดำที่ดูดซับแสงแทนที่จะสะท้อน หอคอยเตี้ยและหนา ออกแบบมาเพื่อต้านทานการโจมตีมากกว่าความสวยงาม และคูน้ำรอบปราสาทที่น้ำดำจนมองไม่เห็นก้น</p>
+
+    <p>เอลาร่ายืนอยู่บนสันเขาเล็กๆ มองลงไป สัมผัสของเธอพลุ่งขึ้นอย่างที่ไม่เคยรู้สึกมาก่อน ไม่ใช่แค่ความรู้สึกถึงอันตราย แต่เป็นความรู้สึกหลายชั้นที่ซับซ้อน ราวกับมีเรื่องราวหลายเรื่องซ้อนทับกันอยู่ภายในกำแพงหินนั้น</p>
+
+    <p class="dialogue">"มีคนอยู่เยอะ" เธอพูดเงียบๆ "มากกว่าที่ข่าวกรองของคุณบอก"</p>
+
+    <p class="dialogue">"เยอะแค่ไหน?"</p>
+
+    <p class="dialogue">"สี่สิบ อาจจะห้าสิบ และยังมีบางอย่างอีก..." เธอหยุด ขมวดคิ้ว "มีพลังงานแปลกๆ จากหอคอยด้านตะวันออก ไม่ใช่เวทมนตร์ธรรมดา"</p>
+
+    <p>คาเอลยืนข้างๆ เธอ มองไปที่ปราสาทด้วยดวงตาที่ประเมินค่า แล้วพูดว่า</p>
+
+    <p class="dialogue">"ถึงเวลาแล้วที่ผมจะบอกคุณ"</p>
+
+    <p>เอลาร่าหันมามองเขา</p>
+
+    <p class="dialogue">"เงาสองชั้น ?" เธอถาม</p>
+
+    <p class="dialogue">"ใช่"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ ความจริงของคาเอล ดอร์น ~</p>
+
+    <div class="revelation">
+      <p>พวกเขานั่งลงบนหิน หันหลังให้ปราสาท คาเอลมองไปที่ขอบฟ้านาน ก่อนจะเริ่มพูด</p>
+
+      <p class="dialogue">"ผมเป็น Shadow Hand ของกษัตริย์ธีเรียน นั่นเป็นความจริง" เขาเริ่ม "แต่ที่ป่าบอกว่าผมมีเงาสองชั้น เพราะ... ผมเป็น Shadow Hand ของกษัตริย์อีกองค์ด้วย"</p>
+
+      <p>เอลาร่าเงียบ รอ</p>
+
+      <p class="dialogue">"กษัตริย์ Aldric แห่ง Velmoor อาณาจักรทางเหนือ" คาเอลพูดต่อ "เขาเป็นพ่อของผม"</p>
+
+      <p>เอลาร่าจ้องหน้าเขา</p>
+
+      <p class="dialogue">"งั้นคุณก็เป็นเจ้าชาย"</p>
+
+      <p class="dialogue">"เจ้าชายนอกสมรส" เขาแก้ไขอย่างเรียบๆ ราวกับมันเป็นเรื่องธรรมดา "แม่ผมเป็นนักรบจาก Ashvald ที่พ่อพบในสงคราม ทั้งคู่ไม่ได้แต่งงาน แม่เสียชีวิตตั้งแต่ผมอายุเก้าขวบ พ่อรับผมไว้แต่ไม่ได้ประกาศตำแหน่ง ผมโตขึ้นมาในเงาของราชสำนักทั้งสองฝั่ง เรียนรู้ทุกอย่างจากทั้งสองฝ่าย แล้วก็กลายเป็นคนกลาง คนที่ทั้งสองอาณาจักรไว้ใจ"</p>
+
+      <p class="dialogue">"แต่ถ้าทั้งสองอาณาจักรกำลังจะเปิดสงครามกัน..." เอลาร่าพูดช้าๆ ขณะที่เรื่องทุกอย่างเริ่มชัดขึ้น</p>
+
+      <p class="dialogue">"ผมจะเป็นคนทรยศฝั่งใดฝั่งหนึ่งเสมอ ไม่ว่าจะเลือกทางไหน" เขารับคำ เสียงไม่มีอารมณ์ แต่เธอสัมผัสได้ถึงน้ำหนักที่ซ่อนอยู่ใต้ความราบเรียบนั้น</p>
+
+      <p class="dialogue">"แล้วพวกม่านเงา ?" เธอถาม</p>
+
+      <p class="dialogue">"พวกเขาไม่ได้ต้องการแค่น้องสาวของคุณ" คาเอลมองตรงมาที่เธอในที่สุด "พวกเขาต้องการใช้พลังของเนลลาในการ<em>ปลุก</em>บางอย่างที่ถูกฝังอยู่ในหอคอยด้านตะวันออกของ Blackmoor Keep มานานกว่าสองร้อยปี"</p>
+
+      <p>ความเงียบ</p>
+
+      <p class="dialogue">"ปลุกอะไร ?" เธอถามเบาๆ</p>
+
+      <p class="dialogue">"Oracle of Ruin" เขาพูดชื่อนั้นเหมือนคนที่ไม่อยากให้มันออกมาจากปากเลย "พยากรณ์แห่งความพินาศ สิ่งโบราณที่เห็นอนาคตทุกแขนง ไม่ใช่แค่อนาคตของคน แต่อนาคตของโลก ถ้าใครควบคุมมันได้ ก็ไม่มีสงครามที่แพ้ ไม่มีแผนที่ล้มเหลว"</p>
+
+      <p class="dialogue">"แล้วน้องสาวของฉันเกี่ยวอะไร ?"</p>
+
+      <p class="dialogue">"พลังฉายภาพอนาคตของเนลลาเป็นกุญแจที่จะปลุกมัน" คาเอลพูด "แต่ไม่ใช่ในฐานะเครื่องมือ..."</p>
+
+      <p>เขาหยุด</p>
+
+      <p class="dialogue">"บอกฉันมาให้หมด" เอลาร่าพูดเบาแต่ชัด</p>
+
+      <p class="dialogue">"เนลลาต้องกลายเป็นภาชนะ" เขาพูดในที่สุด "Oracle จะเข้าสิงร่างเธอ และถ้าสำเร็จ เนลลาจะไม่มีวันกลับมาเหมือนเดิม"</p>
+    </div>
+
+    <p>อากาศเหมือนถูกดูดออกไปจากปอดของเธอทั้งหมด</p>
+
+    <p>เอลาร่านั่งนิ่งอยู่ครู่หนึ่ง มองไปที่ปราสาทด้านล่าง ในใจเธอวนเวียนภาพฝันเมื่อคืน เนลลาที่ยิ้ม รอยยิ้มที่เธอสงสัยว่ามันหมายความว่าอะไร</p>
+
+    <p class="inner-thought">เนลลารู้ เธอรู้แล้วตั้งแต่ก่อนที่พวกเขาจะจับไป เธอเห็นอนาคตตัวเองแล้ว และเธอก็ยังยิ้ม</p>
+
+    <p class="dialogue">"เรามีเวลาเท่าไหร่ ?" เธอถาม เสียงไม่สั่น</p>
+
+    <p class="dialogue">"พิธีกรรมจะเริ่มเมื่อดวงจันทร์ขึ้นถึงจุดสูงสุด" คาเอลตอบ "คืนนี้ ประมาณเที่ยงคืน"</p>
+
+    <p>เธอลุกขึ้นยืน มองลงไปที่ปราสาทอีกครั้ง สายตาสีเทาของเธอนิ่งและเย็น</p>
+
+    <p class="dialogue">"งั้นเราก็ต้องไปคืนนี้"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ บุกเข้า Blackmoor ~</p>
+
+    <p>พวกเขารอจนฟ้ามืดสนิท คาเอลนำทางผ่านทางน้ำใต้ดินที่เขาจำแผนที่ไว้ในหัวมาก่อนหน้านั้น อุโมงค์แคบและมืด น้ำเย็นเฉียบถึงเข่า เอลาร่าเดินตามหลังเขาในความเงียบสนิท</p>
+
+    <p>สัมผัสของเธอทำงานตลอดเวลา อ่านพื้นที่ อ่านอันตราย อ่านทิศทางของยามและความเสี่ยง มันเหมือนมีแผนที่เงาอยู่ในหัวที่อัปเดตตัวเองทุกวินาที</p>
+
+    <p class="dialogue">"ยามสองคนบนหอคอยซ้าย" เธอกระซิบ "และมีสี่คนลาดตระเวนในลานกลาง"</p>
+
+    <p class="dialogue">"ทางไหนที่โล่งที่สุด?"</p>
+
+    <p class="dialogue">"ขวามือ แต่แค่สามนาที หลังจากนั้นยามจะเปลี่ยนกะ"</p>
+
+    <p>คาเอลพยักหน้า ทั้งคู่เคลื่อนตัวพร้อมกัน</p>
+
+    <p>พวกเขาผ่านลานกลางไปทางขวาได้โดยไม่มีเสียง ขึ้นบันไดหินเก่าแก่ที่ทุกขั้นเหยียบต้องระวัง และเลี้ยวเข้าสู่ทางเดินยาวที่นำไปยังหอคอยด้านตะวันออก</p>
+
+    <p>แต่แล้วเอลาร่าก็รู้สึกถึงบางอย่างที่ทำให้หยุดนิ่ง</p>
+
+    <p class="inner-thought">มีคนรู้ว่าเราอยู่ที่นี่แล้ว นั่นไม่ใช่ยามธรรมดา</p>
+
+    <div class="combat">
+      <p class="dialogue">"กับดัก" เธอพูดพร้อมกับดึงคาเอลเข้าไปชิดฝาผนังในพริบตา</p>
+
+      <p>ลูกธนูไฟพุ่งผ่านจุดที่พวกเขาเคยยืนอยู่ ปักลงที่พื้นหินแล้วดับลงช้าๆ</p>
+
+      <p>ชายสิบคนโผล่ออกมาจากห้องที่เปิดอยู่สองข้างทาง แต่ครั้งนี้ไม่เหมือนก่อน เหล่านี้คือนักรบชั้นนำ เคลื่อนไหวเป็นรูปขบวน ประสานกัน ไม่ใช่โจรทั่วไป</p>
+
+      <p class="dialogue">"เจ็ดสิบสามวินาที" เธอบอกคาเอล</p>
+
+      <p class="dialogue">"อะไร ?"</p>
+
+      <p class="dialogue">"เราต้องผ่านพวกนี้ภายในเจ็ดสิบสามวินาทีก่อนที่ยามชุดที่สองจะมาถึง"</p>
+
+      <p>คาเอลไม่ถามว่าเธอรู้ได้อย่างไร เขาแค่พูดว่า</p>
+
+      <p class="dialogue">"เข้าใจแล้ว"</p>
+
+      <p>การต่อสู้ครั้งนี้หนักกว่าทุกครั้งที่ผ่านมา ศัตรูฝึกมาดี และพื้นที่แคบทำให้เคลื่อนที่ลำบาก เอลาร่าสู้ด้วยสัญชาตญาณล้วนๆ ร่างกายเคลื่อนก่อนที่สมองจะสั่ง หลบดาบ ตอบโต้ด้วยศอก หัวเข่า มีดสั้น ใช้ผนังเป็นแรงดีด</p>
+
+      <p>คาเอลสู้ด้วยวิธีที่แตกต่าง เขาเหมือนกำแพงที่เคลื่อนที่ได้ รับทุกการโจมตีที่ควรหลบด้วยการสวนกลับก่อน แต่ละการเคลื่อนไหวของเขากว้างและแน่วแน่ เขาจัดการสี่คนในเวลาที่เธอจัดการไปสามคน</p>
+
+      <p>ชายคนหนึ่งฟาดดาบมาที่ศีรษะของเธอ เธอก้มหลบ แต่อีกคนจ้องอยู่ที่ด้านข้าง เธอเห็นเส้นอันตรายนั้นเปิดออกในหนึ่งวินาที</p>
+
+      <p>และคาเอลก็อยู่ที่นั่น ดาบของเขาสกัดกั้นการโจมตีนั้นไว้ได้พอดี แล้วผลักชายคนนั้นออกไปกระแทกกำแพงอย่างแรง</p>
+
+      <p>ทั้งคู่มองตากันชั่ววูบ</p>
+
+      <p class="dialogue">"ขอบใจ" เธอพูดระหว่างหายใจหอบ</p>
+
+      <p class="dialogue">"หกสิบสองวินาที" เขาตอบ</p>
+
+      <p>เธอหัวเราะสั้นๆ แล้วทั้งสองวิ่งต่อ</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ หอคอยด้านตะวันออก ~</p>
+
+    <p>ประตูหอคอยหนักและเก่าแก่ แต่ไม่ได้ล็อคไว้ ราวกับคนข้างในรู้ว่าไม่มีอะไรจะหยุดพวกเขาได้แล้ว</p>
+
+    <p>เอลาร่าผลักประตูออก และก้าวเข้าไปในห้องกลม</p>
+
+    <p>เนลลานั่งอยู่กลางวงกลมของสัญลักษณ์เรืองแสงสีแดง เหมือนในฝัน ไม่ถูกมัด ไม่ร้องไห้ ผมสีน้ำตาลหยิกรุ่งโรจน์ไปด้วยแสงจากพิธีกรรม และรอยยิ้มนั้น ก็อยู่ที่นั่น</p>
+
+    <p class="dialogue">"พี่เอลา" เนลลาพูดเสียงเบา ราวกับสองคนพบกันในบ้านเก่า ไม่ใช่ในห้องพิธีกรรมที่อาจจะทำลายตัวตนของเธอ "พี่มาช้าไปสิบนาที"</p>
+
+    <p class="dialogue">"เนลลา" เอลาร่าก้าวเข้าไป แต่หยุดที่ขอบวงกลม แรงกั้นล่องหนต้านเธอไว้ "ออกมาได้แล้ว"</p>
+
+    <p class="dialogue">"ยังออกไม่ได้" น้องสาวส่ายหัว "พิธีกรรมล็อคฉันไว้ มันจะหลุดได้ก็ต่อเมื่อ..." เธอหยุด มองไปที่คาเอลที่ยืนอยู่หลังพี่สาว "เขาเป็นคนที่ฉันเห็นในอนาคต"</p>
+
+    <p class="dialogue">"ฉันรู้" คาเอลพูดเงียบๆ ก้าวเข้ามายืนข้างเอลาร่า</p>
+
+    <p class="dialogue">"คุณรู้ ?" เอลาร่าหันมามองเขา</p>
+
+    <p class="dialogue">"เนลลาส่งข้อความมาหากษัตริย์สามเดือนก่อน" คาเอลอธิบาย "เธอเห็นอนาคตว่าตัวเองจะถูกจับ และเธอก็ยอมให้มันเกิดขึ้น เพราะเธอเห็นว่ามีวิธีเดียวที่จะทำลาย Oracle of Ruin ได้ตลอดกาล ไม่ใช่แค่หยุดพิธีกรรม"</p>
+
+    <p>เอลาร่าหันไปมองน้องสาว เนลลายิ้มอย่างเงียบสงบ</p>
+
+    <p class="dialogue">"เนลลา... คุณรู้มาตลอด?"</p>
+
+    <p class="dialogue">"ฉันเห็นทุกอย่างตั้งแต่ต้น พี่" เนลลาพูดเบาๆ "เห็นว่าพี่จะมา เห็นว่าคาเอลจะพาพี่มา เห็นสิ่งที่ต้องทำ" เธอมองพี่สาว "และเห็นสิ่งที่พี่รู้สึกโดยที่พี่ยังไม่รู้ตัว"</p>
+
+    <p>ใบหน้าเอลาร่าไม่เปลี่ยนแปลง แต่เธอรู้สึกร้อนที่แก้มและแดงขึ้นเล็กน้อย</p>
+
+    <p class="dialogue">"สิ่งที่พี่ต้องทำคืออะไร ?" เธอเปลี่ยนเรื่อง</p>
+
+    <p class="dialogue">"พลังของ Oracle ผูกอยู่กับวงกลมนี้" เนลลาอธิบาย "มันดูดพลังจากผู้ที่อยู่ในวง ถ้าฉันสู้กับมัน มันจะกินฉัน แต่ถ้ามีคนข้างนอกที่มีพลังเหนือกว่า Oracle ดึงพลังนั้นเข้ามาพร้อมกัน..." เธอหยุด "วงกลมจะล้นและแตก"</p>
+
+    <p class="dialogue">"เธอพูดถึงพลังของฉัน..." เอลาร่าเข้าใจ "พลังรับรู้ภัยของฉันตรงข้ามกับพลังฉายอนาคตของเนลลา ถ้าทั้งสองชนกัน..."</p>
+
+    <p class="dialogue">"มันจะระเบิดและทำลาย Oracle ไปด้วย" คาเอลรับคำ แล้วมองไปที่เธอ "แต่มันอันตราย เอลาร่า พลังชนกันอาจทำร้ายคุณ"</p>
+
+    <p class="dialogue">"หรืออาจไม่" เนลลาพูดเบาๆ "ฉันเห็นสองอนาคต"</p>
+
+    <p class="dialogue">"สองอนาคต ?" เอลาร่าถาม</p>
+
+    <p class="dialogue">"อนาคตที่พี่ระวังตัวมากเกินไป และมันไม่ได้ผล กับอนาคตที่พี่ไว้ใจ..." เนลลามองตรงไปที่คาเอล "ไว้ใจคนที่อยู่ข้างๆ"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ สิ่งที่เธอไม่เคยทำ ~</p>
+
+    <p>เอลาร่ายืนอยู่หน้าวงกลม มองไปที่น้องสาว แล้วมองไปที่คาเอลที่ยืนอยู่ข้างๆ</p>
+
+    <p class="inner-thought">ไว้ใจ สองคำที่เธอลืมวิธีทำไปนานแล้ว</p>
+
+    <p class="dialogue">"ถ้าฉันยื่นมือเข้าไปในวง" เธอถามคาเอลอย่างเงียบๆ "แล้วพลังมันตีกลับ"</p>
+
+    <p class="dialogue">"ผมจะช่วยคุณ" เขาตอบทันที ไม่ลังเล</p>
+
+    <p class="dialogue">"คุณไม่มีพลังวิเศษ"</p>
+
+    <p class="dialogue">"ใช่ ผมไม่มี" เขายอมรับ "แต่ผมมีสองมือ และผมจะไม่ปล่อยให้คุณล้ม"</p>
+
+    <p>เธอมองเขานาน ในห้องที่แสงแดงกระพริบ ในเวลาที่นาฬิกาเดินเข้าใกล้เที่ยงคืน ในพื้นที่ที่ไม่มีที่สำหรับการโกหก</p>
+
+    <p>สัมผัสของเธอ ไม่บอกว่าเขาโกหก</p>
+
+    <p class="inner-thought">ไม่เคยบอก ตั้งแต่วันแรกที่เจอเขา</p>
+
+    <p>เธอยื่นมือให้เขา</p>
+
+    <p>คาเอลจับมือนั้น แน่น ไม่รีบ เหมือนคนที่ตั้งใจจะไม่ปล่อย</p>
+
+    <p>เอลาร่าหลับตา และปล่อยพลังของเธอออกไป</p>
+
+    <div class="tender">
+      <p>มันไม่เหมือนการโจมตี มันเหมือนการหายใจ ที่ยาวและเต็มกว่าที่เคย พลังรับรู้ของเธอพุ่งออกไปจากตัวเองราวกับคลื่น สัมผัสทุกสิ่งในห้อง สัมผัสวงกลม สัมผัสเนลลา สัมผัสพลังโบราณที่หลับใหลอยู่ภายใน</p>
+      <p>และสัมผัสมือที่จับมือเธออยู่ อุ่น แน่น ไม่ขยับ</p>
+      <p>พลังของเนลลาพุ่งขึ้นมาพบกับพลังของเธอ สองสิ่งตรงข้ามกันบรรจบ อดีตและอนาคต การรับรู้และการฉาย สิ่งที่เป็นอยู่และสิ่งที่จะเป็น</p>
+    </div>
+
+    <p>แสงในห้องระเบิดออกเป็นสีขาว</p>
+
+    <p>เอลาร่าล้มหลัง แต่ไม่ถึงพื้น มีแขนรับเธอไว้ แน่น อบอุ่น</p>
+
+    <p>เสียงร้องดังขึ้นจากวงกลม เหมือนสิ่งโบราณที่กำลังสลายตัว แล้วก็เงียบลงอย่างสมบูรณ์</p>
+
+    <p>สัญลักษณ์ทุกตัวในวงกลมดับลงพร้อมกัน</p>
+
+    <p>และเนลลาก็ก้าวออกมาจากวงกลมที่ไม่มีอยู่อีกแล้ว วิ่งมาหาพี่สาว</p>
+
+    <p class="dialogue">"พี่!" เสียงน้องสาวตัวเล็กที่กลับมาเป็นตัวเองอีกครั้ง กอดเธอแน่น "พี่โอเคไหม ?"</p>
+
+    <p>เอลาร่าอยู่ในแขนของน้องสาว แต่หลังของเธอยังพิงอยู่กับบางอย่างที่แข็งแกร่งกว่า เธอรู้ว่าคาเอลยังนั่งอยู่ข้างหลัง ยังไม่ปล่อย</p>
+
+    <p class="dialogue">"โอเค" เธอพูด เสียงแผ่ว "ฉันโอเค"</p>
+
+    <p class="inner-thought">แปลกดี ที่คำนั้นรู้สึกจริงในครั้งนี้</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ หลังจากนั้น ~</p>
+
+    <p>พวกเขาออกจาก Blackmoor Keep ผ่านทางเดิมที่เข้ามา ม่านเงาที่เหลือดูเหมือนรู้ว่าแพ้แล้วและหายตัวไปในความมืด หรืออาจเป็นเพราะไม่มีอะไรที่คุ้มค่าการสู้ต่ออีกแล้ว</p>
+
+    <p>ทั้งสามคนนั่งอยู่ริมลำธารห่างจากปราสาท เนลลาหลับไปแทบจะทันทีที่ศีรษะแตะกระเป๋า ร่างกายของเธอต้องการพักฟื้น</p>
+
+    <p>เอลาร่านั่งมองน้ำ คาเอลนั่งอยู่ห่างออกไปสักหน่อย</p>
+
+    <p class="dialogue">"ขอบคุณนะ" เธอพูดในที่สุด "สำหรับทุกอย่าง"</p>
+
+    <p class="dialogue">"ไม่เป็นไร"</p>
+
+    <p class="dialogue">"แล้ว" เธอแก้ไข หันมามองเขา "ทำไมคุณถึงไม่ปล่อยฉันล้มหลังวงเวทย์ระเบิด"</p>
+
+    <p>คาเอลมองกลับมา ในแสงจันทร์ที่ออกมาเต็มดวงหลังพิธีกรรมสลาย ใบหน้าของเขาดูอ่อนกว่าปกติ</p>
+
+    <p class="dialogue">"บอกแล้วว่าจะไม่ปล่อย"</p>
+
+    <p class="dialogue">"คุณพูดแบบนั้นกับทุกคนที่คุณร่วมงานด้วยไหม ?"</p>
+
+    <p class="dialogue">"ไม่"</p>
+
+    <p>คำตอบสั้นๆ ที่มีน้ำหนักมากกว่าคำยาวๆ ทั้งหมด</p>
+
+    <p>เอลาร่านั่งนิ่งอยู่นาน มองน้ำที่ไหล มองดาว มองทุกอย่างที่ไม่ใช่คาเอล เพราะเธอรู้ว่าถ้าหันไปมองเขา เธออาจพูดอะไรออกไปที่เธอยังไม่พร้อมจะพูด</p>
+
+    <p>แต่เนลลาพูดถูก เธอเห็นบางอย่างในตัวเธอที่เธอยังไม่ยอมรับ</p>
+
+    <p class="dialogue">"คาเอล"</p>
+
+    <p class="dialogue">"อะไร ?"</p>
+
+    <p class="dialogue">"เมื่อกลับถึงเมืองหลวงแล้ว..." เธอหยุดสักครู่ "เรื่องของคุณ เรื่องสองอาณาจักร เรื่องพ่อ เรื่องที่คุณต้องแบกอยู่คนเดียว..." เธอมองลงไปที่มือตัวเอง ที่มือข้างที่เขาจับไว้ตลอดในเวลาที่ผ่านมา "ฉันไม่ได้บอกว่าฉันเป็นคนเหมาะสม แต่ถ้าคุณต้องการใครที่จะ..." เธอหาคำ "...ไม่ปล่อย"</p>
+
+    <p>ความเงียบ</p>
+
+    <p>แล้วคาเอลก็ขยับมานั่งใกล้ขึ้น ไม่ถามอะไร ไม่พูดอะไรมาก แค่วางมือทาบบนมือเธอเบาๆ</p>
+
+    <p class="dialogue">"ฉันรู้" เขาพูดเงียบๆ "รู้มานานแล้ว"</p>
+
+    <p>ลำธารไหล ดาวเต็มฟ้า และเนลลาที่หลับอยู่ข้างๆ กำลังฝัน เป็นฝันที่ดี เพราะเธอเห็นมันมาก่อนแล้ว</p>
+
+    <div class="quote-block">
+      <p>มีบางครั้งที่ชีวิตไม่ได้ให้คุณเลือกระหว่างปลอดภัยหรือกล้าหาญ มันแค่วางทั้งสองอย่างไว้ตรงหน้า แล้วถามว่าคุณพร้อมแล้วหรือยัง</p>
+      <p>เอลาร่า วินด์มาร์ค ใช้เวลาสองปีเพื่อหนีจากคำถามนั้น</p>
+      <p>คืนนี้ เธอหยุดหนีแล้ว</p>
+    </div>
+
+  </div>
+
+  <div class="chapter-end">
+    <span class="end-mark">⚔ จบตอนที่ ๓ ⚔</span>
+    <p class="next-teaser">ตอนที่ ๔ : กลับสู่ราชสำนัก — เมื่อความจริงเกี่ยวกับตัวตนของคาเอลถูกเปิดเผย และเอลาร่าต้องเลือกระหว่างอิสรภาพที่สัญญาไว้ กับสิ่งที่เธอเพิ่งพบเจอ</p>
+    <p class="next-teaser">ตอนถัดไป ยังไม่ปล่อย กูหมก</p>
+    <!-- <a class="next-teaser" href="/SOTS/SOTS_ep4.html">ตอนถัดไป</a> -->
+    <a class="next-teaser" href="/index.html">กลับหน้าหลัก</a>
+  </div>
+
+</div>
+
+<script>
+// Stars
+const sc = document.getElementById('stars');
+for (let i = 0; i < 70; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${Math.random()*4+2}s;--delay:${Math.random()*6}s;--bright:${Math.random()*0.4+0.15};`;
+  sc.appendChild(s);
+}
+
+// Embers
+const ec = document.getElementById('embers');
+for (let i = 0; i < 20; i++) {
+  const e = document.createElement('div');
+  e.className = 'ember';
+  const sz = Math.random() * 3 + 1;
+  const drift = (Math.random()-0.5)*80;
+  const r = Math.floor(Math.random()*80+160), g = Math.floor(Math.random()*60+40);
+  e.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;bottom:${Math.random()*20}%;background:rgba(${r},${g},20,0.9);--dur:${Math.random()*6+6}s;--delay:${Math.random()*8}s;--drift:${drift}px;box-shadow:0 0 4px rgba(${r},${g},20,0.8);`;
+  ec.appendChild(e);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน | ตอนที่ 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a5f28;
+    --crimson: #8b1a1a;
+    --crimson-light: #c0392b;
+    --dark: #0d0a07;
+    --dark-mid: #1a1410;
+    --dark-paper: #1e1812;
+    --parchment: #f5ead8;
+    --parchment-dark: #d4c4a0;
+    --text-body: #e8dcc8;
+    --text-dim: #9a8a70;
+    --forest-green: #2a4a2a;
+    --forest-glow: #4a7a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--dark);
+    color: var(--text-body);
+    font-family: 'Sarabun', serif;
+    font-weight: 300;
+    line-height: 1.95;
+    font-size: 17px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 10% 20%, rgba(42,74,42,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 70% at 90% 80%, rgba(139,26,26,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(13,10,7,0.6) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Firefly particles */
+  .fireflies {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .firefly {
+    position: absolute;
+    border-radius: 50%;
+    animation: float var(--dur, 6s) ease-in-out infinite, glow var(--glow-dur, 3s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes float {
+    0% { transform: translate(0, 0); opacity: 0; }
+    20% { opacity: 1; }
+    50% { transform: translate(var(--tx, 30px), var(--ty, -40px)); }
+    80% { opacity: 1; }
+    100% { transform: translate(var(--tx2, -20px), var(--ty2, 20px)); opacity: 0; }
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 4px 2px rgba(150,255,150,0.3); }
+    50% { box-shadow: 0 0 8px 4px rgba(150,255,150,0.7); }
+  }
+
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: var(--gold-light);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: var(--bright, 0.6); transform: scale(1); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .header-ornament {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeDown 1.2s ease both;
+  }
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--gold-dim);
+    font-size: 22px;
+    letter-spacing: 8px;
+  }
+  .ornament-line::before,
+  .ornament-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  }
+
+  .series-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+    animation: fadeDown 1.2s ease 0.1s both;
+  }
+
+  .main-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    color: var(--gold);
+    text-align: center;
+    line-height: 1.3;
+    text-shadow: 0 0 40px rgba(201,168,76,0.4), 0 2px 4px rgba(0,0,0,0.8);
+    margin-bottom: 10px;
+    animation: fadeDown 1.2s ease 0.2s both;
+  }
+
+  .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeDown 1.2s ease 0.3s both;
+  }
+
+  .chapter-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 16px;
+    animation: fadeDown 1s ease 0.4s both;
+  }
+  .chapter-badge span {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .badge-gem {
+    width: 6px; height: 6px;
+    background: var(--forest-glow);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--forest-glow);
+  }
+
+  .chapter-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(18px, 3.5vw, 26px);
+    color: var(--parchment);
+    text-align: center;
+    margin-bottom: 50px;
+    text-shadow: 0 0 20px rgba(245,234,216,0.2);
+    animation: fadeDown 1s ease 0.5s both;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 40px 0;
+    color: var(--gold-dim);
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim)60, transparent);
+  }
+  .divider-gem {
+    width: 5px; height: 5px;
+    background: var(--gold-dim);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .content {
+    animation: fadeUp 1.4s ease 0.6s both;
+  }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    text-indent: 2em;
+  }
+
+  p.no-indent { text-indent: 0; }
+
+  p.drop-cap::first-letter {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 4.5em;
+    font-weight: 700;
+    color: var(--forest-glow);
+    float: left;
+    line-height: 0.75;
+    margin: 8px 12px -4px 0;
+    text-shadow: 0 0 20px rgba(74,122,74,0.6);
+  }
+
+  .scene-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--forest-glow);
+    text-align: center;
+    text-transform: uppercase;
+    margin: 50px 0 30px;
+    opacity: 0.9;
+  }
+
+  .dialogue {
+    color: #ddd0b8;
+    text-indent: 2em;
+  }
+
+  .dramatic {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .inner-thought {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .forest-whisper {
+    color: #7abf7a;
+    font-style: italic;
+    text-indent: 2em;
+  }
+
+  .quote-block {
+    border-left: 2px solid var(--forest-glow);
+    padding: 16px 24px;
+    margin: 36px 0;
+    background: rgba(74,122,74,0.05);
+    font-style: italic;
+    color: var(--parchment-dark);
+    text-indent: 0 !important;
+  }
+
+  .combat {
+    background: rgba(139,26,26,0.06);
+    border: 1px solid rgba(139,26,26,0.2);
+    border-radius: 2px;
+    padding: 24px;
+    margin: 30px 0;
+  }
+
+  /* Forest atmosphere box */
+  .forest-scene {
+    background: rgba(42,74,42,0.08);
+    border: 1px solid rgba(74,122,74,0.2);
+    border-radius: 2px;
+    padding: 24px;
+    margin: 30px 0;
+  }
+
+  /* Tender moment */
+  .tender {
+    background: rgba(201,168,76,0.04);
+    border-left: 2px solid rgba(201,168,76,0.3);
+    padding: 16px 24px;
+    margin: 30px 0;
+  }
+  .tender p { text-indent: 0; }
+
+  .chapter-end {
+    text-align: center;
+    margin-top: 70px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    animation: fadeUp 1s ease 1s both;
+  }
+  .chapter-end .end-mark {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--gold-dim);
+    letter-spacing: 6px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .next-teaser {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    letter-spacing: 1px;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--forest-glow); border-radius: 3px; opacity: 0.5; }
+
+  em { font-style: italic; color: var(--gold-light); }
+  strong { font-weight: 600; color: var(--parchment); }
+
+  @media (max-width: 600px) {
+    .container { padding: 40px 24px 80px; }
+    p { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="fireflies" id="fireflies"></div>
+
+<div class="container">
+
+  <div class="header-ornament">
+    <div class="ornament-line">✦ ✦ ✦</div>
+  </div>
+
+  <p class="series-title">นิยายแฟนตาซีโรแมนติก</p>
+  <h1 class="main-title">เงาแห่งราชัน</h1>
+  <p class="subtitle">Shadow of the Sovereign</p>
+
+  <div class="chapter-badge">
+    <div class="badge-gem"></div>
+    <span>ตอนที่ ๒</span>
+    <div class="badge-gem"></div>
+  </div>
+
+  <h2 class="chapter-title">ป่าแห่งความทรงจำ</h2>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="content">
+
+    <p class="drop-cap">ป่า Darkmoor เริ่มต้นด้วยความเงียบ</p>
+
+    <p>ไม่ใช่ความเงียบของสถานที่ไร้ชีวิต แต่เป็นความเงียบของสิ่งมีชีวิตที่กำลังฟังอยู่ ต้นไม้ยักษ์ใหญ่สูงราวกับเสาของวิหารโบราณ รากพันกันเป็นตาข่ายบนพื้นดิน แสงอาทิตย์ที่ผ่านลงมาได้แค่เป็นเส้นบางๆ ราวกับโลกข้างบนนั้นเป็นเรื่องราวของคนอื่น</p>
+
+    <p>เอลาร่าชะลอม้าลงทันทีที่ก้าวเข้าเขตแดนป่า สัญชาตญาณของเธอที่เงียบมาตลอดก็กระตุกขึ้นมาเบาๆ ไม่ใช่อันตราย แต่เป็นความรู้สึกว่า<em>มีสิ่งที่มองไม่เห็นกำลังมองดูอยู่</em></p>
+
+    <p class="dialogue">"คุณรู้จักป่านี้ดีแค่ไหน ?" คาเอลถามจากด้านหลัง เสียงของเขาลดต่ำลงโดยอัตโนมัติ เหมือนคนที่รู้ว่าบางที่ไม่ควรส่งเสียงดัง</p>
+
+    <p class="dialogue">"ดีพอที่จะรู้ว่าต้องพูดน้อยๆ" เธอตอบในเสียงเดียวกัน</p>
+
+    <p>เขาเงียบ</p>
+
+    <p>พวกเขาเดินทางในความเงียบสักครู่ ม้าทั้งสองตัวเดินช้าลงเองโดยไม่ต้องสั่ง ราวกับรู้ดีว่าการรีบร้อนในป่านี้ไม่ใช่ความคิดที่ดี</p>
+
+    <p>แสงหิ่งห้อยสีเขียวจางๆ ลอยอยู่ตามพุ่มไม้ทั้งที่เป็นกลางวัน เอลาร่ารู้ว่านั่นไม่ใช่หิ่งห้อย แต่เป็น<em>วิญญาณป่า</em> สิ่งมีชีวิตเล็กๆ ที่ไม่มีรูปร่างถาวร อาศัยอยู่ในป่าเก่าแก่แห่งนี้มานานก่อนที่มนุษย์จะรู้จักตัวอักษร</p>
+
+    <p>พวกมันไม่เป็นอันตราย ถ้าคุณไม่รบกวนพวกมันก่อน</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ เมื่อป่าพูด ~</p>
+
+    <div class="forest-scene">
+      <p>ชั่วโมงแรกผ่านไปด้วยดี จนกระทั่งป่าเริ่มเปลี่ยน</p>
+
+      <p>เส้นทางที่เอลาร่าจำได้เริ่มบิดเบี้ยว ต้นไม้ที่ควรจะอยู่ทางซ้ายกลับปรากฏทางขวา โขดหินที่เธอรู้จักหายไป และที่แย่ที่สุดคือเสียง ไม่ใช่เสียงอันตราย แต่เป็นเสียงกระซิบ เบาจนแทบไม่ได้ยิน แต่ดังสม่ำเสมอพอที่จะทำให้เนื้อหนังเริ่มขนลุก</p>
+
+      <p class="forest-whisper">"...ผู้หญิงที่มีดวงตาแห่งพายุ... กลับมาแล้ว..."</p>
+
+      <p>เอลาร่าหยุดม้า</p>
+
+      <p class="dialogue">"ได้ยินไหม ?" เธอถามคาเอลโดยไม่หันหลัง</p>
+
+      <p class="dialogue">"ได้ยิน" เสียงเขาเกร็งขึ้นเล็กน้อย "คุณเคยมาที่นี่มาก่อนสินะ"</p>
+
+      <p class="dialogue">"สองปีที่แล้ว" เธอพูดเบาๆ "ตอนนั้นหนีมาที่นี่ และป่าก็... ยอมให้ผ่าน"</p>
+
+      <p class="dialogue">"ยอมให้ผ่าน" เขาทวนคำ "พูดราวกับว่าป่ามีความคิดเป็นของตัวเอง"</p>
+
+      <p class="dialogue">"มันมี"</p>
+
+      <p>ความเงียบสั้นๆ</p>
+
+      <p class="forest-whisper">"...เธอพามาด้วย... ผู้ชายที่มีเงาสองชั้น..."</p>
+
+      <p>คาเอลชะงัก เอลาร่าหันมามองเขาเป็นครั้งแรกในรอบชั่วโมง</p>
+
+      <p class="dialogue">"เงาสองชั้น" เธอพูดช้าๆ มองเขาด้วยแววตาที่ประเมินค่า "นั่นหมายความว่าอะไร ?"</p>
+
+      <p class="dialogue">"ไม่รู้" เขาตอบ แต่สายตาหลบไปที่อื่น</p>
+
+      <p class="inner-thought">เขาโกหก... แต่ฉันไม่รู้สึกถึงภัย เขาซ่อนเรื่องของตัวเอง แต่นั่นไม่ใช่เรื่องที่ฉันต้องสน</p>
+
+      <p>เธอตัดสินใจปล่อยผ่านเรื่องนั้นไปก่อน</p>
+    </div>
+
+    <p class="dialogue">"เราต้องพิสูจน์ตัวกับป่า" เอลาร่าลงจากม้า ผูกบังเหียนกับกิ่งไม้ "ฝากม้าไว้ตรงนี้ก่อน"</p>
+
+    <p class="dialogue">"พิสูจน์อย่างไร ?"</p>
+
+    <p class="dialogue">"ด้วยความจริง" เธอเดินไปยืนตรงกลางพื้นที่โล่งเล็กๆ แล้วหลับตา "ป่า Darkmoor ไม่ยอมให้คนที่มีความตั้งใจอำพรางผ่านไป มันอ่านใจคน"</p>
+
+    <p class="dialogue">"แล้วฉันต้องทำอะไร?"</p>
+
+    <p class="dialogue">"ยืนเฉยๆ และคิดถึงสิ่งที่คุณต้องการจริงๆ ไม่ใช่สิ่งที่คุณบอกคนอื่น"</p>
+
+    <p>คาเอลเดินมายืนข้างๆ เธอสัมผัสได้ถึงความลังเลของเขา แต่ในที่สุดเขาก็หลับตา</p>
+
+    <p>ป่าเงียบสักครู่</p>
+
+    <p>แล้วแสงหิ่งห้อยที่กระจายอยู่ทั่วก็ค่อยๆ ลอยเข้ามาหา รวมตัวกันเป็นทรงกลมสีเขียวอ่อนแวววาวอยู่ระหว่างพวกเขาสองคน</p>
+
+    <p class="forest-whisper">"...พวกเจ้า...ผ่านได้... แต่จำไว้... สิ่งที่เข้ามาในป่านี้จะต้องทิ้งอะไรบางอย่างไว้..."</p>
+
+    <p class="dialogue">"ทิ้งอะไร ?" เอลาร่าถามออกเสียง</p>
+
+    <p class="forest-whisper">"...ความลับ..."</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ ราคาของการผ่าน ~</p>
+
+    <p>เอลาร่าเปิดตา มองไปที่แสงที่ลอยอยู่ แล้วพยักหน้า</p>
+
+    <p class="dialogue">"ตกลง" เธอพูดกับป่า แล้วหันมาที่คาเอล "กฎของที่นี่คือต้องบอกความลับหนึ่งอย่างกับอีกคน ป่าจะเป็นพยาน"</p>
+
+    <p class="dialogue">"ความลับ" เขาทวนคำอย่างราบเรียบแต่เธอสังเกตว่ากล้ามเนื้อขากรรไกรของเขาเกร็งขึ้น</p>
+
+    <p class="dialogue">"สิ่งที่คุณไม่เคยบอกใคร" เธออธิบาย "ป่าจะรู้เองว่าเป็นความจริงหรือเปล่า ถ้าโกหก... เราจะวนเวียนอยู่ในนี้จนตาย"</p>
+
+    <p>ความเงียบยาวนาน</p>
+
+    <p class="dialogue">"ฉันก่อนก็ได้" เอลาร่าพูด แล้วมองตรงมาที่เขา สายตาสีเทาของเธอสงบนิ่งผิดปกติ</p>
+
+    <p>เธอหายใจเข้าลึกๆ</p>
+
+    <p class="dialogue">"สองปีที่แล้ว คืนที่ฉันหนีมาที่ป่านี้" เธอเริ่มพูด เสียงเรียบแต่มีน้ำหนักอยู่ "ฉันไม่ได้หนีเพราะกลัว ฉันหนีเพราะถ้าอยู่ต่อ ฉันจะฆ่าคนที่สั่งให้ฆ่าน้องสาวฉัน และคนนั้น... เป็นผู้การของฉันเอง ฉันทำไม่ได้ ไม่ใช่เพราะไม่กล้า แต่เพราะฉันรู้ว่าถ้าทำ ฉันจะไม่มีวันกลับมาเป็นคนเดิม"</p>
+
+    <p>แสงสีเขียวกระพริบ</p>
+
+    <p class="inner-thought">ความจริงที่ฉันไม่เคยบอกใครเลย แม้แต่ตัวเอง</p>
+
+    <p>คาเอลมองเธอนาน ในดวงตาสีดำของเขามีบางอย่างที่เธออ่านไม่ออก ไม่ใช่ความสงสาร แต่เป็นบางอย่างที่หนักกว่า</p>
+
+    <p>เขาหันหน้าไปมองต้นไม้ข้างหน้า</p>
+
+    <p class="dialogue">"ฉันสมัครงานนี้ด้วยตัวเอง" เขาพูดช้าๆ "กษัตริย์ไม่ได้สั่ง ผมขอมาเอง"</p>
+
+    <p class="dialogue">"ทำไม ?"</p>
+
+    <p class="dialogue">"เพราะฉันเคยเห็นคุณสู้ ห้าปีที่แล้ว ในการต่อสู้ที่ Greyveil" เขาหยุดนิดหนึ่ง "ตอนนั้นคุณช่วยชีวิตคนสิบสองคน รวมถึงน้องชายของฉัน โดยไม่รู้ตัว และหายออกไปก่อนที่ใครจะถามชื่อ"</p>
+
+    <p>เอลาร่าจำไม่ได้</p>
+
+    <p>เธอผ่านการต่อสู้มาหลายสิบครั้ง บางครั้งช่วยคนโดยไม่ตั้งใจ แล้วก็เดินต่อไปเหมือนไม่มีอะไรเกิดขึ้น</p>
+
+    <p class="dialogue">"แล้วคุณก็จำคนที่ไม่ได้สำคัญอะไรกับคุณ" เธอพูดเงียบๆ ไม่ใช่คำถาม</p>
+
+    <p class="dialogue">"สำคัญสิ" เขาตอบ เสียงเบา แต่ชัด</p>
+
+    <p>แสงสีเขียวพวยพุ่งขึ้นแล้วกระจายออกไปรอบๆ ป่ายอมรับความจริงของทั้งคู่แล้ว ทางข้างหน้าสว่างขึ้นเล็กน้อย ราวกับป่าขยับออกทางเพื่อให้พวกเขาผ่าน</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ คืนในป่า ~</p>
+
+    <p>พวกเขาเดินทางต่อในความเงียบที่เปลี่ยนไปจากก่อน ก่อนหน้านั้นความเงียบของพวกเขาเป็นความเงียบของคนแปลกหน้า แต่ตอนนี้มันหนักกว่านั้น เต็มไปด้วยคำที่พูดออกไปแล้วและไม่มีทางเอากลับคืน</p>
+
+    <p>เมื่อฟ้าเริ่มมืด คาเอลหยุดที่โขดหินขนาดใหญ่ที่สร้างที่กำบังตามธรรมชาติ</p>
+
+    <p class="dialogue">"เราจะกันพักที่นี่ก่อน" เขาพูด "ออกเดินทางต่อรุ่งเช้า"</p>
+
+    <p>พวกเขาก่อไฟเล็กๆ ระหว่างโขดหิน ไม่ใหญ่พอที่จะมองเห็นจากระยะไกล แต่ให้ความอบอุ่นได้พอดี เอลาร่านั่งหลังชิดหิน มองเปลวไฟ ขณะที่คาเอลตรวจอุปกรณ์และจัดยามอย่างเป็นระบบ</p>
+
+    <p>เธอสังเกตว่าเขาทำงานอย่างเงียบและมีประสิทธิภาพ ไม่มีการเคลื่อนไหวฟุ่มเฟือย ทุกอย่างที่เขาทำมีเหตุผล</p>
+
+    <p class="inner-thought">คนที่เติบโตมากับการอยู่รอด ไม่ใช่คนที่ถูกสอนวิธีอยู่รอด ต่างกัน</p>
+
+    <p class="dialogue">"น้องชายของคุณ" เธอพูดขึ้นมาอย่างไม่ได้ตั้งใจ "ตอนนี้เขาเป็นอย่างไร ?"</p>
+
+    <p>คาเอลที่กำลังเช็ดดาบหยุดนิ่ง</p>
+
+    <p class="dialogue">"เขาเสียชีวิตแล้ว" เขาตอบ เสียงไม่สั่น "หกเดือนหลังจาก Greyveil"</p>
+
+    <p>เอลาร่าไม่พูด ไม่มีคำปลอบใจที่ฟังดูจริง เธอรู้เรื่องนั้นดี</p>
+
+    <p class="dialogue">"โทษที" เธอพูดในที่สุด สั้นๆ แต่มีน้ำหนัก</p>
+
+    <p class="dialogue">"ไม่เป็นไร" เขาเช็ดดาบต่อ "คุณช่วยให้เขามีเวลาอีกหกเดือน ในหกเดือนนั้นเขาได้กลับบ้าน ได้เจอแม่ ได้เห็นหมู่บ้านของตัวเอง มันเป็นหกเดือนที่ดี"</p>
+
+    <p>เปลวไฟดิ้นไหวระหว่างพวกเขา</p>
+
+    <p class="dialogue">"เขาชื่อว่าอะไร?" เธอถามเบาๆ</p>
+
+    <p class="dialogue">"เรน"</p>
+
+    <p class="dialogue">"เรน" เธอทวน ราวกับการพูดชื่อนั้นออกมาเป็นเครื่องบูชาเล็กๆ ให้กับคนที่ไม่มีตัวตนแล้ว</p>
+
+    <p>คาเอลเงยหน้าขึ้นมองเธอ ในแสงไฟ ดวงตาสีดำของเขาอ่อนกว่าปกติมาก</p>
+
+    <p class="dialogue">"นอนพักได้เลย" เขาพูดหลังจากนั้น "ผมเฝ้ายามให้ก่อน"</p>
+
+    <p class="dialogue">"งั้นฉันเฝ้าอีกครึ่งหนึ่ง"</p>
+
+    <p class="dialogue">"เข้าใจแล้ว" เขาพยักหน้า "ผมจะปลุกตอนเที่ยงคืน"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ สิ่งที่ป่าส่งมา ~</p>
+
+    <p>เอลาร่าหลับไปเร็วกว่าที่คาดไว้ ร่างกายที่เหนื่อยล้าจากการเดินทางและการต่อสู้บังคับให้จิตใจหยุดพัก</p>
+
+    <p>เธอฝันถึงเนลลา</p>
+
+    <p>น้องสาวตัวเล็กที่มีผมสีน้ำตาลหยิกและรอยยิ้มที่กว้างเกินหน้า เนลลาที่ชอบวาดรูปบนกระดาษขาว เนลลาที่ร้องไห้ทุกครั้งที่เห็นสัตว์เจ็บป่วย แต่กลับเดินตรงไปหาและรักษามันโดยไม่กลัว</p>
+
+    <p class="inner-thought">ฉันจะเอาเธอกลับมา</p>
+
+    <p>ความฝันกระโดดไปอีกที่ เธอเห็นห้องมืดๆ ห้องหนึ่ง มีรูปทรงที่เธอรู้ว่าคือเนลลานั่งอยู่กลางห้อง ไม่ถูกมัด แต่ล้อมรอบด้วยสัญลักษณ์เวทมนตร์ที่เธอไม่รู้จัก และแสงไฟสีแดงที่กระพริบเป็นจังหวะ</p>
+
+    <p>เนลลาหันมา</p>
+
+    <p>และยิ้ม</p>
+
+    <p class="inner-thought">เธอยิ้ม... แปลกมาก นั่นไม่ใช่รอยยิ้มของคนที่กำลังกลัว</p>
+
+    <p>เอลาร่าสะดุ้งตื่น</p>
+
+    <p>ท้องฟ้าเหนือป่ายังมืดอยู่ แต่ดาวหนาแน่นจนดูราวกับใครโปรยผงเงินทิ้งไว้ คาเอลนั่งอยู่ตรงข้ามเปลวไฟ ไม่นอน ยังคงดาบวางข้างเข่า สายตามองอยู่ที่ความมืดของป่า</p>
+
+    <p>เขาได้ยินเธอสะดุ้ง หันมามอง</p>
+
+    <p class="dialogue">"ฝันร้าย ?"</p>
+
+    <p class="dialogue">"ฝันแปลก" เธอลุกขึ้นนั่ง "น้องสาวฉัน เธอยิ้มในฝัน"</p>
+
+    <p class="dialogue">"นั่นไม่ดีหรือ ?"</p>
+
+    <p class="dialogue">"รอยยิ้มของเธอไม่ใช่รอยยิ้มของคนถูกจองจำ" เอลาร่าขมวดคิ้ว "มันเหมือนคนที่รู้อะไรบางอย่าง"</p>
+
+    <p>คาเอลเงียบ เธอมองเขา</p>
+
+    <p class="dialogue">"คุณรู้เรื่องอะไรที่ฉันยังไม่รู้ไหม?" เธอถามตรงๆ</p>
+
+    <p>ความเงียบที่ยาวเกินไป</p>
+
+    <p class="dialogue">"รู้" เขาตอบในที่สุด "แต่ยังไม่ถึงเวลาที่จะบอก"</p>
+
+    <p>เอลาร่าอยากโกรธ อยากยืนขึ้นและบอกว่าข้อตกลงเป็นโมฆะ แต่สัมผัสของเธอบอกว่าเขาพูดความจริง เขา<em>รู้จริงๆ</em> และเขาเชื่อจริงๆ ว่ายังไม่ถึงเวลา</p>
+
+    <p class="dialogue">"เมื่อถึงเวลา คุณจะบอกฉัน ?" เธอถาม</p>
+
+    <p class="dialogue">"ใช่ ผมสัญญา"</p>
+
+    <p>เธอมองเขานาน ป่าเงียบรอบข้าง วิญญาณป่าลอยอยู่ห่างๆ ราวกับไม่ต้องการรบกวน</p>
+
+    <p class="dialogue">"งั้นไปพักก่อนเถอะ" เธอพูด "ฉันเฝ้ายามเอง"</p>
+
+    <p class="dialogue">"ยังไม่เที่ยงคืน"</p>
+
+    <p class="dialogue">"ฉันตื่นแล้ว นอนไม่หลับอีกอยู่ดี" เธอเดินมานั่งตำแหน่งที่เขาเคยนั่ง "ไปนอน คาเอล"</p>
+
+    <p>นั่นเป็นครั้งแรกที่เธอเรียกชื่อเขา ทั้งคู่รู้สึกได้ คาเอลลุกขึ้นช้าๆ เดินไปยังที่นอนที่ปูไว้ แล้วหยุดอยู่ครู่หนึ่งก่อนนอนลง</p>
+
+    <p class="dialogue">"เอลาร่า"</p>
+
+    <p class="dialogue">"อะไร?"</p>
+
+    <p class="dialogue">"ขอบคุณสำหรับเรน"</p>
+
+    <div class="tender">
+      <p>เธอไม่ตอบ แต่มองไปที่ดาวข้างบน และในความเงียบของป่า ในแสงจากวิญญาณเล็กๆ ที่ลอยเวียนอยู่รอบๆ เธอรู้สึกถึงบางอย่างในอก บางอย่างที่เธอไม่อยากตั้งชื่อ</p>
+      <p>ความอบอุ่น ทั้งที่อากาศยังเย็นเฉียบ</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ รุ่งเช้าและเงาที่ตามมา ~</p>
+
+    <p>รุ่งสางมาพร้อมกับเสียงนกร้องที่เอลาร่าไม่รู้จัก ป่า Darkmoor มีนกของตัวเองที่ไม่มีในที่ไหน เสียงมันใสและลึกในเวลาเดียวกัน เหมือนมีน้ำสองชนิดไหลผ่านกัน</p>
+
+    <p>คาเอลตื่นมาพร้อมกับเธอ ทั้งคู่เก็บของและออกเดินทางในเวลาไม่นาน ไม่มีกาแฟ แค่น้ำใสจากลำธารป่าที่เย็นจัดและขนมปังแข็งๆจากกระเป๋า</p>
+
+    <p>ป่าค่อยๆ เบาบางลง แสงเริ่มส่องผ่านได้มากขึ้น และเอลาร่ารู้สึกได้ว่าพวกเขาใกล้จะออกจากเขต Darkmoor แล้ว</p>
+
+    <p>แต่แล้วสัมผัสของเธอก็ก้องขึ้นดังกว่าที่เคย</p>
+
+    <p class="dialogue">"หยุด"</p>
+
+    <p>คาเอลหยุดทันที ดาบออกจากฝักในหนึ่งวินาที</p>
+
+    <p class="dialogue">"กี่คน?"</p>
+
+    <p class="dialogue">"มาก" เธอพูดอย่างตึงเครียด "ไม่ใช่ห้าคนเหมือนเมื่อวาน มากกว่านั้น"</p>
+
+    <div class="combat">
+      <p>พวกเขาโผล่ออกมาจากต้นไม้พร้อมกัน สิบคน อาจจะสิบสอง ทุกคนถืออาวุธ บางคนมีธนู บางคนมีดาบ ทุกคนสวมชุดสีดำของม่านเงา</p>
+
+      <p class="dialogue">"ส่งผู้หญิงมา" ชายที่ดูเหมือนหัวหน้าพูด "แล้วเราจะปล่อยแกไป"</p>
+
+      <p class="dialogue">"น่าสนใจ" เอลาร่าพูดอย่างเงียบสงบ "แกคิดว่าฉันเป็นสินค้าที่โยนให้กันได้รึไง"</p>
+
+      <p>คาเอลเคลื่อนมายืนชิดเธอ หลังชนหลัง ทั้งสองคนล้อมรอบด้วยศัตรู</p>
+
+      <p class="dialogue">"แผนล่ะ ?" เขาถามเบาๆ</p>
+
+      <p class="dialogue">"ฉันซ้าย นายรับขวา และอย่าตาย"</p>
+
+      <p class="dialogue">"ได้"</p>
+
+      <p>ม่านเงาบุกมาพร้อมกัน</p>
+
+      <p>เอลาร่าไม่รอ เธอวิ่งเข้าหาก่อนที่พวกเขาจะพร้อม ระยะห่างระหว่างเธอกับธนูคือความอยู่รอด มีดสั้นสองเล่มในมือทั้งสองข้าง เธอสู้ด้วยความเร็วและความแม่นยำ ไม่ใช่ความแข็งแกร่ง ใช้ร่างกายของศัตรูเป็นโล่ กลิ้งหลบใต้การฟันดาบ ต่อยจุดอ่อน และไม่อยู่ที่เดิมนานพอให้ใครตามทัน</p>
+
+      <p>ด้านหลัง เสียงดาบกระทบกันดังหนักแน่น คาเอลสู้ต่างสไตล์โดยสิ้นเชิง เขาใช้ความแข็งแกร่งและความแม่นยำ ทุกการโจมตีของเขาจบสั้น ไม่มีการเล่นหลอกล่อ แค่จุดประสงค์และผลลัพธ์</p>
+
+      <p>เอลาร่าล้มศัตรูลงห้าคนในสามนาที แต่ยังมีอีก และขาของเธอเริ่มหนักขึ้น</p>
+
+      <p>ชายคนหนึ่งจับข้อมือเธอได้ ดึงแรง เธอเกือบล้ม แต่แล้วน้ำหนักจากคนๆ นั้นก็หายไป เธอหันไป คาเอลจัดการชายคนนั้นไปแล้ว โดยไม่ทันรู้ตัวว่าเขาเดินมาถึงเบื้องหลังเธอเมื่อไหร่</p>
+
+      <p>สายตาของพวกเขาพบกันชั่ววินาที</p>
+
+      <p>แล้วก็แยกออกไปต่อสู้ต่อ</p>
+
+      <p>ในที่สุด ศัตรูที่เหลือเริ่มถอยออกไป หลายคนบาดเจ็บ บางคนหมดสติ ไม่มีใครตาย เอลาร่าไม่นิยมการฆ่าถ้าหลีกเลี่ยงได้</p>
+
+      <p>ทั้งสองยืนหอบอยู่กลางสนามรบเล็กๆ ในป่า</p>
+    </div>
+
+    <p>เอลาร่ามองมือตัวเอง มีรอยถลอกที่ข้อมือ เลือดออกนิดหน่อย ไม่ใช่แผลจากการสู้ แต่จากการที่ถูกดึงข้อมือ</p>
+
+    <p>คาเอลเดินมา ดึงผ้าสะอาดออกจากกระเป๋า โดยไม่พูดอะไร เขาจับมือเธอขึ้นมาพันแผล</p>
+
+    <p>เธอยอมให้เขาทำโดยไม่ดึงออก</p>
+
+    <p class="inner-thought">มือเขาอุ่นอีกแล้ว</p>
+
+    <p class="dialogue">"พวกเขาส่งพวกมันมามากขึ้น" เขาพูดขณะพันผ้า ไม่มองหน้าเธอ "แปลว่าพวกเขากลัวคุณ"</p>
+
+    <p class="dialogue">"หรือแปลว่าพวกเขาต้องการฉันมากพอที่จะเสี่ยง" เธอพูด แล้วก็รู้สึกถึงความหมายอีกนัยหนึ่งที่ซ่อนอยู่ในคำพูดของตัวเอง</p>
+
+    <p>คาเอลผูกผ้าเสร็จ แต่ยังไม่ปล่อยมือเธอ</p>
+
+    <p>เขามองลงมาที่มือนั้น แล้วก็มองขึ้นมาที่ใบหน้าเธอ ระยะห่างระหว่างพวกเขาแคบกว่าที่ควรจะเป็น</p>
+
+    <p class="dialogue">"เราจะออกจากป่าได้ภายในชั่วโมง" เขาพูดในที่สุด เสียงต่ำลง "และหลังจากนั้นอีกหนึ่งวันก็ถึง Blackmoor"</p>
+
+    <p class="dialogue">"อืม" เธอตอบ เสียงของเธอก็เบาลงเช่นกัน</p>
+
+    <p>เขาปล่อยมือเธอ ถอยออกไปหนึ่งก้าว</p>
+
+    <p class="dialogue">"ไปกันเถอะ"</p>
+
+    <p>เธอตามเขาไป</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <div class="quote-block">
+      <p>ป่า Darkmoor เงียบลงหลังจากพวกเขาออกไป วิญญาณป่าเล็กๆ ลอยกลับเข้าไปในร่มเงา ทิ้งไว้เพียงแสงสีเขียวจางๆ ที่บอกว่ามีบางอย่างเกิดขึ้นในป่าวันนี้</p>
+      <p>บางอย่างที่ต้นไม้เก่าแก่จะจำไว้นานกว่าที่มนุษย์จะจำได้</p>
+      <p>สองความลับ หนึ่งคืนที่ไฟยังไหม้อยู่ และมือหนึ่งคู่ที่ไม่รีบปล่อยออกไป</p>
+    </div>
+
+  </div>
+
+  <div class="chapter-end">
+    <span class="end-mark">✦ จบตอนที่ ๒ ✦</span>
+    <p class="next-teaser">ตอนที่ ๓ : Blackmoor Keep — ป้อมปราการที่ซ่อนความจริงเกี่ยวกับเนลลา และเงาสองชั้นของคาเอล ดอร์น</p>
+    <a class="next-teaser" href="/SOTS/SOTS_ep3.html">ตอนถัดไป</a>
+    <a class="next-teaser" href="/index.html">กลับหน้าหลัก</a>
+  </div>
+
+</div>
+
+<script>
+// Stars
+const starsContainer = document.getElementById('stars');
+for (let i = 0; i < 60; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  const size = Math.random() * 2 + 0.5;
+  star.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%; top:${Math.random()*100}%;
+    --dur:${Math.random()*4+2}s; --delay:${Math.random()*5}s;
+    --bright:${Math.random()*0.4+0.15};
+  `;
+  starsContainer.appendChild(star);
+}
+
+// Fireflies
+const ffContainer = document.getElementById('fireflies');
+for (let i = 0; i < 25; i++) {
+  const ff = document.createElement('div');
+  ff.className = 'firefly';
+  const size = Math.random() * 3 + 2;
+  const tx = (Math.random()-0.5)*80, ty = (Math.random()-0.5)*80;
+  const tx2 = (Math.random()-0.5)*60, ty2 = (Math.random()-0.5)*60;
+  ff.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%; top:${Math.random()*100}%;
+    background: rgba(120,220,120,0.8);
+    --dur:${Math.random()*8+5}s;
+    --glow-dur:${Math.random()*3+2}s;
+    --delay:${Math.random()*8}s;
+    --tx:${tx}px; --ty:${ty}px;
+    --tx2:${tx2}px; --ty2:${ty2}px;
+  `;
+  ffContainer.appendChild(ff);
+}
+</script>
+
+</body>
+</html>
