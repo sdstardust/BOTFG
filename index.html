@@ -556,7 +556,7 @@ footer {
       </div>
     </a>
 
-    <a class="ncard" href="https://sdstardust.github.io/BOTFG/BOTFG/BOTFG_1.html" data-genre="ตอนเดียวจบ">
+    <a class="ncard" href="https://sdstardust.github.io/BOTFG/BOTFG/BOTFG_1.html" data-genre="ตอนเดียวจบ,ระทึกขวัญ">
       <div class="ncard-cover">
         <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#130422 0%,#2c0808 100%);"></div>
         <span class="ncard-icon" style="color:#c2072a;">🦴</span>
@@ -564,7 +564,7 @@ footer {
       </div>
       <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
       <div class="ncard-body">
-        <span class="ncard-genre">ระทึกขวัญ</span>
+        <span class="ncard-genre">ระทึกขวัญ, ตอนเดียวจบ</span>
         <div class="ncard-title">กระดูกของพระเจ้า</div>
         <div class="ncard-ch">ตอนทั้งหมด <span>ตอนที่ 1</span></div>
       </div>
@@ -626,7 +626,7 @@ footer {
       </div>
     </a>
   -->
-    <a class="ncard" href="https://sdstardust.github.io/BOTFG/TMTHD/TMTHD_ep1.html" data-genre="สยองขวัญ">
+    <a class="ncard" href="https://sdstardust.github.io/BOTFG/TMTHD/TMTHD_ep1.html" data-genre="ตอนเดียวจบ, สยองขวัญ">
       <div class="ncard-cover">
         <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#050010 0%,#100020 100%);"></div>
         <span class="ncard-icon" style="color:#c084fc;">🪞</span>
@@ -634,13 +634,13 @@ footer {
       </div>
       <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
       <div class="ncard-body">
-        <span class="ncard-genre">สยองขวัญ</span>
+        <span class="ncard-genre">สยองขวัญ, ตอนเดียวจบ</span>
         <div class="ncard-title">กระจกบอกว่าเธอตายแล้ว</div>
         <div class="ncard-ch">ทั้งหมด: <span>1 ตอน</span></div>
       </div>
     </a>
-<!--
-    <a class="ncard" href="novel-7.html" data-genre="ผจญภัย">
+
+    <a class="ncard" href="https://github.com/sdstardust/BOTFG/GOTE/_portGOTE.html" data-genre="ผจญภัย, แฟนตาซี">
       <div class="ncard-cover">
         <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#080f06 0%,#101a08 100%);"></div>
         <span class="ncard-icon" style="color:#a3e07a;">⚔️</span>
@@ -648,12 +648,13 @@ footer {
       </div>
       <div class="ncard-hover-overlay"><span class="ncard-hover-text">อ่านเลย →</span></div>
       <div class="ncard-body">
-        <span class="ncard-genre">ผจญภัย</span>
+        <span class="ncard-genre">ผจญภัย, แฟนตาซี</span>
         <div class="ncard-title">ผู้พิทักษ์แห่งขอบโลก</div>
-        <div class="ncard-ch">ตอนล่าสุด: <span>ตอนที่ 4</span></div>
+        <div class="ncard-ch">ตอนล่าสุด: <span>ตอนที่ 5</span></div>
       </div>
     </a>
 
+<!--
     <a class="ncard" href="novel-8.html" data-genre="แฟนตาซี">
       <div class="ncard-cover">
         <div class="ncard-cover-bg" style="background:linear-gradient(135deg,#0a0618 0%,#160d2e 100%);"></div>
@@ -727,7 +728,7 @@ function filterNovels(genre, btn) {
   document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.ncard').forEach(card => {
-    card.style.display = (genre === 'all' || card.dataset.genre === genre) ? 'block' : 'none';
+    let genres = card.dataset.genre; card.style.display = (genre === 'all' || genres.includes(genre)) ? 'block' : 'none';
   });
 }
 

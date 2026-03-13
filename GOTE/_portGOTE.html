@@ -1,30 +1,27 @@
-<a href="">ตอนที่ 1</a>
-<a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep2.html">ตอนที่ 2</a>
-<a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep3.html">ตอนที่ 3</a>
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เงาแห่งราชัน — sdstardust</title>
+<title>ผู้พิทักษ์แห่งขอบโลก — sdstardust</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
 <style>
 :root {
   --void: #04030a;
-  --card: #0e0b1e;
-  --card2: #120f22;
-  --border: rgba(180,140,255,0.1);
-  --border-hover: rgba(180,140,255,0.3);
-  --star: #e8deff;
-  --dust: rgba(232,222,255,0.5);
-  --muted: rgba(232,222,255,0.28);
-  --purple: #9b6dff;
-  --purple-soft: #c4a8ff;
-  --rose: #ff6b9d;
-  --rose-soft: #ffb3d0;
-  --gold: #f0c060;
+  --card: #0b0e10;
+  --card2: #0f1318;
+  --border: rgba(160,220,180,0.1);
+  --border-hover: rgba(160,220,180,0.28);
+  --star: #e4f0ee;
+  --dust: rgba(228,240,238,0.5);
+  --muted: rgba(228,240,238,0.28);
+  --green: #5ecf8a;
+  --green-soft: #a3e0be;
   --teal: #4ecdc4;
+  --gold: #f0c060;
+  --amber: #e8963a;
+  --purple-soft: #c4a8ff;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -40,26 +37,26 @@ body {
 
 #starfield { position:fixed; inset:0; z-index:0; pointer-events:none; }
 
-.nebula { position:fixed; border-radius:50%; filter:blur(110px); pointer-events:none; z-index:0; }
+.nebula { position:fixed; border-radius:50%; filter:blur(120px); pointer-events:none; z-index:0; }
 .nb1 {
-  width:650px; height:500px;
-  background: radial-gradient(ellipse, rgba(180,40,100,0.28) 0%, transparent 70%);
-  top:-120px; right:-100px;
-  animation: nd 26s ease-in-out infinite alternate;
+  width:700px; height:500px;
+  background: radial-gradient(ellipse, rgba(20,80,50,0.35) 0%, transparent 70%);
+  top:-100px; left:-180px;
+  animation: nd 28s ease-in-out infinite alternate;
 }
 .nb2 {
   width:500px; height:600px;
-  background: radial-gradient(ellipse, rgba(60,20,140,0.3) 0%, transparent 70%);
-  bottom:5%; left:-100px;
-  animation: nd 20s ease-in-out infinite alternate-reverse;
+  background: radial-gradient(ellipse, rgba(40,100,80,0.2) 0%, transparent 70%);
+  bottom:0; right:-120px;
+  animation: nd 22s ease-in-out infinite alternate-reverse;
 }
 .nb3 {
-  width:400px; height:350px;
-  background: radial-gradient(ellipse, rgba(240,192,96,0.1) 0%, transparent 70%);
-  top:45%; left:40%;
-  animation: nd 32s ease-in-out infinite alternate;
+  width:450px; height:350px;
+  background: radial-gradient(ellipse, rgba(100,60,10,0.2) 0%, transparent 70%);
+  top:40%; left:35%;
+  animation: nd 34s ease-in-out infinite alternate;
 }
-@keyframes nd { from{transform:translate(0,0);} to{transform:translate(35px,45px);} }
+@keyframes nd { from{transform:translate(0,0);} to{transform:translate(40px,35px);} }
 
 /* NAV */
 nav {
@@ -75,7 +72,7 @@ nav {
   font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase;
   color:var(--muted); text-decoration:none; transition:color 0.3s;
 }
-.nav-back:hover { color:var(--rose-soft); }
+.nav-back:hover { color:var(--green-soft); }
 .nav-back::before { content:'←'; font-size:1rem; }
 
 /* BANNER */
@@ -89,46 +86,58 @@ nav {
   border-bottom:1px solid var(--border);
   overflow:hidden;
 }
-.banner-bg-gradient {
-  position:absolute; inset:0;
-  background:linear-gradient(160deg, rgba(180,40,100,0.07) 0%, rgba(60,20,140,0.06) 50%, transparent 100%);
-  pointer-events:none;
+.banner-bg {
+  position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(160deg, rgba(20,80,50,0.08) 0%, rgba(100,60,10,0.05) 60%, transparent 100%);
 }
 
 /* COVER */
 .cover-wrap { width:240px; aspect-ratio:2/3; flex-shrink:0; }
 .cover-frame {
   width:100%; height:100%;
-  background:linear-gradient(160deg,#18060e 0%,#2a0d1e 45%,#0e050c 100%);
-  border:1px solid rgba(255,107,157,0.2);
+  background:linear-gradient(160deg,#060e08 0%,#0c1e10 45%,#06100a 100%);
+  border:1px solid rgba(94,207,138,0.2);
   display:flex; align-items:center; justify-content:center;
   position:relative; overflow:hidden;
 }
+
+/* animated map grid lines on cover */
+.cover-grid {
+  position:absolute; inset:0; opacity:0.06;
+  background-image:
+    linear-gradient(rgba(94,207,138,1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94,207,138,1) 1px, transparent 1px);
+  background-size:30px 30px;
+  animation:gridShift 20s linear infinite;
+}
+@keyframes gridShift { from{background-position:0 0;} to{background-position:30px 30px;} }
+
 .cover-glow {
-  position:absolute; width:220px; height:220px; border-radius:50%;
-  background:radial-gradient(circle, rgba(255,107,157,0.22) 0%, transparent 70%);
-  animation:gpulse 4.5s ease-in-out infinite;
+  position:absolute; width:200px; height:200px; border-radius:50%;
+  background:radial-gradient(circle, rgba(94,207,138,0.2) 0%, transparent 70%);
+  animation:gpulse 5s ease-in-out infinite;
 }
 .cover-glow2 {
-  position:absolute; width:150px; height:150px; border-radius:50%;
-  background:radial-gradient(circle, rgba(155,109,255,0.15) 0%, transparent 70%);
-  top:20%; left:15%;
-  animation:gpulse 6s ease-in-out infinite reverse;
+  position:absolute; width:130px; height:130px; border-radius:50%;
+  background:radial-gradient(circle, rgba(232,150,58,0.15) 0%, transparent 70%);
+  bottom:25%; right:15%;
+  animation:gpulse 7s ease-in-out infinite reverse;
 }
 @keyframes gpulse { 0%,100%{transform:scale(1);opacity:0.5;} 50%{transform:scale(1.2);opacity:1;} }
-.cover-icon { position:relative; z-index:2; font-size:4.8rem; filter:drop-shadow(0 0 28px rgba(255,107,157,0.5)); }
+
+.cover-icon { position:relative; z-index:2; font-size:4.8rem; filter:drop-shadow(0 0 28px rgba(94,207,138,0.5)); }
 .cover-title-overlay {
   position:absolute; bottom:0; left:0; right:0; z-index:3;
   padding:1.5rem 1rem 1rem;
-  background:linear-gradient(0deg,rgba(14,6,10,0.9) 0%,transparent 100%);
+  background:linear-gradient(0deg,rgba(6,14,8,0.92) 0%,transparent 100%);
   text-align:center;
 }
 .cover-title-text {
   font-family:'Noto Serif Thai',serif;
-  font-size:0.78rem; font-weight:600; letter-spacing:0.05em;
-  color:var(--rose-soft); line-height:1.4;
+  font-size:0.75rem; font-weight:600; letter-spacing:0.05em;
+  color:var(--green-soft); line-height:1.5;
 }
-.cover-corner { position:absolute; width:18px; height:18px; border-color:var(--rose); border-style:solid; opacity:0.5; }
+.cover-corner { position:absolute; width:18px; height:18px; border-color:var(--green); border-style:solid; opacity:0.45; }
 .cc-tl{top:8px;left:8px;border-width:1px 0 0 1px;}
 .cc-tr{top:8px;right:8px;border-width:1px 1px 0 0;}
 .cc-bl{bottom:8px;left:8px;border-width:0 0 1px 1px;}
@@ -149,9 +158,10 @@ nav {
   font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase;
   padding:0.22rem 0.75rem; border-radius:2px;
 }
-.t-romance  { background:rgba(255,107,157,0.12); color:var(--rose);        border:1px solid rgba(255,107,157,0.25); }
-.t-thriller { background:rgba(78,205,196,0.12);  color:var(--teal);         border:1px solid rgba(78,205,196,0.25); }
-.t-ongoing  { background:rgba(155,109,255,0.12); color:var(--purple-soft);  border:1px solid rgba(155,109,255,0.28); }
+.t-adv     { background:rgba(94,207,138,0.12);  color:var(--green-soft);  border:1px solid rgba(94,207,138,0.25); }
+.t-fantasy { background:rgba(78,205,196,0.12);  color:var(--teal);         border:1px solid rgba(78,205,196,0.25); }
+.t-new     { background:rgba(240,192,96,0.12);  color:var(--gold);         border:1px solid rgba(240,192,96,0.25); }
+.t-ongoing { background:rgba(155,109,255,0.1);  color:var(--purple-soft);  border:1px solid rgba(155,109,255,0.25); }
 
 .banner-title {
   font-family:'Cormorant Garamond',serif;
@@ -160,13 +170,13 @@ nav {
   letter-spacing:0.02em; margin-bottom:0.5rem;
 }
 .banner-author { font-size:0.8rem; letter-spacing:0.1em; color:var(--muted); margin-bottom:2rem; }
-.banner-author span { color:var(--rose-soft); }
+.banner-author span { color:var(--green-soft); }
 
 .banner-desc {
   font-family:'Noto Serif Thai',serif;
   font-size:0.88rem; line-height:2.1; color:var(--dust);
   max-width:580px; margin-bottom:2.5rem;
-  border-left:2px solid rgba(255,107,157,0.3);
+  border-left:2px solid rgba(94,207,138,0.3);
   padding-left:1.2rem;
 }
 
@@ -179,31 +189,31 @@ nav {
 }
 .bstat-num {
   font-family:'Cormorant Garamond',serif;
-  font-size:2rem; font-weight:600; color:var(--rose-soft);
+  font-size:2rem; font-weight:600; color:var(--green-soft);
   display:block; line-height:1;
 }
 .bstat-lbl { font-size:0.62rem; letter-spacing:0.18em; color:var(--muted); text-transform:uppercase; margin-top:0.2rem; display:block; }
 
 .banner-actions { display:flex; gap:0.8rem; flex-wrap:wrap; }
 .btn-start {
-  background:linear-gradient(135deg,#a0204a,#e0407a);
+  background:linear-gradient(135deg,#1e6e3a,#3aa860);
   color:#fff; padding:0.75rem 2rem;
   border:none; border-radius:2px;
   font-family:'Noto Sans Thai',sans-serif;
   font-size:0.8rem; font-weight:500; letter-spacing:0.1em;
   cursor:pointer; text-decoration:none; transition:all 0.3s;
-  box-shadow:0 0 25px rgba(220,60,120,0.25);
+  box-shadow:0 0 25px rgba(60,168,96,0.25);
 }
-.btn-start:hover { box-shadow:0 0 45px rgba(220,60,120,0.5); transform:translateY(-2px); }
+.btn-start:hover { box-shadow:0 0 45px rgba(60,168,96,0.5); transform:translateY(-2px); }
 .btn-latest {
   background:transparent; color:var(--dust);
   padding:0.75rem 2rem;
-  border:1px solid rgba(255,107,157,0.3); border-radius:2px;
+  border:1px solid rgba(94,207,138,0.3); border-radius:2px;
   font-family:'Noto Sans Thai',sans-serif;
   font-size:0.8rem; letter-spacing:0.1em;
   cursor:pointer; text-decoration:none; transition:all 0.3s;
 }
-.btn-latest:hover { border-color:var(--rose); color:var(--rose-soft); transform:translateY(-2px); }
+.btn-latest:hover { border-color:var(--green); color:var(--green-soft); transform:translateY(-2px); }
 
 /* CHAPTER SECTION */
 .chapter-section {
@@ -216,13 +226,14 @@ nav {
   display:flex; align-items:center; justify-content:space-between;
   flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;
 }
-.ch-label { font-size:0.62rem; letter-spacing:0.4em; color:var(--rose); text-transform:uppercase; }
+.ch-label { font-size:0.62rem; letter-spacing:0.4em; color:var(--green); text-transform:uppercase; }
 .ch-count-badge {
-  background:rgba(255,107,157,0.1);
-  border:1px solid rgba(255,107,157,0.2);
-  color:var(--rose-soft);
+  background:rgba(94,207,138,0.09);
+  border:1px solid rgba(94,207,138,0.2);
+  color:var(--green-soft);
   font-size:0.68rem; letter-spacing:0.1em;
   padding:0.2rem 0.75rem; border-radius:999px;
+  margin-top:0.4rem; display:inline-block;
 }
 
 .sort-row { display:flex; gap:0.5rem; }
@@ -234,18 +245,19 @@ nav {
   border-radius:999px; cursor:pointer; transition:all 0.2s;
 }
 .sort-btn:hover, .sort-btn.active {
-  border-color:var(--rose); color:var(--rose-soft);
-  background:rgba(255,107,157,0.07);
+  border-color:var(--green);
+  color:var(--green-soft);
+  background:rgba(94,207,138,0.07);
 }
 
-/* Chapter list */
+/* Chapter rows */
 .ch-list { display:flex; flex-direction:column; gap:0.4rem; }
 
 .ch-row {
   display:grid;
   grid-template-columns:3rem 1fr auto auto;
   align-items:center; gap:1rem;
-  padding:1rem 1.3rem;
+  padding:1.1rem 1.3rem;
   border:1px solid var(--border);
   background:var(--card);
   border-radius:3px;
@@ -256,23 +268,23 @@ nav {
 .ch-row::before {
   content:'';
   position:absolute; left:0; top:0; bottom:0; width:2px;
-  background:linear-gradient(180deg,var(--rose),var(--purple));
+  background:linear-gradient(180deg,var(--green),var(--teal));
   transform:scaleY(0); transition:transform 0.3s;
   transform-origin:bottom;
 }
 .ch-row:hover {
-  border-color:rgba(255,107,157,0.3);
+  border-color:rgba(94,207,138,0.28);
   background:var(--card2);
   transform:translateX(5px);
+  box-shadow:0 4px 30px rgba(0,0,0,0.4);
 }
 .ch-row:hover::before { transform:scaleY(1); }
 
-/* Latest badge */
 .ch-row.is-latest {
-  border-color:rgba(255,107,157,0.2);
-  background:rgba(255,107,157,0.04);
+  border-color:rgba(94,207,138,0.2);
+  background:rgba(94,207,138,0.03);
 }
-.ch-row.is-latest .ch-num { color:var(--rose-soft); }
+.ch-row.is-latest .ch-num { color:var(--green-soft); }
 
 .latest-badge {
   display:inline-block;
@@ -280,8 +292,7 @@ nav {
   color:var(--gold); background:rgba(240,192,96,0.1);
   border:1px solid rgba(240,192,96,0.25);
   padding:0.1rem 0.45rem; border-radius:2px;
-  margin-left:0.5rem;
-  vertical-align:middle;
+  margin-left:0.5rem; vertical-align:middle;
 }
 
 .ch-num {
@@ -290,14 +301,13 @@ nav {
   color:var(--muted); text-align:center;
   transition:color 0.25s;
 }
-.ch-row:hover .ch-num { color:var(--rose-soft); }
+.ch-row:hover .ch-num { color:var(--green-soft); }
 
 .ch-info { min-width:0; }
 .ch-name {
   font-family:'Noto Serif Thai',serif;
   font-size:0.92rem; font-weight:600;
-  color:var(--star); line-height:1.35;
-  margin-bottom:0.12rem;
+  color:var(--star); line-height:1.35; margin-bottom:0.12rem;
 }
 .ch-sub { font-size:0.67rem; color:var(--muted); letter-spacing:0.04em; }
 
@@ -307,27 +317,34 @@ nav {
   color:var(--muted); font-size:0.85rem;
   opacity:0; transition:all 0.25s;
 }
-.ch-row:hover .ch-arrow { color:var(--rose-soft); opacity:1; transform:translateX(3px); }
+.ch-row:hover .ch-arrow { color:var(--green-soft); opacity:1; transform:translateX(3px); }
 
-/* Divider between chapters */
+/* Chapter decorative icon */
+.ch-deco {
+  position:absolute; right:3.5rem; top:50%; transform:translateY(-50%);
+  font-size:0.9rem; opacity:0; transition:opacity 0.3s;
+  pointer-events:none;
+}
+.ch-row:hover .ch-deco { opacity:0.3; }
+
+/* coming soon */
 .ch-divider {
   display:flex; align-items:center; gap:0.8rem;
-  margin:1.5rem 0 1.2rem;
+  margin:1.8rem 0 1.2rem;
 }
-.ch-divider-line { flex:1; height:1px; background:linear-gradient(90deg,rgba(255,107,157,0.15),transparent); }
-.ch-divider-text { font-size:0.58rem; letter-spacing:0.3em; color:rgba(255,107,157,0.4); text-transform:uppercase; white-space:nowrap; }
+.ch-divider-line { flex:1; height:1px; background:linear-gradient(90deg,rgba(94,207,138,0.15),transparent); }
+.ch-divider-line.r { background:linear-gradient(270deg,rgba(94,207,138,0.15),transparent); }
+.ch-divider-text { font-size:0.58rem; letter-spacing:0.3em; color:rgba(94,207,138,0.4); text-transform:uppercase; white-space:nowrap; }
 
-/* Coming soon row */
 .ch-row-soon {
-  display:flex; align-items:center; justify-content:center;
-  gap:0.8rem;
-  padding:1rem 1.3rem;
-  border:1px dashed rgba(255,107,157,0.15);
+  display:flex; align-items:center; justify-content:center; gap:0.8rem;
+  padding:1.1rem 1.3rem;
+  border:1px dashed rgba(94,207,138,0.15);
   border-radius:3px;
   color:var(--muted);
   font-size:0.75rem; letter-spacing:0.15em;
 }
-.ch-row-soon .soon-icon { font-size:1rem; opacity:0.4; }
+.ch-row-soon .soon-icon { font-size:1rem; opacity:0.35; }
 
 /* FOOTER */
 footer {
@@ -339,20 +356,13 @@ footer {
 }
 .f-logo { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--star); }
 .f-logo em { color:var(--purple-soft); font-style:italic; }
-.f-copy { font-size:0.65rem; color:rgba(232,222,255,0.18); letter-spacing:0.05em; }
+.f-copy { font-size:0.65rem; color:rgba(228,240,238,0.18); letter-spacing:0.05em; }
 
-/* Animations */
+/* Anim */
 .fade-in { opacity:0; transform:translateY(18px); animation:fi 0.8s ease forwards; }
 @keyframes fi { to{opacity:1;transform:translateY(0);} }
 .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.7s ease,transform 0.7s ease; }
 .reveal.in { opacity:1; transform:translateY(0); }
-
-/* stagger */
-.ch-row:nth-child(1){animation-delay:0.05s}
-.ch-row:nth-child(2){animation-delay:0.10s}
-.ch-row:nth-child(3){animation-delay:0.15s}
-.ch-row:nth-child(4){animation-delay:0.20s}
-.ch-row:nth-child(5){animation-delay:0.25s}
 
 @media(max-width:768px){
   nav{padding:1.2rem 1.5rem;}
@@ -375,21 +385,22 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="index.html">sd<em>stardust</em></a>
-  <a class="nav-back" href="index.html">กลับหน้าหลัก</a>
+  <a class="logo" href="https://sdstardust.github.io/BOTFG/">sd<em>stardust</em></a>
+  <a class="nav-back" href="https://sdstardust.github.io/BOTFG/">กลับหน้าหลัก</a>
 </nav>
 
 <!-- BANNER -->
 <div class="banner fade-in">
-  <div class="banner-bg-gradient"></div>
+  <div class="banner-bg"></div>
 
   <div class="cover-wrap">
     <div class="cover-frame">
+      <div class="cover-grid"></div>
       <div class="cover-glow"></div>
       <div class="cover-glow2"></div>
       <div class="cover-icon">⚔️</div>
       <div class="cover-title-overlay">
-        <div class="cover-title-text">เงาแห่งราชัน</div>
+        <div class="cover-title-text">ผู้พิทักษ์แห่งขอบโลก</div>
       </div>
       <div class="cover-corner cc-tl"></div>
       <div class="cover-corner cc-tr"></div>
@@ -402,32 +413,34 @@ footer {
     <div class="breadcrumb">
       <a href="https://sdstardust.github.io/BOTFG/">sdstardust</a>
       <span>›</span>
-      <span>เงาแห่งราชัน</span>
+      <span>ผู้พิทักษ์แห่งขอบโลก</span>
     </div>
 
     <div class="tag-row">
-      <span class="tag t-romance">โรแมนติก</span>
-      <span class="tag t-thriller">ระทึกขวัญ</span>
+      <span class="tag t-adv">ผจญภัย</span>
+      <span class="tag t-fantasy">แฟนตาซี</span>
+      <span class="tag t-new">ใหม่!</span>
       <span class="tag t-ongoing">กำลังเขียน</span>
     </div>
 
-    <h1 class="banner-title">เงาแห่งราชัน</h1>
+    <h1 class="banner-title">ผู้พิทักษ์<br>แห่งขอบโลก</h1>
     <p class="banner-author">โดย <span>sdstardust</span></p>
 
     <p class="banner-desc">
-      ในราชสำนักที่เต็มไปด้วยคำโกหกและเงาที่มืดมน
-      นักสู้ยอดฝืมือ หญิงสาวผู้มีพลัง...
+      เมื่อแผนที่สิ้นสุด ภารกิจเพิ่งเริ่มต้น
+      นักรบผู้ไร้นามถูกส่งไปพิทักษ์ดินแดนที่ไม่มีใครกล้าเหยียบ
+      แต่สิ่งที่รออยู่ ณ ขอบโลก ไม่ใช่ศัตรู — มันคือความจริงที่จักรวาลพยายามปิดซ่อน…
     </p>
 
     <div class="banner-stats">
       <div><span class="bstat-num">5</span><span class="bstat-lbl">ตอนปัจจุบัน</span></div>
       <div><span class="bstat-num">กำลังเขียน</span><span class="bstat-lbl">สถานะ</span></div>
-      <div><span class="bstat-num">โรแมนติก</span><span class="bstat-lbl">แนวเรื่อง</span></div>
+      <div><span class="bstat-num">ผจญภัย</span><span class="bstat-lbl">แนวเรื่อง</span></div>
     </div>
 
     <div class="banner-actions">
-      <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep1.html" class="btn-start">▶ อ่านตั้งแต่ต้น</a>
-      <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep5.html" class="btn-latest">ตอนล่าสุด →</a>
+      <a href="https://sdstardust.github.io/BOTFG/GOTE_ep1.html" class="btn-start">▶ อ่านตั้งแต่ต้น</a>
+      <a href="https://sdstardust.github.io/BOTFG/GOTE_ep5.html" class="btn-latest">ตอนล่าสุด →</a>
     </div>
   </div>
 </div>
@@ -441,14 +454,14 @@ footer {
       <span class="ch-count-badge">5 ตอน · กำลังเขียน</span>
     </div>
     <div class="sort-row">
-      <button class="sort-btn active" id="sortAsc" onclick="sortChapters('asc',this)">เก่า → ใหม่</button>
-      <button class="sort-btn" id="sortDesc" onclick="sortChapters('desc',this)">ใหม่ → เก่า</button>
+      <button class="sort-btn active" onclick="sortChapters('asc',this)">เก่า → ใหม่</button>
+      <button class="sort-btn" onclick="sortChapters('desc',this)">ใหม่ → เก่า</button>
     </div>
   </div>
 
   <div class="ch-list reveal" id="chList">
 
-    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep1.html" data-num="1">
+    <a class="ch-row" href="https://github.com/sdstardust/BOTFG/GOTE/GOTE_ep1.html" data-num="1">
       <span class="ch-num">01</span>
       <div class="ch-info">
         <div class="ch-name">ดาบที่ไม่มีชื่อ</div>
@@ -456,49 +469,54 @@ footer {
       </div>
       <span class="ch-date">มี.ค. 69</span>
       <span class="ch-arrow">→</span>
+      <span class="ch-deco">🗺️</span>
     </a>
 
-    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep2.html" data-num="2">
+    <a class="ch-row" href="https://github.com/sdstardust/BOTFG/GOTE/GOTE_ep2.html" data-num="2">
       <span class="ch-num">02</span>
       <div class="ch-info">
-        <div class="ch-name">ป่าแห่งความทรงจำ</div>
+        <div class="ch-name">หญิงสาวและไฟแห่งความตาย</div>
         <div class="ch-sub">ตอนที่ 2</div>
       </div>
       <span class="ch-date">มี.ค. 69</span>
       <span class="ch-arrow">→</span>
+      <span class="ch-deco">🔥</span>
     </a>
 
-    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep3.html" data-num="3">
+    <a class="ch-row" href="https://github.com/sdstardust/BOTFG/GOTE/GOTE_ep3.html" data-num="3">
       <span class="ch-num">03</span>
       <div class="ch-info">
-        <div class="ch-name">ป้อมปราการและความจริงที่ซ่อนอยู่</div>
-        <div class="ch-sub">ตอนที่ 3</div>
+        <div class="ch-name">ถนนสู่ที่สิ้นสุดของแผนที่</div>
+        <div class="ch-sub">ตอนที่ 3 · จุดหักเห</div>
       </div>
       <span class="ch-date">มี.ค. 69</span>
       <span class="ch-arrow">→</span>
+      <span class="ch-deco">🧭</span>
     </a>
 
-    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep4.html" data-num="4">
+    <a class="ch-row" href="https://github.com/sdstardust/BOTFG/GOTE/GOTE_ep4.html" data-num="4">
       <span class="ch-num">04</span>
       <div class="ch-info">
-        <div class="ch-name">กลับสู่ราชสำนัก</div>
+        <div class="ch-name">ขอบแห่งทุกสิ่ง</div>
         <div class="ch-sub">ตอนที่ 4</div>
       </div>
       <span class="ch-date">มี.ค. 69</span>
       <span class="ch-arrow">→</span>
+      <span class="ch-deco">🌌</span>
     </a>
 
-    <a class="ch-row is-latest" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep5.html" data-num="5">
+    <a class="ch-row is-latest" href="https://github.com/sdstardust/BOTFG/GOTE/GOTE_ep5.html" data-num="5">
       <span class="ch-num">05</span>
       <div class="ch-info">
         <div class="ch-name">
-          รากเหง้าใหม่
+          ชื่อที่ถูกแกะสลัก
           <span class="latest-badge">ใหม่</span>
         </div>
         <div class="ch-sub">ตอนที่ 5 · ตอนล่าสุด</div>
       </div>
       <span class="ch-date">มี.ค. 69</span>
       <span class="ch-arrow">→</span>
+      <span class="ch-deco">⚔️</span>
     </a>
 
   </div>
@@ -506,11 +524,11 @@ footer {
   <div class="ch-divider reveal" style="margin-top:2rem;">
     <div class="ch-divider-line"></div>
     <div class="ch-divider-text">ตอนต่อไปกำลังมา</div>
-    <div class="ch-divider-line" style="background:linear-gradient(270deg,rgba(255,107,157,0.15),transparent);"></div>
+    <div class="ch-divider-line r"></div>
   </div>
 
   <div class="ch-row-soon reveal">
-    <span class="soon-icon">🌹</span>
+    <span class="soon-icon">🌿</span>
     <span>ตอนที่ 6 — เร็วๆ นี้</span>
   </div>
 
@@ -532,11 +550,12 @@ function initStars(){
   stars=[];
   const n=Math.floor((canvas.width*canvas.height)/4000);
   for(let i=0;i<n;i++){
+    const isGreen = Math.random() > 0.7;
     stars.push({
       x:Math.random()*canvas.width, y:Math.random()*canvas.height,
       r:Math.random()*1.2+0.2, alpha:Math.random()*0.6+0.1,
       speed:Math.random()*0.004+0.001, phase:Math.random()*Math.PI*2,
-      hue:Math.random()>0.75 ? 330+Math.random()*30 : 240+Math.random()*60
+      hue: isGreen ? 140+Math.random()*30 : 200+Math.random()*60
     });
   }
 }
@@ -545,7 +564,7 @@ function draw(t){
   stars.forEach(s=>{
     const a=s.alpha*(0.5+0.5*Math.sin(t*s.speed*50+s.phase));
     ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle=`hsla(${s.hue},65%,88%,${a})`; ctx.fill();
+    ctx.fillStyle=`hsla(${s.hue},60%,85%,${a})`; ctx.fill();
   });
   requestAnimationFrame(draw);
 }
@@ -556,8 +575,8 @@ window.addEventListener('resize',()=>{ resize(); initStars(); });
 function sortChapters(dir, btn){
   document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  const list = document.getElementById('chList');
-  const rows = Array.from(list.querySelectorAll('.ch-row'));
+  const list=document.getElementById('chList');
+  const rows=Array.from(list.querySelectorAll('.ch-row'));
   rows.sort((a,b)=>{
     const na=parseInt(a.dataset.num||0);
     const nb=parseInt(b.dataset.num||0);
