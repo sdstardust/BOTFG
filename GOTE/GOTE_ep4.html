@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บทที่สี่ — ขอบแห่งทุกสิ่ง | ผู้พิทักษ์แห่งขอบโลก</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --gold:#c9933a; --gold-light:#f0c060; --midnight:#060610; --silver:#c8d4e8; --parchment:#f5ead6; --void:#4040a0; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background-color:var(--midnight); color:var(--parchment); font-family:'Sarabun',sans-serif; min-height:100vh; }
+  .stars {
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(60,60,180,0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 100%, rgba(10,10,40,0.8) 0%, transparent 50%),
+      var(--midnight);
+  }
+  .stars::before { content:''; position:absolute; inset:0;
+    background-image:
+      radial-gradient(2px 2px at 5% 5%, rgba(200,200,255,0.9), transparent),
+      radial-gradient(1px 1px at 18% 22%, white, transparent),
+      radial-gradient(2px 2px at 35% 8%, rgba(150,150,255,0.8), transparent),
+      radial-gradient(1px 1px at 52% 18%, white, transparent),
+      radial-gradient(1.5px 1.5px at 68% 6%, rgba(200,200,255,0.9), transparent),
+      radial-gradient(1px 1px at 82% 14%, white, transparent),
+      radial-gradient(2px 2px at 92% 3%, rgba(150,150,255,0.7), transparent),
+      radial-gradient(1px 1px at 12% 35%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 45% 42%, white, transparent),
+      radial-gradient(1.5px 1.5px at 78% 38%, rgba(200,200,255,0.8), transparent),
+      radial-gradient(1px 1px at 25% 55%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 60% 28%, rgba(180,180,255,0.9), transparent),
+      radial-gradient(1px 1px at 88% 48%, white, transparent),
+      radial-gradient(1px 1px at 8% 72%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 38% 68%, rgba(200,200,255,0.6), transparent); }
+  .crystal-glow {
+    position:fixed; bottom:0; left:0; right:0; height:40vh; pointer-events:none; z-index:0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(80,80,200,0.15) 0%, transparent 70%);
+  }
+  .wrapper { position:relative; z-index:1; max-width:820px; margin:0 auto; padding:0 28px 100px; }
+  .nav { display:flex; justify-content:space-between; align-items:center; padding:28px 0 0; font-size:0.78rem; letter-spacing:0.25em; color:rgba(130,130,220,0.4); }
+  .nav a { color:inherit; text-decoration:none; } .nav a:hover { color:var(--gold-light); }
+  .chapter-header { text-align:center; padding:64px 20px 48px; }
+  .chapter-label { font-size:0.72rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--gold); opacity:0.7; margin-bottom:16px; display:block; }
+  .chapter-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,5vw,2.6rem); color:var(--gold-light); font-weight:700; line-height:1.25; text-shadow:0 0 60px rgba(80,80,200,0.6), 0 0 20px rgba(200,150,40,0.3); margin-bottom:32px; }
+  .header-rule { display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:48px; }
+  .header-rule::before,.header-rule::after { content:''; height:1px; width:100px; background:linear-gradient(to right, transparent, var(--gold), transparent); }
+  .rune { color:var(--gold); font-size:1rem; opacity:0.7; }
+  .prose { font-size:1.05rem; line-height:2.15; }
+  .prose p { color:rgba(245,234,214,0.9); margin-bottom:22px; text-align:justify; text-indent:2.2em; }
+  .prose p.no-indent { text-indent:0; }
+  .prose p:first-of-type { text-indent:0; }
+  /* .prose p:first-of-type::first-letter { font-family:'Cinzel Decorative',cursive; font-size:3.8rem; float:left; line-height:0.78; margin-right:10px; margin-top:8px; color:var(--gold-light); text-shadow:0 0 30px rgba(80,80,200,0.7); } */
+  .prose .d { color:var(--silver); font-style:italic; }
+  .prose .em { color:var(--gold-light); font-weight:700; font-style:normal; }
+  .prose .void-text { color:#9090e0; font-style:italic; }
+  .prose .quiet { color:rgba(245,234,214,0.6); font-size:0.97rem; }
+  .scene-break { text-align:center; margin:40px 0; color:var(--gold); opacity:0.4; letter-spacing:1.2em; font-size:0.85rem; }
+  .lore-box { background:rgba(20,20,80,0.2); border-left:3px solid #6060cc; padding:22px 28px; margin:36px 0; border-radius:0 4px 4px 0; }
+  .lore-box .lt { font-size:0.68rem; letter-spacing:0.4em; color:#9090dd; text-transform:uppercase; margin-bottom:10px; font-weight:700; }
+  .lore-box p { font-size:0.9rem; color:rgba(180,180,240,0.8); line-height:1.9; text-indent:0 !important; }
+  .crystal-quote { text-align:center; margin:40px 0; padding:24px 32px; background:rgba(60,60,150,0.08); border:1px solid rgba(100,100,200,0.2); border-radius:2px; }
+  .crystal-quote p { color:#a0a8e0; font-style:italic; font-size:1.1rem; line-height:2; text-indent:0 !important; }
+  .end-mark { text-align:center; padding:56px 0 16px; color:var(--gold); opacity:0.4; font-size:1.6rem; letter-spacing:0.6em; }
+  .next-chapter { text-align:center; margin-top:8px; font-size:0.78rem; letter-spacing:0.3em; color:rgba(200,180,100,0.4); }
+  .next-chapter a { color:inherit; text-decoration:none; } .next-chapter a:hover { color:var(--gold-light); }
+  .prev-chapter { text-align:center; margin-bottom:20px; font-size:0.78rem; letter-spacing:0.3em; color:rgba(200,180,100,0.3); }
+  .prev-chapter a { color:inherit; text-decoration:none; } .prev-chapter a:hover { color:var(--gold-light); }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="crystal-glow"></div>
+<div class="wrapper">
+
+  <nav class="nav">
+    <span style="font-size:0.72rem; letter-spacing:0.3em;">ผู้พิทักษ์แห่งขอบโลก</span>
+    <span><a href="https://github.com/sdstardust/BOTFG/GOTE/_portGOTE.html">กลับหน้าหลัก</a></span>
+    <span>บทที่สี่ / ห้า</span>
+  </nav>
+
+  <div class="chapter-header">
+    <span class="chapter-label">บทที่สี่</span>
+    <h1 class="chapter-title">ขอบแห่งทุกสิ่ง</h1>
+    <div class="header-rule"><span class="rune">◇</span></div>
+  </div>
+
+  <div class="prev-chapter"><a href="chapter-03-ถนนสู่ที่สิ้นสุดของแผนที่.html">← บทที่สาม: ถนนสู่ที่สิ้นสุดของแผนที่</a></div>
+
+  <div class="prose">
+
+    <p>สิบสองวันต่อมา พวกเขาเห็นมัน</p>
+
+    <p>ขอบโลกไม่ใช่หน้าผา ไม่ใช่น้ำตก และไม่ใช่ความมืด มันคือที่ที่อากาศเป็นผลึกสีน้ำเงินอ่อน แขวนอยู่นิ่งๆ ราวกับเวลาหยุดที่นั่น ผลึกไม่ได้โปร่งใสทั้งหมด มีบางส่วนที่ข้นกว่า มีบางส่วนที่เหมือนหมอก และทั้งหมดสั่นเบาๆ ด้วยความถี่ที่ต่ำจนหูไม่ได้ยิน แต่รู้สึกได้ที่กระดูกอก</p>
+
+    <p>ต้นไม้ต้นสุดท้ายอยู่ห่างออกไปยี่สิบก้าวก่อนถึงขอบ กิ่งชี้ขึ้นทุกกิ่ง ราวกับมันกำลังสวดมนต์ให้กับสิ่งที่อยู่เกินขอบออกไป ใบไม้สีขาว ไม่ได้ตาย แต่เป็นสีขาว ราวกับสีถูกดูดออกไปเหลือแค่รูปทรง</p>
+
+    <p class="d">"นั่นแหละ"</p>
+
+    <p>ซิยาพูดเบาๆ หยุดเดิน เธอไม่ได้ก้าวต่อ</p>
+
+    <p>เคอันมองเธอ</p>
+
+    <p class="d">"นักนำทางไปได้แค่นี้" เธอบอก เสียงราบ "ขอบโลกเป็นของผู้พิทักษ์เท่านั้น ฉันเข้าใกล้กว่านี้ไม่ได้"</p>
+
+    <p class="no-indent">"ทำไม?"</p>
+
+    <p class="d">"เพราะฉันเป็นไฟ และขอบโลกเป็นที่ที่ไฟไม่มีที่ยืน"</p>
+
+    <p>เธอหันมามอง เคอัน ตาของเธอสีน้ำตาลอมทองที่เขาเคยสังเกตว่าดูเหนื่อยตั้งแต่วันแรกที่เจอกัน บัดนี้มันดูแตกต่าง ดูเหมือนคนที่รู้ว่ากำลังจะส่งใครบางคนไปในที่ที่เธอไปไม่ได้ และทำใจกับมันแล้ว</p>
+
+    <p class="d">"เจ้าต้องเดินไปคนเดียว"</p>
+
+    <div class="lore-box">
+      <div class="lt">◇ ขอบโลก — บันทึกนักนำทาง ✦</div>
+      <p>ไม่มีนักนำทางคนใดเคยเห็นขอบโลกจากระยะใกล้ เราอธิบายมันผ่านสิ่งที่ผู้พิทักษ์เล่าก่อนออกเดิน และสิ่งที่รอยเท้าบอกเราหลังจากนั้น รอยเท้าทุกคู่เดินไปข้างหน้าเสมอ ไม่มีคู่ไหนเคยหันกลับ</p>
+    </div>
+
+    <p>เคอันยืนอยู่กับคำนั้นสักพัก มองไปที่ขอบโลก มองผลึกที่สั่นเบาๆ ในความสงบ มันไม่น่ากลัว ไม่ใช่แบบที่เขาคิด มันสวยในแบบที่สิ่งที่อันตรายมักสวย ราวกับธรรมชาติลงทุนกับความงามเพื่อล่อให้เข้ามาใกล้</p>
+
+    <p>แล้วเขาก็เห็นมัน</p>
+
+    <p>มาจากทิศที่ไม่มีชื่อ ออกมาจากผลึกอากาศที่ขอบ รูปร่างมันเปลี่ยนทุกสองสามวินาที บางครั้งเป็นหมาป่าขนาดเรือนร่างคน ขนสีควัน ดวงตาสีเหมือนท้องฟ้าก่อนพายุ บางครั้งเป็นกลุ่มควันที่มีดวงตาสิบสองดวงกระจายอยู่ในรูปที่ไม่สมมาตร บางครั้งมันเป็นเงาของเคอันเองอย่างที่เขาเคยเห็นในเมืองกระจก</p>
+
+    <p>แต่มันไม่วิ่ง มันเดินมาอย่างไม่เร่งรีบ ราวกับรู้ว่าไม่มีที่ไหนให้หนี ราวกับรู้ว่ามันชนะก่อนที่การสู้จะเริ่ม</p>
+
+    <p>เคอันดึงดาบออกจากฝัก มือกำแน่น นิ้วขาว รู้สึกถึงความร้อนจากดาบที่ขึ้นมาเต็มที่ ความร้อนที่ไม่ได้เจ็บ แต่รู้สึกเหมือนมีคนจับมือเขา</p>
+
+    <p class="d">"มันคืออะไร?" เขาถามดาบ เสียงไม่สั่น</p>
+
+    <p class="d">"มันคือทุกอย่างที่อยู่เกินขอบและอยากข้ามมา มันไม่มีชื่อเพราะมันไม่ใช่สิ่งเดียว มันเป็นทุกสิ่ง"</p>
+
+    <p class="d">"และเจ้าต้องทำอะไรที่ผู้พิทักษ์ทุกคนไม่เคยยอมทำ"</p>
+
+    <p class="no-indent">"สู้?"</p>
+
+    <p class="d">"วางดาบลง"</p>
+
+    <p>เคอันหยุด มือที่กำดาบแน่นขึ้นโดยอัตโนมัติ</p>
+
+    <p class="no-indent">"วาง—"</p>
+
+    <p class="d">"วางดาบลง ผู้พิทักษ์ทุกคนสู้ด้วยดาบ ดังนั้นสิ่งนั้นจึงรู้วิธีกินดาบ มันเติบโตมาพร้อมกับการต่อสู้ของผู้พิทักษ์ทุกรุ่น มันแข็งแกร่งขึ้นทุกครั้งที่ถูกสู้ด้วยกำลัง"</p>
+
+    <p class="d">"มันไม่รู้จักคนที่ยอมแพ้ด้วยใจสงบ ไม่เคยเจอ"</p>
+
+    <div class="scene-break">· · · · ·</div>
+
+    <p>ซิยาได้ยิน เธออยู่ห่างออกไปแต่ลมพัดพาเสียง เธอเดินมาอีกสองก้าว ซึ่งเป็นสองก้าวที่เธอรู้สึกได้ว่าอากาศเปลี่ยน เปลี่ยนเป็นบางอย่างที่กดทับไฟในตัวเธอ เธอหยุด แต่ยังมองเคอัน</p>
+
+    <p class="d">"ดาบพูดถูก"</p>
+
+    <p>เธอพูด เสียงแตกเล็กน้อย</p>
+
+    <p class="d">"ฉันไม่รู้เรื่องนี้มาก่อน ไม่มีนักนำทางคนไหนรู้ เพราะผู้พิทักษ์ทุกคนตายก่อนจะบอก"</p>
+
+    <p>เธอหลับตา</p>
+
+    <p class="d">"แต่ฉันคิดว่าถ้าเราทำแบบเดิมทุกรุ่น แล้วได้ผลแบบเดิมทุกรุ่น บางทีเราควรลองแบบอื่น"</p>
+
+    <p>สิ่งไร้รูปเดินเข้ามาเรื่อยๆ ผลึกอากาศรอบๆ แตกออกเป็นเสียงกรุ๋งกริ๋งเบาๆ เหมือนกระจกแตกช้าๆ ระยะยี่สิบก้าว สิบห้าก้าว</p>
+
+    <p>เคอันกำดาบ มองมัน มองรูปร่างที่เปลี่ยนไปเรื่อยๆ จนหยุดเปลี่ยน เพราะตอนนี้มันเป็นรูปของปู่เขา รูปร่างซาเรน ช่างตีเหล็กผู้เป็นผู้พิทักษ์คนก่อน ยืนอยู่ตรงหน้าเขาอย่างเป็นธรรมชาติ</p>
+
+    <p>มันรู้ว่าจะต้องทำอะไรถึงจะเจ็บ</p>
+
+    <p class="no-indent">"ปู่ไม่ได้อยู่ตรงนั้น"</p>
+
+    <p>เคอันพูดออกเสียงดัง ไม่ใช่เพื่อให้สิ่งนั้นได้ยิน แต่เพื่อให้ตัวเองได้ยิน</p>
+
+    <p class="no-indent">"ปู่ทำงานเสร็จแล้ว มันกำลังใช้รูปร่างที่ฉันรักมาหยุดฉัน"</p>
+
+    <p>สิบก้าว</p>
+
+    <p>เคอันหายใจออก ยาว สม่ำเสมอ นิ้วที่กำดาบคลายออกทีละนิ้ว</p>
+
+    <p>เขาวางดาบลงบนพื้น</p>
+
+    <div class="scene-break">· · · · ·</div>
+
+    <p>สิ่งไร้รูปหยุด</p>
+
+    <p>ห้าก้าว รูปร่างของปู่หยุดก้าว รอ มองดาบที่วางบนพื้น มองเคอันที่ยืนอยู่โดยไม่มีอาวุธ</p>
+
+    <p>มันไม่รู้จะทำอะไร</p>
+
+    <p>ในความเงียบที่ยาวนานสามลมหายใจ เคอันเห็นอะไรบางอย่างในรูปร่างของปู่ที่ยืนตรงหน้า เขาเห็นว่ามันไม่ใช่ปู่ แต่ตอนนี้มันก็ไม่แน่ใจว่าตัวเองเป็นอะไรด้วยเช่นกัน มันเป็นสิ่งที่ถูกสร้างขึ้นเพื่อสู้กับดาบ และตอนนี้ดาบไม่อยู่แล้ว</p>
+
+    <p>มันยื่นมือออกมา ไม่ใช่ท่าทางโจมตี แต่เป็นท่าทางที่เคอันไม่เคยเห็นจากสิ่งที่ควรจะอันตราย</p>
+
+    <p>มันเหมือนกำลังขอ</p>
+
+    <p>เคอันไม่รู้ว่าทำไม แต่เขาก็ยื่นมือออกไปตอบ</p>
+
+    <p>แตะ</p>
+
+    <p>ความเย็นวิ่งขึ้นมาตามแขน แต่ไม่ใช่ความเย็นที่เจ็บ เป็นความเย็นที่สงบ เหมือนน้ำลึกที่ไม่มีกระแส และในวินาทีนั้น เคอันเห็นบางอย่างในสิ่งที่อยู่ตรงหน้า</p>
+
+    <p>มันเหนื่อย</p>
+
+    <p>มันอยู่ที่ขอบโลกนานเท่าไหร่ก็ไม่รู้ รอผู้พิทักษ์ที่จะมาสู้ด้วย และทุกครั้งที่สู้และชนะ มันก็ยังอยู่ที่นี่ ไม่ได้ไปไหน แค่รอต่อ</p>
+
+    <p class="quiet">ราวกับมันก็ไม่รู้ว่าตัวเองต้องการอะไร แต่รู้แค่ว่าต้องสู้</p>
+
+    <p>เคอันไม่รู้ว่าความเข้าใจนั้นถูกหรือผิด แต่เขาก็พูดออกไป เบาๆ</p>
+
+    <p class="no-indent">"ไปได้แล้วล่ะ"</p>
+
+    <p>และสิ่งไร้รูปก็สลายไปอย่างเงียบๆ ราวกับมันเป็นแค่ไอน้ำ ไม่มีเสียง ไม่มีแสง ไม่มีการระเบิดหรือชัยชนะ มันแค่ไม่อยู่แล้ว</p>
+
+    <p>ผลึกอากาศที่ขอบโลกสั่นครั้งหนึ่ง แล้วก็นิ่ง</p>
+
+    <div class="scene-break">· · · · ·</div>
+
+    <p>เคอันยืนอยู่ที่นั่นนานพอสมควร มือที่เคยแตะสิ่งนั้นยังรู้สึกถึงความเย็นอยู่ ไม่ใช่ไม่สบาย แค่จดจำ</p>
+
+    <p>ดาบบนพื้นเปล่งแสงครั้งแรกในชีวิต สว่างไม่ใช่สีทอง ไม่ใช่สีขาว มันเป็นสีที่ไม่มีชื่อในภาษามนุษย์ สีที่อยู่ระหว่างสีทั้งหมดที่มี ราวกับดาบกำลังบอกว่า นี่คือสิ่งที่ฉันรอตลอดมา</p>
+
+    <p>เคอันเก็บดาบขึ้นมา น้ำหนักมันเบากว่าเดิม ราวกับบางอย่างออกไปจากมันแล้ว</p>
+
+    <p class="d">"ทำได้ดี"</p>
+
+    <p>เสียงในหัว นิ่งกว่าเดิม</p>
+
+    <p class="d">"ปู่ของเจ้ารู้ว่าต้องทำแบบนี้ แต่ไม่มีใครบอกให้เขาทำ เขาเลยทำแบบเดิม เหมือนทุกคนก่อนหน้า"</p>
+
+    <p class="no-indent">"เขาไม่ได้เจ็บปวดใช่ไหม?" เคอันถาม</p>
+
+    <p class="d">"เขาทำงานเสร็จ ฉันบอกแล้วว่าฉันไม่รู้ว่าตายคืออะไรสำหรับผู้พิทักษ์"</p>
+
+    <p>เคอันหันกลับมาหาซิยาที่ยืนรออยู่ข้างหลัง น้ำตาอยู่บนแก้มข้างหนึ่ง เธอเช็ดออกเร็วๆ ราวกับอยากปฏิเสธว่ามีอยู่</p>
+
+    <p class="no-indent">"เสร็จแล้ว?" เธอถาม</p>
+
+    <p class="no-indent">"เสร็จ" เขาตอบ</p>
+
+    <p>เธอพยักหน้า หันมองไปที่ขอบโลกที่อยู่ห่างออกไป ผลึกอากาศยังอยู่ที่เดิม สวยงาม เงียบ</p>
+
+    <p class="d">"แปลกใหม่มาก"</p>
+
+    <p>เธอพูดเบาๆ เกือบจะเป็นการพูดกับตัวเอง</p>
+
+    <p class="d">"ผู้พิทักษ์คนแรกที่ฉันพากลับมาได้"</p>
+
+  </div>
+
+  <div class="end-mark">⬥ ⬦ ⬥</div>
+  <div class="next-chapter"><a href="chapter-05-ชื่อที่ถูกแกะสลัก.html">บทส่งท้าย → ชื่อที่ถูกแกะสลัก</a></div>
+
+</div>
+</body>
+</html>

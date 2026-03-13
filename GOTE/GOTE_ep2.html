@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บทที่สอง — หญิงสาวและไฟแห่งความตาย | ผู้พิทักษ์แห่งขอบโลก</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --gold:#c9933a; --gold-light:#f0c060; --midnight:#0d0820; --silver:#c8d4e8; --parchment:#f5ead6; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background-color:var(--midnight); color:var(--parchment); font-family:'Sarabun',sans-serif; min-height:100vh; }
+  .stars { position:fixed; inset:0; pointer-events:none; z-index:0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(120,60,30,0.2) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(20,10,60,0.5) 0%, transparent 50%), var(--midnight); }
+  .stars::before { content:''; position:absolute; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, white, transparent), radial-gradient(1px 1px at 30% 40%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1.5px 1.5px at 55% 10%, white, transparent), radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 85% 25%, white, transparent), radial-gradient(2px 2px at 45% 80%, rgba(255,200,150,0.7), transparent),
+      radial-gradient(1px 1px at 15% 70%, white, transparent), radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 60% 45%, white, transparent), radial-gradient(1px 1px at 25% 90%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 75% 35%, white, transparent), radial-gradient(1px 1px at 40% 55%, rgba(255,220,180,0.6), transparent); }
+  .wrapper { position:relative; z-index:1; max-width:820px; margin:0 auto; padding:0 28px 100px; }
+  .nav { display:flex; justify-content:space-between; align-items:center; padding:28px 0 0; font-size:0.78rem; letter-spacing:0.25em; color:rgba(200,140,60,0.5); }
+  .nav a { color:inherit; text-decoration:none; } .nav a:hover { color:var(--gold-light); }
+  .chapter-header { text-align:center; padding:64px 20px 48px; }
+  .chapter-label { font-size:0.72rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--gold); opacity:0.7; margin-bottom:16px; display:block; }
+  .chapter-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,5vw,2.6rem); color:var(--gold-light); font-weight:700; line-height:1.25; text-shadow:0 0 40px rgba(220,100,40,0.4); margin-bottom:32px; }
+  .header-rule { display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:48px; }
+  .header-rule::before,.header-rule::after { content:''; height:1px; width:100px; background:linear-gradient(to right, transparent, var(--gold), transparent); }
+  .rune { color:var(--gold); font-size:1rem; opacity:0.7; }
+  .prose { font-size:1.05rem; line-height:2.15; }
+  .prose p { color:rgba(245,234,214,0.9); margin-bottom:22px; text-align:justify; text-indent:2.2em; }
+  .prose p.no-indent { text-indent:0; }
+  .prose p:first-of-type { text-indent:0; }
+  /* .prose p:first-of-type::first-letter { font-family:'Cinzel Decorative',cursive; font-size:3.8rem; float:left; line-height:0.78; margin-right:10px; margin-top:8px; color:var(--gold-light); text-shadow:0 0 20px rgba(220,100,40,0.5); } */
+  .prose .d { color:var(--silver); font-style:italic; }
+  .prose .em { color:var(--gold-light); font-weight:700; font-style:normal; }
+  .prose .fire { color:#e8804a; font-style:italic; }
+  .scene-break { text-align:center; margin:40px 0; color:var(--gold); opacity:0.4; letter-spacing:1.2em; font-size:0.85rem; }
+  .lore-box { background:rgba(120,50,10,0.12); border-left:3px solid #e8804a; padding:22px 28px; margin:36px 0; border-radius:0 4px 4px 0; }
+  .lore-box .lt { font-size:0.68rem; letter-spacing:0.4em; color:#e8804a; text-transform:uppercase; margin-bottom:10px; font-weight:700; }
+  .lore-box p { font-size:0.9rem; color:rgba(200,210,232,0.8); line-height:1.9; text-indent:0 !important; }
+  .end-mark { text-align:center; padding:56px 0 16px; color:var(--gold); opacity:0.4; font-size:1.6rem; letter-spacing:0.6em; }
+  .next-chapter { text-align:center; margin-top:8px; font-size:0.78rem; letter-spacing:0.3em; color:rgba(200,180,100,0.4); }
+  .next-chapter a { color:inherit; text-decoration:none; } .next-chapter a:hover { color:var(--gold-light); }
+  .prev-chapter { text-align:center; margin-bottom:20px; font-size:0.78rem; letter-spacing:0.3em; color:rgba(200,180,100,0.3); }
+  .prev-chapter a { color:inherit; text-decoration:none; } .prev-chapter a:hover { color:var(--gold-light); }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrapper">
+
+  <nav class="nav">
+    <span style="color:rgba(200,140,60,0.4); font-size:0.72rem; letter-spacing:0.3em;">ผู้พิทักษ์แห่งขอบโลก</span>
+    <span><a href="https://github.com/sdstardust/BOTFG/GOTE/_portGOTE.html">กลับหน้าหลัก</a></span>
+    <span>บทที่สอง / ห้า</span>
+  </nav>
+
+  <div class="chapter-header">
+    <span class="chapter-label">บทที่สอง</span>
+    <h1 class="chapter-title">หญิงสาวและไฟแห่งความตาย</h1>
+    <div class="header-rule"><span class="rune">🔥</span></div>
+  </div>
+
+  <div class="prev-chapter"><a href="chapter-01-ดาบที่ไม่มีชื่อ.html">← บทที่หนึ่ง: ดาบที่ไม่มีชื่อ</a></div>
+
+  <div class="prose">
+
+    <p>เช้าวันรุ่งขึ้น ท้องฟ้าเหนือหมู่บ้านซาร์เวนกลับมารับฝนได้ตามปกติ ราวกับสิ่งที่เกิดขึ้นเมื่อคืนเป็นแค่ความฝัน แต่เคอันรู้ว่าไม่ใช่ เพราะดาบในกล่องไม้มะเกลือยังอยู่ตรงหัวเตียง และรอยที่นิ้วมือของเขายังเป็นสีเทาจางๆ จากที่จับด้ามดาบตลอดคืน</p>
+
+    <p>เขาพบว่ามีคนนอนอยู่หน้าประตูโรงตีเหล็กตอนออกมาจากบ้าน ห่อตัวด้วยเสื้อคลุมสีเถ้าที่เปียกชุ่มจากฝนยามเช้า ผมสั้นดำ ใบหน้าหันออกจากประตู ฝ่ามือทั้งสองที่วางคว่ำบนพื้นหินมีรอยแผลเป็นรูปดาวหกแฉกที่เขาไม่เคยเห็นรูปแบบนั้นมาก่อน แผลเป็นไม่ได้สีชมพูอย่างแผลเป็นทั่วไป แต่เป็นสีเงินเข้มเกือบดำ</p>
+
+    <p>เคอันยืนดูอยู่สักครู่ ครุ่นคิดว่าจะทำอย่างไร ดาบในมือเขาไม่พูดอะไร ซึ่งอาจแปลว่าสถานการณ์นี้ไม่ได้อันตราย หรืออาจแปลว่าดาบยังคิดไม่ออกว่าจะพูดอะไร</p>
+
+    <p>เขาเอาน้ำมาให้ นั่งลงบนขอบบันไดที่เปียก รอ</p>
+
+    <p>หญิงสาวตื่นขึ้นมาอย่างรวดเร็ว ราวกับเธอไม่ได้หลับลึก แต่แค่รอให้ใครมาเรียก เธอนั่งขึ้น รับน้ำ ดื่มหมดในสามอึก มองเคอันด้วยตาสีน้ำตาลอมทองที่ดูเหนื่อยมากกว่าอายุของเธอจริงๆ</p>
+
+    <p class="d">"ขอบคุณ"</p>
+
+    <p class="no-indent">เสียงเธอแห้งจากเดินทาง "ฉันชื่อ<span class="em">ซิยา</span> มาจากเมือง<span class="em">อัซกาแรน</span> ทางตะวันออก"</p>
+
+    <p>เคอันรู้จักอัซกาแรน ทุกคนรู้จัก มันอยู่ห่างออกไปยี่สิบวันเดิน และเป็นเมืองที่สร้างขึ้นรอบเตาไฟนิรันดร์ที่ไม่เคยดับมาสี่ร้อยปี เตาไฟที่ว่านั้นเผาไหม้อยู่กลางจัตุรัสเมือง ไม่ต้องการเชื้อเพลิง ไม่ต้องการคนดูแล มันแค่ลุกอยู่ เสมอ</p>
+
+    <p>หรือเคยเป็นเช่นนั้น</p>
+
+    <div class="lore-box">
+      <div class="lt">🔥 อาณาจักรแห่งไฟ ✦</div>
+      <p>อัซกาแรนเป็นเมืองที่ก่อตั้งโดยนักนำทางกลุ่มแรก ผู้ที่ค้นพบว่าไฟที่ขอบโลกมีสีต่างจากไฟปกติ มันไม่ส่องสว่าง มันดูดความมืด นักนำทางแห่งอาณาจักรไฟสืบทอดความรู้เกี่ยวกับเส้นทางสู่ขอบโลก และมีหน้าที่พาผู้พิทักษ์ถึงจุดหมายโดยไม่ตายระหว่างทาง อย่างน้อยก็ในทางทฤษฎี
+        และนั่นก็เป็นที่มาของคำว่า นักนำทาง
+      </p>
+    </div>
+
+    <p class="d">"ฉันรู้ว่าเจ้าได้รับดาบแล้ว"</p>
+
+    <p class="no-indent">"ทำไมถึงรู้?" เคอันถามด้วยน้ำเสียงในแบบที่เขาหวังว่าจะฟังดูไม่ตื่นตกใจ</p>
+
+    <p class="d">"เพราะไฟที่หมู่บ้านฉันดับพร้อมกันหมดทุกดวงเมื่อคืน"</p>
+
+    <p>เธอพักสักครู่ กลืนอะไรบางอย่าง</p>
+
+    <p class="d">"รวมถึงเตาไฟนิรันดร์ด้วย"</p>
+
+    <p>เคอันนิ่ง เขารู้ว่านั่นสำคัญ แต่ยังประมวลไม่ทัน</p>
+
+    <p class="d">"ทุกครั้งที่ผู้พิทักษ์คนใหม่ปลุกดาบตื่น ไฟที่อาณาจักรเราจะดับ เป็นสัญญาณว่าถึงเวลาที่นักนำทางต้องออกเดิน ฉันเป็นนักนำทางคนปัจจุบัน แต่ฉันรอสัญญาณนี้มาเจ็ดปีแล้ว"</p>
+
+    <p class="no-indent">"เจ็ดปี?" เคอันถาม</p>
+
+    <p class="d">"ผู้พิทักษ์คนก่อนหน้าทำงานเสร็จก่อนที่ฉันจะเป็นนักนำทาง ฉันได้รับตำแหน่งนี้ตอนอายุสิบสาม และนั่งรอมาตั้งแต่นั้น"</p>
+
+    <p>เธอดึงแขนเสื้อขึ้น บนท่อนแขนซ้ายมีรอยสักรูปเปลวไฟที่ดูเหมือนกำลังไหม้จริงๆ ไม่ใช่แค่ลวดลาย สีของมันขยับอยู่ใต้ผิวหนังเหมือนเปลวไฟจริงๆ สีส้มเคลื่อนที่เป็นสีแดง เป็นเหลือง เป็นขาว</p>
+
+    <p class="d">"นี่คือตราของนักนำทาง ไม่ใช่แค่สักสวยงาม มันเชื่อมกับเตาไฟนิรันดร์ ตราบใดที่เตาลุกอยู่ มันสว่าง ตราบใดที่ฉันยังมีชีวิต เตาจะลุกอีกครั้ง"</p>
+
+    <p>เธอปล่อยแขนเสื้อลง มองตรงมาที่เคอัน</p>
+
+    <p class="d">"เมื่อคืนนี้ตราดับ เช้านี้ก็ยังดับ มันจะไม่สว่างอีกจนกว่าฉันจะพาเจ้าถึงขอบโลก"</p>
+
+    <div class="scene-break">· · · · ·</div>
+
+    <p>พวกเขานั่งคุยกันอีกสองชั่วโมงบนบันไดโรงตีเหล็ก เคอันถาม ซิยาตอบ บางคำตอบทำให้รู้สึกดีขึ้น บางคำตอบทำให้รู้สึกแย่ลง</p>
+
+    <p class="no-indent">"ผู้พิทักษ์คนก่อนหน้า" เขาถาม "เขาเป็นอย่างไรบ้าง?"</p>
+
+    <p>ซิยาเงียบสักครู่ มองไปที่แนวขอบฟ้าทางตะวันตกที่ยังมืดอยู่แม้ฟ้าจะสว่างแล้ว มันมืดในแบบที่ต่างจากเมฆ เหมือนส่วนหนึ่งของท้องฟ้าตัดสินใจจะไม่รับแสง</p>
+
+    <p class="d">"ไม่มีคนไหนเลยที่กลับมา"</p>
+
+    <p>เธอพูดโดยไม่เปลี่ยนทิศสายตา</p>
+
+    <p class="d">"ผู้พิทักษ์ทุกคนไปถึงขอบโลก ทำสิ่งที่ต้องทำ แต่ไม่มีใครเดินกลับมา นักนำทางกลับมาเสมอ แต่ผู้พิทักษ์ไม่"</p>
+
+    <p class="no-indent">"แล้วทำไมถึงบอกฉัน?" เคอันถามด้วยน้ำเสียงที่พยายามปกปิดไม่ให้ซิยารู้ว่าเขากำลังกลัว</p>
+
+    <p class="d">"เพราะนักนำทางทุกคนก่อนหน้าฉันไม่ได้บอกผู้พิทักษ์ และผู้พิทักษ์ทุกคนก็ตายโดยไม่รู้ว่าตัวเองกำลังตาย ฉันคิดว่านั่นไม่ยุติธรรม"</p>
+
+    <p>เธอหันมามองเขาครั้งแรก ตาของเธอไม่ใช่ตาของคนที่กลัว ไม่ใช่ตาของคนที่เสียใจ มันเป็นตาของคนที่ตัดสินใจบางอย่างมานานแล้ว และกำลังจะทำตามการตัดสินใจนั้น</p>
+
+    <p class="d">"ฉันจะพาเจ้าถึงขอบโลก เจ้าจะทำสิ่งที่ต้องทำ และหลังจากนั้น ฉันไม่รู้ว่าจะเกิดอะไรขึ้น แต่ถ้าเจ้าจะเดินไป เจ้าควรรู้ว่ากำลังเดินไปไหน"</p>
+
+    <div class="scene-break">· · · · ·</div>
+
+    <p>เคอันเงียบอยู่นานหลายนาที ฟังเสียงฝนที่ตกอยู่รอบๆ ฟังเสียงหมู่บ้านที่เริ่มตื่นขึ้นทีละน้อย เสียงแม่ครัวบ้านใกล้เคียงสับฟืน เสียงเด็กร้องไห้สักคน เสียงชีวิตธรรมดาที่เขาโตมาพร้อมกับมัน</p>
+
+    <p class="no-indent">"ดาบ" เขาพูดเบาๆ ในแบบที่ซิยาจะไม่ได้ยิน "เธอพูดความจริงไหม?"</p>
+
+    <p class="d">"ใช่"</p>
+
+    <p>เสียงในหัวตอบทันที</p>
+
+    <p class="d">"และเธอยังไม่ได้บอกทุกอย่าง"</p>
+
+    <p class="no-indent">"อะไรที่เธอไม่ได้บอก?"</p>
+
+    <p class="d">"ถามเธอเองดีกว่า บางอย่างต้องพูดด้วยปาก ไม่ใช่ผ่านดาบ"</p>
+
+    <p>เคอันตัดสินใจ เขาหันมามองซิยา</p>
+
+    <p class="no-indent">"เธอมาจากอัซกาแรนคนเดียว?" เขาถาม</p>
+
+    <p>ซิยาพักสักวินาที ซึ่งเพียงพอให้เคอันรู้ว่ามีบางอย่างอยู่ในคำตอบ</p>
+
+    <p class="d">"มีนักนำทางอีกสองคนออกมาพร้อมกัน พวกเขาคิดว่าผู้พิทักษ์จะอยู่ในเมืองใหญ่ทางเหนือหรือตะวันออก ฉันคิดว่าดาบจะอยู่กับช่างตีเหล็กในหมู่บ้านเล็กๆ ชายขอบทะเลทราย"</p>
+
+    <p class="d">"และฉันคิดถูก"</p>
+
+    <p>เธอพูดประโยคสุดท้ายโดยไม่มีความภูมิใจในเสียง เป็นแค่การระบุข้อเท็จจริง</p>
+
+    <p class="no-indent">"ถ้านักนำทางคนอื่นมาถึงก่อนล่ะ?" เคอันถาม</p>
+
+    <p class="d">"พวกเขาจะพาผู้พิทักษ์ของพวกเขาไป ถ้าหาเจอ ผู้พิทักษ์ไม่จำเป็นต้องมีแค่คนเดียวเสมอ"</p>
+
+    <p class="d">"แต่ดาบเลือกเจ้า ดังนั้นเจ้าคือผู้พิทักษ์ของฉัน"</p>
+
+    <p>เธอพูดประโยค "ของฉัน" ในแบบที่ฟังดูเหมือนความรับผิดชอบ ไม่ใช่การครอบครอง เคอันสังเกตความแตกต่างนั้นและรู้สึกขอบคุณ</p>
+
+    <div class="scene-break">· · · · ·</div>
+
+    <p>พวกเขาใช้เวลาที่เหลือของเช้านั้นเตรียมตัว เคอันเตรียมของที่จำเป็น มันน้อยกว่าที่เขาอยากเตรียม แต่ยังมากกว่าที่ซิยาแนะนำ ซิยาซ่อมรองเท้าบู๊ทของเธอโดยใช้เข็มและด้ายที่เธอหยิบออกมาจากที่ไหนสักที่ในชายเสื้อ</p>
+
+    <p>แม่ของเคอันซึ่งทราบว่าลูกชายตัวเองจะออกเดินทางตั้งแต่เห็นหน้า ไม่พูดอะไรมาก เธอแค่ทำอาหารเช้าให้สองคน นั่งดูพวกเขากินด้วยสายตาที่เคอันไม่สามารถอ่านออก พอเขาลุกขึ้นมาหยิบกระเป๋า เธอก็กอดเขาไว้นานพอที่จะทำให้เขารู้ว่าเธอกลัว แต่ไม่นานพอที่จะขอให้เขาอยู่</p>
+
+    <p>นั่นเป็นสิ่งที่เขารักในตัวแม่มากที่สุด เธอรู้จักความแตกต่างระหว่างการกลัวกับการหยุด</p>
+
+    <p class="d">"เดินทางปลอดภัยนะ"</p>
+
+    <p>เธอพูดเพียงเท่านั้น แล้วกลับเข้าบ้าน</p>
+
+    <p>เคอันยืนมองประตูบ้านอยู่ครู่หนึ่ง จากนั้นหันไปหาซิยาที่ยืนรอข้างหน้าพร้อมกระเป๋าใบเล็กที่เธอแบกมาจากอัซกาแรน</p>
+
+    <p class="no-indent">"ออกเดินได้เลยไหม?" เขาถาม</p>
+
+    <p class="d">"ฉันรอมาเจ็ดปีแล้ว" เธอตอบ "อีกสักนาทีไม่เป็นไร"</p>
+
+    <p>แต่เธอก็หันหน้าไปทางตะวันตกทันที และเดิน</p>
+
+    <p>เคอันตามไป โดยไม่รู้ว่าบางอย่างในหมู่บ้านกำลังมองพวกเขาออกไป บางอย่างที่ไม่มีรูปร่าง ที่รอดูว่าผู้พิทักษ์คนใหม่จะก้าวออกไปจากที่ที่ปลอดภัยได้ไหม</p>
+
+    <p>ตอนนี้มันได้คำตอบแล้ว</p>
+
+  </div>
+
+  <div class="end-mark">⬥ ⬦ ⬥</div>
+  <div class="next-chapter"><a href="chapter-03-ถนนสู่ที่สิ้นสุดของแผนที่.html">บทที่สาม → ถนนสู่ที่สิ้นสุดของแผนที่</a></div>
+
+</div>
+</body>
+</html>
