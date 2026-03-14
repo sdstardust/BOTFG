@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แสงที่มองไม่เห็น — บทที่สอง</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09080f;
+    --gold: #c8a96e;
+    --gold-dim: #8a6f3e;
+    --gold-light: #ecdcb4;
+    --parchment: #ede5d0;
+    --body-text: #ccc0a8;
+    --mist: #9aa8bc;
+    --rose-deep: #6b2d42;
+    --slate: #2a3040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--body-text);
+    font-family: 'Noto Serif Thai', serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .ambient {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 50% 40% at 10% 20%, rgba(42,48,64,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 90% 80%, rgba(107,45,66,0.12) 0%, transparent 60%);
+  }
+
+  .stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 12% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 28% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 42% 18%, rgba(200,169,110,0.55) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 74% 12%, rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 55%, rgba(200,169,110,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 6% 75%, rgba(255,255,255,0.65) 0%, transparent 100%),
+      radial-gradient(1px 1px at 95% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 50% 88%, rgba(255,255,255,0.7) 0%, transparent 100%);
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    border-bottom: 1px solid rgba(200,169,110,0.08);
+    background: rgba(9,8,15,0.7);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold-dim);
+  }
+
+  .nav-chapters { display: flex; gap: 2rem; list-style: none; }
+  .nav-chapters a {
+    font-size: 0.7rem; letter-spacing: 0.2rem; text-transform: uppercase;
+    color: var(--gold-dim); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-chapters a:hover, .nav-chapters a.active { color: var(--gold); }
+
+  /* HERO - split layout different from ch1 */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 6rem 5rem;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(8rem, 18vw, 18rem);
+    font-weight: 600;
+    color: rgba(200,169,110,0.04);
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 600px;
+  }
+
+  .chapter-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.45rem; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 1.5rem;
+    opacity: 0; animation: riseIn 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--gold-light); margin-bottom: 1.5rem;
+    opacity: 0; animation: riseIn 1s ease 0.5s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.15rem;
+    color: var(--mist); line-height: 1.8;
+    opacity: 0; animation: riseIn 1s ease 0.7s forwards;
+  }
+
+  /* Character card floating */
+  .char-card {
+    position: absolute; right: 6rem; top: 50%; transform: translateY(-50%);
+    width: 220px;
+    border: 1px solid rgba(200,169,110,0.15);
+    padding: 2rem 1.5rem;
+    background: rgba(9,8,15,0.6);
+    backdrop-filter: blur(8px);
+    opacity: 0; animation: riseIn 1.2s ease 1s forwards;
+  }
+
+  .char-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  }
+
+  .char-label {
+    font-size: 0.6rem; letter-spacing: 0.3rem; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 1rem;
+  }
+
+  .char-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .char-title-line {
+    font-size: 0.75rem; color: var(--mist);
+    font-style: italic; margin-bottom: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .char-stats { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .char-stat-row {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .char-stat-label {
+    font-size: 0.6rem; letter-spacing: 0.1rem; text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .char-stat-bar {
+    width: 80px; height: 2px;
+    background: rgba(200,169,110,0.15);
+    position: relative; overflow: hidden;
+  }
+
+  .char-stat-fill {
+    position: absolute; left: 0; top: 0; height: 100%;
+    background: var(--gold-dim);
+  }
+
+  /* STORY */
+  .story {
+    position: relative; z-index: 1;
+    max-width: 740px; margin: 0 auto;
+    padding: 2rem 3rem 8rem;
+  }
+
+  .section-marker {
+    display: flex; align-items: center; gap: 2rem;
+    margin: 4rem 0 3rem;
+  }
+  .section-marker .bar {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(200,169,110,0.4), transparent);
+  }
+  .section-marker .bar.right {
+    background: linear-gradient(90deg, transparent, rgba(200,169,110,0.4));
+  }
+  .section-marker .label {
+    font-size: 0.6rem; letter-spacing: 0.35rem; text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .prose { font-size: 1.05rem; line-height: 2.15; color: var(--body-text); }
+  .prose p { margin-bottom: 1.8rem; text-indent: 2.2em; }
+  .prose p:first-of-type { text-indent: 0; }
+  .prose .em { color: var(--gold-light); font-style: italic; }
+  .prose .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12em; color: var(--gold-light); font-style: italic;
+  }
+  .prose .speech { color: var(--parchment); font-style: italic; }
+
+  blockquote {
+    margin: 3rem 0; padding: 2rem 2.5rem;
+    border-left: 2px solid var(--gold-dim);
+    background: rgba(200,169,110,0.04);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.2rem;
+    color: var(--gold-light); line-height: 1.9;
+  }
+
+  .scene-break {
+    text-align: center; color: var(--gold-dim);
+    letter-spacing: 1.2rem; font-size: 0.7rem;
+    margin: 3.5rem 0; opacity: 0.6;
+  }
+
+  .chapter-nav {
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2rem 3rem 4rem;
+    border-top: 1px solid rgba(200,169,110,0.1);
+  }
+
+  .chapter-nav a {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none; color: var(--gold-dim);
+    font-size: 0.75rem; letter-spacing: 0.2rem;
+    text-transform: uppercase; transition: color 0.3s;
+  }
+  .chapter-nav a:hover { color: var(--gold); }
+  .chapter-nav a.prev::before { content: '←'; font-size: 1rem; }
+  .chapter-nav a.next::after { content: '→'; font-size: 1rem; }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-chapters { gap: 1rem; }
+    .hero { padding: 7rem 2rem 4rem; }
+    .char-card { display: none; }
+    .story { padding: 2rem 1.5rem 6rem; }
+    .chapter-nav { padding: 2rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+<div class="stars"></div>
+
+<nav>
+  <span class="nav-title">แสงที่มองไม่เห็น</span>
+  <ul class="nav-chapters">
+    <li><a href="TLBS_ep1.html">บทที่ ๑</a></li>
+    <li><a href="TLBS_ep2.html" class="active">บทที่ ๒</a></li>
+    <li><a href="TLBS_ep3.html">บทที่ ๓</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-text">VEYLAN</div>
+  <div class="hero-content">
+    <p class="chapter-eyebrow">✦ &nbsp; บทที่สอง &nbsp; ✦</p>
+    <h1>นักล่าเงา<br>และเจ้าหญิงผู้มืดมิด</h1>
+    <p class="hero-subtitle">เขามาเพื่อสืบสวนปีศาจ<br>แต่พบสิ่งที่น่ากลัวกว่า — ความจริง</p>
+  </div>
+  <div class="char-card">
+    <div class="char-label">ตัวละคร</div>
+    <div class="char-name">เวย์แลน</div>
+    <div class="char-title-line">นักล่าสิ่งมืด แห่งกิลด์เถ้าถ่าน</div>
+    <div class="char-stats">
+      <div class="char-stat-row">
+        <span class="char-stat-label">ความสามารถ</span>
+        <div class="char-stat-bar"><div class="char-stat-fill" style="width:90%"></div></div>
+      </div>
+      <div class="char-stat-row">
+        <span class="char-stat-label">ความเย็นชา</span>
+        <div class="char-stat-bar"><div class="char-stat-fill" style="width:80%"></div></div>
+      </div>
+      <div class="char-stat-row">
+        <span class="char-stat-label">ความลึกลับ</span>
+        <div class="char-stat-bar"><div class="char-stat-fill" style="width:95%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="story">
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">ผู้มาเยือน</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>เขาเดินทางมาในคืนที่พายุหิมะกลืนกินดาว</p>
+
+    <p><span class="name">เวย์แลน</span> ไม่ได้บอกให้ใครรู้ว่าเขามาถึง เขาไม่เคยทำแบบนั้น ในอาชีพที่ขึ้นชื่อว่าต้องเดินในเงา การประกาศตัวคือความตาย เขาปีนขึ้นมาทางกำแพงด้านเหนือของวัง ตรงมุมที่ยามไม่ค่อยผ่าน ที่เขารู้ดีเพราะเขาใช้เวลาสองวันเดินสำรวจก่อนจะรับงานนี้</p>
+
+    <p>งานที่ว่าคือการ "ดูแลปัญหาในปีกตะวันตก" — นั่นคือภาษาที่ราชสำนักใช้เสมอเมื่อไม่ต้องการพูดตรง ๆ ว่าต้องการอะไร รายงานที่เขาได้รับมาระบุว่ามีกิจกรรมเวทมนตร์ผิดปกติ คนรับใช้สองคนหายตัวไป มีแสงและเสียงประหลาดในยามดึก และ "สิ่งที่อยู่ในห้องนั้นอาจเป็นอันตราย"</p>
+
+    <p>เวย์แลนรับงานโดยไม่ถามมาก เพราะเขาไม่เคยถาม เขาทำงานเสร็จแล้วก็เดินออกไป นั่นคือกฎสามสิบปีที่เขาใช้มาตลอด</p>
+
+    <p>แต่กฎนั้นเริ่มสั่นคลอนตั้งแต่ก้าวแรกที่เขาขึ้นบันไดหินของหอคอยปีกตะวันตก</p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="prose">
+    <p>ดวงตาสีทองแดงของเขา — ของขวัญจากพลังเลือดโบราณที่ไหลในสายเลือดครึ่งหนึ่ง — มองเห็นในความมืดได้ราวกับกลางวัน แต่สิ่งที่เขาเห็นในทางเดินของหอคอยนั้นไม่ได้มีลักษณะคุกคาม มีเพียงกลิ่นเทียนไขเก่า กลิ่นหนังสือ และกลิ่นอีกอย่างที่เขาใช้เวลาสักพักถึงแยกออกได้ — กลิ่นดินแร่ผสมเกสรดอกไม้ป่า กลิ่นแบบเดียวกับที่นักเวทย์โบราณใช้ในพิธีสื่อสารกับด้ายแห่งชะตากรรม</p>
+
+    <p>เขาเคยได้ยินตำนานนั้น ตำนานที่นักวิชาการส่วนใหญ่เชื่อว่าเป็นแค่เรื่องเล่า — ว่ามีผู้คนบางกลุ่มที่เกิดมาพร้อมกับความสามารถมองเห็นเส้นด้ายที่โยงใยระหว่างทุกชีวิต เห็นอนาคตที่เป็นไปได้ เห็นการตายที่กำลังจะมา เขาไม่เคยเชื่อ เพราะในสามสิบปีที่ล่าสิ่งมืด เขาพบเห็นสิ่งที่น่าเชื่อถือกว่านั้นมาก</p>
+
+    <p>แล้วเขาก็เปิดประตูห้องนั้น</p>
+  </div>
+
+  <blockquote>
+    "คุณมาช้าไปสี่ชั่วโมง"<br><br>
+    เสียงนั้นเย็นสงบ ราวกับน้ำไหลในถ้ำ<br>
+    ไม่ใช่เสียงกลัว ไม่ใช่เสียงตกใจ<br>
+    แต่เป็นเสียงของคนที่รอคอยมานานแล้ว
+  </blockquote>
+
+  <div class="prose">
+    <p>เธอนั่งขัดสมาธิบนพื้นหินกลางห้อง มือทั้งสองวางบนหัวเข่า ลวดลายดินสีเงินที่เธอวาดรอบตัวยังเรืองแสงริบหรี่ เป็นรูปทรงที่เวย์แลนจำได้จากตำราเวทมนตร์โบราณเล่มหนึ่งที่เขาอ่านไว้นานมาแล้ว — วงจรเรียกชะตา สัญลักษณ์ที่ถูกเชื่อว่าสูญหายไปพร้อมกับนักพยากรณ์องค์สุดท้ายเมื่อสองร้อยปีก่อน</p>
+
+    <p>ดวงตาขาวขุ่นของเธอลืมขึ้นตรงทิศทางที่เขายืน แม้จะไม่มีทางรู้ว่าเขาอยู่ที่นั่น</p>
+
+    <p class="speech">"ข้าไม่ได้นัดกับใคร"</p>
+
+    <p class="speech">"แต่ฉันรู้ว่าคุณจะมา"</p>
+
+    <p>เธอยิ้มเล็กน้อย และนั่นทำให้เวย์แลนไม่สบายใจขึ้นมาก เขาเคยยืนหน้าสัตว์ประหลาดที่มีฟันสิบหกแถว เคยต่อสู้กับปีศาจที่ควบคุมลมพายุได้ เคยลงไปในถ้ำใต้ดินที่ไม่มีแสงและออกมาได้คนเดียว แต่รอยยิ้มเบา ๆ ของหญิงสาวคนนี้ทำให้เขารู้สึกราวกับถูกมองทะลุผ่าน</p>
+
+    <p class="speech">"นั่นคือสิ่งที่ทุกคนกลัว"</p>
+
+    <p>เธอพูดก่อนที่เขาจะพูดอะไร</p>
+
+    <p class="speech">"ฉันมองไม่เห็นโลก แต่ฉันได้ยินโชคชะตา และโชคชะตาของคุณ... มันดังมาก"</p>
+  </div>
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">คืนแล้วคืนเล่า</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>เวย์แลนรายงานกลับไปยังราชสำนักว่าไม่พบปีศาจ มีเพียงเจ้าหญิงที่มีกิจกรรมเวทมนตร์ส่วนตัว ไม่เป็นอันตราย และเขาจะอยู่เพื่อ "เฝ้าดู" ต่อไป</p>
+
+    <p>เขาไม่รู้ว่าทำไมถึงพูดแบบนั้น เพราะตามปกติ เขาทำงานเสร็จก็ออกไป</p>
+
+    <p>แต่มีบางอย่างในห้องนั้นที่ทำให้เขาไม่อยากออกไป</p>
+
+    <p>คืนแรกเขาอยู่ที่มุมห้อง เฝ้ามองอยู่ห่าง ๆ เธอดีดพิณโดยไม่สนใจเขา เสียงที่ออกมาไม่ใช่เพลงที่เขาเคยได้ยิน มันเป็นสิ่งที่ฟังแล้วรู้สึกราวกับว่ามีใครกำลังเล่าเรื่องที่เศร้าที่สุดในโลกออกมาเป็นเสียง โดยไม่ต้องใช้คำพูด</p>
+
+    <p>คืนที่สองเขานั่งลงบนเก้าอี้ริมหน้าต่าง</p>
+
+    <p>คืนที่สามเธอพูดกับเขาโดยไม่ถามว่าเขาเป็นใครหรือทำไมถึงมา</p>
+
+    <p class="speech">"ในปีที่คุณอายุสิบสอง มีคนที่คุณรักตาย"</p>
+
+    <p>เวย์แลนเกร็งนิ้วมือบนด้ามดาบ</p>
+
+    <p class="speech">"ข้าไม่ได้มาให้ท่านทำนาย"</p>
+
+    <p class="speech">"ฉันไม่ได้ทำนาย"</p> <p>เธอหันมาทางเขาด้วยดวงตาขาวขุ่นที่ไม่มีทางมองเห็นเขา แต่เขากลับรู้สึกว่าถูกมองอยู่ <span class="speech">"ฉันแค่เห็นรอยแผลเป็นในด้ายของคุณ"</span></p>
+
+    <p>เขาไม่ตอบ เพราะไม่รู้จะตอบอะไร</p>
+
+    <p>และนั่นคือครั้งแรกในรอบหลายปีที่เขาไม่รู้จะพูดอะไร</p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="prose">
+    <p>สัปดาห์ผ่านไปกลายเป็นเดือน เวย์แลนยังอยู่ที่หอคอย เขาบอกกับตัวเองว่าเขาอยู่เพื่องาน เพื่อสังเกตการณ์ เพื่อทำความเข้าใจธรรมชาติของพลังของเธอก่อนรายงาน แต่ทุกคืนที่ผ่านไป เขาก็รู้ว่านั่นเป็นข้ออ้างที่อ่อนแอขึ้นเรื่อย ๆ</p>
+
+    <p>เซลีนไม่เคยถามว่าเขาอยู่ทำไม เธอแค่รู้ว่าเขาอยู่ และเธอก็พูดคุยกับเขาราวกับว่าเขาเป็นส่วนหนึ่งของห้องมาตลอดแล้ว</p>
+
+    <p>เธออธิบายให้เขาฟังว่าสีของดนตรีแต่ละท่อนคืออะไร — ไม่ใช่สีจริง แต่เป็นความรู้สึกที่เธอแปลออกมาเป็นภาษาของคนที่มองเห็น เธอบอกว่าเสียงพิณตัวนั้นมีสีน้ำเงินอมเทา เสียงลมผ่านหน้าต่างเป็นสีเขียวอ่อน และเสียงก้าวเดินของเขามีสีที่เธอยังหาคำอธิบายไม่ได้</p>
+
+    <p class="speech">"มันเป็นสีที่ฟังแล้วรู้สึกเหมือนคนกำลังพยายามลืมบางสิ่ง"</p>
+
+    <p>เขาหัวเราะออกมาสั้น ๆ ทั้งที่ไม่ได้ตั้งใจ มันเป็นเสียงหัวเราะที่ดูงุ่มง่ามเพราะไม่ชินปาก</p>
+
+    <p>เซลีนหันมาทางเสียงนั้น ดวงตาขาวของเธอกว้างขึ้นนิดเดียวราวกับประหลาดใจ</p>
+
+    <p class="speech">"คุณหัวเราะได้ด้วย"</p>
+
+    <p class="speech">"ข้าก็เป็นคนนะ"</p>
+
+    <p class="speech">"ฉันรู้"</p> <p>เธอกล่าวเงียบ ๆ <span class="speech">"แค่ไม่เคยได้ยินคุณหัวเราะ เลยนึกว่าคุณลืมวิธีไปแล้ว"</span></p>
+
+    <p>เวย์แลนนึกไม่ออกว่าจะตอบอะไร จึงนิ่งเฉย แต่มีบางอย่างในอก — บางอย่างที่เขาไม่มีชื่อให้มัน — อุ่นขึ้นเล็กน้อย</p>
+  </div>
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">คืนที่ดวงตาพูด</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>คืนหนึ่งหลังจากสองเดือนผ่านไป เซลีนนั่งสงบนิ่งนานผิดปกติ มือทั้งสองวางนิ่งอยู่บนหัวเข่า ไม่ดีดพิณ ไม่วาดลวดลาย ดวงตาขาวจ้องไปที่ไหนก็ไม่รู้</p>
+
+    <p>เวย์แลนสังเกตเห็น เขาเป็นนักล่า และนักล่าสังเกตทุกอย่าง</p>
+
+    <p class="speech">"มีอะไร?"</p>
+
+    <p>เธอเงียบอยู่นาน</p>
+
+    <p class="speech">"มีคนในวังจะตายคืนนี้"</p>
+
+    <p>เวย์แลนลุกขึ้น</p>
+
+    <p class="speech">"ใคร? ต้องทำอะไร?"</p>
+
+    <p class="speech">"ทำอะไรไม่ได้"</p> <p>เธอกล่าวช้า ๆ น้ำเสียงไม่เปลี่ยน แต่มีบางอย่างในนั้นที่ฟังแล้วหนักใจ <span class="speech">"ฉันเห็นได้ แต่ไม่ได้หมายความว่าฉันเปลี่ยนได้เสมอ ด้ายบางเส้นมันตัดสินใจไปแล้ว"</span></p>
+
+    <p class="speech">"แล้วเธอแบกสิ่งนั้นไว้คนเดียว?"</p>
+
+    <p>เซลีนไม่ตอบ แต่เธอกำนิ้วมือแน่นขึ้นนิดเดียว สิ่งที่เวย์แลนสังเกตเห็น</p>
+
+    <p>เขาลังเลอยู่ครู่หนึ่ง แล้วก็เดินไปนั่งลงบนพื้นตรงข้ามเธอ ในระยะที่ถ้าเธอยื่นมือออกไปก็จะแตะเขาได้ ซึ่งเป็นระยะที่ใกล้กว่าที่เขาเคยนั่งมาก่อน</p>
+
+    <p class="speech">"ข้าอยู่นี่"</p>
+
+    <p>ไม่มีคำอธิบาย ไม่มีคำสัญญา แค่สามคำนั้น</p>
+
+    <p>เซลีนไม่พูดอะไร แต่นิ้วมือที่กำแน่นค่อย ๆ คลายออก และเธอก็นั่งอยู่ในความเงียบนั้นโดยไม่โดดเดี่ยวเป็นครั้งแรก</p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="prose">
+    <p class="speech">"ดวงตาคุณเป็นสีอะไร?"</p>
+
+    <p>เธอถามในอีกคืนหนึ่ง นิ้วบางๆ ของเธอแตะอากาศตรงที่เขานั่งอยู่ ราวกับกำลังพยายามวาดภาพสิ่งที่เธอไม่อาจมองเห็น</p>
+
+    <p class="speech">"ทอง"</p>
+
+    <p class="speech">"โกหก"</p>
+
+    <p>เขาเกร็งขึ้น</p>
+
+    <p class="speech">"ข้าไม่ได้โกหก"</p>
+
+    <p class="speech">"ดวงตาคุณอาจเป็นสีทอง"</p> <p>เธอกล่าว <span class="speech">"แต่เสียงคุณบอกว่ามันคือสีที่ทำให้คุณเจ็บปวด ฉันว่ามันต้องเป็นสีของบางสิ่งที่คุณสูญเสียไปนานมาแล้ว และยังสูญเสียอยู่ทุกวันที่มองกระจก"</span></p>
+
+    <p>ครั้งแรกในรอบสิบปี เวย์แลนไม่มีคำพูดโต้ตอบ</p>
+
+    <p>เพราะเธอพูดถูก และไม่มีใครพูดถูกเกี่ยวกับเขาได้อย่างนั้น โดยไม่เคยมองเห็นหน้าเขาสักครั้ง</p>
+
+    <p>เขานั่งอยู่ในความเงียบนั้นนานมาก จนกระทั่งเสียงพิณเบา ๆ เริ่มขึ้นอีกครั้ง เซลีนดีดโดยไม่บังคับให้เขาพูด ไม่รอคำตอบ แค่เล่นดนตรีในสีที่เธอบอกว่าเป็น <span class="em">สีของคนที่กำลังเริ่มจำ</span></p>
+
+    <p>และเวย์แลนก็ฟัง</p>
+
+    <p>เป็นครั้งแรกในชีวิตที่เขาฟังโดยไม่ต้องระวังตัว</p>
+  </div>
+
+</article>
+
+<div class="chapter-nav">
+  <a href="TLBS_ep1.html" class="prev">บทที่หนึ่ง</a>
+  <a href="TLBS_ep3.html" class="next">บทที่สาม</a>
+</div>
+
+</body>
+</html>

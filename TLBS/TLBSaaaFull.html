@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แสงที่มองไม่เห็น</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --deep: #0d0a1a;
+    --ink: #1a1530;
+    --parchment: #f5efe0;
+    --mist: #b8c4d8;
+    --rose: #8b3a52;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    color: var(--parchment);
+    font-family: 'Sarabun', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  .stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 55% 15%, rgba(255,255,255,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 70%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(201,168,76,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 90%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 50%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 65% 75%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      var(--deep);
+  }
+
+  .cover {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 60%, rgba(139,58,82,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ornament {
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: 0.5rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    animation: fadeIn 2s ease forwards;
+  }
+
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #fff8e7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeIn 2.5s ease forwards;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--mist);
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 3s ease 0.5s forwards;
+    margin-bottom: 3rem;
+  }
+
+  .divider {
+    width: 120px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2rem auto;
+  }
+
+  .tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    opacity: 0;
+    animation: fadeIn 3s ease 1s forwards;
+    max-width: 480px;
+    line-height: 1.8;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: var(--gold); opacity: 0.5; font-size: 0.75rem;
+    letter-spacing: 0.2rem; animation: pulse 3s infinite;
+  }
+  .scroll-hint::after { content: '↓'; font-size: 1.2rem; }
+
+  .story-wrap {
+    position: relative; z-index: 1;
+    max-width: 720px; margin: 0 auto;
+    padding: 5rem 2rem 8rem;
+  }
+
+  .chapter-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.4rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    opacity: 0.8;
+  }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--gold-light);
+    margin-bottom: 2.5rem;
+    line-height: 1.3;
+  }
+
+  .prose {
+    font-size: 1.05rem;
+    line-height: 2.1;
+    color: #d8cfc0;
+    font-weight: 300;
+  }
+
+  .prose p { margin-bottom: 1.6rem; text-indent: 2em; }
+  .prose p:first-child { text-indent: 0; }
+
+  .prose .dialogue {
+    color: var(--parchment);
+    font-style: italic;
+  }
+
+  .scene-break {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 0.8rem;
+    margin: 3rem 0;
+    opacity: 0.5;
+  }
+
+  .highlight {
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  .chapter-sep {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin: 5rem 0 4rem;
+  }
+  .chapter-sep .line {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3));
+  }
+  .chapter-sep .line:last-child {
+    background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent);
+  }
+  .chapter-sep .gem { color: var(--gold); font-size: 0.9rem; }
+
+  .story-footer {
+    position: relative; z-index: 1;
+    text-align: center; padding: 3rem 2rem 5rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .story-footer p {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    opacity: 0.7;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 0.35; } 50% { opacity: 0.65; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<section class="cover">
+  <div class="ornament">✦ &nbsp; นิยายแฟนตาซี &nbsp; ✦</div>
+  <h1>แสงที่มองไม่เห็น</h1>
+  <p class="subtitle">The Light Beyond Sight</p>
+  <div class="divider"></div>
+  <p class="tagline">"ในโลกที่มืดมิด เธอเห็นสิ่งที่คนอื่นมองข้าม<br>และในความมืดนั้น เขาพบแสงสว่างของชีวิต"</p>
+  <div class="scroll-hint">เลื่อนลง</div>
+</section>
+
+<main class="story-wrap">
+
+  <div class="chapter-label">บทที่หนึ่ง</div>
+  <h2 class="chapter-title">เจ้าหญิงผู้ถูกลืม</h2>
+
+  <div class="prose">
+    <p>ในยุคที่เวทมนตร์ยังหลั่งไหลผ่านสายลม มีอาณาจักรหนึ่งชื่อ <span class="highlight">เวลธาเลน</span> — อาณาจักรแห่งแสงสวรรค์ ที่ซึ่งกษัตริย์ผู้ยิ่งใหญ่ทรงปกครองด้วยพลังแห่งดวงตาทิพย์ สายพระเนตรของราชวงศ์สามารถมองเห็นโชคชะตา มองเห็นความจริงที่ซ่อนเร้น และมองเห็นสิ่งที่ไม่มีใครมองเห็นได้</p>
+
+    <p>แต่เจ้าหญิง <span class="highlight">เซลีน</span> เกิดมาในความมืด</p>
+
+    <p>ดวงตาทั้งสองข้างของเธอขาวขุ่นดังหมอกฤดูหนาว ไม่มีแม้แต่ประกายแห่งแสง ในคืนที่เธอถือกำเนิด นักพยากรณ์ผู้เฒ่าได้ทำนายด้วยเสียงสั่นระริก</p>
+
+    <p class="dialogue">"เธอไม่อาจสืบทอดพลังแห่งดวงตาทิพย์ได้... แต่ในความมืดของเธอ มีสิ่งที่น่าหวาดกลัวยิ่งกว่า"</p>
+
+    <p>กษัตริย์ไม่เคยจำอวยพรเธอในวันเกิด พระราชินีทอดถอนใจทุกครั้งที่มองหน้าลูกสาว และเจ้าหญิงผู้พิการก็ค่อย ๆ ถูกลืมไปในหอคอยสูงทางปีกตะวันตกของวัง ท่ามกลางหนังสือที่เธออ่านด้วยการสัมผัสตัวอักษรนูนโบราณ และเสียงดนตรีที่เธอเป่าพิณจากความรู้สึกในใจ</p>
+
+    <p>เซลีนไม่เคยร้องไห้เพราะตาบอด เธอร้องไห้เพราะโลกทั้งใบปฏิบัติต่อเธอราวกับว่าเธอไม่มีตัวตน</p>
+  </div>
+
+  <div class="chapter-sep">
+    <div class="line"></div>
+    <div class="gem">✦</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="chapter-label">บทที่สอง</div>
+  <h2 class="chapter-title">นักล่าเงาและเจ้าหญิงผู้มืดมน</h2>
+
+  <div class="prose">
+    <p>เขาเดินทางมาในคืนที่พายุหิมะกลืนกินดาว</p>
+
+    <p><span class="highlight">เวย์แลน</span> — นักล่าสิ่งมืด ผู้สวมเกราะสีเถ้าและผ้าคลุมสีดำ รับจ้างกำจัดสัตว์ประหลาดและปีศาจในทุกมุมโลก เขามีดวงตาสีทองแดงที่สามารถมองเห็นในความมืดได้ ของขวัญจากพลังเลือดโบราณที่ไม่เคยทำให้ใครอยากเข้าใกล้เขา</p>
+
+    <p>เวย์แลนถูกว่าจ้างให้สืบสวนปีศาจที่คืบคลานในปีกตะวันตกของวัง รายงานระบุว่ามีเสียงแปลก ๆ ยามดึก มีแสงพิลึกรอดออกมาจากใต้ประตูห้องต้องห้าม และคนรับใช้สองคนหายตัวไปอย่างไร้ร่องรอย</p>
+
+    <p>แต่เมื่อเขาเปิดประตูห้องนั้น สิ่งที่เขาพบไม่ใช่ปีศาจ</p>
+
+    <p>มีเด็กหญิงอายุราวยี่สิบปี นั่งขัดสมาธิบนพื้นหินเย็น มือทั้งสองแตะดินสีเงินที่เธอวาดลวดลายวนเวียนรอบตัว ดวงตาขาวขุ่นของเธอลืมขึ้นตรงทิศทางที่เขายืน แม้จะไม่มีทางรู้ว่าเขาอยู่ที่นั่น</p>
+
+    <p class="dialogue">"คุณมาช้าไปสี่ชั่วโมง"</p>
+
+    <p>เวย์แลนหยุดนิ่ง</p>
+
+    <p class="dialogue">"ข้าไม่ได้นัดกับใคร"</p>
+
+    <p class="dialogue">"แต่ฉันรู้ว่าคุณจะมา"</p>
+
+    <p>เซลีนยิ้มเล็กน้อย ลวดลายดินสีเงินรอบตัวเธอเริ่มเรืองแสง เป็นสัญลักษณ์เวทย์มนตร์ที่เวย์แลนไม่เคยเห็นในชีวิต</p>
+
+    <p class="dialogue">"นั่นคือสิ่งที่ทุกคนกลัว"</p> <p>เธอกล่าว เสียงเย็นสงบราวกับน้ำในถ้ำ <span class="dialogue">"ฉันมองไม่เห็นโลก แต่ฉันได้ยินโชคชะตา"</span></p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="prose">
+    <p>นั่นคือจุดเริ่มต้นของสิ่งที่ไม่มีคำใดอธิบายได้ชัดเจน</p>
+
+    <p>เวย์แลนได้รับมอบหมายจากราชสำนักให้ "ดูแล" เจ้าหญิงที่พวกเขาเรียกว่าเป็นอันตราย ทว่าวันแล้ววันเล่า แทนที่จะเฝ้าระวัง เขากลับพบตัวเองนั่งริมหน้าต่างของหอคอย ฟังเธออธิบายสีของดนตรีที่เธอได้ยิน ฟังเธอบรรยายรูปร่างของเสียงลม และฟังเธอ "มองเห็น" โลกด้วยวิธีที่ทำให้เขาอยากทิ้งดวงตาทองแดงของตัวเองไปเสียเลย</p>
+
+    <p class="dialogue">"ดวงตาคุณเป็นสีอะไร?"</p> <p>เธอถามในคืนหนึ่ง นิ้วบางของเธอแตะอากาศราวกับกำลังวาดภาพตรงที่เขายืน</p>
+
+    <p class="dialogue">"ทอง"</p> <p>เขาตอบสั้น ๆ</p>
+
+    <p class="dialogue">"โกหก"</p> <p>เธอกล่าวเงียบ ๆ <span class="dialogue">"คุณบอกว่าทอง แต่เสียงคุณบอกว่ามันคือสีที่ทำให้คุณเจ็บปวด ฉันว่ามันต้องเป็นสีของบางสิ่งที่คุณเสียไป"</span></p>
+
+    <p>ครั้งแรกในรอบสิบปี เวย์แลนไม่มีคำพูดโต้ตอบ</p>
+  </div>
+
+  <div class="chapter-sep">
+    <div class="line"></div>
+    <div class="gem">✦</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="chapter-label">บทที่สาม</div>
+  <h2 class="chapter-title">วันที่โลกพังทลาย</h2>
+
+  <div class="prose">
+    <p>ความจริงที่ซ่อนอยู่ในหอคอยถูกเปิดเผยในคืนเดือนหงาย</p>
+
+    <p>เซลีนไม่ได้ "ตาบอด" อย่างที่ทุกคนเข้าใจ ดวงตาของเธอมองไม่เห็นแสงธรรมดา แต่เธอมองเห็น <span class="highlight">ด้ายแห่งชะตากรรม</span> — เส้นสีทองบางเฉียบที่โยงใยระหว่างทุกชีวิตในอาณาจักร เธอเห็นว่าใครจะตาย ใครจะทรยศ ใครจะรัก และใครจะถูกทำลาย</p>
+
+    <p>และในคืนนั้น เธอเห็นด้ายของเวย์แลนขาดสะบั้น</p>
+
+    <p class="dialogue">"อย่าออกไปคืนนี้"</p> <p>เธอกุมข้อมือเขาด้วยมือที่สั่นเบา ๆ ครั้งแรกที่เธอแตะเขาด้วยความกลัว ไม่ใช่ความอยากรู้อยากเห็น</p>
+
+    <p class="dialogue">"มีงานที่ต้องทำ เจ้าหญิง"</p>
+
+    <p class="dialogue">"มีคนส่งคุณไปตาย"</p> <p>เธอเงยหน้า ดวงตาขาวขุ่นของเธอมองตรงมาที่ใบหน้าเขาราวกับมองเห็น <span class="dialogue">"พระราชาสั่งให้คุณไปปราบสิ่งที่ไม่มีอยู่จริง เพราะพระองค์รู้ว่าคุณรู้ความจริงเกี่ยวกับฉันแล้ว และพระองค์ไม่ต้องการให้ใครรู้ว่าลูกสาวพระองค์มีพลังที่ยิ่งใหญ่กว่าพระองค์"</span></p>
+
+    <p>เงียบ ยาวนาน หนักหน่วง</p>
+
+    <p>เวย์แลนมองลงมาที่มือเล็กที่กุมข้อมือเขา แล้วพลิกมือจับมือเธอแทน</p>
+
+    <p class="dialogue">"แล้วถ้าข้าไม่ไป?"</p>
+
+    <p class="dialogue">"ฉันก็ไม่รู้"</p> <p>เธอกล่าวตรง ๆ แบบที่เธอเป็นเสมอ <span class="dialogue">"ฉันเห็นแต่ด้ายที่ขาด ฉันไม่เห็นด้ายที่ยังต่อได้"</span></p>
+
+    <p>เขาไม่ได้ออกไปคืนนั้น</p>
+
+    <p>แต่ราชสำนักส่งทหารมาแทน</p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="prose">
+    <p>ในคืนที่ทหารบุกหอคอย เซลีนยืนกลางห้องโดยไม่หวาดหวั่น ลวดลายดินสีเงินลอยขึ้นรอบตัวเธอ เส้นด้ายแห่งชะตากรรมนับร้อยพันเส้นเรืองแสงออกมาจากดวงตาขาวของเธอ ฉายไปทั่วห้อง</p>
+
+    <p>ทหารที่เห็นแสงนั้นล้วนก้าวถอยหลัง ไม่ใช่เพราะกลัว แต่เพราะในแสงนั้น พวกเขาเห็นภาพชีวิตตัวเอง เห็นคนที่ตนรัก เห็นความจริงที่ซ่อนไว้ในใจนานปี</p>
+
+    <p>และในที่สุด พวกเขาก็วางอาวุธลง</p>
+
+    <p>เวย์แลนยืนอยู่ข้างเธอตลอด ไม่ได้ต่อสู้ ไม่ได้ป้องกัน แต่เพียงยืนเคียงข้าง เพราะเขาตระหนักในที่สุดว่า <span class="highlight">หญิงสาวที่มองไม่เห็นแสงคนนี้ไม่ต้องการใครมาปกป้องเธอ</span> เธอต้องการแค่ใครสักคนที่ยืนอยู่ข้างเธอ</p>
+  </div>
+
+  <div class="chapter-sep">
+    <div class="line"></div>
+    <div class="gem">✦</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="chapter-label">บทส่งท้าย</div>
+  <h2 class="chapter-title">แสงที่มองไม่เห็น</h2>
+
+  <div class="prose">
+    <p>เซลีนไม่เคยเห็นหน้าเวย์แลน แต่เธอรู้ว่าเขาเป็นคนอย่างไร รู้จากน้ำเสียงที่อ่อนลงทีละน้อยทุกคืน รู้จากเสียงเท้าที่ไม่เคยรีบแม้ทั้งโลกจะโกลาหล รู้จากด้ายแห่งชะตากรรมสีทองที่งอกขึ้นระหว่างเธอกับเขา เป็นเส้นด้ายที่เธอไม่เคยเห็นในชีวิตมาก่อน</p>
+
+    <p>ด้ายที่ไม่ได้บอกอนาคต แต่เป็นด้ายที่บอกว่า <span class="highlight">ขณะนี้ มีคนอยู่กับเธอ</span></p>
+
+    <p>ในคืนที่พวกเขาหนีออกจากวังด้วยกัน เดินเท้าผ่านป่าที่เต็มไปด้วยสัตว์มีเวทย์มนตร์และลมหนาวที่กัดกระดูก เซลีนก้าวพลาดบนรากไม้ แต่มือใหญ่จับเธอไว้ก่อนที่เธอจะล้ม</p>
+
+    <p class="dialogue">"ขอบคุณ"</p> <p>เธอกล่าว แล้วไม่ได้ปล่อยมือเขาออก</p>
+
+    <p class="dialogue">"คุณมองเห็นชะตาทุกคน"</p> <p>เขาถามเบา ๆ <span class="dialogue">"แล้วชะตาของเราล่ะ?"</span></p>
+
+    <p>เซลีนหยุดเดิน หันหน้าไปทิศทางที่เธอรู้ว่าเขายืนอยู่ เธอยิ้ม ยิ้มแบบที่ไม่มีใครเคยทำให้เธอยิ้มได้มาก่อน</p>
+
+    <p class="dialogue">"ฉันมองไม่เห็น"</p> <p>เธอตอบ <span class="dialogue">"และนั่นแหละ... คือสิ่งที่ดีที่สุดที่เคยเกิดขึ้นกับฉัน"</span></p>
+
+    <p>เวย์แลนเงียบอยู่นาน แล้วก็ไม่มีใครพูดอีก เพราะไม่จำเป็นต้องพูด</p>
+
+    <p>เขาจูงมือเธอเดินต่อ เข้าไปในป่ามืดที่เต็มไปด้วยดาว และในความมืดนั้น ทั้งสองต่างเห็นสิ่งที่คนอื่นมองไม่เห็น</p>
+
+    <p>เขาเห็นเธอ</p>
+
+    <p>เธอเห็นเขา</p>
+
+    <p>และโลกทั้งใบก็สว่างขึ้น</p>
+  </div>
+
+</main>
+
+<footer class="story-footer">
+  <div class="divider"></div>
+  <p>"บางครั้งแสงที่สว่างที่สุด<br>คือแสงที่ดวงตาไม่อาจมองเห็นได้"</p>
+</footer>
+
+</body>
+</html>

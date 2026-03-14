@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แสงที่มองไม่เห็น — บทที่หนึ่ง</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09080f;
+    --gold: #c8a96e;
+    --gold-dim: #8a6f3e;
+    --gold-light: #ecdcb4;
+    --parchment: #ede5d0;
+    --body-text: #ccc0a8;
+    --mist: #9aa8bc;
+    --rose-deep: #6b2d42;
+    --ink: #1c1628;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--body-text);
+    font-family: 'Noto Serif Thai', serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === AMBIENT BACKGROUND === */
+  .ambient {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 50% 40% at 20% 10%, rgba(104,60,30,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 80% 90%, rgba(107,45,66,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 50% 50%, rgba(200,169,110,0.04) 0%, transparent 70%);
+  }
+
+  .stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.75) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 38% 8%, rgba(255,255,255,0.85) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 25%, rgba(200,169,110,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 55%, rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(2px 2px at 78% 18%, rgba(200,169,110,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 42%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 14% 68%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 92% 72%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 82%, rgba(200,169,110,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 90%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 95%, rgba(255,255,255,0.5) 0%, transparent 100%);
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    border-bottom: 1px solid rgba(200,169,110,0.08);
+    background: rgba(9,8,15,0.7);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-chapters {
+    display: flex; gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-chapters a {
+    font-size: 0.7rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-chapters a:hover, .nav-chapters a.active { color: var(--gold); }
+
+  /* === HERO === */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 6rem 6rem 4rem;
+    gap: 4rem;
+  }
+
+  .hero-text { max-width: 520px; }
+
+  .chapter-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.45rem;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: riseIn 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: riseIn 1s ease 0.5s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--mist);
+    line-height: 1.8;
+    opacity: 0;
+    animation: riseIn 1s ease 0.7s forwards;
+    margin-bottom: 3rem;
+  }
+
+  .scroll-cue {
+    display: flex; align-items: center; gap: 1rem;
+    opacity: 0;
+    animation: riseIn 1s ease 1s forwards;
+  }
+  .scroll-cue .line { width: 40px; height: 1px; background: var(--gold-dim); }
+  .scroll-cue span {
+    font-size: 0.65rem; letter-spacing: 0.25rem; text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  /* Decorative circle */
+  .hero-deco {
+    position: relative;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0;
+    animation: riseIn 1.2s ease 0.8s forwards;
+  }
+
+  .deco-ring {
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.2);
+    position: absolute;
+    animation: rotateSlow 40s linear infinite;
+  }
+
+  .deco-ring::before {
+    content: '✦';
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    color: var(--gold); font-size: 0.8rem;
+  }
+
+  .deco-ring-2 {
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.12);
+    position: absolute;
+    animation: rotateSlow 28s linear infinite reverse;
+  }
+
+  .deco-inner {
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,45,66,0.3) 0%, rgba(9,8,15,0) 70%);
+    border: 1px solid rgba(107,45,66,0.3);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0.5rem;
+    z-index: 1;
+  }
+
+  .deco-eye {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 12px rgba(200,169,110,0.5));
+  }
+
+  .deco-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.15rem;
+  }
+
+  /* === STORY BODY === */
+  .story {
+    position: relative; z-index: 1;
+    max-width: 740px; margin: 0 auto;
+    padding: 2rem 3rem 8rem;
+  }
+
+  .section-marker {
+    display: flex; align-items: center; gap: 2rem;
+    margin: 4rem 0 3rem;
+  }
+  .section-marker .bar {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(200,169,110,0.4), transparent);
+  }
+  .section-marker .bar.right {
+    background: linear-gradient(90deg, transparent, rgba(200,169,110,0.4));
+  }
+  .section-marker .label {
+    font-size: 0.6rem; letter-spacing: 0.35rem; text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .prose {
+    font-size: 1.05rem;
+    line-height: 2.15;
+    color: var(--body-text);
+  }
+
+  .prose p {
+    margin-bottom: 1.8rem;
+    text-indent: 2.2em;
+  }
+  .prose p:first-of-type { text-indent: 0; }
+
+  .prose .em { color: var(--gold-light); font-style: italic; }
+  .prose .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12em;
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .prose .speech {
+    color: var(--parchment);
+    font-style: italic;
+  }
+
+  blockquote {
+    margin: 3rem 0;
+    padding: 2rem 2.5rem;
+    border-left: 2px solid var(--gold-dim);
+    background: rgba(200,169,110,0.04);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    line-height: 1.9;
+  }
+
+  .scene-break {
+    text-align: center;
+    color: var(--gold-dim);
+    letter-spacing: 1.2rem;
+    font-size: 0.7rem;
+    margin: 3.5rem 0;
+    opacity: 0.6;
+  }
+
+  /* === FOOTER NAV === */
+  .chapter-nav {
+    position: relative; z-index: 1;
+    display: flex; justify-content: flex-end;
+    padding: 2rem 3rem 4rem;
+    border-top: 1px solid rgba(200,169,110,0.1);
+  }
+
+  .chapter-nav a {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    color: var(--gold-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .chapter-nav a:hover { color: var(--gold); }
+  .chapter-nav a::after { content: '→'; font-size: 1rem; }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-chapters { gap: 1rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
+    .hero-deco { display: none; }
+    .story { padding: 2rem 1.5rem 6rem; }
+    .chapter-nav { padding: 2rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+<div class="stars"></div>
+
+<nav>
+  <span class="nav-title">แสงที่มองไม่เห็น</span>
+  <ul class="nav-chapters">
+    <li><a href="portTLBS.html">กลับหน้าเลือกตอน</a></li>
+    <li><a href="TLBS_ep1.html" class="active">บทที่ ๑</a></li>
+    <li><a href="TLBS_ep2.html">บทที่ ๒</a></li>
+    <li><a href="TLBS_ep3.html">บทที่ ๓</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <p class="chapter-eyebrow">✦ &nbsp; บทที่หนึ่ง &nbsp; ✦</p>
+    <h1>เจ้าหญิง<br>ผู้ถูกลืม</h1>
+    <p class="hero-subtitle">ในราชวงศ์ที่บูชาแสง<br>เธอถือกำเนิดมาพร้อมความมืด</p>
+    <div class="scroll-cue">
+      <div class="line"></div>
+      <span>เริ่มอ่าน</span>
+    </div>
+  </div>
+  <div class="hero-deco">
+    <div class="deco-ring"></div>
+    <div class="deco-ring-2"></div>
+    <div class="deco-inner">
+      <div class="deco-eye"><img src="/TLBS/image/67828-bloodmoon-twemoji.png" width="25px" height="25px"></img></div>
+      <!-- <div class="deco-eye">🌑</img></div> -->
+      <div class="deco-label">เวลธาเลน</div>
+    </div>
+  </div>
+</section>
+
+<article class="story">
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">ต้นกำเนิด</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>ในยุคที่เวทมนตร์ยังหลั่งไหลผ่านสายลมดุจสายเลือด มีอาณาจักรหนึ่งตั้งอยู่บนยอดหน้าผาสีขาวสูงตระหง่าน ชื่อของมันถูกบันทึกในแผ่นหินโบราณด้วยตัวอักษรสีทองว่า <span class="name">เวลธาเลน</span> — อาณาจักรแห่งดวงตาทิพย์ ที่ซึ่งทุกชีวิตล้วนถือกำเนิดขึ้นพร้อมกับแสงสว่างในดวงตา</p>
+
+    <p>ราชวงศ์ <span class="name">เออร์เวน</span> ครองบัลลังก์มาแปดชั่วอายุคน ทุกกษัตริย์ในสายเลือดนี้ล้วนได้รับพรแห่งดวงตาทิพย์ — สายตาที่สามารถมองทะลุผ่านม่านเวลา เห็นโชคชะตาของผู้คน มองเห็นเส้นด้ายแห่งชีวิตที่พันกันอยู่อย่างซับซ้อนราวใยแมงมุมยักษ์ กษัตริย์จึงไม่ใช่เพียงผู้ปกครอง แต่คือ <span class="em">ผู้มองเห็น</span> ผู้ที่ประชาชนเชื่อว่าสามารถนำทางพวกเขาพ้นจากความผิดพลาดและภัยพิบัติได้ทั้งปวง</p>
+
+    <p>และด้วยเหตุนี้ การเกิดของ <span class="name">เซลีน</span> จึงเป็นสิ่งที่ไม่มีใครในราชสำนักเตรียมใจรับได้</p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="prose">
+    <p>คืนที่เซลีนถือกำเนิด ฟ้าแลบแต่ฝนไม่ตก ดาวสีแดงดวงหนึ่งปรากฏขึ้นทางทิศตะวันตกซึ่งนักโหราศาสตร์เรียกว่า <span class="em">ดาวแห่งม่านบัง</span> สัญลักษณ์ที่ปรากฏครั้งสุดท้ายเมื่อสองร้อยปีก่อนในคืนที่มหาสงครามเริ่มต้น</p>
+
+    <p>พระราชินี <span class="name">อาราเวล</span> ทรงคลอดพระธิดาหลังสู้กับความเจ็บปวดมาสามวันสามคืน เมื่อทารกร้องไห้ครั้งแรก เสียงนั้นแปลกประหลาดผิดปกติ — ไม่ใช่เสียงกลัว ไม่ใช่เสียงเจ็บปวด แต่เป็นเสียงสั่นสะเทือนลึก ราวกับสายพิณที่ถูกดีดในห้องใต้ดิน</p>
+
+    <p>นักพยากรณ์ผู้เฒ่า <span class="name">โซเรน</span> ก้าวเข้ามายืนเหนือเปลของทารก ยื่นมือลงไปเปิดเปลือกตาเล็ก ๆ ออก แล้วก็ถอยหลังสองก้าว มือที่เคยแตะไม้เท้ามาหกสิบปีสั่นอยู่อย่างห้ามไม่ได้</p>
+
+    <p>ดวงตาของทารกขาวขุ่น ขาวดังหมอกที่ลงจัดในฤดูหนาว ไม่มีแม้แต่รูม่านตา ไม่มีแม้แต่เส้นเลือดฝอย มีเพียงความขาวนิ่งสนิท และในความขาวนั้น ถ้าเพ่งมองนานพอ จะเห็นสิ่งที่ดูเหมือนดวงดาวเล็ก ๆ กระพริบอยู่ลึก ๆ ข้างใน</p>
+  </div>
+
+  <blockquote>
+    "เธอไม่อาจสืบทอดพลังแห่งดวงตาทิพย์ได้...<br>
+    แต่ในความมืดของเธอ มีสิ่งที่น่าหวาดกลัวยิ่งกว่า<br>
+    เพราะเธอไม่ได้มองไม่เห็น —<br>
+    เธอมองเห็นสิ่งที่พวกเราไม่มีวันมองเห็น"
+  </blockquote>
+
+  <div class="prose">
+    <p>กษัตริย์ <span class="name">เธรน</span> ทรงฟังคำทำนายนั้นโดยไม่แสดงอารมณ์ใด เพียงแต่ทรงกวาดสายพระเนตรสีน้ำเงินเข้มไปที่ทารกในเปล แล้วทรงถามด้วยพระสุรเสียงเย็นราวก้อนน้ำแข็ง</p>
+
+    <p class="speech">"น่าหวาดกลัว... หรือน่าเป็นประโยชน์?"</p>
+
+    <p>โซเรนไม่ตอบ เพราะนักพยากรณ์ผู้เฒ่ารู้ดีว่าคำตอบที่แท้จริงคือทั้งสองอย่าง และในบางครั้ง สองสิ่งนั้นคือสิ่งเดียวกัน</p>
+  </div>
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">วัยเด็กในหอคอย</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>เซลีนเติบโตขึ้นในหอคอยปีกตะวันตก ห้องที่กว้างแต่รู้สึกคับแคบเพราะความเงียบที่หนักอึ้งอยู่ในนั้นตลอดเวลา ผนังหินสีเทาถูกประดับด้วยผ้าม่านทอสีเข้มที่ไม่มีประโยชน์อะไรสำหรับเธอ มีเพียงพื้นกระเบื้องเย็นที่เธอเดินบนนั้นจนจำได้ทุกแตกร้าว ทุกรอยต่อ ทุกส่วนที่มีกระเบื้องหลวมเล็กน้อย</p>
+
+    <p>เธอเรียนรู้โลกผ่านสามสิ่ง</p>
+
+    <p>สิ่งแรกคือ <span class="em">เสียง</span> เธอแยกแยะเสียงเท้าของคนรับใช้แต่ละคนออกจากกัน รู้ว่าใครกำลังมาจากเสียงฝีเท้า รู้ว่าอากาศข้างนอกเป็นอย่างไรจากเสียงลมที่รอดผ่านช่องหน้าต่าง รู้ว่าพระราชาในอารมณ์ดีหรือเปล่าจากเสียงที่ลอยมาจากห้องบัลลังก์ไกล ๆ</p>
+
+    <p>สิ่งที่สองคือ <span class="em">การสัมผัส</span> หนังสือที่ถูกแกะสลักตัวอักษรนูนสำหรับผู้ตาบอดกลายเป็นสมบัติล้ำค่าที่สุดของเธอ เธออ่านทุกเล่มที่มีในห้องสมุดของหอคอยจนจำได้แม้กระทั่งรอยนิ้วมือของคนที่แกะสลักก่อนเธอ เธอเรียนรู้ประวัติศาสตร์ โหราศาสตร์ สมุนไพร เวทมนตร์โบราณ และภาษาของอาณาจักรเพื่อนบ้านทั้งห้า</p>
+
+    <p>สิ่งที่สามคือ <span class="em">ดนตรี</span> มีพิณโบราณตัวหนึ่งตั้งอยู่มุมห้อง ไม่มีใครรู้ว่ามันอยู่ที่นั่นตั้งแต่เมื่อไหร่ เซลีนพบมันตอนอายุหกขวบเมื่อนิ้วมือเล็ก ๆ คลำไปถูกสาย เสียงที่ดังขึ้นทำให้เธอหยุดนิ่ง แล้วนิ้วก็ดีดต่อ ทีละเส้น สองเส้น สามเส้น เธอไม่ได้เรียนดนตรีจากครูคนไหน เธอเรียนจากความรู้สึกในฝ่ามือ</p>
+
+    <p>แต่สิ่งที่เธอไม่เคยเรียนรู้คือ <span class="em">วิธีหยุดรู้สึก</span></p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="prose">
+    <p>พระราชบิดาเสด็จเยี่ยมเธอปีละครั้ง ในวันเกิด ซึ่งเป็นวันที่พระองค์ดูเหมือนจะจำได้ว่ามีลูกสาวอยู่ด้วย การเสด็จเยี่ยมแต่ละครั้งใช้เวลาไม่เกินสิบนาที มีรูปแบบตายตัวเสมอ — พระองค์จะยืนที่ประตูห้อง ถามว่าเธอสบายดีไหม เธอตอบว่าสบายดี แล้วพระองค์ก็เสด็จออกไป</p>
+
+    <p>เซลีนชอบวันนั้น ไม่ใช่เพราะพระราชบิดาเสด็จมา แต่เพราะนั้นคือหนึ่งในไม่กี่วันที่เธอรู้สึกได้ว่าตัวเองมีตัวตนอยู่จริง</p>
+
+    <p>พระราชมารดาไม่เคยมา หลังจากเซลีนอายุได้สี่ขวบ พระนางอาราเวลก็ไม่ผ่านหน้าหอคอยปีกตะวันตกอีกเลย คนรับใช้เล่าให้เธอฟังว่าพระนางทรงมีพระโอรสแล้วสองพระองค์ ทั้งสองมีดวงตาสีน้ำเงินเข้มสมบูรณ์แบบ สมกับที่เป็นทายาทของราชวงศ์</p>
+
+    <p>เซลีนไม่โกรธ เธอแค่บันทึกข้อมูลนั้นไว้เหมือนที่เธอบันทึกทุกอย่าง — เก็บไว้ในส่วนลึกของความทรงจำที่เธอสร้างขึ้นเป็นแผนที่ในหัว แผนที่ของโลกที่เธอไม่เคยเห็นด้วยตา</p>
+
+    <p>มีเพียงสิ่งเดียวที่ทำให้เธอร้องไห้คือคืนที่เธออายุสิบสาม คืนที่ได้ยินเสียงดนตรีจากงานเลี้ยงใต้หอคอย เสียงหัวเราะของน้องชายทั้งสองดังขึ้นมาปะปนกับเสียงฟ้อนรำ และเซลีนนั่งอยู่บนพื้นหินเย็นคนเดียว มือสัมผัสรูปแตกของกระเบื้องที่เธอจำได้ขึ้นใจ รู้สึกครั้งแรกในชีวิตว่า <span class="em">ความโดดเดี่ยวมีน้ำหนัก</span></p>
+  </div>
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">พลังที่ซ่อนอยู่</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>แต่ในความโดดเดี่ยวนั้น มีสิ่งหนึ่งที่งอกงามขึ้นอย่างเงียบ ๆ</p>
+
+    <p>มันเริ่มต้นเมื่อเซลีนอายุสิบห้า วันหนึ่งขณะเธอนั่งดีดพิณอยู่คนเดียว นิ้วมือก็หยุดเองราวกับถูกดึง ในความมืดของดวงตาเธอปรากฏสิ่งที่เธอไม่เคยเห็นมาก่อน — เส้นสีทองบางเฉียบเส้นหนึ่ง ลอยอยู่ในอากาศตรงหน้า</p>
+
+    <p>เธอไม่ตกใจ เธอแค่เงียบสนิทและเฝ้ามอง</p>
+
+    <p>เส้นด้ายนั้นโยงจากตรงที่เธอนั่งไปลอดผ่านผนังออกไปข้างนอก และเมื่อเธอปิดตาลง มันก็ยังอยู่ที่นั่น แต่ตอนนี้มีเส้นอื่นเพิ่มขึ้นด้วย สิบเส้น ร้อยเส้น พันเส้น ทุกเส้นมีสีและความหนาต่างกัน บางเส้นสว่างจ้า บางเส้นริบหรี่ใกล้ดับ บางเส้นขาดกลางอากาศอย่างน่าสะพรึง</p>
+
+    <p>และในบางคืน เมื่อเธอแตะเส้นด้ายที่สว่างที่สุด เธอได้ยินเสียง ไม่ใช่เสียงดนตรีหรือเสียงพูด แต่เป็น <span class="em">เสียงของชีวิต</span> — ของใครบางคนที่กำลังสุขหรือเศร้า รัก หรือกลัว</p>
+
+    <p>เซลีนไม่บอกใคร เพราะเธอรู้ว่าถ้าพระราชบิดาทรงทราบ สิ่งที่จะตามมาจะไม่ใช่ความภาคภูมิใจ แต่คือ <span class="em">ความกลัว</span></p>
+
+    <p>และคนที่กลัวมักทำสิ่งที่เลวร้ายเสมอ</p>
+
+    <p>ดังนั้นเธอจึงเก็บมันไว้คนเดียว เฝ้าสังเกต เรียนรู้ และรอคอย โดยไม่รู้ว่ากำลังรอคอยอะไรอยู่ จนกระทั่งคืนหนึ่ง ที่มีรอยเท้าแปลกปลอมดังขึ้นที่ปลายทางเดินของหอคอย หนักและมั่นคง แตกต่างจากเสียงเท้าของคนรับใช้ทุกคนที่เธอจำได้</p>
+
+    <p>และเส้นด้ายแห่งชะตากรรมของชายคนนั้น — เธอเห็นมันตั้งแต่ก่อนที่เขาจะเปิดประตูเสียอีก</p>
+
+    <p>มันเป็นเส้นที่สีเปลี่ยนไปทุกขณะ สลับระหว่างสีทองสว่างและสีเทาเข้ม ราวกับกำลังตัดสินใจระหว่างสองสิ่ง และในตอนท้ายของเส้น มีรอยขาดที่ยังไม่สมบูรณ์ — ยังไม่ขาด แต่กำลังจะขาด</p>
+
+    <p>เซลีนนั่งขัดสมาธิบนพื้นหินกลางห้อง มือทั้งสองวาดลวดลายดินสีเงินรอบตัว รอคอยเขาอย่างใจเย็น</p>
+
+    <p>เพราะเธอรู้ว่าเขาจะมา</p>
+
+    <p>แต่เธอไม่รู้ว่าเขาจะมาเปลี่ยนชีวิตเธอไปตลอดกาล</p>
+  </div>
+
+</article>
+
+<div class="chapter-nav">
+  <a href="TLBS_ep2.html">บทที่สอง — นักล่าเงา</a>
+</div>
+
+</body>
+</html>

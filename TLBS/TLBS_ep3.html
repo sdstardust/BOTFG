@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แสงที่มองไม่เห็น — บทที่สาม</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0810;
+    --gold: #c8a96e;
+    --gold-dim: #8a6f3e;
+    --gold-light: #ecdcb4;
+    --parchment: #ede5d0;
+    --body-text: #ccc0a8;
+    --mist: #9aa8bc;
+    --rose-deep: #6b2d42;
+    --crimson: #7a1f2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--body-text);
+    font-family: 'Noto Serif Thai', serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .ambient {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(122,31,46,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 0% 100%, rgba(107,45,66,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 30% at 100% 50%, rgba(200,169,110,0.06) 0%, transparent 60%);
+  }
+
+  .stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 15% 10%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 55% 15%, rgba(200,169,110,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 72% 45%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(2px 2px at 88% 20%, rgba(200,169,110,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 8% 60%, rgba(255,255,255,0.65) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 75%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 92% 80%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 90%, rgba(200,169,110,0.4) 0%, transparent 100%);
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    border-bottom: 1px solid rgba(200,169,110,0.08);
+    background: rgba(10,8,16,0.75);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1rem; color: var(--gold-dim);
+  }
+
+  .nav-chapters { display: flex; gap: 2rem; list-style: none; }
+  .nav-chapters a {
+    font-size: 0.7rem; letter-spacing: 0.2rem; text-transform: uppercase;
+    color: var(--gold-dim); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-chapters a:hover, .nav-chapters a.active { color: var(--gold); }
+
+  /* HERO - tension/climax feel, centered */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 6rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(122,31,46,0.2) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  /* Broken thread visual */
+  .thread-visual {
+    position: relative;
+    width: 300px; height: 2px;
+    margin: 0 auto 4rem;
+    opacity: 0; animation: riseIn 1.5s ease 0.3s forwards;
+  }
+
+  .thread-visual::before {
+    content: '';
+    position: absolute; left: 0; top: 0;
+    width: 45%; height: 100%;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+
+  .thread-visual::after {
+    content: '';
+    position: absolute; right: 0; top: 0;
+    width: 45%; height: 100%;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .thread-break {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px; height: 8px;
+    background: var(--crimson);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(122,31,46,0.8), 0 0 24px rgba(122,31,46,0.4);
+  }
+
+  .chapter-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.45rem; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 1.5rem;
+    opacity: 0; animation: riseIn 1s ease 0.5s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--gold-light); margin-bottom: 1.5rem;
+    opacity: 0; animation: riseIn 1s ease 0.7s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.2rem;
+    color: var(--mist); line-height: 1.9; max-width: 480px;
+    opacity: 0; animation: riseIn 1s ease 0.9s forwards;
+  }
+
+  /* STORY */
+  .story {
+    position: relative; z-index: 1;
+    max-width: 740px; margin: 0 auto;
+    padding: 2rem 3rem 8rem;
+  }
+
+  .section-marker {
+    display: flex; align-items: center; gap: 2rem;
+    margin: 4rem 0 3rem;
+  }
+  .section-marker .bar {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(200,169,110,0.4), transparent);
+  }
+  .section-marker .bar.right {
+    background: linear-gradient(90deg, transparent, rgba(200,169,110,0.4));
+  }
+  .section-marker .label {
+    font-size: 0.6rem; letter-spacing: 0.35rem; text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .prose { font-size: 1.05rem; line-height: 2.15; color: var(--body-text); }
+  .prose p { margin-bottom: 1.8rem; text-indent: 2.2em; }
+  .prose p:first-of-type { text-indent: 0; }
+  .prose .em { color: var(--gold-light); font-style: italic; }
+  .prose .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12em; color: var(--gold-light); font-style: italic;
+  }
+  .prose .speech { color: var(--parchment); font-style: italic; }
+  .prose .tension { color: #c87070; font-style: italic; }
+
+  blockquote {
+    margin: 3rem 0; padding: 2rem 2.5rem;
+    border-left: 2px solid var(--gold-dim);
+    background: rgba(200,169,110,0.04);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.2rem;
+    color: var(--gold-light); line-height: 1.9;
+  }
+
+  blockquote.dark {
+    border-left-color: var(--crimson);
+    background: rgba(122,31,46,0.06);
+    color: #dbb0b0;
+  }
+
+  .scene-break {
+    text-align: center; color: var(--gold-dim);
+    letter-spacing: 1.2rem; font-size: 0.7rem;
+    margin: 3.5rem 0; opacity: 0.6;
+  }
+
+  /* Ending flourish */
+  .ending {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    position: relative;
+  }
+
+  .ending-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    line-height: 2;
+    margin-bottom: 3rem;
+    max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+
+  .ending-ornament {
+    color: var(--gold-dim);
+    font-size: 1.2rem;
+    letter-spacing: 1rem;
+    opacity: 0.5;
+  }
+
+  .chapter-nav {
+    position: relative; z-index: 1;
+    display: flex; justify-content: flex-start;
+    padding: 2rem 3rem 4rem;
+    border-top: 1px solid rgba(200,169,110,0.1);
+  }
+
+  .chapter-nav a {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none; color: var(--gold-dim);
+    font-size: 0.75rem; letter-spacing: 0.2rem;
+    text-transform: uppercase; transition: color 0.3s;
+  }
+  .chapter-nav a:hover { color: var(--gold); }
+  .chapter-nav a.prev::before { content: '←'; font-size: 1rem; }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-chapters { gap: 1rem; }
+    .hero { padding: 7rem 2rem 4rem; }
+    .story { padding: 2rem 1.5rem 6rem; }
+    .chapter-nav { padding: 2rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+<div class="stars"></div>
+
+<nav>
+  <span class="nav-title">แสงที่มองไม่เห็น</span>
+  <ul class="nav-chapters">
+    <li><a href="TLBS_ep1.html">บทที่ ๑</a></li>
+    <li><a href="TLBS_ep2.html">บทที่ ๒</a></li>
+    <li><a href="TLBS_ep3.html" class="active">บทที่ ๓</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="thread-visual"><div class="thread-break"></div></div>
+  <p class="chapter-eyebrow">✦ &nbsp; บทที่สาม &nbsp; ✦</p>
+  <h1>วันที่โลก<br>พังทลาย</h1>
+  <p class="hero-subtitle">ความจริงไม่เคยรอเวลาที่เหมาะสม<br>มันมาเสมอในคืนที่มืดที่สุด</p>
+</section>
+
+<article class="story">
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">ด้ายที่กำลังขาด</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>ความจริงที่ซ่อนอยู่ในหอคอยปีกตะวันตกถูกเปิดเผยในคืนเดือนหงาย</p>
+
+    <p>มันเริ่มต้นจากความเงียบที่ผิดปกติ เซลีนนั่งนิ่งสนิทตั้งแต่พระอาทิตย์ตก มือทั้งสองวางราบบนหัวเข่า ไม่ดีดพิณ ไม่วาดลวดลาย ไม่พูด เวย์แลนสังเกตเห็นแต่ไม่ถาม เพราะเขาเรียนรู้แล้วว่าบางครั้งเธอต้องการเวลาของตัวเอง</p>
+
+    <p>แต่คืนนี้ไม่เหมือนทุกคืน</p>
+
+    <p>เมื่อเดือนเพิ่งขึ้นสูงสุด เซลีนขยับในที่สุด แต่ไม่ใช่การขยับปกติ เธอก้าวลุกขึ้นอย่างช้า ๆ หันหน้าตรงมาทางเวย์แลน และในดวงตาขาวขุ่นของเธอ เขาเห็นสิ่งที่เขาไม่เคยเห็นมาก่อน</p>
+
+    <p>ความกลัว</p>
+
+    <p class="speech">"มีคนส่งคุณไปตาย"</p>
+
+    <p>เวย์แลนวางมือลงจากด้ามดาบช้า ๆ</p>
+
+    <p class="speech">"หมายความว่ายังไง"</p>
+
+    <p class="speech">"พระราชาสั่งให้คุณออกไปปราบสิ่งที่ไม่มีอยู่จริงในคืนนี้ มีการซุ่มโจมตีรอคุณอยู่ที่ป่าทางเหนือ ทหารสิบสองนาย พร้อมคาถาที่ออกแบบมาเพื่อฆ่าคนที่มีพลังเลือดโบราณโดยเฉพาะ"</p>
+
+    <p>เธอพูดโดยไม่หยุดหายใจ ราวกับว่าถ้าหยุดแล้วจะพูดต่อไม่ได้</p>
+
+    <p class="speech">"พระองค์รู้ว่าคุณอยู่ที่นี่มาสามเดือน รู้ว่าคุณรู้ความจริงเกี่ยวกับฉัน และพระองค์รู้ว่าถ้าคุณพูดออกไป... คนจะรู้ว่าลูกสาวพระองค์มีพลังที่ยิ่งใหญ่กว่าพระองค์"</p>
+  </div>
+
+  <blockquote class="dark">
+    ราชาที่กลัวถูกบดบังจะทำทุกอย่าง<br>
+    เพื่อดับแสงที่สว่างกว่าตน<br>
+    แม้แสงนั้นจะเป็นเลือดเนื้อของตัวเอง
+  </blockquote>
+
+  <div class="prose">
+    <p>เวย์แลนยืนนิ่ง ในหัวเขาประมวลข้อมูลทั้งหมด — คำสั่งที่มาช้า ตำแหน่งที่ผิดปกติ รายละเอียดงานที่ดูจงใจคลุมเครือ ทุกอย่างเริ่มเข้าที่เข้าทาง เขาเคยเดินเข้าไปในกับดักแบบนี้มาแล้วครั้งหนึ่งเมื่อยี่สิบปีก่อน และเขาออกมาได้เพราะโชคล้วน ๆ</p>
+
+    <p>ครั้งนี้เขาไม่ได้อยากพึ่งโชค</p>
+
+    <p class="speech">"ท่านรู้เรื่องนี้มานานแค่ไหน?"</p>
+
+    <p>เซลีนเงียบชั่วขณะ</p>
+
+    <p class="speech">"ตั้งแต่สัปดาห์ที่สอง"</p>
+
+    <p>เวย์แลนกำมือ</p>
+
+    <p class="speech">"ทำไมถึงไม่บอกข้า?"</p>
+
+    <p class="speech">"เพราะฉันรู้ว่าถ้าบอก คุณจะจากไป"</p> <p>เธอตอบตรง ๆ แบบที่เธอเป็นเสมอ แต่ครั้งนี้น้ำเสียงมีบางอย่างที่แตกต่าง <span class="speech">"และฉันยังไม่อยากให้คุณไป"</span></p>
+
+    <p>ความเงียบยาวนานขึ้นมา เต็มไปด้วยเสียงลมนอกหน้าต่างและเสียงเทียนไขที่ไหม้</p>
+
+    <p class="speech">"แล้วตอนนี้ทำไมถึงบอก?"</p>
+
+    <p class="speech">"เพราะคืนนี้ ด้ายของคุณเริ่มขาด"</p>
+
+    <p>เธอก้าวเดินมาหาเขาหนึ่งก้าว แล้วยื่นมือออกมาในอากาศอย่างลังเล ราวกับไม่แน่ใจว่าเขาอยู่ตรงไหน เวย์แลนก้าวเข้ามาหาอีกก้าว ให้มือเธอแตะข้อมือเขา</p>
+
+    <p class="speech">"อย่าออกไปคืนนี้"</p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">พลังแห่งความจริง</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>เขาไม่ได้ออกไปคืนนั้น</p>
+
+    <p>แต่ราชสำนักส่งทหารมาแทนก่อนเที่ยงคืน</p>
+
+    <p>เวย์แลนได้ยินเสียงก้าวเดินหนักหน่วงบนบันไดหินก่อนที่เสียงเคาะประตูจะดังขึ้น เขาลุกขึ้นคว้าดาบ แต่เซลีนวางมือบนแขนเขาเบา ๆ</p>
+
+    <p class="speech">"อย่า"</p>
+
+    <p class="speech">"พวกเขาจะทำร้ายท่าน"</p>
+
+    <p class="speech">"ไม่"</p> <p>เธอกล่าวเงียบ ๆ แล้วเดินไปยืนกลางห้อง <span class="speech">"เพราะพวกเขาไม่รู้ว่ากำลังทำอะไรอยู่"</span></p>
+
+    <p>ประตูเปิดออก ทหารแปดนายถือคบเพลิงและอาวุธ ผู้นำทีมเป็นนายทหารระดับสูงที่เวย์แลนจำหน้าได้จากพิธีในวัง</p>
+
+    <p class="speech">"ในพระนามของกษัตริย์ เจ้าหญิงเซลีนจะต้องถูกย้ายไปยัง—"</p>
+
+    <p>เขาพูดไม่จบ</p>
+
+    <p>เพราะในขณะนั้น เซลีนยกมือขึ้น และลวดลายดินสีเงินรอบตัวเธอลอยขึ้นเรืองแสง สว่างขึ้นเรื่อย ๆ จนทั้งห้องเต็มไปด้วยแสงสีเงินอมทอง และจากดวงตาขาวขุ่นของเธอ เส้นด้ายแห่งชะตากรรมนับร้อยนับพันเส้นเรืองแสงออกมา ฉายไปทั่วห้อง ไปถึงทหารแต่ละคน</p>
+
+    <p>และในแสงนั้น ทุกคนเห็นสิ่งที่เซลีนเห็นตลอดเวลา</p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="prose">
+    <p>นายทหารผู้นำทีมล้มคุกเข่าลงในที่สุด ไม่ใช่เพราะถูกบังคับ แต่เพราะในแสงของเซลีน เขาเห็นใบหน้าลูกสาวคนเล็กของเขาที่เพิ่งเกิดเมื่อเดือนก่อน เห็นเส้นด้ายของชีวิตลูกสาวที่ยาวและสว่าง และเขาก็รู้ในทันทีว่าเขาไม่ใช่คนที่ควรทำตามคำสั่งที่กำลังทำอยู่</p>
+
+    <p>ทหารคนอื่น ๆ ล้วนเห็นบางอย่างของตัวเอง บางคนเห็นพ่อแม่ บางคนเห็นเพื่อนที่ตายในสงครามครั้งก่อน บางคนเห็นตัวเองในอดีตที่ยังเป็นเด็กและยังเชื่อว่าโลกยุติธรรม</p>
+
+    <p>และในที่สุด พวกเขาก็วางอาวุธลงทีละคน</p>
+
+    <p>เวย์แลนยืนอยู่ข้างเธอตลอด ไม่ได้ต่อสู้ ไม่ได้ป้องกัน แค่ยืนเคียงข้าง เพราะเขาตระหนักในที่สุดว่า <span class="em">หญิงสาวที่มองไม่เห็นแสงคนนี้ไม่ต้องการใครมาปกป้องเธอ</span> เธอต้องการแค่ใครสักคนที่ยืนอยู่ข้างเธอในขณะที่เธอแบกสิ่งที่หนักเกินกว่าจะแบกคนเดียว</p>
+  </div>
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">การจากลา</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>พวกเขาออกจากวังก่อนรุ่งสาง</p>
+
+    <p>เซลีนไม่ได้เอาอะไรไปมาก พิณโบราณตัวเดียว ผ้าคลุมตัวหนึ่ง และหนังสือเล่มเล็กที่เธออ่านจนนิ้วจำรูปตัวอักษรแต่ละตัวได้ เวย์แลนเดินนำ เธอเดินตาม มือของเธอจับชายเสื้อของเขาเบา ๆ ไม่แน่นพอที่จะดึง แต่หนักพอที่จะรู้ว่าอยู่ที่นั่น</p>
+
+    <p>พวกเขาเดินผ่านสวนหลังวังที่ยังงามอยู่แม้ในยามดึก เซลีนบอกว่าเธอได้ยินเสียงดอกไม้ในยามกลางคืน — เสียงแมลงที่บินรอบกลีบ เสียงน้ำค้างที่หยดตกบนใบ เสียงรากที่ดูดน้ำขึ้นมาจากดิน เป็นดนตรีที่คนมองเห็นมักไม่ได้ยิน เพราะพวกเขาเพียงแค่มองดู ไม่ได้ฟัง</p>
+
+    <p>เวย์แลนไม่ได้พูดอะไร แต่เขาเดินช้าลง เพื่อฟัง</p>
+
+    <p>และนั่นคือครั้งแรกที่เขาได้ยินด้วย</p>
+  </div>
+
+  <div class="scene-break">· · · ✦ · · ·</div>
+
+  <div class="section-marker">
+    <div class="bar"></div>
+    <div class="label">แสงที่มองไม่เห็น</div>
+    <div class="bar right"></div>
+  </div>
+
+  <div class="prose">
+    <p>เซลีนไม่เคยเห็นหน้าเวย์แลน แต่เธอรู้ว่าเขาเป็นคนอย่างไร</p>
+
+    <p>เธอรู้จากน้ำเสียงที่อ่อนลงทีละน้อยทุกคืน จากเสียงเท้าที่ไม่เคยรีบแม้ทั้งโลกจะโกลาหล จากวิธีที่เขานั่งลงเงียบ ๆ เมื่อเธอร้องไห้โดยไม่รู้ตัวและไม่บอกให้เธอหยุด จากวิธีที่เขายื่นน้ำให้เธอก่อนที่เธอจะรู้ว่าตัวเองกระหาย</p>
+
+    <p>และรู้จากด้ายแห่งชะตากรรมสีทองที่งอกขึ้นระหว่างเธอกับเขา เส้นด้ายที่เธอไม่เคยเห็นในชีวิตมาก่อน</p>
+
+    <p>ด้ายที่ไม่ได้บอกอนาคต ไม่ได้บอกว่าจะเกิดอะไรขึ้น แต่เป็นด้ายที่บอกว่า <span class="em">ขณะนี้ มีคนอยู่กับเธอ</span></p>
+
+    <p>ในคืนที่พวกเขาเดินเท้าผ่านป่าที่เต็มไปด้วยสัตว์มีเวทย์มนตร์และลมหนาวที่กัดกระดูก เซลีนก้าวพลาดบนรากไม้ มือใหญ่จับเธอไว้ก่อนที่เธอจะล้ม</p>
+
+    <p class="speech">"ขอบคุณ"</p> <p>เธอกล่าว แล้วไม่ได้ปล่อยมือเขาออก</p>
+
+    <p>เวย์แลนไม่ได้ปล่อยมือเธอออกเช่นกัน</p>
+
+    <p class="speech">"ท่านมองเห็นชะตาทุกคน"</p> <p>เขาถามเบา ๆ เสียงที่เธอบอกว่าเป็นสีของคนที่กำลังเรียนรู้ที่จะอยู่กับความจริง <span class="speech">"แล้วชะตาของเราล่ะ?"</span></p>
+
+    <p>เซลีนหยุดเดิน หันหน้าไปทิศทางที่เธอรู้ว่าเขายืนอยู่ และยิ้ม ยิ้มแบบที่ไม่มีใครเคยทำให้เธอยิ้มได้มาก่อน</p>
+
+    <p class="speech">"ฉันมองไม่เห็น"</p> <p>เธอตอบ <span class="speech">"และนั่นแหละ... คือสิ่งที่ดีที่สุดที่เคยเกิดขึ้นกับฉัน"</span></p>
+
+    <p>เวย์แลนเงียบอยู่นาน เงียบแบบที่เธอรู้แล้วว่าไม่ใช่เงียบเพราะไม่มีอะไรพูด แต่เงียบเพราะกำลังรู้สึกบางอย่างที่ยังหาคำไม่ได้</p>
+
+    <p>แล้วเขาก็จูงมือเธอเดินต่อ เข้าไปในป่ามืดที่เต็มไปด้วยดาว</p>
+
+    <p>และในความมืดนั้น ทั้งสองต่างเห็นสิ่งที่คนอื่นมองไม่เห็น</p>
+
+    <p>เขาเห็นเธอ — เห็นจริง ๆ ครั้งแรกในชีวิตที่เขาเห็นใครโดยไม่ผ่านดวงตาทองแดง</p>
+
+    <p>เธอเห็นเขา — เห็นในแบบที่เธอเห็นทุกคน ผ่านเส้นด้ายแห่งชะตากรรม แต่เส้นด้ายของเขาเป็นสีที่เธอยังไม่มีชื่อให้ เป็นสีที่อุ่น และสว่าง และไม่มีรอยขาดอีกต่อไป</p>
+
+    <p>และโลกทั้งใบก็สว่างขึ้น ไม่ใช่เพราะแสงดาว ไม่ใช่เพราะเวทมนตร์</p>
+
+    <p>แต่เพราะมีคนสองคนที่ในที่สุดก็ได้ยืนอยู่ในที่ ที่ตัวเองควรอยู่</p>
+
+    <p class="speech">"แล้วก็เลิกเรียกฉันว่าท่านได้แล้วล่ะ"</p>
+  </div>
+
+  <div class="ending">
+    <div class="ending-quote">
+      "บางครั้งแสงที่สว่างที่สุด<br>
+      คือแสงที่ดวงตาไม่อาจมองเห็นได้<br>
+      แต่หัวใจรู้จักมันทุกครั้ง<br>
+      ที่ได้อยู่ใกล้"
+    </div>
+    <div class="ending-ornament">✦ &nbsp; จบ &nbsp; ✦</div>
+  </div>
+
+</article>
+
+<div class="chapter-nav">
+  <a href="บทที่สอง-นักล่าเงา.html" class="prev">บทที่สอง</a>
+</div>
+
+</body>
+</html>
