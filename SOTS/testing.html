@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ดาบที่ไม่มีชื่อ — เงาแห่งราชัน | sdstardust</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #04020a;
+  --card: #0d0a14;
+  --border: rgba(220,160,255,0.1);
+  --border-hover: rgba(220,160,255,0.28);
+  --star: #f0e8ff;
+  --dust: rgba(240,232,255,0.55);
+  --muted: rgba(240,232,255,0.28);
+  --violet: #c070ff;
+  --violet-soft: #e0aaff;
+  --rose: #ff6bbb;
+  --rose-soft: #ffb3d8;
+  --gold: #f0c060;
+  --purple-soft: #c4a8ff;
+  --menu-w: 280px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--void);
+  color: var(--star);
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── STARFIELD ─── */
+#starfield { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+/* ─── NEBULA ─── */
+.nebula { position:fixed; border-radius:50%; filter:blur(120px); pointer-events:none; z-index:0; }
+.nb1 {
+  width:650px; height:550px;
+  background:radial-gradient(ellipse, rgba(150,40,200,0.22) 0%, transparent 70%);
+  top:-150px; left:-180px;
+  animation:nd 28s ease-in-out infinite alternate;
+}
+.nb2 {
+  width:500px; height:500px;
+  background:radial-gradient(ellipse, rgba(200,40,140,0.16) 0%, transparent 70%);
+  bottom:-80px; right:-120px;
+  animation:nd 24s ease-in-out infinite alternate-reverse;
+}
+@keyframes nd { from{transform:translate(0,0);} to{transform:translate(35px,40px);} }
+
+/* ─── TOP NAV BAR ─── */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem 0 1.8rem;
+  background: linear-gradient(180deg, rgba(4,2,10,0.97) 0%, rgba(4,2,10,0.85) 100%);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.topbar-left {
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.topbar-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 600;
+  color: var(--star); text-decoration: none; letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.topbar-logo em { color: var(--purple-soft); font-style: italic; font-weight: 300; }
+
+.topbar-sep { color: var(--muted); font-size: 0.7rem; }
+
+.topbar-chapter {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 0.8rem; color: var(--muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 280px;
+}
+.topbar-chapter span { color: var(--violet-soft); }
+
+/* ─── MENU BUTTON ─── */
+.menu-btn {
+  position: relative;
+  width: 38px; height: 38px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 600;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.menu-btn:hover { border-color: var(--violet); background: rgba(192,112,255,0.07); }
+.menu-btn .bar {
+  width: 18px; height: 1.5px;
+  background: var(--violet-soft);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.menu-btn.open .bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.menu-btn.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-btn.open .bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ─── OVERLAY ─── */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(4,2,10,0.6);
+  backdrop-filter: blur(3px);
+  z-index: 800;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlay.show { opacity: 1; pointer-events: all; }
+
+/* ─── SIDE MENU ─── */
+.side-menu {
+  position: fixed;
+  top: 0; right: calc(-1 * var(--menu-w));
+  width: var(--menu-w);
+  height: 100%;
+  background: #0d0914;
+  border-left: 1px solid var(--border);
+  z-index: 900;
+  transition: right 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.side-menu.active { right: 0; }
+
+/* menu glow top */
+.menu-glow {
+  position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,112,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.menu-header {
+  padding: 1.8rem 1.5rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.menu-novel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--star); letter-spacing: 0.03em;
+  margin-bottom: 0.3rem;
+}
+.menu-label {
+  font-size: 0.62rem; letter-spacing: 0.3em;
+  color: var(--violet); text-transform: uppercase;
+}
+
+.menu-section-title {
+  font-size: 0.6rem; letter-spacing: 0.35em;
+  color: var(--muted); text-transform: uppercase;
+  padding: 1rem 1.5rem 0.5rem;
+  flex-shrink: 0;
+}
+
+.menu-links {
+  flex: 1; overflow-y: auto;
+  padding: 0 0 1rem;
+}
+.menu-links::-webkit-scrollbar { width: 3px; }
+.menu-links::-webkit-scrollbar-track { background: transparent; }
+.menu-links::-webkit-scrollbar-thumb { background: rgba(192,112,255,0.2); border-radius: 2px; }
+
+.menu-links a {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: var(--muted);
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  border-left: 2px solid transparent;
+  transition: all 0.2s;
+  position: relative;
+}
+.menu-links a:hover {
+  color: var(--star);
+  background: rgba(192,112,255,0.06);
+  border-left-color: var(--violet);
+}
+.menu-links a.current {
+  color: var(--violet-soft);
+  background: rgba(192,112,255,0.08);
+  border-left-color: var(--violet);
+}
+.menu-links a .ch-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem; color: var(--muted);
+  min-width: 1.5rem;
+}
+.menu-links a.current .ch-n { color: var(--violet); }
+
+.menu-divider {
+  height: 1px; background: var(--border);
+  margin: 0.5rem 1.5rem;
+}
+
+.menu-links .home-link {
+  margin-top: 0.3rem;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.menu-links .home-link:hover { color: var(--rose-soft); border-left-color: var(--rose); }
+
+/* ─── MAIN CONTENT ─── */
+.reader-wrap {
+  position: relative; z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 5rem 2rem 8rem;
+  transition: filter 0.3s;
+}
+
+/* chapter header */
+.ch-eyebrow {
+  font-size: 0.62rem; letter-spacing: 0.4em;
+  color: var(--violet); text-transform: uppercase;
+  display: block; margin-bottom: 0.7rem;
+  opacity: 0; animation: riseIn 0.8s ease 0.2s forwards;
+}
+.ch-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600; line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--star) 30%, var(--violet-soft) 70%, var(--rose-soft) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  opacity: 0; animation: riseIn 0.8s ease 0.35s forwards;
+}
+.ch-novel-name {
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  color: var(--muted); margin-bottom: 2.5rem;
+  opacity: 0; animation: riseIn 0.8s ease 0.5s forwards;
+}
+.ch-novel-name span { color: var(--violet-soft); }
+
+/* divider ornament */
+.ornament {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 2.5rem 0;
+  opacity: 0; animation: riseIn 0.8s ease 0.6s forwards;
+}
+.orn-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(192,112,255,0.25),transparent); }
+.orn-icon { color: var(--violet); font-size: 0.8rem; letter-spacing: 0.3em; }
+
+/* reading body */
+.ch-body {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.05rem;
+  line-height: 2.2;
+  color: var(--dust);
+  opacity: 0;
+  animation: riseIn 0.8s ease 0.7s forwards;
+}
+.ch-body p { margin-bottom: 1.6em; }
+.ch-body p:first-child::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.8em; font-weight: 600;
+  float: left; line-height: 0.75;
+  margin: 0.05em 0.1em 0 0;
+  color: var(--violet-soft);
+  text-shadow: 0 0 30px rgba(192,112,255,0.4);
+}
+.ch-body em {
+  font-style: italic; color: var(--violet-soft);
+}
+.ch-body strong {
+  font-weight: 600; color: var(--star);
+}
+
+/* scene break */
+.scene-break {
+  text-align: center; margin: 2.5rem 0;
+  color: var(--muted); letter-spacing: 0.5em;
+  font-size: 0.7rem;
+}
+
+/* ─── CHAPTER NAVIGATION ─── */
+.ch-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  opacity: 0; animation: riseIn 0.8s ease 0.9s forwards;
+}
+.ch-nav-btn {
+  display: flex; align-items: center; gap: 0.6rem;
+  text-decoration: none; color: var(--muted);
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--border); border-radius: 2px;
+  transition: all 0.25s;
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+.ch-nav-btn:hover {
+  border-color: var(--violet);
+  color: var(--violet-soft);
+  background: rgba(192,112,255,0.06);
+}
+.ch-nav-btn.disabled {
+  opacity: 0.25; pointer-events: none;
+}
+.ch-nav-center {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; color: var(--muted);
+  letter-spacing: 0.08em; text-align: center;
+}
+.ch-nav-center a {
+  color: var(--violet-soft); text-decoration: none;
+  display: block; font-size: 0.68rem; letter-spacing: 0.15em;
+  text-transform: uppercase; margin-top: 0.2rem;
+  transition: color 0.2s;
+}
+.ch-nav-center a:hover { color: var(--star); }
+
+/* ─── READING SETTINGS BAR ─── */
+.settings-bar {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  z-index: 400;
+  display: flex; align-items: center; gap: 0.5rem;
+  background: rgba(13,10,20,0.92);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  backdrop-filter: blur(12px);
+  opacity: 0; animation: riseIn 1s ease 1.2s forwards;
+}
+.settings-btn {
+  background: transparent; border: none;
+  color: var(--muted); font-size: 0.75rem;
+  cursor: pointer; padding: 0.3rem 0.7rem;
+  border-radius: 999px; letter-spacing: 0.05em;
+  font-family: 'Noto Sans Thai', sans-serif;
+  transition: all 0.2s;
+}
+.settings-btn:hover { color: var(--violet-soft); background: rgba(192,112,255,0.08); }
+.settings-sep { width:1px; height:14px; background:var(--border); }
+.progress-wrap { display:flex; align-items:center; gap:0.5rem; }
+.progress-bar {
+  width: 80px; height: 2px;
+  background: rgba(192,112,255,0.15); border-radius:999px; overflow:hidden;
+}
+.progress-fill {
+  height: 100%; width: 20%;
+  background: linear-gradient(90deg, var(--violet), var(--rose));
+  border-radius:999px;
+  transition: width 0.3s;
+}
+.progress-text { font-size:0.62rem; color:var(--muted); letter-spacing:0.05em; white-space:nowrap; }
+
+/* font size classes */
+body.fs-sm .ch-body { font-size: 0.92rem; }
+body.fs-md .ch-body { font-size: 1.05rem; }
+body.fs-lg .ch-body { font-size: 1.2rem; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes riseIn {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:600px){
+  .reader-wrap { padding: 5rem 1.2rem 7rem; }
+  .topbar-chapter { display:none; }
+  .ch-nav-btn span { display:none; }
+}
+</style>
+</head>
+<body class="fs-md">
+
+<div class="nebula nb1"></div>
+<div class="nebula nb2"></div>
+<canvas id="starfield"></canvas>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-logo" href="index.html">sd<em>stardust</em></a>
+    <span class="topbar-sep">›</span>
+    <div class="topbar-chapter">
+      <span>เงาแห่งราชัน</span> — ตอนที่ 1
+    </div>
+  </div>
+  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+  <div class="menu-glow"></div>
+
+  <div class="menu-header">
+    <div class="menu-label">✦ สารบัญ</div>
+    <div class="menu-novel-title">เงาแห่งราชัน</div>
+  </div>
+
+  <div class="menu-section-title">ตอนทั้งหมด</div>
+
+  <div class="menu-links">
+    <a href="chapter-1.html" class="current">
+      <span class="ch-n">01</span>
+      ดาบที่ไม่มีชื่อ
+    </a>
+    <a href="chapter-2.html">
+      <span class="ch-n">02</span>
+      ป่าแห่งความทรงจำ
+    </a>
+    <a href="chapter-3.html">
+      <span class="ch-n">03</span>
+      ป้อมปราการและความจริงที่ซ่อนอยู่
+    </a>
+    <a href="chapter-4.html">
+      <span class="ch-n">04</span>
+      กลับสู่ราชสำนัก
+    </a>
+    <a href="chapter-5.html">
+      <span class="ch-n">05</span>
+      รากเหง้าใหม่
+    </a>
+
+    <div class="menu-divider"></div>
+
+    <a href="novel-2.html" class="home-link">
+      <span class="ch-n">←</span>
+      หน้านิยาย
+    </a>
+    <a href="index.html" class="home-link">
+      <span class="ch-n">⌂</span>
+      หน้าหลัก
+    </a>
+  </div>
+</div>
+
+<!-- READER CONTENT -->
+<div class="reader-wrap" id="readerWrap">
+
+  <span class="ch-eyebrow">✦ เงาแห่งราชัน · ตอนที่ 1</span>
+  <h1 class="ch-title">ดาบที่ไม่มีชื่อ</h1>
+  <p class="ch-novel-name">โดย <span>sdstardust</span></p>
+
+  <div class="ornament">
+    <div class="orn-line"></div>
+    <div class="orn-icon">✦ ✦ ✦</div>
+    <div class="orn-line"></div>
+  </div>
+
+  <div class="ch-body">
+    <p>
+      ในคืนที่ดวงจันทร์หายไปจากท้องฟ้า ดาบก็ปรากฏขึ้นบนธรณีประตูของเธอ
+      ไม่มีชื่อ ไม่มีฝัก ไม่มีใครรู้ว่ามันมาจากไหน
+      มีเพียงรอยแกะสลักเล็กๆ ที่โคนใบมีดซึ่งเธออ่านออกเพียงสองคำว่า <em>"ยังไม่จบ"</em>
+    </p>
+
+    <p>
+      หล่อนหยิบมันขึ้นมาด้วยมือที่สั่น ใบมีดเย็นราวกับโลหะที่ไม่เคยรู้จักไออุ่น
+      แต่แปลกที่ในทันทีที่นิ้วสัมผัสด้ามจับ หัวใจของเธอกลับเต้นแรงราวกับรู้จักมันมาก่อน
+    </p>
+
+    <p>
+      <strong>"ใครทิ้งมันไว้ที่นี่?"</strong>
+    </p>
+
+    <p>
+      เสียงของเธอแผ่วลงไปในความมืด ไม่มีคำตอบ มีแต่เสียงลมที่พัดพาใบไม้ร่วงหล่นลงบนลานหิน
+      และที่ไกลออกไปในป่าทึบ เธอสาบานว่าเห็นเงาบางอย่างยืนนิ่งจ้องมาที่เธออยู่
+    </p>
+
+    <div class="scene-break">· · ·</div>
+
+    <p>
+      รุ่งเช้าเธอนำดาบไปให้นายกองทหารรักษาพระองค์ดู
+      ชายชราผู้นั้นเงียบอยู่นานผิดปกติ ก่อนจะส่งมันคืนมาพร้อมสีหน้าที่เธออ่านไม่ออก
+    </p>
+
+    <p>
+      <strong>"เก็บมันไว้"</strong> เขาพูดเบาๆ <strong>"และอย่าบอกใคร"</strong>
+    </p>
+
+    <p>
+      เธอเปิดปากจะถาม แต่ตาของเขากลับดูราวกับกำลังไล่เธอออกไปจากบทสนทนานั้นก่อนที่มันจะเริ่มขึ้นด้วยซ้ำ
+      เธอจึงได้แต่พยักหน้า กอดดาบไว้ชิดอก แล้วเดินออกจากห้องนั้น
+    </p>
+
+    <p>
+      โดยไม่รู้เลยว่าในอีกสามวันข้างหน้า ดาบเล่มนั้นจะเปลี่ยนทุกอย่าง
+    </p>
+  </div>
+
+  <div class="ornament" style="margin-top:3rem;">
+    <div class="orn-line"></div>
+    <div class="orn-icon">✦</div>
+    <div class="orn-line"></div>
+  </div>
+
+  <!-- CHAPTER NAV -->
+  <div class="ch-nav">
+    <a href="#" class="ch-nav-btn disabled">
+      ← <span>ตอนก่อนหน้า</span>
+    </a>
+    <div class="ch-nav-center">
+      ตอนที่ 1 / 5
+      <a href="novel-2.html">ดูทุกตอน ↑</a>
+    </div>
+    <a href="chapter-2.html" class="ch-nav-btn">
+      <span>ตอนต่อไป</span> →
+    </a>
+  </div>
+
+</div>
+
+<!-- SETTINGS BAR -->
+<div class="settings-bar">
+  <button class="settings-btn" onclick="setFont('sm')">ก&nbsp;เล็ก</button>
+  <button class="settings-btn" onclick="setFont('md')">ก</button>
+  <button class="settings-btn" onclick="setFont('lg')">ก&nbsp;ใหญ่</button>
+  <div class="settings-sep"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-text" id="progressText">0%</span>
+  </div>
+</div>
+
+<canvas id="starfield" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+
+<script>
+// ─── STARFIELD ───
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+function initStars(){
+  stars=[];
+  const n=Math.floor((canvas.width*canvas.height)/4500);
+  for(let i=0;i<n;i++){
+    const r=Math.random();
+    stars.push({
+      x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+      r:Math.random()*1.1+0.2, alpha:Math.random()*0.5+0.1,
+      speed:Math.random()*0.003+0.001, phase:Math.random()*Math.PI*2,
+      hue: r>0.6?280+Math.random()*40 : r>0.3?320+Math.random()*30 : 240+Math.random()*40
+    });
+  }
+}
+function draw(t){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{
+    const a=s.alpha*(0.5+0.5*Math.sin(t*s.speed*50+s.phase));
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`hsla(${s.hue},65%,88%,${a})`; ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+resize(); initStars(); requestAnimationFrame(draw);
+window.addEventListener('resize',()=>{ resize(); initStars(); });
+
+// ─── MENU ───
+function toggleMenu(){
+  const menu = document.getElementById('sideMenu');
+  const btn  = document.getElementById('menuBtn');
+  const ovl  = document.getElementById('overlay');
+  menu.classList.toggle('active');
+  btn.classList.toggle('open');
+  ovl.classList.toggle('show');
+}
+function closeMenu(){
+  document.getElementById('sideMenu').classList.remove('active');
+  document.getElementById('menuBtn').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+// ─── FONT SIZE ───
+function setFont(size){
+  document.body.classList.remove('fs-sm','fs-md','fs-lg');
+  document.body.classList.add('fs-'+size);
+}
+
+// ─── READ PROGRESS ───
+function updateProgress(){
+  const el = document.getElementById('readerWrap');
+  const scrollTop = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? Math.round((scrollTop/docH)*100) : 0;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = pct+'%';
+}
+window.addEventListener('scroll', updateProgress);
+updateProgress();
+</script>
+</body>
+</html>

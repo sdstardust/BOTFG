@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ปุ่ม 3 ขีด */
+.menu-btn {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* เมนูด้านขวา */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -250px; /* ซ่อน */
+  width: 250px;
+  height: 100%;
+  background-color: #111;
+  padding-top: 60px;
+  transition: 0.3s;
+}
+
+/* ลิงก์เมนู */
+.side-menu a {
+  display: block;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+}
+
+.side-menu a:hover {
+  background-color: #575757;
+}
+
+/* ตอนเปิดเมนู */
+.side-menu.active {
+  right: 0;
+}
