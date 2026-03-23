@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน | ตอนที่ 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a5f28;
+    --ice: #a8c8e8;
+    --ice-light: #d0e8f8;
+    --ice-dim: #5a7a9a;
+    --frost: #e8f4ff;
+    --steel: #6a7a8a;
+    --steel-light: #9aaabb;
+    --crimson: #8b1a1a;
+    --crimson-light: #c0392b;
+    --dark: #060a10;
+    --dark-mid: #0e1520;
+    --parchment: #f0e8d8;
+    --parchment-dark: #ccbca0;
+    --text-body: #dde4ee;
+    --text-dim: #7a8898;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--dark);
+    color: var(--text-body);
+    font-family: 'Sarabun', serif;
+    font-weight: 300;
+    line-height: 1.95;
+    font-size: 17px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(168,200,232,0.15) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 10% 50%, rgba(90,122,154,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 90% 80%, rgba(139,26,26,0.10) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Snow particles */
+  .snow {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .flake {
+    position: absolute;
+    background: rgba(220,235,255,0.8);
+    border-radius: 50%;
+    animation: snowFall var(--dur, 12s) linear infinite;
+    animation-delay: var(--delay, 0s);
+    opacity: 0;
+  }
+  @keyframes snowFall {
+    0%   { transform: translateY(-20px) translateX(0); opacity: 0; }
+    5%   { opacity: var(--op, 0.5); }
+    90%  { opacity: var(--op, 0.5); }
+    100% { transform: translateY(110vh) translateX(var(--drift, 30px)); opacity: 0; }
+  }
+
+  /* Ice shimmer */
+  .shimmer {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .shard {
+    position: absolute;
+    background: linear-gradient(135deg, rgba(168,200,232,0.3), transparent);
+    animation: shardPulse var(--dur, 5s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+    opacity: 0;
+    transform: rotate(var(--rot, 45deg));
+  }
+  @keyframes shardPulse {
+    0%, 100% { opacity: 0; transform: rotate(var(--rot, 45deg)) scale(0.8); }
+    50% { opacity: var(--op, 0.3); transform: rotate(var(--rot, 45deg)) scale(1); }
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 780px; margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .header-ornament { text-align: center; margin-bottom: 20px; animation: fadeDown 1.2s ease both; }
+  .ornament-line {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; color: var(--ice); font-size: 20px; letter-spacing: 8px;
+  }
+  .ornament-line::before, .ornament-line::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ice), transparent);
+  }
+
+  .series-title {
+    font-family: 'Cinzel', serif; font-size: 11px;
+    letter-spacing: 6px; color: var(--gold-dim);
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 16px; animation: fadeDown 1.2s ease 0.1s both;
+  }
+  .main-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(32px, 6vw, 52px); color: var(--gold);
+    text-align: center; line-height: 1.3;
+    text-shadow: 0 0 40px rgba(201,168,76,0.4), 0 2px 4px rgba(0,0,0,0.9);
+    margin-bottom: 10px; animation: fadeDown 1.2s ease 0.2s both;
+  }
+  .subtitle {
+    font-family: 'Cinzel', serif; font-size: 13px;
+    letter-spacing: 4px; color: var(--text-dim);
+    text-align: center; margin-bottom: 50px;
+    animation: fadeDown 1.2s ease 0.3s both;
+  }
+  .chapter-badge {
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px; margin-bottom: 16px;
+    animation: fadeDown 1s ease 0.4s both;
+  }
+  .chapter-badge span {
+    font-family: 'Cinzel', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
+  }
+  .badge-gem {
+    width: 6px; height: 6px;
+    background: var(--ice);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--ice-light);
+  }
+  .chapter-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(18px, 3.5vw, 26px); color: var(--parchment);
+    text-align: center; margin-bottom: 50px;
+    text-shadow: 0 0 20px rgba(240,232,216,0.2);
+    animation: fadeDown 1s ease 0.5s both;
+  }
+
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; margin: 40px 0;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168,200,232,0.5), transparent);
+  }
+  .divider-gem {
+    width: 5px; height: 5px; background: var(--ice);
+    transform: rotate(45deg); flex-shrink: 0;
+    box-shadow: 0 0 6px var(--ice-light);
+  }
+
+  .content { animation: fadeUp 1.4s ease 0.6s both; }
+
+  p { margin-bottom: 24px; text-align: justify; text-indent: 2em; }
+ 
+  /*
+  p.drop-cap::first-letter {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 4.5em; font-weight: 700;
+    color: var(--ice);
+    float: left; line-height: 0.75;
+    margin: 8px 12px -4px 0;
+    text-shadow: 0 0 20px rgba(168,200,232,0.6);
+  }
+    */
+
+
+  .scene-title {
+    font-family: 'Cinzel', serif; font-size: 13px;
+    letter-spacing: 4px; color: var(--ice);
+    text-align: center; text-transform: uppercase;
+    margin: 50px 0 30px; opacity: 0.85;
+  }
+
+  .dialogue { color: #dde4ee; text-indent: 2em; }
+  .dramatic { color: var(--gold-light); font-style: italic; }
+  .inner-thought { color: var(--text-dim); font-style: italic; }
+
+  /* King's voice — cold and precise */
+  .king-voice {
+    color: var(--ice-light);
+    font-style: italic;
+    text-indent: 2em;
+    letter-spacing: 0.3px;
+  }
+
+  .quote-block {
+    border-left: 2px solid var(--ice-dim);
+    padding: 16px 24px; margin: 36px 0;
+    background: rgba(168,200,232,0.04);
+    font-style: italic; color: var(--parchment-dark);
+  }
+  .quote-block p { text-indent: 0; margin-bottom: 12px; }
+  .quote-block p:last-child { margin-bottom: 0; }
+
+  .court-scene {
+    background: rgba(14,21,32,0.6);
+    border: 1px solid rgba(168,200,232,0.15);
+    border-radius: 2px; padding: 26px; margin: 32px 0;
+  }
+  .court-scene p { margin-bottom: 20px; }
+  .court-scene p:last-child { margin-bottom: 0; }
+
+  .drama {
+    background: rgba(139,26,26,0.07);
+    border-top: 1px solid rgba(139,26,26,0.22);
+    border-bottom: 1px solid rgba(139,26,26,0.22);
+    padding: 26px; margin: 32px 0;
+  }
+  .drama p { margin-bottom: 20px; }
+  .drama p:last-child { margin-bottom: 0; }
+
+  .tender {
+    background: rgba(201,168,76,0.04);
+    border-left: 2px solid rgba(201,168,76,0.35);
+    padding: 20px 28px; margin: 36px 0;
+  }
+  .tender p { text-indent: 0; margin-bottom: 14px; }
+  .tender p:last-child { margin-bottom: 0; }
+
+  .chapter-end {
+    text-align: center; margin-top: 70px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(168,200,232,0.2);
+    animation: fadeUp 1s ease 1s both;
+  }
+  .chapter-end .end-mark {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px; color: var(--ice);
+    letter-spacing: 6px; display: block; margin-bottom: 12px;
+  }
+  .next-teaser {
+    font-size: 13px; color: var(--text-dim);
+    font-style: italic; letter-spacing: 1px;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--ice-dim); border-radius: 3px; }
+
+  em { font-style: italic; color: var(--gold-light); }
+  strong { font-weight: 600; color: var(--parchment); }
+
+  @media (max-width: 600px) {
+    .container { padding: 40px 24px 80px; }
+    p { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="snow" id="snow"></div>
+<div class="shimmer" id="shimmer"></div>
+
+<div class="container">
+
+  <div class="header-ornament">
+    <div class="ornament-line">❄ ✦ ❄</div>
+  </div>
+
+  <p class="series-title">นิยายแฟนตาซีโรแมนติก</p>
+  <h1 class="main-title">เงาแห่งราชัน</h1>
+  <p class="subtitle">Shadow of the Sovereign</p>
+
+  <div class="chapter-badge">
+    <div class="badge-gem"></div>
+    <span>ตอนที่ ๖</span>
+    <div class="badge-gem"></div>
+  </div>
+
+  <h2 class="chapter-title">ดินแดนแห่งน้ำแข็ง</h2>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="content">
+
+    <p class="drop-cap">เวลมัวร์ เริ่มต้นด้วยความหนาว</p>
+
+    <p>ไม่ใช่ความหนาวธรรมดาที่แค่ทำให้เนื้อตัวสั่น แต่เป็นความหนาวที่ซึมเข้าไปในกระดูก ราวกับอากาศของดินแดนนี้มีความตั้งใจของตัวเอง ต้นไม้สนสูงตระหง่านสองข้างทาง ใบเขียวเข้มปกคลุมด้วยหิมะบางๆ และท้องฟ้าเป็นสีเทาเงินตลอดเวลา ราวกับไม่เคยตัดสินใจว่าจะให้แสงแดดผ่านมาหรือไม่</p>
+
+    <p>เอลาร่าดึงเสื้อคลุมให้แน่นขึ้น มองดินแดนที่เปลี่ยนไปอย่างชัดเจนทุกลีก ยิ่งเดินทางเข้าไปทางเหนือ ต้นไม้ยิ่งสูงขึ้น หิมะยิ่งหนาขึ้น และผู้คนที่พวกเขาผ่านมาตามหมู่บ้านเล็กๆ มองพวกเขาด้วยสายตาที่อ่านยาก ไม่ใช่ความเป็นศัตรู แต่เป็นการประเมินค่าอย่างเงียบๆ ของคนที่รู้ว่าคนแปลกหน้าหมายความว่าอะไร</p>
+
+    <p class="dialogue">"ผู้คนที่นี่ไม่ค่อยยิ้ม" เธอพูดเบาๆ กับคาเอลที่ขี่ม้าเคียงข้าง</p>
+
+    <p class="dialogue">"พวกเขายิ้มเวลาที่มีเหตุผลจะยิ้ม" คาเอลตอบ เสียงมีบางอย่างที่อ่อนกว่าปกติ อาจเป็นเพราะเขากำลังกลับบ้าน ถึงแม้ว่าบ้านนั้นจะไม่ได้ต้อนรับเขาเสมอ "ที่นี่ฤดูหนาวยาวนาน คนที่นี่เรียนรู้ว่าต้องประหยัดทุกอย่าง รวมถึงความรู้สึก"</p>
+
+    <p class="dialogue">"เหมือนอย่างที่คุณโตมา?" เธอถามโดยไม่ได้ตั้งใจ</p>
+
+    <p>คาเอลหันมามองเธอ แล้วก็พยักหน้าเล็กน้อย</p>
+
+    <p class="dialogue">"บางส่วน" เขาพูด "แต่แม่ผมสอนผมว่าความอบอุ่นไม่ได้หายไปในความหนาว แค่ซ่อนอยู่ข้างใน"</p>
+
+    <p class="inner-thought">แม่ของเขา ผู้หญิงที่เขาแทบไม่พูดถึง</p>
+
+    <p>เธอไม่ถามต่อ รอให้เขาพูดเองถ้าอยากพูด</p>
+
+    <p class="dialogue">"แม่ผมชื่อ เซร่า" คาเอลพูดหลังจากนั้นสักครู่ ราวกับเขารู้ว่าเธอกำลังรอ "เธอเป็นนักรบที่เก่งที่สุดในยุคนั้น พ่อรักเธอมาก แต่ไม่สามารถแต่งงานได้เพราะพระราชินีถูกกำหนดไว้แล้วก่อนหน้า" เขามองตรงไปข้างหน้า "แม่ไม่เคยโกรธเรื่องนั้น เธอบอกว่าเธอได้รับความรักแล้ว และรักนั้นให้ผมมา นั่นพอแล้วสำหรับเธอ"</p>
+
+    <p class="dialogue">"เธอฟังดูแข็งแกร่งมาก"</p>
+
+    <p class="dialogue">"เธอเป็นคนที่แข็งแกร่งที่สุดที่ผมเคยรู้จัก" คาเอลพูดเงียบๆ "และผมใช้เวลาทั้งชีวิตพยายามเป็นแบบนั้นบ้าง แต่บางทีก็รู้สึกว่าไปไม่ถึง"</p>
+
+    <p>เอลาร่ามองเขา ชายที่เธอเพิ่งรู้จักมาไม่กี่วันแต่รู้สึกว่าเข้าใจในแบบที่ลึกกว่าปกติ</p>
+
+    <p class="dialogue">"คุณอาจไปถึงแล้ว" เธอพูดเงียบๆ "แค่ไม่รู้ตัว"</p>
+
+    <p>คาเอลเงียบ แต่เธอเห็นว่าเขากดมือบนบังเหียนแน่นขึ้นเล็กน้อย ซึ่งเธอเรียนรู้มาแล้วว่าเป็นสัญญาณว่าคำพูดนั้นไปถึงเขา</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ ราชสำนัก เวลมัวร์ ~</p>
+
+    <p>ปราสาท ฟรอสต์โฮลด์ ไม่ได้ดูน่ากลัวแบบแบล็คมัวร์คีป มันดูสง่างามและเยือกเย็น กำแพงหินสีขาวอมเทาที่ดูดซับสีของหิมะรอบข้าง หอคอยสูงเรียวบางกว่าปราสาททางใต้ และหน้าต่างเรียงรายอย่างเป็นระเบียบราวกับดวงตาที่กำลังประเมินทุกคนที่เข้ามา</p>
+
+    <p>ยามที่ประตูไม่ได้ขัดขวางพวกเขา แต่มองคาเอลด้วยสายตาที่เอลาร่าอ่านออกว่ามีทั้งการจำได้และความเยือกเย็น ลูกชายของกษัตริย์กลับมา ทุกคนรู้ว่าหมายความว่าอะไร</p>
+
+    <p class="inner-thought">สัมผัสของเอลาร่ากระตุกเบาๆ ไม่ใช่อันตราย แต่เป็นความระแวง ทุกคนที่นี่ระแวดระวัง ราวกับรู้ว่าพายุกำลังจะมา</p>
+
+    <p>พวกเขาถูกนำไปที่ห้องรับรองขนาดใหญ่กว่าที่แอชวาลด์มาก เพดานสูง เสาหินสลักลวดลาย และแสงเทียนพันดวงที่ส่องสว่างแต่ยังคงเย็น ราวกับแม้แต่ไฟยังหนาวอยู่ที่นี่</p>
+
+    <p>กษัตริย์อัลดริก แห่งเวลมัวร์ ไม่ได้ทำให้พวกเขารอนาน</p>
+
+    <div class="court-scene">
+      <p>พระองค์เดินเข้ามาโดยไม่มีการประกาศ ชายอายุหกสิบกว่า ผมขาวทั้งหมดแต่ยังหนา ตัวตรงราวกับถูกหล่อมาจากหินเดียวกับกำแพงปราสาท และดวงตาสีเทาอ่อน ดวงตาสีเดียวกับลูกชายของพระองค์ทุกประการ</p>
+
+      <p>เพียงแต่ในดวงตาของกษัตริย์อัลดริก ไม่มีความอบอุ่นที่ ต่างจากที่เธอเห็นในดวงตาของคาเอล</p>
+
+      <p>พระองค์หยุดอยู่ห่างสิบก้าว มองคาเอลก่อน แล้วค่อยเลื่อนมาที่เธอ</p>
+
+      <p class="king-voice">"เคเลน" พระองค์พูด ใช้ชื่อเต็มอีกครั้ง เสียงไม่ดัง แต่เต็มห้อง "เจ้ากลับมาพร้อมกับทูตของแอชวาลด์ และ..." สายตาเลื่อนมาที่เอลาร่า "หญิงสาวข้าที่ไม่รู้จัก"</p>
+
+      <p class="dialogue">"เอลาร่า วินด์มาร์ค" คาเอลพูด เสียงราบเรียบ "ผู้ร่วมภารกิจที่แบล็คมัวร์"</p>
+
+      <p class="king-voice">"ภารกิจที่เจ้าเลือกทำโดยไม่ปรึกษาใคร" กษัตริย์อัลดริก พูดต่อ เสียงเยือกเย็น "และในภารกิจนั้น เจ้าทำลายสมบัติที่อยู่ในดินแดนที่เวลมัวร์อ้างสิทธิ์"</p>
+
+      <p class="dialogue">"โอราเคิลออฟรูน ไม่ใช่สมบัติ" คาเอลพูด "มันเป็นอาวุธที่จะทำลายสมดุลของทุกอาณาจักร รวมถึงเวลมัวร์"</p>
+
+      <p class="king-voice">"เจ้าไม่ใช่คนตัดสิน" กษัตริย์พูด ครั้งแรกที่เสียงพระองค์มีขอบ "เจ้าเป็นชาโดว์แฮนด์ ไม่ใช่กษัตริย์"</p>
+
+      <p>ห้องเงียบสนิท</p>
+
+      <p class="dialogue">"ขอโทษครับ" คาเอลพูด เสียงไม่สั่น "แต่ผมเชื่อว่าสิ่งที่ทำถูกต้อง"</p>
+
+      <p class="king-voice">"ความเชื่อของเจ้าทำให้เวลมัวร์เสียหน้าต่อแอชวาลด์"</p>
+
+      <p class="dialogue">"หรือเวลมัวร์เสียหน้าเพราะกำลังจะเปิดสงครามเพื่อสิ่งที่ไม่ควรมีอยู่ตั้งแต่แรก" เอลาร่าพูดขึ้นมาก่อนที่จะคิด</p>
+
+      <p>ทุกสายตาในห้องหันมาที่เธอ</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ หญิงสาวที่ไม่รู้จัก ~</p>
+
+    <p>กษัตริย์อัลดริกมองเธอนานกว่าที่จำเป็น ไม่ใช่มองด้วยความโกรธ แต่เป็นการมองของคนที่กำลังคิดอะไรบางอย่าง</p>
+
+    <p class="king-voice">"เจ้ากล้าพูดในราชสำนักของผู้อื่นโดยไม่ได้รับอนุญาต" พระองค์พูด</p>
+
+    <p class="dialogue">"ขออภัยค่ะ ท่าน" เธอโค้งศีรษะเล็กน้อย ไม่มากแต่พอให้ถือว่าให้เกียรติ "แต่ฉันอยู่ที่แบล็คมัวร์ ฉันเห็นว่าโอราเคิลจะทำอะไรถ้าปลุกขึ้นมา และถ้ามันถูกปลุกขึ้นมาได้ ไม่มีอาณาจักรไหนปลอดภัย เวลมัวร์ก็ด้วย"</p>
+
+    <p class="king-voice">"เจ้าดูรู้จักอาณาจักรนี้ดีนักสำหรับคนที่เพิ่งก้าวเข้ามาในดินแดนนี้"</p>
+
+    <p class="dialogue">"ฉันไม่รู้จักเวลมัวร์เลย" เธอตอบตรงๆ "แต่ฉันรู้จักคนที่เติบโตมาที่นี่ และเขาเป็นคนที่เลือกทำสิ่งที่ถูกต้องแม้ว่ามันจะเจ็บปวดที่สุด นั่นบอกฉันว่าเวลมัวร์สอนลูกหลานของตัวเองไว้ดีมาก"</p>
+
+    <p>ความเงียบ</p>
+
+    <p>กษัตริย์อัลดริกมองเธอต่ออีกสักครู่ แล้วก็เลื่อนสายตาไปที่คาเอล ในแววตานั้นมีบางอย่างที่เปลี่ยนไปเล็กน้อย ยังไม่ได้อ่อนลง แต่ไม่ได้แข็งเท่าเดิม</p>
+
+    <p class="king-voice">"พอแค่นี้ก่อน" พระองค์พูดในที่สุด "เราจะคุยกันต่อพรุ่งนี้"</p>
+
+    <p>พระองค์หันจากไป คณะทูตโค้งคำนับ และห้องค่อยๆ เบาบางลง</p>
+
+    <p>คาเอลหันมามองเธอด้วยสายตาที่เธออ่านออกว่าเป็นทั้งความขอบคุณและความเป็นห่วง</p>
+
+    <p class="dialogue">"ผมเคยบอกว่าที่นี่อันตรายในแบบที่ต่างออกไป" เขาพูดเบาๆ</p>
+
+    <p class="dialogue">"ฉันรู้" เธอพูดเท่าๆ กัน "แต่มีบางอย่างที่ฉันพูดออกไปไม่ได้ถ้าเห็นว่าไม่ยุติธรรม"</p>
+
+    <p class="dialogue">"นั่นคือสิ่งที่ทำให้คุณอยู่รอดมาหรือสิ่งที่ทำให้คุณเจ็บปวดมาตลอด ?" เขาถาม</p>
+
+    <p>เธอคิดสักครู่</p>
+
+    <p class="dialogue">"ทั้งสองอย่าง" เธอตอบ</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ คืนแรกที่ Frosthold ~</p>
+
+    <p>ห้องที่พวกเขาได้รับสะอาดและเย็น เตาผิงใหญ่ตรงกลางห้องให้ความอบอุ่นพอประมาณ และหน้าต่างบานใหญ่มองออกไปเห็นป่าสนที่ปกคลุมหิมะใต้แสงจันทร์</p>
+
+    <p>เอลาร่ายืนอยู่ที่หน้าต่าง มองออกไป ความเงียบของเวลมัวร์ ต่างจากความเงียบที่เธอคุ้นเคย ที่นี่เงียบอย่างถาวร ราวกับแม้แต่เสียงก็หนาวเกินกว่าจะเดินทางได้ไกล</p>
+
+    <p>มีเสียงเคาะที่ประตูเบาๆ</p>
+
+    <p class="dialogue">"เข้ามาได้"</p>
+
+    <p>คาเอลเปิดประตู ยืนอยู่ที่ขอบประตูโดยไม่ก้าวเข้ามา มือถือถ้วยสองใบ ควันลอยขึ้นจากของร้อนข้างใน</p>
+
+    <p class="dialogue">"ชา" เขาพูด "ที่นี่ดื่มจะก่อนนอน ช่วยให้อบอุ่น"</p>
+
+    <p class="dialogue">"ขอบคุณ" เธอรับถ้วยจากมือเขา นิ้วสัมผัสกันเล็กน้อย ทั้งคู่ไม่ถอยออกทันที</p>
+
+    <p>คาเอลก้าวเข้ามาในห้อง ยืนข้างๆ เธอที่หน้าต่าง มองออกไปที่ป่าเดียวกัน</p>
+
+    <p class="dialogue">"ตอนเด็กๆ ผมมักยืนอยู่ที่หน้าต่างนี้" เขาพูดเบาๆ "ตอนที่แม่ยังอยู่ เธอมักเล่านิทานให้ฟังเกี่ยวกับต้นไม้ในป่า บอกว่าทุกต้นมีชื่อและทุกชื่อมีเรื่องราว"</p>
+
+    <p class="dialogue">"คุณจำชื่อได้บ้างไหม ?"</p>
+
+    <p class="dialogue">"จำได้ทุกต้น" เขาตอบ เสียงเบา "นั่นเป็นวิธีที่แม่สอนผมให้จำสิ่งที่สำคัญ ไม่ใช่ด้วยการท่อง แต่ด้วยการเชื่อมมันกับบางอย่างที่รัก"</p>
+
+    <p>เอลาร่าจิบชา รสขมอมหวาน สมุนไพรที่เธอไม่รู้จักแต่อบอุ่นลงไปถึงอก</p>
+
+    <p class="dialogue">"พ่อคุณ" เธอพูดหลังจากนั้น "เขารักคุณไหม ?"</p>
+
+    <p>คาเอลเงียบนาน</p>
+
+    <p class="dialogue">"รัก" เขาตอบในที่สุด "แต่ไม่รู้วิธีแสดงออกกับคนที่ทำให้เขารู้สึกผิดอยู่เสมอ" เขามองออกไปที่ป่า "ทุกครั้งที่เขาเห็นผม เขาเห็นแม่ด้วย และเห็นสิ่งที่เขาทำได้ไม่ดีพอ"</p>
+
+    <p class="dialogue">"และคุณรู้มานานแล้ว ?"</p>
+
+    <p class="dialogue">"รู้ตั้งแต่เด็ก" เขาพยักหน้า "นั่นไม่ได้ทำให้เจ็บน้อยลง แค่ทำให้เข้าใจมากขึ้น"</p>
+
+    <p class="inner-thought">ชายคนนี้แบกอะไรหนักมาทั้งชีวิต และยังคงเดินหน้าต่อ</p>
+
+    <p>เธอไม่ได้วางมือบนมือเขา ไม่ได้พูดคำปลอบใจ แค่ยืนอยู่ใกล้ๆ ปล่อยให้ความเงียบเป็นสิ่งที่มีอยู่ระหว่างพวกเขา ไม่ใช่ช่องว่าง แต่เป็นพื้นที่</p>
+
+    <p>คาเอลหันมามองเธอ</p>
+
+    <p class="dialogue">"ผมดีใจที่คุณมา" เขาพูด ไม่ตีอ้อมค้อม</p>
+
+    <p class="dialogue">"ฉันก็ดีใจที่มา" เธอตอบ แล้วก็หันไปมองต้นไม้ข้างนอก ราวกับไม่อยากให้เขาเห็นหน้าตอนพูดคำนั้น</p>
+
+    <p class="dialogue">"คุณไม่ได้มองผมเลยตอนพูด" เขาสังเกต เสียงไม่ล้อเล่น แต่มีความอ่อนโยนบางอย่างซ่อนอยู่</p>
+
+    <p class="dialogue">"ฉันกำลังชมวิว" เธอพูด แต่ก็ไม่ได้หันมา</p>
+
+    <p>คาเอลไม่ตอบ แต่มุมปากของเขาขยับขึ้นในแบบที่เธอชอบ</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ รุ่งเช้าและความจริง ~</p>
+
+    <p>การประชุมวันถัดมาหนักกว่าวันแรก</p>
+
+    <p>กษัตริย์อัลดริก นั่งที่ปลายโต๊ะ ที่ปรึกษาสามคนอยู่สองข้าง คาเอลนั่งตรงข้ามพ่อ และเอลาร่านั่งข้างๆ คาเอล ซึ่งทำให้ที่ปรึกษาทั้งสามคนแลกสายตากันอย่างไม่ได้ตั้งใจ</p>
+
+    <div class="drama">
+      <p class="king-voice">"เจ้ามาที่นี่ในฐานะอะไร เคเลน ?" กษัตริย์ถามตรงๆ ไม่มีการอ้อมค้อม "ลูกชาย ? ทูตของแอชวาลด์ ? หรือคนที่มาขอโทษ ?"</p>
+
+      <p class="dialogue">"ผมมาในฐานะตัวเอง" คาเอลพูด เสียงสงบ "ซึ่งเป็นสิ่งที่ผมไม่เคยทำมาก่อน"</p>
+
+      <p>กษัตริย์ขมวดคิ้วเล็กน้อย</p>
+
+      <p class="king-voice">"ตัวเอง ? หมายความว่าอะไร ?"</p>
+
+      <p class="dialogue">"หมายความว่าผมไม่ได้มาในนามเวลมัวร์ หรือ แอชวาลด์" คาเอลพูด "ผมมาบอกพ่อว่าผมตัดสินใจทำสิ่งที่ถูกต้อง และผมจะทำอีกถ้ามีสถานการณ์เดิม" เขาหยุด "ผมไม่ได้มาขอโทษสำหรับสิ่งที่ทำ แต่ผมมาขอโทษที่ทำโดยไม่บอกพ่อก่อน นั่นเป็นสิ่งที่ผมทำผิด"</p>
+
+      <p>ห้องเงียบ</p>
+
+      <p class="king-voice">"เจ้าต่างจากที่ข้าคาดไว้" กษัตริย์พูดในที่สุด เสียงยังคงเยือกเย็น แต่มีอะไรบางอย่างในนั้นที่ฟังดูเหมือนการประเมินใหม่ "เจ้ากลับมาโดยไม่กลัว"</p>
+
+      <p class="dialogue">"ผมกลัว" คาเอลพูดตรงๆ "แต่ผมมีคนที่เดินมาด้วย"</p>
+
+      <p>สายตาของกษัตริย์อัลดริก เลื่อนมาที่เอลาร่า</p>
+
+      <p class="king-voice">"หญิงสาวจากแอชวาลด์"</p>
+
+      <p class="dialogue">"ไม่ใช่จากแอชวาลด์" เธอพูด "ฉันไม่ได้เป็นของอาณาจักรไหน ฉันแค่เลือกที่จะอยู่กับคนที่คุ้มค่า"</p>
+
+      <p class="king-voice">"และลูกชายข้าคุ้มค่าในสายตาเจ้า ?"</p>
+
+      <p class="dialogue">"มากที่สุดในบรรดาคนที่ฉันเคยเดินทางมาด้วย" เธอตอบโดยไม่ลังเล</p>
+
+      <p>กษัตริย์มองเธอนาน ครั้งนี้นานกว่าเดิมมาก ราวกับกำลังอ่านอะไรบางอย่างที่ลึกกว่าที่เห็น</p>
+
+      <p class="king-voice">"เจ้าไม่กลัวข้า"</p>
+
+      <p class="dialogue">"สัมผัสของฉันบอกว่าท่านไม่ใช่ภัย" เธอพูดตรงๆ "ท่านเป็นพ่อที่เจ็บปวดและไม่รู้วิธีจะหยุดมัน นั่นต่างจากภัยมาก"</p>
+
+      <p>ห้องเงียบอีกครั้ง แต่ครั้งนี้ความเงียบมีคุณภาพต่างออกไป</p>
+    </div>
+
+    <p>กษัตริย์อัลดริกลุกขึ้นช้าๆ เดินมาหยุดตรงหน้าคาเอล สายตาของพ่อกับลูกพบกัน ในนั้นมีสิ่งที่สะสมมาหลายสิบปีทั้งความรัก ความผิดหวัง ความภูมิใจ และความเจ็บปวดที่ไม่รู้จะพูดออกมาอย่างไร</p>
+
+    <p class="king-voice">"เจ้าเหมือนแม่เจ้ามากกว่าที่ข้านึก" กษัตริย์พูด เสียงครั้งนี้เบากว่า "เซร่าก็พูดตรงแบบนี้เสมอ"</p>
+
+    <p class="dialogue">"ผมรู้" คาเอลตอบ เสียงสั่นเล็กน้อยเป็นครั้งแรก</p>
+
+    <p class="king-voice">"ข้าจะพิจารณาเรื่องโอราเคิลใหม่" กษัตริย์พูด ไม่ใช่การยอมรับโดยตรง แต่เป็นสัญญาณว่าประตูเริ่มเปิด "แต่เจ้าต้องอยู่ที่นี่สักพักเพื่อให้ข้าคุยกับเจ้าอย่างเป็นเรื่องเป็นราว ไม่ใช่ผ่านสาส์น"</p>
+
+    <p class="dialogue">"ผมอยู่ได้" คาเอลพูด แล้วมองมาที่เธอ</p>
+
+    <p class="dialogue">"ฉันก็อยู่ได้เหมือนกัน" เธอพูดก่อนที่เขาจะถาม</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ เย็นนั้น ~</p>
+
+    <p>หิมะเริ่มตกอีกครั้งตอนค่ำ เม็ดเล็กและเบา ลอยลงมาอย่างสงบราวกับโลกกำลังหายใจ เอลาร่ายืนอยู่ในสวนของฟรอสต์โฮลด์ ที่ต้นไม้สนยืนตรงรับหิมะ เธอชื้นมือออกไปรับเม็ดหิมะเล็กๆ และมันก็ละลายในฝ่ามืออุ่นของเธอในพริบตา</p>
+
+    <p class="inner-thought">อ่อนแอมาก แต่ก็งดงามมาก ในเวลาเดียวกัน</p>
+
+    <p>คาเอลเดินออกมาจากปราสาท ยืนข้างๆ เธอ ไม่ได้ถามว่าทำอะไรอยู่</p>
+
+    <p class="dialogue">"พ่อไม่ได้แย่อย่างที่ผมกลัว" เขาพูดหลังจากสักพัก</p>
+
+    <p class="dialogue">"เขาแค่ไม่รู้ว่าจะยอมรับได้อย่างไร" เธอพูด "บางคนสร้างกำแพงเพราะเคยเจ็บ ไม่ใช่เพราะอยากอยู่คนเดียว"</p>
+
+    <p class="dialogue">"คุณรู้ดีมากสำหรับคนที่เพิ่งเจอเขา"</p>
+
+    <p class="dialogue">"ฉันรู้จักคนที่ทำแบบนั้น" เธอพูดเงียบๆ แล้วก็หันไปมองเขา "ตัวเองก็รวมอยู่ด้วย"</p>
+
+    <p>คาเอลมองเธอ แล้วก็ยื่นมือออกไปในแบบที่เธอรู้จักแล้ว ฝ่ามือหงาย รอ</p>
+
+    <div class="tender">
+      <p>เธอวางมือลงไป นิ้วพันกันในอากาศหนาวของเวลมัวร์</p>
+      <p>หิมะตกลงมาเบาๆ รอบๆ พวกเขา ต้นไม้สนยืนเป็นพยาน และท้องฟ้าสีเทาเงินข้างบนก็เงียบสงบในแบบที่เธอเริ่มคุ้นเคย</p>
+      <p class="dialogue">"ผมไม่รู้ว่าพ่อจะยอมรับทุกอย่างในที่สุดไหม" คาเอลพูดเบาๆ "แต่ผมรู้ว่าผมทำสิ่งที่ถูกต้องแล้ว"</p>
+      <p class="dialogue">"ใช่" เธอพูด</p>
+      <p class="dialogue">"และผมรู้ว่าไม่ว่าจะเกิดอะไรขึ้น..." เขาหยุดสักครู่ เหมือนคนที่กำลังเลือกคำที่หนักพอ "ผมไม่อยากเดินทางกลับไปคนเดียว"</p>
+      <p>เอลาร่ามองออกไปที่หิมะที่ตกลงมา แล้วก็กดมือเขาเบาๆ</p>
+      <p class="dialogue">"ฉันก็ไม่อยากเหมือนกัน" เธอพูด เสียงเบากว่าที่ตั้งใจไว้มาก</p>
+      <p>คาเอลเงียบสักครู่</p>
+      <p class="dialogue">"คุณพูดโดยไม่หันมามองเลย" เขาพูดเบาๆ</p>
+      <p class="dialogue">"ฉันกำลังดูหิมะ" เธอพูด แต่ไม่ได้ปล่อยมือเขา</p>
+    </div>
+
+    <div class="quote-block">
+      <p>หิมะตกที่เวลมัวร์ในคืนนั้นนานกว่าปกติ ราวกับฟ้าก็รู้ว่ามีบางอย่างเริ่มต้นในสวนของฟรอสต์โฮลด์</p>
+      <p>บางอย่างที่ไม่ใช่สนธิสัญญา ไม่ใช่ภารกิจ ไม่ใช่การเดินทาง</p>
+      <p>แค่สองคนที่ยืนอยู่ในความหนาว และพบว่าบางทีนั่นก็อบอุ่นพอแล้ว</p>
+    </div>
+
+  </div>
+
+  <div class="chapter-end">
+    <span class="end-mark">❄ จบตอนที่ ๖ ❄</span>
+    <p class="next-teaser">ตอนที่ ๗ : รอยร้าวในน้ำแข็ง — เมื่อความลับที่กษัตริย์อัลดริก ซ่อนไว้เกี่ยวกับแม่ของคาเอลถูกเปิดเผย และเอลาร่าต้องเผชิญกับด้านมืดของราชสำนักที่เย็นชากว่าอากาศนอกกำแพง</p>
+  </div>
+
+</div>
+
+<script>
+// Snow
+const snowC = document.getElementById('snow');
+for (let i = 0; i < 60; i++) {
+  const f = document.createElement('div');
+  f.className = 'flake';
+  const sz = Math.random() * 4 + 1;
+  const drift = (Math.random() - 0.5) * 100;
+  f.style.cssText = `
+    width:${sz}px; height:${sz}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*-20}%;
+    --dur:${Math.random()*8+8}s;
+    --delay:${Math.random()*12}s;
+    --drift:${drift}px;
+    --op:${Math.random()*0.4+0.2};
+  `;
+  snowC.appendChild(f);
+}
+
+// Ice shards
+const shimC = document.getElementById('shimmer');
+for (let i = 0; i < 15; i++) {
+  const s = document.createElement('div');
+  s.className = 'shard';
+  const w = Math.random() * 80 + 20;
+  const h = Math.random() * 3 + 1;
+  s.style.cssText = `
+    width:${w}px; height:${h}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    --dur:${Math.random()*4+3}s;
+    --delay:${Math.random()*6}s;
+    --rot:${Math.random()*180}deg;
+    --op:${Math.random()*0.2+0.05};
+  `;
+  shimC.appendChild(s);
+}
+</script>
+
+</body>
+</html>
