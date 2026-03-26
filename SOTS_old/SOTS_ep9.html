@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน | ตอนที่ 9</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a5f28;
+    --rose: #c97a7a;
+    --rose-light: #e8a8a8;
+    --rose-dim: #7a4a4a;
+    --crimson: #8b1a1a;
+    --crimson-light: #c0392b;
+    --dark: #0a0808;
+    --dark-warm: #120e0e;
+    --parchment: #f5eadc;
+    --parchment-dark: #d4c0a0;
+    --text-body: #ece0d0;
+    --text-dim: #9a8878;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--dark);
+    color: var(--text-body);
+    font-family: 'Sarabun', serif;
+    font-weight: 300;
+    line-height: 1.95;
+    font-size: 17px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 40% at 50% 0%,  rgba(201,122,122,0.16) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 55% at 12% 65%,  rgba(201,168,76,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 50% at 90% 75%,  rgba(139,26,26,0.10) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Warm drifting petals */
+  .petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .petal {
+    position: absolute; border-radius: 50% 0 50% 0;
+    animation: petalFall var(--dur,12s) ease-in-out infinite;
+    animation-delay: var(--delay,0s); opacity: 0;
+  }
+  @keyframes petalFall {
+    0%   { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
+    8%   { opacity: var(--op,.4); }
+    85%  { opacity: var(--op,.4); }
+    100% { transform: translateY(110vh) translateX(var(--drift,50px)) rotate(var(--spin,180deg)); opacity: 0; }
+  }
+
+  /* Gold stars */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .star {
+    position: absolute; border-radius: 50%;
+    animation: twinkle var(--dur,3s) ease-in-out infinite;
+    animation-delay: var(--delay,0s); opacity: 0;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0; transform: scale(.5); }
+    50%     { opacity: var(--bright,.5); transform: scale(1); }
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 780px; margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .header-ornament { text-align: center; margin-bottom: 20px; animation: fadeDown 1.2s ease both; }
+  .ornament-line {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; color: var(--rose); font-size: 20px; letter-spacing: 8px;
+  }
+  .ornament-line::before,.ornament-line::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  }
+
+  .series-title {
+    font-family:'Cinzel',serif; font-size:11px;
+    letter-spacing:6px; color:var(--gold-dim);
+    text-transform:uppercase; text-align:center;
+    margin-bottom:16px; animation:fadeDown 1.2s ease .1s both;
+  }
+  .main-title {
+    font-family:'Cinzel Decorative',serif;
+    font-size:clamp(32px,6vw,52px); color:var(--gold);
+    text-align:center; line-height:1.3;
+    text-shadow:0 0 45px rgba(201,168,76,.45),0 2px 4px rgba(0,0,0,.9);
+    margin-bottom:10px; animation:fadeDown 1.2s ease .2s both;
+  }
+  .subtitle {
+    font-family:'Cinzel',serif; font-size:13px;
+    letter-spacing:4px; color:var(--text-dim);
+    text-align:center; margin-bottom:50px;
+    animation:fadeDown 1.2s ease .3s both;
+  }
+  .chapter-badge {
+    display:flex; align-items:center; justify-content:center;
+    gap:20px; margin-bottom:16px; animation:fadeDown 1s ease .4s both;
+  }
+  .chapter-badge span {
+    font-family:'Cinzel',serif; font-size:12px;
+    letter-spacing:5px; color:var(--gold); text-transform:uppercase;
+  }
+  .badge-gem {
+    width:6px; height:6px; background:var(--rose);
+    transform:rotate(45deg); box-shadow:0 0 10px var(--rose-light);
+  }
+  .chapter-title {
+    font-family:'Cinzel Decorative',serif;
+    font-size:clamp(18px,3.5vw,26px); color:var(--parchment);
+    text-align:center; margin-bottom:50px;
+    text-shadow:0 0 20px rgba(245,234,220,.18);
+    animation:fadeDown 1s ease .5s both;
+  }
+
+  .divider {
+    display:flex; align-items:center; justify-content:center;
+    gap:12px; margin:40px 0;
+  }
+  .divider::before,.divider::after {
+    content:''; flex:1; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(201,122,122,.5),transparent);
+  }
+  .divider-gem {
+    width:5px; height:5px; background:var(--rose);
+    transform:rotate(45deg); flex-shrink:0;
+    box-shadow:0 0 6px var(--rose-light);
+  }
+
+  .content { animation:fadeUp 1.4s ease .6s both; }
+
+  p { margin-bottom:24px; text-align:justify; text-indent:2em; }
+
+  p.drop-cap::first-letter {
+    font-family:'Cinzel Decorative',serif;
+    font-size:4.5em; font-weight:700; color:var(--rose);
+    float:left; line-height:.75; margin:8px 12px -4px 0;
+    text-shadow:0 0 22px rgba(201,122,122,.6);
+  }
+
+  .scene-title {
+    font-family:'Cinzel',serif; font-size:13px;
+    letter-spacing:4px; color:var(--rose);
+    text-align:center; text-transform:uppercase;
+    margin:50px 0 30px; opacity:.85;
+  }
+
+  .dialogue      { color:#ece0d0; text-indent:2em; }
+  .dramatic      { color:var(--gold-light); font-style:italic; }
+  .inner-thought { color:var(--text-dim); font-style:italic; }
+  .king-voice {
+    color:#d0e0f0; font-style:italic;
+    text-indent:2em; letter-spacing:.3px;
+  }
+
+  .quote-block {
+    border-left:2px solid var(--rose-dim);
+    padding:16px 24px; margin:36px 0;
+    background:rgba(201,122,122,.05);
+    font-style:italic; color:var(--parchment-dark);
+  }
+  .quote-block p { text-indent:0; margin-bottom:12px; }
+  .quote-block p:last-child { margin-bottom:0; }
+
+  .road-scene {
+    background:rgba(18,14,14,.55);
+    border:1px solid rgba(201,122,122,.14);
+    border-radius:2px; padding:26px; margin:32px 0;
+  }
+  .road-scene p { margin-bottom:20px; }
+  .road-scene p:last-child { margin-bottom:0; }
+
+  .drama {
+    background:rgba(139,26,26,.07);
+    border-top:1px solid rgba(139,26,26,.22);
+    border-bottom:1px solid rgba(139,26,26,.22);
+    padding:26px; margin:32px 0;
+  }
+  .drama p { margin-bottom:20px; }
+  .drama p:last-child { margin-bottom:0; }
+
+  .tender {
+    background:rgba(201,168,76,.04);
+    border-left:2px solid rgba(201,168,76,.38);
+    padding:22px 28px; margin:36px 0;
+  }
+  .tender p { text-indent:0; margin-bottom:16px; }
+  .tender p:last-child { margin-bottom:0; }
+
+  .chapter-end {
+    text-align:center; margin-top:70px; padding-top:40px;
+    border-top:1px solid rgba(201,122,122,.22);
+    animation:fadeUp 1s ease 1s both;
+  }
+  .chapter-end .end-mark {
+    font-family:'Cinzel Decorative',serif;
+    font-size:18px; color:var(--rose);
+    letter-spacing:6px; display:block; margin-bottom:12px;
+  }
+  .next-teaser {
+    font-size:13px; color:var(--text-dim);
+    font-style:italic; letter-spacing:1px;
+  }
+
+  @keyframes fadeDown {
+    from { opacity:0; transform:translateY(-20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--dark); }
+  ::-webkit-scrollbar-thumb { background:var(--rose-dim); border-radius:3px; }
+
+  em     { font-style:italic; color:var(--gold-light); }
+  strong { font-weight:600;   color:var(--parchment); }
+
+  @media (max-width:600px) {
+    .container { padding:40px 24px 80px; }
+    p { text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"  id="stars"></div>
+<div class="petals" id="petals"></div>
+
+<div class="container">
+
+  <div class="header-ornament">
+    <div class="ornament-line">✦ ❧ ✦</div>
+  </div>
+
+  <p class="series-title">นิยายแฟนตาซีโรแมนติก</p>
+  <h1 class="main-title">เงาแห่งราชัน</h1>
+  <p class="subtitle">Shadow of the Sovereign</p>
+
+  <div class="chapter-badge">
+    <div class="badge-gem"></div>
+    <span>ตอนที่ ๙</span>
+    <div class="badge-gem"></div>
+  </div>
+
+  <h2 class="chapter-title">กลับสู่แอชวาลด์</h2>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="content">
+
+    <p class="drop-cap">การเดินทางกลับเป็นคนละเรื่องกับการเดินทางมา</p>
+
+    <p>ตอนที่พวกเขาออกจาก Ashveld ไปนั้น มีแรงกดดันอยู่ในอากาศ มีนาฬิกาเดิน มีศัตรูที่รออยู่และคำถามที่ยังไม่มีคำตอบ แต่ในตอนนี้ถนนสายเดิมดูกว้าง ต้นไม้สองข้างทางที่ดูสูง และม้าสองตัวก้าวเดินในจังหวะที่ผ่อนคลายกว่าที่เคย</p>
+
+    <p>เอลาร่าสังเกตความแตกต่างนั้น และสังเกตด้วยว่าคาเอลก็เงียบต่างออกไปด้วย ก่อนหน้านั้นความเงียบของเขาเป็นความเงียบของคนที่กำลังคิดหรือกำลังเฝ้าระวัง แต่ตอนนี้เป็นความเงียบของคนที่อิ่มเอมบางอย่างแล้ว</p>
+
+    <p class="inner-thought">เขาดูผ่อนคลายกว่าเดิม ในแบบที่เธอต้องใช้เวลาสักพักถึงจะบอกได้ว่าต่างอย่างไร แต่เมื่อเห็นก็รู้ทันที</p>
+
+    <p class="dialogue">"คิดอะไรอยู่ ?" เธอถามระหว่างขี่ม้าเคียงข้างกัน</p>
+
+    <p class="dialogue">"คิดว่าครั้งต่อไปที่กลับเวลมัวร์ ผมอยากพาคุณไปดูภูเขาทางเหนือให้ชัดขึ้น" คาเอลตอบ "ต้นสนต้นที่สี่ที่คุณบอกว่ามองลงมาแล้วสวยงาม แต่ยังมีจุดที่ดีกว่าถ้าขี่ม้าออกไปสักสองชั่วโมง"</p>
+
+    <p class="dialogue">"คุณกำลังวางแผนทริปครั้งต่อไปก่อนที่ทริปนี้จะจบ ?"</p>
+
+    <p class="dialogue">"ผมเป็นคนชอบวางแผนล่วงหน้า"</p>
+
+    <p class="dialogue">"คุณเป็นคนที่ผมไม่เคยเห็นวางแผนล่วงหน้าเลยตั้งแต่รู้จักกันมา"</p>
+
+    <p class="dialogue">"หมายความว่านี่เป็นเรื่องที่คุ้มค่าพอที่จะเริ่มวางแผน" เขาพูด แล้วก็มองตรงไปข้างหน้า มุมปากขยับขึ้นนิดหน่อย</p>
+
+    <p>เธอไม่ตอบ แต่ก็ไม่ได้หันหน้าหนี</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ กลางทาง ~</p>
+
+    <div class="road-scene">
+      <p>พวกเขาหยุดพักที่หมู่บ้านเล็กๆ ระหว่างเส้นทาง โรงเตี๊ยมเก่าที่มีแสงไฟอุ่นๆ ส่องออกมาจากหน้าต่างและกลิ่นซุปที่หอมจนเดินเข้าไปเองโดยไม่ต้องคิด</p>
+
+      <p>พวกเขานั่งที่โต๊ะมุมใน ไม่ใช่เพราะนิสัยระวังตัวเหมือนก่อน แต่เพราะเคยชินกับการที่มุมเป็นที่ที่สงบที่สุด</p>
+
+      <p>เจ้าของโรงเตี๊ยมวางซุปร้อนสองถ้วยและขนมปังหนาลงมา เอลาร่าจิบซุปแล้วรู้สึกอบอุ่นจากในสู่นอก</p>
+
+      <p class="dialogue">"คาเอล" เธอพูดขึ้นมาระหว่างมื้อ</p>
+
+      <p class="dialogue">"อะไร ?"</p>
+
+      <p class="dialogue">"ตอนที่กษัตริย์อัลดริกถามว่าฉันเป็นใคร คุณบอกท่านว่าอะไร ?"</p>
+
+      <p>คาเอลหยุดฉีกขนมปัง มองขึ้นมาที่เธอ</p>
+
+      <p class="dialogue">"ทำไมถึงถามตอนนี้ ?"</p>
+
+      <p class="dialogue">"เพราะฉันถามพ่อคุณก่อนและเขาบอกว่าคุณบอกเขาแล้ว แต่ไม่เคยถามคุณเอง"</p>
+
+      <p>เขาวางขนมปังลง มองเธอนาน</p>
+
+      <p class="dialogue">"ผมบอกท่านว่าคุณเป็นคนที่ผมไว้ใจมากที่สุดในบรรดาคนที่เคยทำงานร่วมกัน" เขาพูด "และท่านถามว่าแค่นั้นเหรอ ผมก็บอกว่า ณ ตอนนั้น ใช่ แค่นั้น"</p>
+
+      <p class="dialogue">"แล้วตอนนี้ ?"</p>
+
+      <p>คาเอลเงียบนาน ในโรงเตี๊ยมเสียงคนพูดคุยรอบข้างดังพออำพรางความเงียบของพวกเขาได้</p>
+
+      <p class="dialogue">"ตอนนี้ถ้าท่านถามอีก" เขาพูดช้าๆ "ผมจะตอบต่างออกไป"</p>
+
+      <p class="dialogue">"ต่างอย่างไร ?"</p>
+
+      <p>เขามองตรงมาที่เธอ ดวงตาสีดำที่เธอเรียนรู้จนอ่านออกแล้วในหลายสถานการณ์</p>
+
+      <p class="dialogue">"ผมจะบอกว่าคุณเป็นคนที่ผมเลือก" เขาพูดเงียบๆ "ในแบบที่ไม่มีภารกิจ ไม่มีสัญญา และไม่มีเหตุผลอื่นนอกจากว่าผมต้องการให้คุณอยู่"</p>
+
+      <p>เอลาร่าถือถ้วยซุปอยู่ มองเขา รู้สึกถึงบางอย่างที่อุ่นกว่าซุปร้อนๆ ในมือ</p>
+
+      <p class="dialogue">"คุณพูดออกมาตรงกว่าที่ฉันคิดไว้" เธอพูด</p>
+
+      <p class="dialogue">"ผมเรียนรู้จากคนข้างๆ" เขาตอบ</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ สิ่งที่รอคอยอยู่ ~</p>
+
+    <p>แอชวาลด์ต้อนรับพวกเขาด้วยแสงอาทิตย์ที่อุ่นกว่าเวลมัวร์มาก เมืองหลวงที่พลุกพล่านและมีเสียงตลอดเวลา ตลาดเปิด เสียงเด็กวิ่งเล่น และกลิ่นอาหารจากร้านสองข้างทาง</p>
+
+    <p>เอลาร่าสูดหายใจลึกๆ</p>
+
+    <p class="inner-thought">เมืองนี้ก็คุ้นเคยในแบบของมัน แต่เวลมัวร์คุ้นเคยในแบบที่ต่างออกไป</p>
+
+    <p>กษัตริย์ธีเรียนรับพวกเขาในห้องเดิม เสิร์ฟชาเหมือนเดิม และฟังรายงานอย่างตั้งใจ เมื่อคาเอลเล่าเรื่องการประกาศทายาทและสาส์นจากเวลมัวร์จบ กษัตริย์ธีเรียนนิ่งอยู่ครู่หนึ่งก่อนพูดว่า</p>
+
+    <p class="king-voice">"อัลดริกทำสิ่งที่ข้าไม่คาดคิดว่าเขาจะทำได้" กษัตริย์ธีเรียนพูด ใช้ภาษาในระดับเดียวกันกับกษัตริย์อัลดริก เพราะสองพระองค์เติบโตมาในยุคเดียวกันและมีธรรมเนียมเหมือนกัน "ข้าเคยรู้จักอัลดริกสมัยยังหนุ่ม เขาเป็นคนที่ยอมรับความผิดพลาดยากมาก"</p>
+
+    <p class="dialogue">"เขาเปลี่ยนไป" คาเอลพูด</p>
+
+    <p class="king-voice">"ลูกชายเขาทำให้เขาเปลี่ยน" กษัตริย์ธีเรียนพูด แล้วมองมาที่เอลาร่า "หรือคนที่ลูกชายเขาพาไปกันแน่"</p>
+
+    <p>เธอไม่ตอบ แค่พยักหน้าเล็กน้อย</p>
+
+    <p class="king-voice">"ดี" กษัตริย์ธีเรียนพูดสั้นๆ แล้วยกถ้วยชา "แอชวาลด์และเวลมัวร์จะมีทูตพบกันอย่างเป็นทางการในเดือนหน้า ข้าต้องการให้เจ้าเป็นล่ามและที่ปรึกษาในการเจรจา คาเอล"</p>
+
+    <p class="dialogue">"ผมไม่ใช่คนกลางอีกต่อไปแล้ว ท่าน" คาเอลพูดตรงๆ</p>
+
+    <p class="king-voice">"ข้ารู้" กษัตริย์ตอบ "ข้าต้องการให้เจ้าเป็นตัวแทนของเวลมัวร์ ไม่ใช่คนกลาง นั่นต่างกัน" พระองค์มองเขา "เจ้าสามารถเป็นทายาทของเวลมัวร์ และยังเป็นที่ไว้วางใจของแอชวาลด์ได้พร้อมกัน ถ้าเจ้าเลือกที่จะเป็น"</p>
+
+    <p>คาเอลนิ่งอยู่สักครู่</p>
+
+    <p class="dialogue">"ผมจะคิดดู" เขาพูด</p>
+
+    <p class="king-voice">"ข้าให้เวลาเจ้าหนึ่งสัปดาห์" กษัตริย์ธีเรียนลุกขึ้น แล้วก็หยุดก่อนถึงประตู "และเอลาร่า วินด์มาร์ค"</p>
+
+    <p class="dialogue">"ค่ะท่าน ?"</p>
+
+    <p class="king-voice">"ประวัติของเจ้าถูกล้างแล้วตามที่สัญญา" พระองค์พูด "แต่ถ้าเจ้าต้องการอะไรเพิ่ม ประตูวังข้าเปิดอยู่เสมอ"</p>
+
+    <p>พระองค์เดินออกไป</p>
+
+    <p>คาเอลมองตามพ่อบุญธรรมที่เขาไม่เคยเรียกอย่างนั้นแต่รู้สึกแบบนั้นมาตลอด แล้วก็หันมาที่เธอ</p>
+
+    <p class="dialogue">"กษัตริย์สองพระองค์" เธอพูด "แต่ละพระองค์ก็พูดถึงคุณในแบบที่ภูมิใจ"</p>
+
+    <p class="dialogue">"ผมไม่แน่ใจว่านั่นทำให้ชีวิตง่ายขึ้นหรือซับซ้อนขึ้น" คาเอลพูด</p>
+
+    <p class="dialogue">"ทั้งสองอย่าง" เธอตอบ "แต่ซับซ้อนในแบบที่คุ้มค่า"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ คืนที่แอชวาลด์ ~</p>
+
+    <p>เนลลาส่งจดหมายมารอที่ห้องพักของเอลาร่าแล้ว ตัวอักษรที่คุ้นเคยเขียนมามากมายจนแทบอ่านไม่ออก ซึ่งแปลว่าเธอตื่นเต้นมากเวลาเขียน</p>
+
+    <p><em>"พี่เอลา! ฉันอยู่ที่มิเรฟอลล์แล้ว เมืองนี้สวยมาก มีตลาดหนังสือ มีนักมายากล และมีคนเก่งๆ ที่ฉันกำลังเรียนรู้อะไรบางอย่างด้วยกันอยู่ พี่จะได้รู้เร็วๆ นี้ แต่ตอนนี้ขอบอกแค่ว่าฉันโอเคมาก ดีมากด้วย ส่งความรักไปให้คาเอลด้วยนะ และบอกเขาว่าฉันเห็นในอนาคตแล้วว่าเขาจะทำสิ่งที่ถูกต้อง แม้ว่ามันจะยากก็ตาม เขาจะรู้เองว่าหมายถึงอะไร — เนลลา"</em></p>
+
+    <p>เอลาร่าอ่านจบแล้วพับจดหมายเก็บ รู้สึกอะไรอุ่นในอกที่คุ้นเคยมากขึ้นทุกวัน</p>
+
+    <p class="inner-thought">น้องสาวฉันโอเค และฉันก็โอเค นั่นเป็นประโยคที่เมื่อสองเดือนก่อนฉันไม่กล้าพูดออกมา</p>
+
+    <p>มีเสียงเคาะที่ประตูห้อง</p>
+
+    <p class="dialogue">"เข้ามาได้"</p>
+
+    <p>คาเอลเดินเข้ามา มือถือถ้วยสองใบ ควันลอยขึ้นจากของร้อนข้างใน เธอรู้ทันทีว่าเป็นชา เพราะนั่นเป็นสิ่งที่เขาทำทุกครั้งที่มาหาเธอตอนค่ำ</p>
+
+    <p class="inner-thought">ฉันเรียนรู้รูปแบบของเขาโดยไม่รู้ตัว เหมือนที่เรียนรู้กิ่งต้นสนและรสชาติของชาเวลมัวร์</p>
+
+    <p class="dialogue">"เนลลาส่งจดหมายมา" เธอพูดขณะรับถ้วย</p>
+
+    <p class="dialogue">"เธอโอเคไหม ?"</p>
+
+    <p class="dialogue">"โอเคมาก อยู่ที่มิเรฟอลล์ และบอกให้ส่งความรักไปให้คุณ" เธอยื่นจดหมายให้ "และบอกว่าคุณจะรู้เองว่าสิ่งที่ถูกต้องคืออะไร"</p>
+
+    <p>คาเอลอ่านจดหมายสั้นๆ แล้วพับคืน มุมปากขยับขึ้น</p>
+
+    <p class="dialogue">"น้องสาวคุณเห็นอนาคตแล้วยังแซวได้อีกนะ"</p>
+
+    <p class="dialogue">"นั่นแหละ เนลลา" เธอพูด</p>
+
+    <p>พวกเขานั่งที่ขอบหน้าต่าง มองออกไปที่เมืองหลวงที่ยังคึกคักแม้จะเย็นลงแล้ว แสงไฟจากบ้านนับร้อยหลังส่องขึ้นมาในอากาศ อุ่นและมีชีวิต</p>
+
+    <div class="drama">
+      <p class="dialogue">"ผมตัดสินใจแล้ว" คาเอลพูดหลังจากเงียบมาสักพัก</p>
+
+      <p class="dialogue">"เรื่องการเป็นตัวแทนในการเจรจา ?"</p>
+
+      <p class="dialogue">"ใช่" เขาพูด "ผมจะทำ แต่ในเงื่อนไขของผม ไม่ใช่เงื่อนไขของใคร"</p>
+
+      <p class="dialogue">"เงื่อนไขอะไร ?"</p>
+
+      <p class="dialogue">"ผมจะเป็นตัวแทนเวลมัวร์อย่างเป็นทางการ ไม่ใช่คนกลางที่ไม่มีฝ่าย" เขาพูด "และผมจะทำในแบบที่ผมเห็นว่าถูกต้อง ถ้าทั้งสองฝั่งยอมรับ ก็ดี ถ้าไม่ยอมรับ ผมก็จะบอกตรงๆ ว่าไม่เห็นด้วย"</p>
+
+      <p class="dialogue">"นั่นฟังดูเหมือนตัวเองมากกว่าที่เคยเป็น"</p>
+
+      <p class="dialogue">"ใช่" เขาพยักหน้า "เพราะผมเริ่มรู้จักตัวเองมากขึ้นหน่อยแล้ว" เขาหันมามองเธอ "และมีคนช่วยบางส่วน"</p>
+
+      <p class="dialogue">"ฉันไม่ได้ทำอะไรมาก"</p>
+
+      <p class="dialogue">"คุณมีอยู่" เขาพูดเงียบๆ "นั่นก็มากพอแล้ว"</p>
+
+      <p>เธอมองออกไปที่แสงไฟของเมือง รู้สึกถึงบางอย่างที่อิ่มแปล้ในแบบที่ไม่คุ้นเคย</p>
+
+      <p class="dialogue">"คาเอล"</p>
+
+      <p class="dialogue">"อะไร ?"</p>
+
+      <p class="dialogue">"มีอะไรที่คุณยังไม่พูด" เธอพูดตรงๆ "ฉันรู้สึกได้ตั้งแต่ออกจากเวลมัวร์"</p>
+
+      <p>เขาเงียบนาน</p>
+
+      <p class="dialogue">"ใช่" เขายอมรับ</p>
+
+      <p class="dialogue">"พูดได้เลย"</p>
+
+      <p>คาเอลวางถ้วยชาลง หันมามองเธออย่างเต็มๆ ในแสงจากหน้าต่าง ดวงตาสีดำที่เธออ่านออกมาหลายสัปดาห์แล้วตอนนี้มีบางอย่างที่เปิดกว้างกว่าทุกครั้งที่ผ่านมา</p>
+
+      <p class="dialogue">"ผมรักคุณ" เขาพูด ไม่ตีอ้อมค้อม ไม่มีคำนำ ไม่มีเงื่อนไข "ผมไม่รู้ว่าจะพูดแบบอื่นได้ยังไง เพราะผมไม่เคยพูดเรื่องแบบนี้กับใครมาก่อน และผมไม่อยากเริ่มด้วยการพูดอ้อมค้อม"</p>
+
+      <p>ห้องเงียบสนิท เสียงเมืองข้างนอกยังดังอยู่แต่อยู่ไกลๆ</p>
+    </div>
+
+    <p>เอลาร่ามองเขา ผู้ชายที่เธอรู้จักมาเกือบสามสัปดาห์ แต่รู้สึกว่าเข้าใจในแบบที่ลึกกว่าคนที่รู้จักมาหลายปี ผู้ชายที่ไม่เคยโกหกเธอสักครั้ง ไม่เคยปล่อยเธอล้มโดยไม่รับ และไม่เคยพูดอะไรที่ไม่ตั้งใจ</p>
+
+    <p class="inner-thought">สัมผัสของฉันเงียบสนิท เหมือนทุกครั้งที่เขาอยู่ใกล้ๆ</p>
+
+    <p class="inner-thought">ฉันคิดว่าฉันรู้มาสักพักแล้วว่าหมายความว่าอะไร แค่ยังไม่กล้าพูดออกมา</p>
+
+    <p>เธอวางถ้วยชาลงเช่นกัน หันมามองเขาตรงๆ</p>
+
+    <p class="dialogue">"ฉันไม่รู้ว่าฉันถนัดเรื่องนี้มั้ย" เธอพูดตรงๆ "ฉันไม่เคยรักใครมานานมากแล้ว จนเกือบลืมว่ามันทำยังไง"</p>
+
+    <p class="dialogue">"ผมก็ไม่เคย" คาเอลพูด "เราอาจแย่ด้วยกันพอๆ กัน"</p>
+
+    <p>เธอหัวเราะเบาๆ ออกมา แล้วก็ยื่นมือข้ามระยะห่างระหว่างสองคน</p>
+
+    <p class="dialogue">"ฉันก็รักคุณด้วยเหมือนกัน" เธอพูด เสียงไม่สั่น แม้ว่ามันจะเป็นคำที่หนักมาก "และฉันก็ไม่รู้วิธีพูดอ้อมค้อม งั้นก็พูดตรงๆ เหมือนกันดีกว่า"</p>
+
+    <div class="tender">
+      <p>คาเอลมองมือที่เธอยื่นออกมา แล้วจับมือนั้น ไม่รีบ ไม่ลังเล เหมือนทุกครั้งที่เขาจับมือเธอ</p>
+      <p>แต่คราวนี้ต่างออกไป เพราะทั้งสองคนรู้ว่ามันหมายถึงอะไร</p>
+      <p class="dialogue">"ผมดีใจที่ผมรับภารกิจนั้นมาในโรงเตี๊ยมวันนั้น" เขาพูดเบาๆ</p>
+      <p class="dialogue">"ฉันก็ดีใจ ที่คุณตามหาฉัน" เธอตอบ "แม้ว่าตอนนั้นจะยังไม่รู้ว่าจะดีใจทีหลัง"</p>
+      <p class="dialogue">"นั่นแหละที่ดีที่สุดในทุกเรื่อง" เขาพูด "ไม่รู้ล่วงหน้า แค่เดินไปด้วยกัน"</p>
+      <p>เธอมองเขา แล้วก็รู้สึกถึงบางอย่างที่เธอหยุดกลัวมาสักพักแล้ว บางอย่างที่อุ่นและเบาในเวลาเดียวกัน</p>
+      <p>ราวกับการแบกของหนักมาตลอดและในที่สุดก็ได้วางลง ไม่ใช่เพราะอ่อนแอ แต่เพราะมีคนที่วางใจได้อยู่ข้างๆ</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+    <div class="quote-block">
+      <p>มีคนบอกว่าคนที่ผ่านอะไรมามากจะระวังตัวมากเกินไปที่จะรัก</p>
+      <p>เอลาร่า วินด์มาร์ค พิสูจน์ให้เห็นว่านั่นถูกต้อง</p>
+      <p>แต่ก็พิสูจน์ให้เห็นด้วยว่า ถ้าคนข้างๆ อดทนพอและไม่เคยโกหก สุดท้ายแล้ว ระยะห่างที่สร้างขึ้นมาทั้งชีวิตก็ค่อยๆ แคบลงได้เอง</p>
+      <p>โดยไม่ต้องทลายอะไร แค่ค่อยๆ เดินเข้าหากัน</p>
+    </div>
+
+  </div>
+
+  <div class="chapter-end">
+    <span class="end-mark">❧ จบตอนที่ ๙ ❧</span>
+    <p class="next-teaser">ตอนที่ ๑๐ : เมื่อสองอาณาจักรเริ่มเดินหน้า เนลลากลับมาพร้อมข่าวที่ไม่คาดคิด และเอลาร่าพบว่าบ้านไม่ได้มีแค่ที่เดียว</p>
+  </div>
+
+</div>
+
+<script>
+const starsC = document.getElementById('stars');
+for (let i = 0; i < 70; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${Math.random()>.6?'#e8c97a':'#f0e0d0'};--dur:${Math.random()*4+2}s;--delay:${Math.random()*6}s;--bright:${Math.random()*0.4+0.15};`;
+  starsC.appendChild(s);
+}
+
+const petalsC = document.getElementById('petals');
+for (let i = 0; i < 22; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  const sz = Math.random() * 6 + 3;
+  const drift = (Math.random() - 0.5) * 120;
+  const spin = Math.random() * 360;
+  p.style.cssText = `width:${sz}px;height:${sz*0.7}px;left:${Math.random()*100}%;top:${Math.random()*-15}%;background:rgba(210,140,140,0.6);--dur:${Math.random()*8+10}s;--delay:${Math.random()*12}s;--drift:${drift}px;--spin:${spin}deg;--op:${Math.random()*0.25+0.15};`;
+  petalsC.appendChild(p);
+}
+</script>
+
+</body>
+</html>

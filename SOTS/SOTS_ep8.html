@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน | รากเหง้าและทางกลับ</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#7a5f28;
+  --crimson:#8b1a1a;--crimson-light:#c0392b;
+  --dark:#0c0908;--dark-mid:#1a1410;--dark-paper:#1e1812;
+  --parchment:#f5ead8;--parchment-dark:#d4c4a0;--text-body:#e8dcc8;--text-dim:#9a8a70;
+  --accent:#d4907a;--accent-dim:#a06050;--accent-glow:rgba(212,144,122,0.2);
+  --ice:#a8c8e8;--ice-light:#d0e8f8;--ice-dim:#5a7a9a;--dawn-rose:#d4907a;
+  --menu-w:300px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background-color:var(--dark);color:var(--text-body);font-family:'Sarabun',serif;font-weight:300;line-height:1.95;font-size:17px;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 35% at 50% 0%,rgba(212,144,122,0.18) 0%,transparent 55%),radial-gradient(ellipse 55% 55% at 15% 65%,rgba(201,168,76,0.12) 0%,transparent 55%),radial-gradient(ellipse 45% 55% at 88% 75%,rgba(168,200,232,0.08) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;background:var(--accent);border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite;animation-delay:var(--delay,0s);opacity:0;}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(0.5);}50%{opacity:var(--bright,0.5);transform:scale(1);}}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem 0 2rem;background:linear-gradient(180deg,rgba(13,10,7,0.97) 0%,rgba(13,10,7,0.85) 100%);border-bottom:1px solid rgba(212,144,122,0.22);backdrop-filter:blur(10px);}
+.topbar-left{display:flex;align-items:center;gap:1rem;}
+.topbar-logo{font-family:'Cinzel Decorative',serif;font-size:0.95rem;font-weight:400;color:var(--gold);text-decoration:none;letter-spacing:0.05em;text-shadow:0 0 20px rgba(201,168,76,0.3);white-space:nowrap;}
+.topbar-sep{color:var(--accent-dim);font-size:0.8rem;opacity:0.7;}
+.topbar-chapter{font-family:'Cinzel',serif;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px;}
+.topbar-chapter span{color:var(--accent);}
+
+/* MENU BTN */
+.menu-btn{width:36px;height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;flex-shrink:0;border:1px solid rgba(212,144,122,0.22);border-radius:2px;transition:border-color 0.3s,background 0.3s;}
+.menu-btn:hover{border-color:var(--accent);background:rgba(212,144,122,0.2);}
+.menu-btn .bar{width:16px;height:1.5px;background:var(--accent);border-radius:1px;transition:all 0.3s ease;}
+.menu-btn.open .bar:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.menu-btn.open .bar:nth-child(2){opacity:0;transform:scaleX(0);}
+.menu-btn.open .bar:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(4,2,2,0.7);backdrop-filter:blur(2px);z-index:800;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.overlay.show{opacity:1;pointer-events:all;}
+
+/* SIDE MENU */
+.side-menu{position:fixed;top:0;right:calc(-1 * var(--menu-w));width:var(--menu-w);height:100%;background:#110a08;border-left:1px solid rgba(212,144,122,0.22);z-index:900;transition:right 0.35s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow:hidden;}
+.side-menu.active{right:0;}
+.menu-glow{position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(212,144,122,0.2) 0%,transparent 70%);pointer-events:none;}
+.menu-glow2{position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(139,26,26,0.1) 0%,transparent 70%);pointer-events:none;}
+.menu-header{padding:2rem 1.6rem 1.4rem;border-bottom:1px solid rgba(212,144,122,0.22);flex-shrink:0;text-align:center;}
+.menu-series-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.4em;color:var(--accent-dim);text-transform:uppercase;margin-bottom:0.6rem;}
+.menu-novel-title{font-family:'Cinzel Decorative',serif;font-size:1.05rem;color:var(--gold);letter-spacing:0.04em;text-shadow:0 0 25px rgba(201,168,76,0.35);margin-bottom:0.2rem;}
+.menu-subtitle{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.2em;color:var(--text-dim);}
+.menu-ornament{display:flex;align-items:center;gap:8px;padding:0.8rem 1.6rem;color:var(--accent-dim);font-size:0.6rem;letter-spacing:0.25em;flex-shrink:0;}
+.menu-ornament::before,.menu-ornament::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,144,122,0.22),transparent);}
+.menu-links{flex:1;overflow-y:auto;padding:0 0 1rem;}
+.menu-links::-webkit-scrollbar{width:3px;}
+.menu-links::-webkit-scrollbar-thumb{background:rgba(212,144,122,0.22);border-radius:2px;}
+.menu-links a{display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.6rem;text-decoration:none;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.08em;border-left:2px solid transparent;transition:all 0.22s;position:relative;}
+.menu-links a:hover{color:var(--parchment-dark);background:rgba(212,144,122,0.2);border-left-color:var(--accent-dim);}
+.menu-links a.current{color:var(--accent);background:rgba(212,144,122,0.2);border-left-color:var(--accent);}
+.menu-links a.current::before{content:'◆';position:absolute;right:1.2rem;font-size:0.4rem;color:var(--accent);opacity:0.7;}
+.menu-links a .ch-n{font-size:0.65rem;color:var(--accent-dim);min-width:1.8rem;font-family:'Cinzel',serif;}
+.menu-links a.current .ch-n{color:var(--accent);}
+.menu-divider{display:flex;align-items:center;gap:8px;margin:0.5rem 1.6rem;}
+.menu-divider::before,.menu-divider::after{content:'';flex:1;height:1px;background:rgba(212,144,122,0.22);}
+.menu-divider-gem{width:4px;height:4px;background:var(--accent-dim);transform:rotate(45deg);flex-shrink:0;}
+.menu-links .home-link{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;color:var(--text-dim);}
+.menu-links .home-link:hover{color:var(--parchment-dark);border-left-color:var(--accent);}
+
+/* CONTENT */
+.container{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:80px 40px 100px;}
+.header-ornament{text-align:center;margin-bottom:20px;animation:fadeDown 1.2s ease both;}
+.ornament-line{display:flex;align-items:center;justify-content:center;gap:16px;color:var(--accent-dim);font-size:22px;letter-spacing:8px;}
+.ornament-line::before,.ornament-line::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);}
+.series-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:6px;color:var(--gold-dim);text-transform:uppercase;text-align:center;margin-bottom:16px;animation:fadeDown 1.2s ease 0.1s both;}
+.main-title{font-family:'Cinzel Decorative',serif;font-size:clamp(32px,6vw,52px);color:var(--gold);text-align:center;line-height:1.3;text-shadow:0 0 40px rgba(201,168,76,0.4),0 2px 4px rgba(0,0,0,0.8);margin-bottom:10px;animation:fadeDown 1.2s ease 0.2s both;}
+.subtitle{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:var(--text-dim);text-align:center;margin-bottom:50px;animation:fadeDown 1.2s ease 0.3s both;}
+.chapter-badge{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:16px;animation:fadeDown 1s ease 0.4s both;}
+.chapter-badge span{font-family:'Cinzel',serif;font-size:12px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.badge-gem{width:6px;height:6px;background:var(--accent);transform:rotate(45deg);box-shadow:0 0 10px var(--accent);}
+.chapter-title{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,3.5vw,26px);color:var(--parchment);text-align:center;margin-bottom:50px;text-shadow:0 0 20px rgba(245,234,216,0.2);animation:fadeDown 1s ease 0.5s both;}
+.chapter-start-nav{text-align:center;margin-top:70px;padding-top:40px;animation:fadeUp 1s ease 1s both;}
+.divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:40px 0;color:var(--accent-dim);}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,144,122,0.5),transparent);}
+.divider-gem{width:5px;height:5px;background:var(--accent-dim);transform:rotate(45deg);flex-shrink:0;}
+.content{animation:fadeUp 1.4s ease 0.6s both;}
+p{margin-bottom:24px;text-align:justify;text-indent:2em;}
+p.no-indent{text-indent:0;}
+.scene-title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:var(--accent);text-align:center;text-transform:uppercase;margin:50px 0 30px;opacity:0.85;}
+.dialogue{color:#ddd0b8;text-indent:2em;}
+.dramatic{color:var(--accent);font-style:italic;}
+.inner-thought{color:var(--text-dim);font-style:italic;}
+.quote-block{border-left:2px solid var(--accent-dim);padding:16px 24px;margin:36px 0;background:rgba(212,144,122,0.04);font-style:italic;color:var(--parchment-dark);text-indent:0!important;}
+.combat{background:rgba(139,26,26,0.06);border:1px solid rgba(139,26,26,0.2);border-radius:2px;padding:24px;margin:30px 0;}
+.chapter-end{text-align:center;margin-top:70px;padding-top:40px;border-top:1px solid rgba(212,144,122,0.15);animation:fadeUp 1s ease 1s both;}
+.chapter-end .end-mark{font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--accent-dim);letter-spacing:6px;display:block;margin-bottom:12px;}
+.next-teaser{font-size:13px;color:var(--text-dim);font-style:italic;letter-spacing:1px;}
+.hidden-element{visibility:hidden;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px;}
+em{font-style:italic;color:var(--gold-light);}
+strong{font-weight:600;color:var(--parchment);}
+
+/* SETTINGS BAR */
+.settings-bar{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);z-index:400;display:flex;align-items:center;gap:0.4rem;background:rgba(13,10,7,0.94);border:1px solid rgba(212,144,122,0.22);border-radius:2px;padding:0.5rem 1.2rem;backdrop-filter:blur(12px);animation:fadeUp 1s ease 1.2s both;opacity:0;}
+.settings-btn{background:transparent;border:none;color:var(--text-dim);font-size:0.72rem;cursor:pointer;padding:0.3rem 0.65rem;letter-spacing:0.05em;font-family:'Cinzel',serif;transition:all 0.2s;border-radius:2px;}
+.settings-btn:hover{color:var(--accent);background:rgba(212,144,122,0.2);}
+.settings-sep{width:1px;height:14px;background:rgba(212,144,122,0.22);}
+.progress-bar{width:80px;height:1.5px;background:rgba(212,144,122,0.15);border-radius:999px;overflow:hidden;display:inline-block;vertical-align:middle;}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent-dim),var(--accent));border-radius:999px;transition:width 0.3s;}
+.progress-text{font-size:0.6rem;color:var(--text-dim);letter-spacing:0.08em;white-space:nowrap;font-family:'Cinzel',serif;}
+.progress-wrap{display:flex;align-items:center;gap:0.5rem;}
+body.fs-sm p{font-size:15px;}body.fs-md p{font-size:17px;}body.fs-lg p{font-size:19px;}
+@media(max-width:600px){.container{padding:70px 24px 80px;}p{text-align:left;}.topbar-chapter{display:none;}}
+</style>
+</head>
+<body class="fs-md">
+<div class="stars" id="stars"></div>
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-logo" href="https://sdstardust.github.io/BOTFG/">เงาแห่งราชัน</a>
+    <span class="topbar-sep">✦</span>
+    <div class="topbar-chapter"><span>รากเหง้าและทางกลับ</span></div>
+  </div>
+  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+</div>
+
+<div id="sideMenu" class="side-menu">
+  <div class="menu-glow"></div><div class="menu-glow2"></div>
+  <div class="menu-header">
+    <div class="menu-series-label">นิยายแฟนตาซีโรแมนติก</div>
+    <div class="menu-novel-title">เงาแห่งราชัน</div>
+    <div class="menu-subtitle">Shadow of the Sovereign</div>
+  </div>
+  <div class="menu-ornament">✦ ✦ ✦</div>
+  <div class="menu-links">
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep1.html" ><span class="ch-n">I</span>ดาบที่ไม่มีชื่อ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep2.html" ><span class="ch-n">II</span>ป่าแห่งความทรงจำ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep3.html" ><span class="ch-n">III</span>ป้อมปราการและความจริงที่ซ่อนอยู่</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep4.html" ><span class="ch-n">IV</span>กลับสู่ราชสำนัก</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep5.html" ><span class="ch-n">V</span>รากเหง้าใหม่</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep6.html" ><span class="ch-n">VI</span>ดินแดนแห่งน้ำแข็ง</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep7.html" ><span class="ch-n">VII</span>รอยร้าวในน้ำแข็ง</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep8.html" class="current" ><span class="ch-n">VIII</span>รากเหง้าและทางกลับ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep9.html" ><span class="ch-n">IX</span>กลับสู่แอชวาลด์</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep10.html" ><span class="ch-n">X</span>บ้านที่มีมากกว่าหนึ่งที่</a>
+<div class="menu-divider"><div class="menu-divider-gem"></div></div>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/portSOTS.html" class="home-link"><span class="ch-n">⌂</span>กลับหน้าหลัก</a>
+  </div>
+</div>
+
+
+<div class="snow"  id="snow"></div>
+<div class="motes" id="motes"></div>
+
+<div class="container">
+
+  <div class="header-ornament">
+    <div class="ornament-line">✦ ♔ ✦</div>
+  </div>
+
+  <p class="series-title">นิยายแฟนตาซีโรแมนติก</p>
+  <h1 class="main-title">เงาแห่งราชัน</h1>
+  <p class="subtitle">Shadow of the Sovereign</p>
+
+  <div class="chapter-badge">
+    <div class="badge-gem"></div>
+    <span>ตอนที่ ๘</span>
+    <div class="badge-gem"></div>
+  </div>
+
+  <h2 class="chapter-title">รากเหง้าและทางกลับ</h2>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="content">
+
+    <p class="drop-cap">หิมะบางลงทุกวัน</p>
+
+    <p>เอลาร่าสังเกตเห็นเป็นคนแรก เม็ดหิมะที่เคยหนาแน่นตลอดเวลาเริ่มเบาบาง ช่วงบ่ายมีแสงอาทิตย์ลอดผ่านเมฆสีเทามาแตะยอดต้นสนเป็นครั้งคราว และอุณหภูมิที่เคยเฉียบคมก็นุ่มลงทีละองศา ราวกับเวลมัวร์กำลังตัดสินใจว่าจะยอมให้ฤดูใบไม้ผลิเข้ามาหรือยัง</p>
+
+    <p class="inner-thought">แปดวันแล้วที่นี่ และฉันเริ่มรู้จักรูปแบบของดินแดนนี้</p>
+
+    <p>แปดวันที่เธอเดินสำรวจฟรอสต์โฮลด์จนจำทางเดินทุกสายได้ รู้ว่ายามคน ไหนลาดตระเวนเส้นไหน รู้ว่าห้องครัวเปิดก่อนฟ้าสางและห้องสมุดปิดหลังเที่ยงคืน รู้ว่าต้นสนต้นที่สี่ทางซ้ายของสวนด้านในมีกิ่งต่ำพอที่จะปีนขึ้นไปนั่งได้ และนั่นคือจุดที่มองเห็นภูเขาทางเหนือชัดที่สุด</p>
+
+    <p>แปดวันที่เธอเริ่มรู้จักเวลมัวร์ในแบบที่ไม่ใช่แค่ผ่านตา</p>
+
+    <p class="inner-thought">นั่นน่าเป็นห่วง</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ สิ่งที่เปลี่ยนไป ~</p>
+
+    <p>ความสัมพันธ์ระหว่างคาเอลกับกษัตริย์อัลดริกเปลี่ยนไปอย่างที่เห็นได้ชัด ไม่ใช่อย่างฮวบฮาบ แต่เป็นการเปลี่ยนแปลงแบบที่ค่อยๆ เกิดขึ้นในช่วงเวลาเล็กๆ น้อยๆ ที่สะสมกัน</p>
+
+    <p>มื้อเช้าที่กษัตริย์เริ่มนั่งร่วมโต๊ะแทนที่จะรับอาหารในห้องส่วนตัว บทสนทนาสั้นๆ เกี่ยวกับสภาพอากาศที่ยาวขึ้นเรื่อยๆ จนกลายเป็นเรื่องการปกครอง วันหนึ่งที่กษัตริย์พาคาเอลไปที่ห้องเก็บแผนที่และอธิบายพรมแดนของเวลมัวร์ ราวกับกำลังส่งมอบบางอย่าง และอีกวันที่เอลาร่าเห็นพ่อกับลูกยืนดูพระอาทิตย์ตกจากหอสังเกตการณ์ ไม่ได้พูดคุยกัน แค่ยืนอยู่ด้วยกัน</p>
+
+    <p>นั่นก็มากพอแล้ว</p>
+
+    <p>วันที่หก กษัตริย์อัลดริกทำสิ่งที่ไม่มีใครคาดคิด พระองค์เดินมาหาเอลาร่าในสวนที่เธอนั่งอ่านหนังสืออยู่คนเดียว และนั่งลงตรงม้านั่งฝั่งตรงข้ามโดยไม่บอกล่วงหน้า</p>
+
+    <p class="king-voice">"เจ้ารู้จักต้นสนนั้นไหม ?" พระองค์พูด ชี้ไปที่ต้นไม้ต้นที่เธอเพิ่งคิดถึง</p>
+
+    <p class="dialogue">"ต้นที่สี่ทางซ้าย ท่าน" เธอตอบ "กิ่งระดับสองเมตรแข็งแรงพอนั่งได้"</p>
+
+    <p>กษัตริย์มองเธอด้วยสายตาที่อ่านยากแล้วพูดว่า</p>
+
+    <p class="king-voice">"ข้าปีนต้นนั้นครั้งสุดท้ายตอนอายุสิบสอง" พระองค์พูด "เซร่าบอกให้ข้าปีนขึ้นไปดูภูเขาทางเหนือ เพราะเธอบอกว่าคนที่ไม่รู้ว่าดินแดนตัวเองงดงามแค่ไหนไม่มีสิทธิ์ปกครองมัน"</p>
+
+    <p>เอลาร่าฟังอย่างเงียบๆ</p>
+
+    <p class="king-voice">"เจ้าปีนขึ้นไปแล้ว" กษัตริย์พูด ไม่ใช่คำถาม</p>
+
+    <p class="dialogue">"ปีนขึ้นเมื่อเช้า ท่าน" เธอยอมรับ</p>
+
+    <p class="king-voice">"แล้วเห็นว่าเป็นอย่างไร ?"</p>
+
+    <p class="dialogue">"งดงามมาก ท่าน"</p>
+
+    <p>กษัตริย์อัลดริก พยักหน้าช้าๆ แล้วก็เงียบไปสักพัก ก่อนจะพูดว่า</p>
+
+    <p class="king-voice">"เซร่าคงจะชอบเจ้า" เสียงของพระองค์เบาลง "เธอชอบคนที่ไม่รอให้ใครบอกว่าต้องทำอะไร"</p>
+
+    <p>เอลาร่าไม่รู้ว่าจะพูดอะไร นั่นอาจเป็นคำชมที่หนักที่สุดที่เธอเคยได้รับ</p>
+
+    <p class="dialogue">"ขอบคุณ ท่าน" เธอพูดเบาๆ</p>
+
+    <p>พระองค์พยักหน้าอีกครั้ง ลุกขึ้น แล้วเดินจากไปโดยไม่พูดอะไรเพิ่ม</p>
+
+    <p class="inner-thought">กษัตริย์แห่งเวลมัวร์พูดสิ้นสุดบทสนทนาด้วยการเดินจากไปเสมอ ฉันเริ่มคิดว่านั่นเป็นภาษาท่าทางของเขาที่แปลว่า บทสนทนานี้สำคัญพอที่จะไม่ทำลายด้วยคำพูดเพิ่มเติม</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ คำถามที่หลีกเลี่ยงไม่ได้ ~</p>
+
+    <p>คืนวันที่เจ็ด คาเอลนั่งอยู่กับเธอที่ระเบียงตามปกติ แต่มีบางอย่างในท่านั่งของเขาที่บอกว่าเขากำลังคิดอะไรบางอย่างที่หนักกว่าการสนทนาทั่วไป</p>
+
+    <p>เธอรอ</p>
+
+    <p class="dialogue">"ผมต้องตัดสินใจบางอย่าง" เขาพูดในที่สุด มองออกไปที่ต้นสนที่ปกคลุมหิมะ</p>
+
+    <p class="dialogue">"ฉันรู้" เธอตอบ</p>
+
+    <p class="dialogue">"พ่อขอให้ผมอยู่ที่เวลมัวร์" คาเอลพูดช้าๆ "ไม่ใช่ในฐานะชาโดว์แฮนด์ ไม่ใช่คนกลาง แต่ในฐานะทายาทที่เป็นทางการ" เขาหยุด "เขาจะประกาศต่อสาธารณะว่าผมเป็นลูกชายของเขา ให้สิทธิ์ทุกอย่าง"</p>
+
+    <p>เอลาร่าไม่ขยับ</p>
+
+    <p class="dialogue">"นั่นคือสิ่งที่คุณต้องการมาตลอดไหม ?" เธอถามเงียบๆ</p>
+
+    <p class="dialogue">"ผมไม่รู้" คาเอลตอบตรงๆ "ตอนเด็กคงใช่ ตอนที่โตขึ้นมันซับซ้อนกว่านั้น" เขาหันมามองเธอ "และตอนนี้ยิ่งซับซ้อนกว่าเดิม"</p>
+
+    <p class="dialogue">"เพราะอะไร ?"</p>
+
+    <p class="dialogue">"เพราะถ้าผมอยู่ที่เวลมัวร์" เขาพูด เสียงตรงและเงียบ "ผมต้องอยู่ที่นี่ ที่นี่จะเป็นบ้าน และคุณ..." เขาหยุดสักครู่ "คุณไม่ได้มีอะไรยึดติดที่เวลมัวร์"</p>
+
+    <p>ความเงียบ</p>
+
+    <p class="dialogue">"คุณกำลังถามว่าฉันจะอยู่ด้วยไหม ?" เธอพูดตรงๆ</p>
+
+    <p class="dialogue">"ผมกำลังบอกว่าถ้าผมเลือก ผมไม่อยากให้คุณรู้สึกว่าต้องเลือกตามผม" เขาพูด "คุณเพิ่งได้อิสรภาพที่ต้องการมา ผมไม่อยากให้มันกลายเป็นกรงใบใหม่"</p>
+
+    <p>เอลาร่ามองเขานาน มองชายที่แม้กระทั่งในตอนที่กำลังพูดถึงสิ่งที่ตัวเองต้องการ ก็ยังคิดถึงเธอก่อน</p>
+
+    <p class="inner-thought">นั่นแหละที่ทำให้ยากที่จะไม่รักเขา</p>
+
+    <p>เธอเงียบอยู่นานพอที่จะทำให้เขาเริ่มกังวล แล้วก็พูดว่า</p>
+
+    <p class="dialogue">"คาเอล คุณรู้จักฉันมากพอแล้วหรือเปล่าที่จะรู้ว่าฉันไม่ทำอะไรเพราะรู้สึกว่าต้องทำ ?"</p>
+
+    <p>เขานิ่ง แล้วพยักหน้าช้าๆ</p>
+
+    <p class="dialogue">"ผมรู้"</p>
+
+    <p class="dialogue">"ดี" เธอพูด "งั้นถามใหม่ คุณต้องการอะไร ?"</p>
+
+    <p>เขามองตรงมาที่เธอ</p>
+
+    <p class="dialogue">"ต้องการอยู่ที่เวลมัวร์" เขาตอบ "และต้องการให้คุณอยู่ด้วย ไม่ใช่เพราะรู้สึกผิด แต่เพราะผมคิดว่าที่นี่อาจเป็นบ้านของคุณได้ด้วย ถ้าคุณให้โอกาสมัน"</p>
+
+    <p>เอลาร่ามองออกไปที่ท้องฟ้าเหนือฟรอสต์โฮลด์ที่มีดาวเริ่มปรากฏทีละดวง แต่ละดวงชัดกว่าที่เธอเคยเห็นในที่ไหนๆ เพราะที่นี่ไม่มีแสงรบกวน มีแต่ความหนาวและความเงียบ และท้องฟ้าที่ไม่มีอะไรบดบัง</p>
+
+    <p class="inner-thought">บ้าน ฉันไม่รู้จักคำนั้นจริงๆ มาตั้งนานแล้ว</p>
+
+    <p class="inner-thought">แต่แปดวันที่ผ่านมา ฉันรู้ว่าห้องเก็บของชั้นสามปิดเพราะอะไร รู้ว่าต้นสนต้นที่สี่กิ่งแข็งแรงพอ รู้ว่ากษัตริย์อัลดริก จบบทสนทนาที่สำคัญด้วยการเดินจากไป และรู้ว่าชาที่ที่นี่มีรสขมอมหวานในแบบที่เธอเริ่มชอบโดยไม่รู้ตัว</p>
+
+    <p class="inner-thought">นั่นฟังดูเหมือนอะไรบางอย่างที่ใกล้เคียงกับการรู้จักที่อยู่ดีๆ</p>
+
+    <p class="dialogue">"ฉันไม่สัญญาว่าจะง่าย" เธอพูดในที่สุด</p>
+
+    <p class="dialogue">"ผมไม่ได้ขอให้สัญญาแบบนั้น" เขาตอบ</p>
+
+    <p class="dialogue">"และฉันจะต้องออกไปข้างนอกเป็นครั้งคราว ฉันไม่ใช่คนที่อยู่นิ่งได้นาน"</p>
+
+    <p class="dialogue">"ผมรู้ดี" เขาพูด "และผมจะออกไปด้วยทุกครั้งที่ทำได้"</p>
+
+    <p>เธอหันมามองเขาอีกครั้ง</p>
+
+    <p class="dialogue">"คุณตอบเร็วมากเลยนะ"</p>
+
+    <p class="dialogue">"เพราะผมคิดคำตอบนี้ไว้ก่อนถามแล้ว" เขาพูด มุมปากขยับขึ้นในแบบที่เธอชอบ</p>
+
+    <p>เธอหัวเราะออกมาเบาๆ แล้วก็มองออกไปที่ดาวอีกครั้ง</p>
+
+    <p class="dialogue">"โอเค" เธอพูดในที่สุด</p>
+
+    <p class="dialogue">"โอเคอะไร ?"</p>
+
+    <p class="dialogue">"โอเคที่จะลอง" เธอพูด "ให้โอกาสเวลมัวร์เป็นบ้าน ดูว่ามันจะเป็นอย่างไร" เธอหันมามองเขา "แต่ฉันขอต้นสนต้นนั้นเป็นของฉัน"</p>
+
+    <p class="dialogue">"ต้นที่สี่ ?"</p>
+
+    <p class="dialogue">"ใช่ กิ่งระดับสองเมตร มุมมองดีที่สุดในปราสาท"</p>
+
+    <p>คาเอลหัวเราะ เสียงอบอุ่นในอากาศหนาว</p>
+
+    <p class="dialogue">"มันเป็นของคุณแล้วล่ะ"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ สิ่งที่กษัตริย์ตัดสินใจ ~</p>
+
+    <div class="court-scene">
+      <p>วันที่เก้า กษัตริย์อัลดริกเรียกทั้งสองคนเข้าพบในห้องรับรองส่วนตัวอีกครั้ง คราวนี้ไม่มีที่ปรึกษา ไม่มีทูต มีแค่สามคนและแสงเทียนที่ให้ความอบอุ่นมากกว่าครั้งแรกที่มาถึง</p>
+
+      <p>กษัตริย์วางม้วนกระดาษบนโต๊ะ ตราประทับสีแดงของเวลมัวร์ยังอยู่ครบ</p>
+
+      <p class="king-voice">"สาส์นนี้ส่งไปยังแอชวาลด์แล้วเมื่อเช้า" พระองค์พูด "ข้าประกาศอย่างเป็นทางการว่าเวลมัวร์ยอมรับการทำลายโอราเคิลออฟรูน และไม่ถือว่าเป็นการทรยศต่อดินแดน"</p>
+
+      <p>คาเอลนิ่งอยู่ครู่หนึ่ง</p>
+
+      <p class="dialogue">"พ่อ..."</p>
+
+      <p class="king-voice">"ข้าทำผิดพลาดหลายอย่างในชีวิต" กษัตริย์พูดตัดหน้า เสียงราบแต่หนัก "การปิดบังความจริงจากเจ้าเป็นหนึ่งในนั้น ข้าแก้ไขทุกอย่างได้ไม่หมด แต่อย่างน้อยข้าแก้ไขสิ่งนี้ได้"</p>
+
+      <p>พระองค์หยิบม้วนกระดาษอีกชิ้น วางลงข้างๆ</p>
+
+      <p class="king-voice">"นี่คือเอกสารประกาศตำแหน่ง" พระองค์พูด "เคเลน อัลดริก ดอร์น ทายาทที่ได้รับการรับรองอย่างเป็นทางการแห่งเวลมัวร์" พระองค์มองลูกชาย "ข้าไม่บังคับ เจ้าลงนามหรือไม่ก็ได้ แต่ข้าต้องการให้เจ้ารู้ว่ามันมีอยู่"</p>
+
+      <p>คาเอลมองเอกสารนั้นนาน แล้วก็มองพ่อ ในดวงตาของเขามีบางอย่างที่เอลาร่าไม่เคยเห็นที่นั่นมาก่อน บางอย่างที่อ่อนกว่าปกติและเปิดกว้างกว่าเดิม</p>
+
+      <p class="dialogue">"ผมต้องคิดก่อน" เขาพูดเบาๆ</p>
+
+      <p class="king-voice">"ข้ารู้" กษัตริย์พูด "เอกสารนั้นไม่มีวันหมดอายุ"</p>
+
+      <p>แล้วพระองค์ก็ทำสิ่งที่เอลาร่าไม่คาดคิด พระองค์วางมือลงบนไหล่ลูกชายเบาๆ เพียงสองวินาที แล้วก็ยกมือออก</p>
+
+      <p>แต่สองวินาทีนั้นก็เพียงพอ</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ ห้องของเซร่า ~</p>
+
+    <p>บ่ายวันนั้น คาเอลมาหาเธอที่สวน</p>
+
+    <p class="dialogue">"ไปกับผมได้ไหม ?" เขาถาม</p>
+
+    <p class="dialogue">"ไปไหน ?"</p>
+
+    <p class="dialogue">"ที่ที่ผมไม่เคยไปคนเดียว"</p>
+
+    <p>เธอรู้ทันทีว่าเขาหมายถึงที่ไหน</p>
+
+    <p>พวกเขาขึ้นไปชั้นสาม ทางเดินเงียบกว่าปกติ ราวกับแม้แต่ยามก็รู้ว่าวันนี้ต้องเว้นระยะ หน้าประตูสีน้ำตาลเข้มที่ถูกล็อคมาสิบห้าปี คาเอลยืนอยู่นิ่งนานสักครู่ มือถือกุญแจที่กษัตริย์อัลดริกมอบให้เมื่อเช้า</p>
+
+    <p>เอลาร่ายืนข้างๆ ไม่พูด ไม่เร่ง</p>
+
+    <p>เขาเสียบกุญแจ หมุน และผลักประตูออก</p>
+
+    <p>ห้องข้างในไม่ได้มืดอย่างที่เธอคาด มีหน้าต่างบานเล็กที่ถูกปิดด้วยผ้าหนา เมื่อคาเอลดึงผ้าออก แสงบ่ายของเวลมัวร์ส่องเข้ามาพร้อมกับฝุ่นละอองที่ลอยช้าในอากาศ</p>
+
+    <p>ห้องเล็ก เรียบง่าย มีโต๊ะเขียนหนังสือ หิ้งหนังสือ และผ้าคลุมเตียงสีน้ำเงิน ทุกอย่างอยู่ในที่เดิมราวกับเจ้าของเพิ่งออกไปเมื่อวานนี้เอง</p>
+
+    <p>บนโต๊ะมีหนังสือปิดอยู่เล่มหนึ่ง และข้างๆ มีรูปวาดเล็กๆ กรอบไม้เก่า ผู้หญิงผมสีดำ ดวงตาสีเทา รอยยิ้มที่เธอจำได้ทันที</p>
+
+    <p class="inner-thought">ดวงตาเดียวกับคาเอล ทุกประการ</p>
+
+    <p>คาเอลยืนอยู่กลางห้อง มองรูปวาดนั้นนาน แล้วก็เดินไปหยิบขึ้นมาถือ มือไม่สั่น แต่เธอเห็นว่าเขากลั้นหายใจ</p>
+
+    <div class="tender">
+      <p>เธอไม่ก้าวเข้าไปใกล้ ไม่วางมือบนไหล่เขา แค่ยืนอยู่ที่ประตู ทิ้งพื้นที่ให้เขากับแม่ที่เขาไม่ได้เจอมาสิบห้าปี</p>
+      <p>คาเอลยืนถือรูปวาดอยู่นาน แล้วก็พูดเบาๆ ราวกับพูดกับคนในรูปมากกว่าพูดกับเธอ</p>
+      <p class="dialogue">"เธออาจจะชอบเอลาร่า" เขาพูด "เธอชอบคนที่ไม่รอให้ใครบอกว่าต้องทำอะไร"</p>
+      <p>เอลาร่ารู้สึกอะไรอุ่นขึ้นในอก คำเดิมกับที่กษัตริย์อัลดริกพูด แต่จากปากของคาเอล มันหนักกว่ามาก</p>
+      <p>เขาวางรูปวาดกลับที่เดิม ถอยออกมา และเดินมาหยุดข้างๆ เธอ</p>
+      <p class="dialogue">"ขอบคุณที่มาด้วย" เขาพูด</p>
+      <p class="dialogue">"ฉันไม่ได้ทำอะไรเลย" เธอพูดตรงๆ</p>
+      <p class="dialogue">"แค่มีคุณอยู่ที่ประตูก็พอแล้ว" เขาตอบ เสียงเบา "บางทีนั่นก็เป็นสิ่งที่ต้องการมากที่สุด"</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ คืนสุดท้ายที่ฟรอสต์โฮลด์ ~</p>
+
+    <p>คาเอลลงนามในเอกสารก่อนอาหารเย็น</p>
+
+    <p>เขาไม่ได้ประกาศ ไม่ได้บอกเธอก่อน เธอรู้เพราะเห็นกษัตริย์อัลดริก เดินออกมาจากห้องทำงานด้วยสีหน้าที่เปลี่ยนไปเล็กน้อย เปลี่ยนในแบบที่เธอเรียนรู้แล้วว่าหมายความว่าอะไรสำหรับพระองค์</p>
+
+    <p>มื้อเย็นคืนนั้นสามคนนั่งร่วมโต๊ะ กษัตริย์อัลดริกสั่งอาหารพิเศษและไวน์จากห้องใต้ดินที่ไม่ได้เปิดมานาน บทสนทนายังสั้นและเป็นระเบียบอยู่ แต่มีบางอย่างในอากาศที่ต่างออกไป</p>
+
+    <p>หลังอาหาร กษัตริย์อัลดริกมองมาที่เธอก่อนลุกจากโต๊ะ</p>
+
+    <p class="king-voice">"เจ้าจะอยู่ที่เวลมัวร์สินะ" พระองค์พูด ไม่ใช่คำถาม</p>
+
+    <p class="dialogue">"ถ้าท่านไม่รังเกียจ" เธอตอบ</p>
+
+    <p class="king-voice">"เวลมัวร์ต้องการคนที่มีสัมผัสที่หก" พระองค์พูดราบๆ "และข้าคิดว่าเจ้าจะเบื่อเร็วถ้าไม่มีอะไรทำ"</p>
+
+    <p class="dialogue">"ท่านรู้จักฉันเร็วมาก" เธอพูด</p>
+
+    <p class="king-voice">"ข้าเป็นกษัตริย์มาสี่สิบปี" พระองค์พูดประโยคเดิมกับวันแรกที่พบกัน แต่คราวนี้มีบางอย่างที่ต่างออกไปในน้ำเสียง บางอย่างที่ใกล้เคียงกับอารมณ์ขันอย่างเงียบๆ</p>
+
+    <p>พระองค์ลุกขึ้น เดินไปถึงประตูแล้วหยุด</p>
+
+    <p class="king-voice">"เอลาร่า วินด์มาร์ค"</p>
+
+    <p class="dialogue">"ค่ะท่าน ?"</p>
+
+    <p class="king-voice">"ข้ายินดีที่เจ้ามา" พระองค์พูด แล้วเดินออกไปก่อนที่เธอจะตอบ</p>
+
+    <p>คาเอลมองตามพ่อจนหายไป แล้วหันมาที่เธอ</p>
+
+    <p class="dialogue">"พ่อไม่ได้พูดอย่างนั้นกับใครไม่บ่อยนัก" เขาพูด</p>
+
+    <p class="dialogue">"ฉันรู้แล้วล่ะ" เธอตอบ แล้วก็รู้สึกถึงบางอย่างอุ่นในอกที่เธอยังไม่คุ้นเคยดีนัก แต่เริ่มหยุดกลัวมันแล้ว</p>
+
+    <div class="finale">
+      <p>พวกเขานั่งอยู่ที่ระเบียงคืนสุดท้ายก่อนที่คาเอลต้องเดินทางกลับแอชวาลด์เพื่อรายงานผลต่อกษัตริย์ธีเรียน เอลาร่าจะเดินทางไปด้วยและกลับมาอีกครั้งในอีกไม่กี่สัปดาห์</p>
+      <p>หิมะเบาลงจนแทบไม่มีแล้ว ท้องฟ้าใสผิดปกติ ดาวเต็มฟ้า</p>
+      <p class="dialogue">"คาเอล" เธอพูดหลังจากเงียบมาสักพัก</p>
+      <p class="dialogue">"อะไร ?"</p>
+      <p class="dialogue">"ฉันไม่รู้ว่านี่จะเรียกว่าบ้านได้หรือเปล่า" เธอพูดตรงๆ "ฉันไม่เคยมีที่ที่รู้สึกอย่างนั้นมานานมากแล้ว แต่..."</p>
+      <p class="dialogue">"แต่ ?"</p>
+      <p>เธอมองออกไปที่ต้นสนต้นที่สี่ทางซ้ายของสวน</p>
+      <p class="dialogue">"แต่ฉันรู้ว่ากิ่งไม้ต้นไหนแข็งแรงพอนั่งได้ และรู้ว่าชาที่นี่รสเป็นยังไง และรู้ว่ากษัตริย์อัลดริกจบบทสนทนาด้วยการเดินจากไปเมื่อมันสำคัญพอ" เธอหันมามองเขา "บางทีนั่นก็พอเป็นจุดเริ่มต้น"</p>
+      <p>คาเอลมองเธอ แล้วยื่นมือออกมาในแบบที่เธอรู้จักแล้ว</p>
+      <p>เธอวางมือลงไปโดยไม่ลังเล</p>
+      <p class="dialogue">"แค่นั้นก็พอแล้ว" เขาพูด</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+    <div class="quote-block">
+      <p>บ้านไม่ใช่สถานที่ที่คุณเกิด และไม่ใช่สถานที่ที่คนอื่นบอกว่าคุณต้องอยู่</p>
+      <p>บ้านคือสถานที่ที่คุณรู้จักต้นไม้ต้นหนึ่งดีพอที่จะรู้ว่ากิ่งไหนแข็งแรง</p>
+      <p>เอลาร่า วินด์มาร์ค ใช้เวลาสองปีในการย้ายเมืองทุกสองเดือน</p>
+      <p>และใช้เวลาแปดวันในการพบว่าบางทีสิ่งที่ต้องการไม่ใช่การเคลื่อนไหว แต่คือที่ที่คุ้มค่าพอที่จะอยู่นิ่ง</p>
+    </div>
+
+  </div>
+
+  <div class="chapter-end">
+    <span class="end-mark">✦ จบตอนที่ ๘ ✦</span>
+    <p class="next-teaser">ตอนที่ ๙ : กลับสู่แอชลาวด์ — เมื่อการเดินทางกลับพาพวกเขามาเผชิญกับสิ่งที่รอคอยอยู่ และคำถามที่ทั้งสองยังไม่กล้าพูดออกมาตรงๆ ในที่สุดก็ถึงเวลาต้องพูด</p>
+  </div>
+
+</div>
+
+
+
+<div class="settings-bar">
+  <button class="settings-btn" onclick="setFont('sm')">A-</button>
+  <button class="settings-btn" onclick="setFont('md')">A</button>
+  <button class="settings-btn" onclick="setFont('lg')">A+</button>
+  <div class="settings-sep"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-text" id="progressText">0%</span>
+  </div>
+</div>
+
+<script>
+const sc=document.getElementById('stars');
+for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${Math.random()*4+2}s;--delay:${Math.random()*5}s;--bright:${Math.random()*0.4+0.15};`;sc.appendChild(s);}
+function toggleMenu(){const m=document.getElementById('sideMenu');const b=document.getElementById('menuBtn');const o=document.getElementById('overlay');m.classList.toggle('active');b.classList.toggle('open');o.classList.toggle('show');}
+function closeMenu(){document.getElementById('sideMenu').classList.remove('active');document.getElementById('menuBtn').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function setFont(s){document.body.classList.remove('fs-sm','fs-md','fs-lg');document.body.classList.add('fs-'+s);}
+function updateProgress(){const d=document.documentElement.scrollHeight-window.innerHeight;const p=d>0?Math.round((window.scrollY/d)*100):0;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressText').textContent=p+'%';}
+window.addEventListener('scroll',updateProgress);updateProgress();
+</script>
+</body>
+</html>

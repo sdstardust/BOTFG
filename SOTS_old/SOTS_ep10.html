@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน | ตอนที่ 10 — บทสุดท้าย</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a5f28;
+    --gold-glow: #f5d870;
+    --cream: #f0e8d8;
+    --cream-dim: #d4c8b0;
+    --dawn: #e0b880;
+    --dawn-rose: #d8987a;
+    --ice: #a8c8e8;
+    --crimson: #8b1a1a;
+    --dark: #08090a;
+    --dark-warm: #100f0c;
+    --parchment: #f8f0e0;
+    --parchment-dark: #d8c8a8;
+    --text-body: #eee8d8;
+    --text-dim: #9a9080;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--dark);
+    color: var(--text-body);
+    font-family: 'Sarabun', serif;
+    font-weight: 300;
+    line-height: 1.95;
+    font-size: 17px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 85% 40% at 50% 0%,  rgba(224,184,128,0.20) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 60% at 10% 65%,  rgba(201,168,76,0.14) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 55% at 90% 70%,  rgba(168,200,232,0.08) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Abundant warm motes — finale energy */
+  .motes { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .mote {
+    position: absolute; border-radius: 50%;
+    animation: moteRise var(--dur,9s) ease-in-out infinite;
+    animation-delay: var(--delay,0s); opacity: 0;
+  }
+  @keyframes moteRise {
+    0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 0; }
+    15%  { opacity: var(--op,.5); }
+    80%  { opacity: var(--op,.5); }
+    100% { transform: translateY(var(--ty,-90px)) scale(.3) rotate(var(--rot,20deg)); opacity: 0; }
+  }
+
+  /* Soft light rays */
+  .rays { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .ray {
+    position: absolute; top: 0; left: 50%;
+    transform-origin: top center;
+    background: linear-gradient(180deg, rgba(224,184,128,.12), transparent);
+    animation: rayPulse var(--dur,7s) ease-in-out infinite;
+    animation-delay: var(--delay,0s); opacity: 0;
+  }
+  @keyframes rayPulse {
+    0%,100% { opacity: 0; }
+    50%     { opacity: 1; }
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 780px; margin: 0 auto;
+    padding: 60px 40px 120px;
+  }
+
+  .header-ornament { text-align: center; margin-bottom: 20px; animation: fadeDown 1.2s ease both; }
+  .ornament-line {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; color: var(--gold); font-size: 22px; letter-spacing: 8px;
+  }
+  .ornament-line::before,.ornament-line::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .series-title {
+    font-family:'Cinzel',serif; font-size:11px;
+    letter-spacing:6px; color:var(--gold-dim);
+    text-transform:uppercase; text-align:center;
+    margin-bottom:16px; animation:fadeDown 1.2s ease .1s both;
+  }
+  .main-title {
+    font-family:'Cinzel Decorative',serif;
+    font-size:clamp(32px,6vw,52px); color:var(--gold);
+    text-align:center; line-height:1.3;
+    text-shadow:0 0 50px rgba(201,168,76,.55),0 2px 4px rgba(0,0,0,.9);
+    margin-bottom:10px; animation:fadeDown 1.2s ease .2s both;
+  }
+  .subtitle {
+    font-family:'Cinzel',serif; font-size:13px;
+    letter-spacing:4px; color:var(--text-dim);
+    text-align:center; margin-bottom:50px;
+    animation:fadeDown 1.2s ease .3s both;
+  }
+  .chapter-badge {
+    display:flex; align-items:center; justify-content:center;
+    gap:20px; margin-bottom:16px; animation:fadeDown 1s ease .4s both;
+  }
+  .chapter-badge span {
+    font-family:'Cinzel',serif; font-size:12px;
+    letter-spacing:5px; color:var(--gold); text-transform:uppercase;
+  }
+  .badge-gem {
+    width:6px; height:6px; background:var(--gold);
+    transform:rotate(45deg); box-shadow:0 0 14px var(--gold-light);
+  }
+  .chapter-title {
+    font-family:'Cinzel Decorative',serif;
+    font-size:clamp(18px,3.5vw,28px); color:var(--parchment);
+    text-align:center; margin-bottom:8px;
+    text-shadow:0 0 25px rgba(248,240,224,.25);
+    animation:fadeDown 1s ease .5s both;
+  }
+  .chapter-subtitle {
+    font-family:'Cinzel',serif; font-size:13px;
+    letter-spacing:5px; color:var(--gold-dim);
+    text-align:center; margin-bottom:55px;
+    animation:fadeDown 1s ease .55s both;
+  }
+
+  .divider {
+    display:flex; align-items:center; justify-content:center;
+    gap:12px; margin:40px 0;
+  }
+  .divider::before,.divider::after {
+    content:''; flex:1; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(201,168,76,.55),transparent);
+  }
+  .divider-gem {
+    width:5px; height:5px; background:var(--gold);
+    transform:rotate(45deg); flex-shrink:0;
+    box-shadow:0 0 9px var(--gold-light);
+  }
+
+  .content { animation:fadeUp 1.4s ease .6s both; }
+
+  p { margin-bottom:24px; text-align:justify; text-indent:2em; }
+
+  p.drop-cap::first-letter {
+    font-family:'Cinzel Decorative',serif;
+    font-size:4.5em; font-weight:700; color:var(--gold);
+    float:left; line-height:.75; margin:8px 12px -4px 0;
+    text-shadow:0 0 28px rgba(201,168,76,.65);
+  }
+
+  .scene-title {
+    font-family:'Cinzel',serif; font-size:13px;
+    letter-spacing:4px; color:var(--gold);
+    text-align:center; text-transform:uppercase;
+    margin:50px 0 30px; opacity:.9;
+  }
+
+  .dialogue      { color:#eee8d8; text-indent:2em; }
+  .dramatic      { color:var(--gold-light); font-style:italic; }
+  .inner-thought { color:var(--text-dim); font-style:italic; }
+  .king-voice {
+    color:#d0e0f0; font-style:italic;
+    text-indent:2em; letter-spacing:.3px;
+  }
+
+  .quote-block {
+    border-left:2px solid var(--gold-dim);
+    padding:18px 26px; margin:36px 0;
+    background:rgba(201,168,76,.05);
+    font-style:italic; color:var(--parchment-dark);
+  }
+  .quote-block p { text-indent:0; margin-bottom:14px; }
+  .quote-block p:last-child { margin-bottom:0; }
+
+  .reunion {
+    background:rgba(16,15,12,.5);
+    border:1px solid rgba(201,168,76,.16);
+    border-radius:2px; padding:26px; margin:32px 0;
+  }
+  .reunion p { margin-bottom:20px; }
+  .reunion p:last-child { margin-bottom:0; }
+
+  .tender {
+    background:rgba(201,168,76,.05);
+    border-left:2px solid rgba(201,168,76,.42);
+    padding:22px 28px; margin:36px 0;
+  }
+  .tender p { text-indent:0; margin-bottom:16px; }
+  .tender p:last-child { margin-bottom:0; }
+
+  /* Grand finale */
+  .finale {
+    background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(224,184,128,.05));
+    border:1px solid rgba(201,168,76,.22);
+    border-radius:2px; padding:32px; margin:40px 0;
+  }
+  .finale p { text-indent:0; margin-bottom:20px; }
+  .finale p:last-child { margin-bottom:0; }
+
+  /* Epilogue */
+  .epilogue {
+    margin:60px 0 0;
+    padding:40px;
+    background:rgba(201,168,76,.04);
+    border:1px solid rgba(201,168,76,.15);
+    border-radius:2px;
+  }
+  .epilogue-title {
+    font-family:'Cinzel',serif; font-size:13px;
+    letter-spacing:5px; color:var(--gold-dim);
+    text-align:center; text-transform:uppercase;
+    margin-bottom:30px;
+  }
+  .epilogue p { text-indent:0; margin-bottom:18px; font-style:italic; color:var(--parchment-dark); }
+  .epilogue p:last-child { margin-bottom:0; }
+
+  /* THE END */
+  .series-end {
+    text-align:center; margin-top:80px; padding-top:50px;
+    border-top:1px solid rgba(201,168,76,.35);
+    animation:fadeUp 1.5s ease 1.2s both;
+  }
+  .series-end .end-mark {
+    font-family:'Cinzel Decorative',serif;
+    font-size:22px; color:var(--gold);
+    letter-spacing:8px; display:block; margin-bottom:18px;
+    text-shadow:0 0 25px rgba(201,168,76,.5);
+  }
+  .series-end .series-name {
+    font-family:'Cinzel',serif; font-size:12px;
+    letter-spacing:6px; color:var(--gold-dim);
+    display:block; margin-bottom:12px;
+  }
+  .series-end .closing-line {
+    font-size:14px; color:var(--text-dim);
+    font-style:italic; letter-spacing:1px;
+  }
+
+  @keyframes fadeDown {
+    from { opacity:0; transform:translateY(-20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--dark); }
+  ::-webkit-scrollbar-thumb { background:var(--gold-dim); border-radius:3px; }
+
+  em     { font-style:italic; color:var(--gold-light); }
+  strong { font-weight:600;   color:var(--parchment); }
+
+  @media (max-width:600px) {
+    .container { padding:40px 24px 80px; }
+    p { text-align:left; }
+    .epilogue { padding:24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="rays"  id="rays"></div>
+<div class="motes" id="motes"></div>
+
+<div class="container">
+
+  <div class="header-ornament">
+    <div class="ornament-line">✦ ♔ ❧ ♔ ✦</div>
+  </div>
+
+  <p class="series-title">นิยายแฟนตาซีโรแมนติก</p>
+  <h1 class="main-title">เงาแห่งราชัน</h1>
+  <p class="subtitle">Shadow of the Sovereign</p>
+
+  <div class="chapter-badge">
+    <div class="badge-gem"></div>
+    <span>ตอนที่ ๑๐</span>
+    <div class="badge-gem"></div>
+  </div>
+
+  <h2 class="chapter-title">บ้านที่มีมากกว่าหนึ่งที่</h2>
+  <p class="chapter-subtitle">— บทสุดท้าย —</p>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="content">
+
+    <p class="drop-cap">เนลลากลับมาในเช้าวันที่ท้องฟ้าใสที่สุดในรอบฤดูกาล</p>
+
+    <p>ไม่มีการแจ้งล่วงหน้า ไม่มีสาส์นบอกกำหนดการ มีแค่เสียงเคาะประตูที่เร็วและสม่ำเสมอในแบบที่ใครก็ตามที่รู้จักเนลลา วินด์มาร์ค จะรู้ทันทีว่าเป็นใคร</p>
+
+    <p>เอลาร่าเปิดประตู</p>
+
+    <p>น้องสาวผมหยิกสีน้ำตาลยืนอยู่หน้าประตู กระเป๋าเดินทางใบใหญ่ข้างๆ รอยฝุ่นที่เสื้อคลุมบอกว่าเดินทางมาตลอดคืน และรอยยิ้มกว้างที่ไม่ได้เปลี่ยนไปเลยสักนิด</p>
+
+    <p class="dialogue">"พี่!" เนลลาวิ่งเข้ากอดก่อนที่เอลาร่าจะพูดอะไรได้</p>
+
+    <p>เธอรับน้องสาวไว้ กอดแน่น รู้สึกถึงน้ำหนักเล็กๆ ของคนที่เธอรักมากที่สุดในโลก</p>
+
+    <p class="inner-thought">เธอกลับมา และเธอโอเค ฉันรู้ได้จากรอยยิ้ม</p>
+
+    <p class="dialogue">"ทำไมไม่บอกล่วงหน้า ?" เธอถามเมื่อถอยออกมา</p>
+
+    <p class="dialogue">"เพราะฉันเห็นในอนาคตแล้วว่าพี่จะพูดว่า ทำไมไม่บอกล่วงหน้า แล้วฉันก็อยากพิสูจน์ว่าอนาคตมันแม่น" เนลลาพูดด้วยน้ำเสียงที่ร่าเริงอย่างชัดเจน "คาเอลอยู่ที่นี่ด้วยไหม ?"</p>
+
+    <p class="dialogue">"อยู่ชั้นล่าง"</p>
+
+    <p class="dialogue">"ดี ฉันมีเรื่องต้องบอกทั้งสองคน"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ ข่าวจากมิเรฟอลล์ ~</p>
+
+    <div class="reunion">
+      <p>ทั้งสามคนนั่งรวมกันที่ห้องของเอลาร่า คาเอลเอนหลังพิงกำแพง เนลลานั่งขัดสมาธิบนเตียง และเอลาร่านั่งที่ขอบหน้าต่างตามเคย</p>
+
+      <p class="dialogue">"มิเรฟอลล์มีนักพยากรณ์กลุ่มหนึ่งที่ศึกษาพลังการมองเห็นมาหลายร้อยปี" เนลลาเริ่มเล่า ดวงตาของเธอสว่างในแบบที่บอกว่าเรื่องนี้สำคัญมาก "พวกเขาพบฉันเองจริงๆ ไม่ใช่ฉันตามหาพวกเขา"</p>
+
+      <p class="dialogue">"พวกเขาบอกอะไร ?" คาเอลถาม</p>
+
+      <p class="dialogue">"พวกเขาบอกว่าพลังของฉันเปลี่ยนไปหลังเหตุการณ์ที่แบล็คมัวร์ ฉันรู้อยู่แล้ว แต่ที่ไม่รู้คือมันเปลี่ยนอย่างไร" เนลลาหยุด "ก่อนหน้านั้นฉันเห็นอนาคตเป็นภาพ แต่ตอนนี้ฉันเห็นมันเป็นเส้นทาง หลายเส้นทางพร้อมกัน และฉันเลือกได้ว่าจะส่งต่ออะไรให้ใคร"</p>
+
+      <p class="dialogue">"ส่งต่อ ?" เอลาร่าขยับคิ้ว</p>
+
+      <p class="dialogue">"ฉันสามารถให้คนอื่นมองเห็นอนาคตของตัวเองได้" เนลลาพูด "แต่เห็นแค่อนาคตของเขา ไม่ใช่อนาคตของคนอื่น และเขาต้องยินยอม" เธอมองพี่สาว "มันต่างจากก่อนมาก ควบคุมได้มากกว่า ปลอดภัยกว่า และ..."</p>
+
+      <p class="dialogue">"และ ?"</p>
+
+      <p class="dialogue">"และกลุ่มนักพยากรณ์ที่มิเรฟอลล์ ต้องการให้ฉันอยู่สอนพวกเขาเป็นเวลาหนึ่งปี" เนลลาพูด "ฉันจะกลับมาเยี่ยมทุกสามเดือน แต่พวกเขาให้ฉันอยู่ที่มิเรฟอลล์ก่อน"</p>
+
+      <p>ห้องเงียบสักครู่</p>
+
+      <p class="dialogue">"คุณตัดสินใจแล้วหรือยัง ?" คาเอลถาม</p>
+
+      <p class="dialogue">"ตัดสินใจแล้วก่อนมา" เนลลาพูดตรงๆ "แค่อยากบอกด้วยตัวเอง ไม่ใช่ผ่านจดหมาย" เธอมองพี่สาว "พี่ว่ายังไง ?"</p>
+
+      <p>เอลาร่ามองน้องสาว มองคนที่โตขึ้นมากในช่วงไม่กี่เดือน ไม่ใช่โตเพราะเวลา แต่เพราะผ่านอะไรมาและยังยิ้มได้</p>
+
+      <p class="dialogue">"ฉันคิดว่านั่นฟังดูดีมากสำหรับเธอ" เธอพูด "และฉันจะเดินทางไปหาเธอทุกครั้งที่ทำได้"</p>
+
+      <p>เนลลายิ้มกว้างขึ้น</p>
+
+      <p class="dialogue">"ฉันรู้" น้องสาวพูด "ฉันเห็นมันในอนาคตแล้ว พี่จะมาพร้อมกับคาเอลในทริปแรก และจะเห็นว่ามิเรฟอลล์มีตลาดขนมที่ดีที่สุดในทวีปนี้"</p>
+
+      <p class="dialogue">"เนลลา" เอลาร่าพูด เสียงเตือน</p>
+
+      <p class="dialogue">"บอกแค่ข้อมูลที่จำเป็น เข้าใจแล้ว" น้องสาวพูดสำรวม แต่ตาหัวเราะ</p>
+
+      <p>คาเอลหัวเราะเบาๆ จากที่นั่งของเขา</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ บ่ายวันนั้น ~</p>
+
+    <p>เนลลาหลับช่วงบ่ายหลังเดินทางมาทั้งคืน เอลาร่าและคาเอลออกไปเดินที่สวนราชสำนัก ซึ่งตอนนี้เริ่มมีดอกไม้บานหลังจากฤดูหนาวผ่านไป</p>
+
+    <p>ต้นไม้ที่เคยตัดแต่งสมมาตรดูงดงามน้อยลงในสายตาเธอ ตอนนี้เธอเปรียบเทียบกับต้นสนของฟรอสต์โฮลด์ ไม่มีใครตัดแต่ง ไม่มีใครสั่งให้งดงาม แค่เติบโตไปตามที่ควรจะเป็น</p>
+
+    <p class="dialogue">"คาเอล" เธอพูดขณะเดิน</p>
+
+    <p class="dialogue">"อะไร ?"</p>
+
+    <p class="dialogue">"ฉันคิดว่าฉันเข้าใจแล้วว่าทำไมฉันถึงไม่เคยอยู่ที่ไหนนานกว่าสองเดือนมาตลอด"</p>
+
+    <p>เขามองเธอ รอ</p>
+
+    <p class="dialogue">"เพราะฉันกลัวว่าถ้าอยู่นานพอ ฉันจะเริ่มผูกพัน และถ้าผูกพันแล้วต้องจากไป มันจะเจ็บมาก" เธอพูดช้าๆ ราวกับเพิ่งเข้าใจสิ่งที่รู้มาตลอดแต่ไม่ยอมรับ "งั้นเลยออกไปก่อนที่จะรู้สึกว่าต้องออก"</p>
+
+    <p class="dialogue">"และตอนนี้ ?" คาเอลถาม</p>
+
+    <p class="dialogue">"ตอนนี้ฉันรู้จักกิ่งต้นสนที่ฟรอสต์โฮลด์" เธอพูดเงียบๆ "และรู้ว่ากษัตริย์อัลดริกจะนั่งม้านั่งในสวนด้านในช่วงบ่ายถ้าไม่มีกิจธุระ และรู้ว่าชาที่นั่นรสเป็นยังไง" เธอหันมามองเขา "การผูกพันมันเกิดขึ้นไปแล้ว โดยที่ฉันไม่ได้ตั้งใจ งั้นเลยไม่มีประโยชน์ที่จะกลัวอีกต่อไป"</p>
+
+    <p>คาเอลเดินมาหยุดข้างหน้าเธอ มองลงมาที่ใบหน้าเธอในแสงบ่ายที่ทองและอบอุ่น</p>
+
+    <p class="dialogue">"คุณรู้ไหมว่านั่นเป็นครั้งแรกที่คุณพูดว่ากลัวโดยไม่มีคำว่า แต่ ตามมาทันที ?"</p>
+
+    <p>เธอคิดสักครู่ แล้วก็พยักหน้า</p>
+
+    <p class="dialogue">"ใช่" เธอพูด "ฉันแค่กลัว ไม่มี แต่"</p>
+
+    <p class="dialogue">"นั่นแหละ" เขาพูดเบาๆ</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ การเจรจาที่แอชวาลด์ ~</p>
+
+    <p>การประชุมระหว่างทูตเวลมัวร์ และกษัตริย์ธีเรียนแห่งแอชวาลด์จัดขึ้นในสัปดาห์ต่อมา ห้องประชุมใหญ่ที่ไม่เคยใช้มาหลายปีถูกเปิดออก พรมสีน้ำเงินปูใหม่ เทียนพันดวง และธงของทั้งสองอาณาจักรแขวนเคียงข้างกันที่ผนัง</p>
+
+    <p>คาเอลนั่งฝั่งเวลมัวร์ในฐานะที่เป็นตัวแทนอย่างเป็นทางการ ไม่ใช่คนกลางที่ไม่มีฝ่ายอีกต่อไป และเอลาร่านั่งอยู่ด้านข้าง ไม่ใช่ในฐานะตัวแทนของใคร แต่ในฐานะที่ปรึกษาที่กษัตริย์ธีเรียนเชิญมาด้วยตัวเอง</p>
+
+    <p class="inner-thought">สัมผัสของฉันทำงานตลอดการประชุมสี่ชั่วโมง อ่านทุกคนในห้อง อ่านความตั้งใจ อ่านความจริงใจ</p>
+
+    <p class="inner-thought">ไม่มีใครโกหก ทุกคนมาด้วยเจตนาที่ต้องการสันติ แม้จะมีจุดขัดแย้งบ้างในรายละเอียด แต่นั่นเป็นเรื่องของการเจรจา ไม่ใช่เรื่องของความไม่ซื่อสัตย์</p>
+
+    <p>มีอยู่ช่วงหนึ่งที่การเจรจาตึงเครียดเรื่องพรมแดนทางการค้า เอลาร่าเอนไปกระซิบบางอย่างกับคาเอลสั้นๆ เขาพยักหน้าและเสนอทางออกที่ไม่มีใครคิดถึง ห้องเงียบสักครู่ แล้วทูตเวลมัวร์ก็พยักหน้าเห็นด้วย และกษัตริย์ธีเรียนก็พูดว่า</p>
+
+    <p class="king-voice">"ข้าเห็นด้วย"</p>
+
+    <p>การประชุมจบลงด้วยเอกสารที่ทั้งสองฝ่ายลงนาม ไม่ใช่สนธิสัญญาสมบูรณ์ แต่เป็นกรอบความร่วมมือเบื้องต้น ก้าวแรกของสิ่งที่จะต้องใช้เวลาหลายปีในการสร้าง</p>
+
+    <p>แต่มันเป็นก้าวแรก และนั่นก็พอแล้ว</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ วันที่เนลลาจากไป ~</p>
+
+    <p>เนลลาอยู่ที่แอชวาลด์สามวัน เธอไปเดินตลาด ไปดูนักมายากลข้างถนน ไปนั่งในสวนและวาดรูป และใช้เวลากับพี่สาวในแบบที่ไม่ต้องทำอะไรพิเศษ แค่อยู่ด้วยกัน</p>
+
+    <p>วันที่เธอจะออกเดินทางกลับมิเรฟอลล์เอลาร่าส่งเธอถึงประตูเมือง</p>
+
+    <p class="dialogue">"ระวังตัวด้วย" เอลาร่าพูด</p>
+
+    <p class="dialogue">"แน่นอน พี่!" เนลลาพูดตอบ ยิ้ม "และฉันเห็นแล้วว่าพี่จะมาเยี่ยมฉันก่อนฤดูหนาว พี่จะชอบมิเรฟอลล์มาก"</p>
+
+    <p class="dialogue">"หยุดบอกอนาคตฉันได้แล้ว"</p>
+
+    <p class="dialogue">"งั้นก็ให้มันเป็นเรื่องน่าประหลาดใจ" เนลลาพูด แล้วกอดพี่สาวแน่น ก่อนจะถอยออกมาและกระซิบ "พี่ดูโอเคนะ ถึงฉันเห็นมาตั้งนานแล้ว แต่ดีใจที่พี่เห็นเองด้วย"</p>
+
+    <p>เธอไม่ตอบ แค่กดไหล่น้องสาวเบาๆ</p>
+
+    <p>เนลลาหันไปมองคาเอลที่ยืนรออยู่ห่างออกไปสักก้าว</p>
+
+    <p class="dialogue">"ดูแลพี่เขาด้วยนะ" เธอพูดกับคาเอล แล้วก็เพิ่มด้วยน้ำเสียงที่จริงจังกว่าปกติ "ขอบคุณที่อยู่ข้างๆ เธอ คาเอล เธอต้องการมันมากกว่าที่เธอยอมรับ"</p>
+
+    <p class="dialogue">"ผมรู้" เขาตอบ เสียงเบา</p>
+
+    <p>เนลลาพยักหน้า หยิบกระเป๋า และเดินออกไปตามถนนที่นำไปยังมิเรฟอลล์โดยไม่หันกลับมา แต่มือโบกอยู่จนหายลับ</p>
+
+    <p>เอลาร่ามองตามจนมองไม่เห็น แล้วก็รู้สึกถึงมือที่วางลงบนไหล่เธอเบาๆ</p>
+
+    <p class="dialogue">"โอเคไหม ?" คาเอลถาม</p>
+
+    <p class="dialogue">"โอเค" เธอตอบ และครั้งนี้ก็จริงอีกครั้ง</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ สิ่งที่เลือก ~</p>
+
+    <p>สองสัปดาห์หลังจากนั้น พวกเขาออกเดินทางกลับเวลมัวร์</p>
+
+    <p>ไม่ใช่เพราะภารกิจ ไม่ใช่เพราะถูกเรียก แต่เพราะคาเอลต้องการกลับบ้าน และเอลาร่าต้องการไปกับเขา เรียบง่ายเพียงแค่นั้น</p>
+
+    <p>กษัตริย์อัลดริกไม่ได้ออกมารับที่ประตูปราสาท แต่มีชาร้อนสองถ้วยรอที่ห้องรับรองส่วนตัว และหนังสือเล่มหนึ่งวางอยู่บนโต๊ะข้างถ้วยชาของเอลาร่า ลายมือที่คุ้นเคยเขียนไว้ที่หน้าแรก</p>
+
+    <p><em>"นิทานเรื่องต้นสน — เซร่า ดอร์น บันทึกให้ลูกชาย"</em></p>
+
+    <p>เธอหยิบหนังสือขึ้นมา มองคาเอล เขามองเธอ แล้วก็พยักหน้าเบาๆ</p>
+
+    <p class="inner-thought">กษัตริย์อัลดริกแห่งเวลมัวร์ ให้หนังสือของเซร่ากับฉัน โดยไม่พูดอะไรทั้งนั้น แค่วางไว้ให้ แล้วก็จากไป ตามแบบฉบับของเขาเสมอ</p>
+
+    <p class="inner-thought">ฉันคิดว่านั่นคือวิธีที่เวลมัวร์พูดว่ายินดีต้อนรับ</p>
+
+    <div class="finale">
+      <p>เย็นวันนั้น เอลาร่าปีนต้นสนต้นที่สี่ทางซ้ายของสวน ขึ้นไปนั่งที่กิ่งระดับสองเมตร และมองออกไปที่ภูเขาทางเหนือที่ชัดกว่าทุกครั้งที่ผ่านมาเพราะฟ้าใส</p>
+      <p>คาเอลยืนอยู่ข้างล่าง มองขึ้นมา</p>
+      <p class="dialogue">"วิวเป็นยังไงบ้าง ?"</p>
+      <p class="dialogue">"ดีที่สุดในปราสาท" เธอตอบ "เหมือนเดิม"</p>
+      <p class="dialogue">"ผมจะขึ้นไปด้วยได้ไหม ?"</p>
+      <p class="dialogue">"กิ่งนี้รับน้ำหนักได้สองคน"</p>
+      <p>เขาปีนขึ้นมา นั่งข้างๆ เธอ กิ่งไม้ไม่แม้แต่สั่น</p>
+      <p>พวกเขานั่งอยู่ที่นั่นด้วยกัน มองภูเขาทางเหนือที่ยอดยังปกคลุมด้วยหิมะ ป่าสนที่ทอดไปไกลสุดสายตา และท้องฟ้าที่กำลังเปลี่ยนจากน้ำเงินเป็นสีส้มอ่อนๆ ของพลบค่ำ</p>
+      <p class="dialogue">"คาเอล"</p>
+      <p class="dialogue">"อะไร ?"</p>
+      <p class="dialogue">"ฉันอยากอยู่ที่นี่" เธอพูด ไม่ใช่คำถาม ไม่ใช่การขออนุญาต แค่การพูดความจริงออกมา "ไม่ใช่เพราะไม่มีที่อื่น แต่เพราะอยากอยู่ที่นี่"</p>
+      <p>คาเอลมองเธอ แล้วก็มองออกไปที่ภูเขา</p>
+      <p class="dialogue">"ผมดีใจที่คุณพูดอย่างนั้น" เขาพูดเบาๆ "เพราะผมก็อยากให้คุณอยู่"</p>
+      <p>ท้องฟ้าเปลี่ยนสีต่อไป แสงสุดท้ายของวันแตะยอดภูเขาเป็นสีทอง แล้วก็จางลงทีละน้อย</p>
+      <p>สองคนนั่งอยู่บนกิ่งสนที่แข็งแรง ไม่รีบ ไม่มีที่ต้องไป ในความเงียบที่ไม่ต้องเติมด้วยอะไร</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+    <div class="epilogue">
+      <p class="epilogue-title">บทส่งท้าย</p>
+
+      <p>หนึ่งปีผ่านไป</p>
+
+      <p>เนลลา วินด์มาร์ค อยู่ที่มิเรฟอลล์ตามที่วางแผนไว้ ส่งจดหมายทุกสัปดาห์โดยไม่พลาดแม้แต่ครั้งเดียว และมาเยี่ยมที่ฟรอสต์โฮลด์สามครั้งในหนึ่งปี ครั้งที่สามเธอไม่ได้มาคนเดียว แต่นั่นเป็นเรื่องราวของอีกบทหนึ่ง</p>
+
+      <p>คาเอล ดอร์น ทำหน้าที่เป็นตัวแทนเวลมัวร์ในการเจรจากับแอชวาลด์ต่อเนื่อง และค้นพบว่าการเป็นของตัวเองทั้งหมดทำให้เขาเก่งกว่าตอนที่เป็นคนกลาง กษัตริย์ธีเรียนแห่งแอชวาลด์ไม่ได้พูดอะไรออกมาตรงๆ แต่หยุดส่งงานอื่นมาให้เขาทำ ซึ่งในภาษาของกษัตริย์นั้นหมายความว่าพอใจ</p>
+
+      <p>กษัตริย์อัลดริกแห่งเวลมัวร์ เปิดห้องของเซร่าอีกครั้ง ไม่ได้เปลี่ยนอะไรภายใน แต่หยุดล็อคประตู และในบางเย็นเขาจะนั่งอยู่ในนั้นคนเดียวครู่หนึ่งก่อนอาหารเย็น ซึ่งเป็นเรื่องที่ทุกคนในปราสาทรู้แต่ไม่มีใครพูดถึง เพราะบางเรื่องก็เป็นของส่วนตัว</p>
+
+      <p>และเอลาร่า วินด์มาร์ค ผู้ที่เคยย้ายเมืองทุกสองเดือน ค้นพบว่าตัวเองรู้จักต้นสนทุกต้นในสวนฟรอสต์โฮลด์ รู้จักชื่อของยามทุกคน รู้จักรสชาติของชาในฤดูต่างๆ และรู้จักว่ากษัตริย์อัลดริก จะพูดในห้องประชุมสั้นกว่าปกติในวันที่อากาศดีเพราะท่านชอบออกไปนั่งข้างนอก</p>
+
+      <p>เธอไม่ได้อยู่นิ่ง เธอยังออกไปเมื่อมีงาน ยังเดินทางกับคาเอลเมื่อมีภารกิจ และยังเดินทางคนเดียวบางครั้งเมื่ออยากได้พื้นที่ของตัวเอง</p>
+
+      <p>แต่เมื่อกลับมา เธอรู้ว่ากำลังกลับไปที่ไหน</p>
+
+      <p>และนั่น คือสิ่งที่เธอค้นหามาตลอด</p>
+    </div>
+
+    <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+    <div class="quote-block">
+      <p>บางคนค้นหาบ้านในแผนที่ บางคนค้นหาในความทรงจำ</p>
+      <p>เอลาร่า วินด์มาร์ค ค้นพบว่าบ้านของเธออยู่ในรูปแบบเล็กๆ ของคนที่รักเธอ ในรสชาติของชาที่จดจำ ในกิ่งไม้ที่แข็งแรงพอ และในมือหนึ่งคู่ที่ไม่เคยรีบปล่อย</p>
+      <p>บ้านไม่ได้มีอยู่เพียงที่เดียว</p>
+      <p>มันอยู่ในทุกที่ที่มีคนรอคุณอยู่</p>
+    </div>
+
+  </div>
+
+  <div class="series-end">
+    <span class="end-mark">✦ จบ ✦</span>
+    <span class="series-name">เงาแห่งราชัน · Shadow of the Sovereign</span>
+    <p class="closing-line">สิบตอน · เรื่องของสองคนที่เรียนรู้ว่าการหยุดหนีไม่ใช่ความอ่อนแอ</p>
+  </div>
+
+</div>
+
+<script>
+// Dawn rays
+const raysC = document.getElementById('rays');
+for (let i = 0; i < 10; i++) {
+  const r = document.createElement('div');
+  r.className = 'ray';
+  const angle = (i - 5) * 15;
+  const h = Math.random() * 60 + 55;
+  r.style.cssText = `height:${h}vh;width:3px;transform:rotate(${angle}deg);left:calc(50% + ${angle * 2.5}px);--dur:${Math.random()*5+5}s;--delay:${Math.random()*6}s;`;
+  raysC.appendChild(r);
+}
+
+// Rich gold motes
+const motesC = document.getElementById('motes');
+for (let i = 0; i < 55; i++) {
+  const m = document.createElement('div');
+  m.className = 'mote';
+  const sz = Math.random() * 4 + 1;
+  const ty = -(Math.random() * 100 + 50);
+  const rot = (Math.random() - 0.5) * 40;
+  const warm = Math.random();
+  let r, g, b;
+  if (warm > 0.6)      { r = 210; g = 170; b = 70; }
+  else if (warm > 0.3) { r = 225; g = 150; b = 100; }
+  else                 { r = 200; g = 190; b = 140; }
+  m.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:rgba(${r},${g},${b},0.9);box-shadow:0 0 ${sz*2.5}px rgba(${r},${g},${b},0.6);--dur:${Math.random()*7+6}s;--delay:${Math.random()*10}s;--ty:${ty}px;--rot:${rot}deg;--op:${Math.random()*0.4+0.2};`;
+  motesC.appendChild(m);
+}
+</script>
+
+</body>
+</html>
