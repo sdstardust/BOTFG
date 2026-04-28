@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน | นิทานต้นสน</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#7a5f28;--crimson:#8b1a1a;--crimson-light:#c0392b;--dark:#0d0b07;--dark-mid:#1a1410;--dark-paper:#1e1812;--parchment:#f5ead8;--parchment-dark:#d4c4a0;--text-body:#e8dcc8;--text-dim:#9a8a70;--accent:#e0b880;--accent-dim:#a07840;--accent-glow:rgba(224,184,128,0.2);--menu-w:300px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background-color:var(--dark);color:var(--text-body);font-family:'Sarabun',serif;font-weight:300;line-height:1.95;font-size:17px;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 85% 40% at 50% 0%,rgba(224,184,128,0.20) 0%,transparent 55%),radial-gradient(ellipse 55% 60% at 10% 65%,rgba(201,168,76,0.14) 0%,transparent 55%),radial-gradient(ellipse 45% 55% at 90% 70%,rgba(168,200,232,0.08) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;background:var(--accent);border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite;animation-delay:var(--delay,0s);opacity:0;}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(0.5);}50%{opacity:var(--bright,0.5);transform:scale(1);}}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem 0 2rem;background:linear-gradient(180deg,rgba(13,10,7,0.97) 0%,rgba(13,10,7,0.85) 100%);border-bottom:1px solid rgba(224,184,128,0.22);backdrop-filter:blur(10px);}
+.topbar-left{display:flex;align-items:center;gap:1rem;}
+.topbar-logo{font-family:'Cinzel Decorative',serif;font-size:0.95rem;color:var(--gold);text-decoration:none;letter-spacing:0.05em;text-shadow:0 0 20px rgba(201,168,76,0.3);white-space:nowrap;}
+.topbar-sep{color:var(--accent-dim);font-size:0.8rem;opacity:0.7;}
+.topbar-chapter{font-family:'Cinzel',serif;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px;}
+.topbar-chapter span{color:var(--accent);}
+.menu-btn{width:36px;height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;flex-shrink:0;border:1px solid rgba(224,184,128,0.22);border-radius:2px;transition:border-color 0.3s,background 0.3s;}
+.menu-btn:hover{border-color:var(--accent);background:rgba(224,184,128,0.2);}
+.menu-btn .bar{width:16px;height:1.5px;background:var(--accent);border-radius:1px;transition:all 0.3s ease;}
+.menu-btn.open .bar:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.menu-btn.open .bar:nth-child(2){opacity:0;transform:scaleX(0);}
+.menu-btn.open .bar:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.overlay{position:fixed;inset:0;background:rgba(4,2,2,0.7);backdrop-filter:blur(2px);z-index:800;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.overlay.show{opacity:1;pointer-events:all;}
+.side-menu{position:fixed;top:0;right:calc(-1 * var(--menu-w));width:var(--menu-w);height:100%;background:#110e08;border-left:1px solid rgba(224,184,128,0.22);z-index:900;transition:right 0.35s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow:hidden;}
+.side-menu.active{right:0;}
+.menu-glow{position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(224,184,128,0.2) 0%,transparent 70%);pointer-events:none;}
+.menu-glow2{position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(139,26,26,0.1) 0%,transparent 70%);pointer-events:none;}
+.menu-header{padding:2rem 1.6rem 1.4rem;border-bottom:1px solid rgba(224,184,128,0.22);flex-shrink:0;text-align:center;}
+.menu-series-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.4em;color:var(--accent-dim);text-transform:uppercase;margin-bottom:0.6rem;}
+.menu-novel-title{font-family:'Cinzel Decorative',serif;font-size:1.05rem;color:var(--gold);letter-spacing:0.04em;text-shadow:0 0 25px rgba(201,168,76,0.35);margin-bottom:0.2rem;}
+.menu-subtitle{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.2em;color:var(--text-dim);}
+.menu-ornament{display:flex;align-items:center;gap:8px;padding:0.8rem 1.6rem;color:var(--accent-dim);font-size:0.6rem;letter-spacing:0.25em;flex-shrink:0;}
+.menu-ornament::before,.menu-ornament::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(224,184,128,0.22),transparent);}
+.menu-part-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--accent-dim);text-transform:uppercase;padding:0.5rem 1.6rem 0.2rem;opacity:0.7;}
+.menu-links{flex:1;overflow-y:auto;padding:0 0 1rem;}
+.menu-links::-webkit-scrollbar{width:3px;}
+.menu-links::-webkit-scrollbar-thumb{background:rgba(224,184,128,0.22);border-radius:2px;}
+.menu-links a{display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.6rem;text-decoration:none;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.08em;border-left:2px solid transparent;transition:all 0.22s;position:relative;}
+.menu-links a:hover{color:var(--parchment-dark);background:rgba(224,184,128,0.2);border-left-color:var(--accent-dim);}
+.menu-links a.current{color:var(--accent);background:rgba(224,184,128,0.2);border-left-color:var(--accent);}
+.menu-links a.current::before{content:'◆';position:absolute;right:1.2rem;font-size:0.4rem;color:var(--accent);opacity:0.7;}
+.menu-links a .ch-n{font-size:0.65rem;color:var(--accent-dim);min-width:1.8rem;font-family:'Cinzel',serif;}
+.menu-links a.current .ch-n{color:var(--accent);}
+.menu-divider{display:flex;align-items:center;gap:8px;margin:0.5rem 1.6rem;}
+.menu-divider::before,.menu-divider::after{content:'';flex:1;height:1px;background:rgba(224,184,128,0.22);}
+.menu-divider-gem{width:4px;height:4px;background:var(--accent-dim);transform:rotate(45deg);flex-shrink:0;}
+.menu-links .home-link{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;color:var(--text-dim);}
+.menu-links .home-link:hover{color:var(--parchment-dark);border-left-color:var(--accent);}
+.container{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:80px 40px 100px;}
+.header-ornament{text-align:center;margin-bottom:20px;}
+.ornament-line{display:flex;align-items:center;justify-content:center;gap:16px;color:var(--accent-dim);font-size:22px;letter-spacing:8px;}
+.ornament-line::before,.ornament-line::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);}
+.series-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:6px;color:var(--gold-dim);text-transform:uppercase;text-align:center;margin-bottom:8px;}
+.season-badge{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:var(--crimson-light);text-transform:uppercase;text-align:center;margin-bottom:12px;opacity:0.85;}
+.main-title{font-family:'Cinzel Decorative',serif;font-size:clamp(32px,6vw,52px);color:var(--gold);text-align:center;line-height:1.3;text-shadow:0 0 40px rgba(201,168,76,0.4),0 2px 4px rgba(0,0,0,0.8);margin-bottom:10px;}
+.subtitle{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:var(--text-dim);text-align:center;margin-bottom:50px;}
+.chapter-badge{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:16px;}
+.chapter-badge span{font-family:'Cinzel',serif;font-size:12px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.badge-gem{width:6px;height:6px;background:var(--accent);transform:rotate(45deg);box-shadow:0 0 10px var(--accent);}
+.chapter-title{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,3.5vw,26px);color:var(--parchment);text-align:center;margin-bottom:50px;text-shadow:0 0 20px rgba(245,234,216,0.2);}
+.divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:40px 0;color:var(--accent-dim);}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(224,184,128,0.5),transparent);}
+.divider-gem{width:5px;height:5px;background:var(--accent-dim);transform:rotate(45deg);flex-shrink:0;}
+.content{animation:fadeUp 1.4s ease 0.6s both;}
+p{margin-bottom:24px;text-align:justify;text-indent:2em;}
+.scene-title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:var(--accent);text-align:center;text-transform:uppercase;margin:50px 0 30px;opacity:0.85;}
+.dialogue{color:#ddd0b8;text-indent:2em;}
+.dramatic{color:var(--accent);font-style:italic;}
+.inner-thought{color:var(--text-dim);font-style:italic;}
+.queen-voice{color:#c8b4d8;text-indent:2em;}
+.king-voice{color:var(--gold-dim);text-indent:2em;font-style:italic;}
+.quote-block{border-left:2px solid var(--accent-dim);padding:16px 24px;margin:36px 0;background:rgba(224,184,128,0.04);font-style:italic;color:var(--parchment-dark);text-indent:0!important;}
+.pine-story{background:rgba(224,184,128,0.04);border:1px solid rgba(224,184,128,0.15);border-radius:3px;padding:2rem 2.5rem;margin:40px 0;font-style:italic;color:var(--parchment-dark);line-height:2.2;}
+.pine-story p{text-indent:2em;margin-bottom:16px;}
+.pine-story p:last-child{margin-bottom:0;}
+.chapter-end{text-align:center;margin-top:70px;padding-top:40px;border-top:1px solid rgba(224,184,128,0.15);}
+.chapter-end .end-mark{font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--accent-dim);letter-spacing:6px;display:block;margin-bottom:12px;}
+.next-teaser{font-size:13px;color:var(--text-dim);font-style:italic;letter-spacing:1px;}
+.char-panel-btn{display:flex;align-items:center;gap:0.5rem;background:rgba(224,184,128,0.07);border:1px solid rgba(224,184,128,0.22);color:var(--accent-dim);padding:0.4rem 1rem;border-radius:2px;font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.1em;cursor:pointer;transition:all 0.25s;margin:2rem auto 0;width:fit-content;}
+.char-panel-btn:hover{background:rgba(224,184,128,0.14);border-color:var(--accent);color:var(--accent);}
+.char-panel-overlay{position:fixed;inset:0;background:rgba(4,2,2,0.8);backdrop-filter:blur(4px);z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;}
+.char-panel-overlay.show{opacity:1;pointer-events:all;}
+.char-panel{background:#130f09;border:1px solid rgba(224,184,128,0.25);max-width:640px;width:90%;max-height:85vh;overflow-y:auto;border-radius:3px;padding:2.5rem 2rem;position:relative;}
+.char-panel h2{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--gold);text-align:center;margin-bottom:0.4rem;}
+.char-panel .panel-sub{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.3em;color:var(--text-dim);text-align:center;margin-bottom:2rem;text-transform:uppercase;}
+.char-card{border:1px solid rgba(224,184,128,0.15);background:rgba(224,184,128,0.03);border-radius:2px;padding:1.2rem 1.5rem;margin-bottom:1rem;}
+.char-card:last-child{margin-bottom:0;}
+.char-name{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.2rem;}
+.char-role{font-family:'Cinzel',serif;font-size:0.6rem;color:var(--text-dim);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.8rem;}
+.char-desc{font-size:0.82rem;color:var(--text-body);line-height:1.8;text-indent:0;}
+.char-panel-close{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid rgba(224,184,128,0.2);color:var(--text-dim);width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.8rem;transition:all 0.2s;border-radius:2px;}
+.char-panel-close:hover{border-color:var(--accent);color:var(--accent);}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--dark);}::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px;}
+em{font-style:italic;color:var(--gold-light);}strong{font-weight:600;color:var(--parchment);}
+.settings-bar{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);z-index:400;display:flex;align-items:center;gap:0.4rem;background:rgba(13,10,7,0.94);border:1px solid rgba(224,184,128,0.22);border-radius:2px;padding:0.5rem 1.2rem;backdrop-filter:blur(12px);}
+.settings-btn{background:transparent;border:none;color:var(--text-dim);font-size:0.72rem;cursor:pointer;padding:0.3rem 0.65rem;letter-spacing:0.05em;font-family:'Cinzel',serif;transition:all 0.2s;border-radius:2px;}
+.settings-btn:hover{color:var(--accent);background:rgba(224,184,128,0.2);}
+.settings-sep{width:1px;height:14px;background:rgba(224,184,128,0.22);}
+.progress-bar{width:80px;height:1.5px;background:rgba(224,184,128,0.15);border-radius:999px;overflow:hidden;display:inline-block;vertical-align:middle;}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent-dim),var(--accent));border-radius:999px;transition:width 0.3s;}
+.progress-text{font-size:0.6rem;color:var(--text-dim);letter-spacing:0.08em;white-space:nowrap;font-family:'Cinzel',serif;}
+.progress-wrap{display:flex;align-items:center;gap:0.5rem;}
+body.fs-sm p{font-size:15px;}body.fs-md p{font-size:17px;}body.fs-lg p{font-size:19px;}
+@media(max-width:600px){.container{padding:70px 24px 80px;}p{text-align:left;}.topbar-chapter{display:none;}.pine-story{padding:1.5rem;}}
+</style>
+</head>
+<body class="fs-md">
+<div class="stars" id="stars"></div>
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-logo" href="https://sdstardust.github.io/BOTFG/">เงาแห่งราชัน</a>
+    <span class="topbar-sep">✦</span>
+    <div class="topbar-chapter"><span>นิทานต้นสน</span></div>
+  </div>
+  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+</div>
+
+<div id="sideMenu" class="side-menu">
+  <div class="menu-glow"></div><div class="menu-glow2"></div>
+  <div class="menu-header">
+    <div class="menu-series-label">นิยายแฟนตาซีโรแมนติก</div>
+    <div class="menu-novel-title">เงาแห่งราชัน</div>
+    <div class="menu-subtitle">Shadow of the Sovereign</div>
+  </div>
+  <div class="menu-ornament">✦ ✦ ✦</div>
+  <div class="menu-links">
+    <div class="menu-part-label">· ภาคที่หนึ่ง ·</div>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep1.html"><span class="ch-n">I</span>ดาบที่ไม่มีชื่อ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep2.html"><span class="ch-n">II</span>ป่าแห่งความทรงจำ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep3.html"><span class="ch-n">III</span>ป้อมปราการและความจริงที่ซ่อนอยู่</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep4.html"><span class="ch-n">IV</span>กลับสู่ราชสำนัก</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep5.html"><span class="ch-n">V</span>รากเหง้าใหม่</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep6.html"><span class="ch-n">VI</span>ดินแดนแห่งน้ำแข็ง</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep7.html"><span class="ch-n">VII</span>รอยร้าวในน้ำแข็ง</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep8.html"><span class="ch-n">VIII</span>รากเหง้าและทางกลับ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep9.html"><span class="ch-n">IX</span>กลับสู่แอชวาลด์</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep10.html"><span class="ch-n">X</span>บ้านที่มีมากกว่าหนึ่งที่</a>
+    <div class="menu-divider"><div class="menu-divider-gem"></div></div>
+    <div class="menu-part-label">· ภาคที่สอง ·</div>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep11.html"><span class="ch-n">XI</span>เงาที่ยังเหลืออยู่</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep12.html"><span class="ch-n">XII</span>ราชินีผู้ไม่ยอมเงียบ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep13.html"><span class="ch-n">XIII</span>ห้องที่ปิดมายี่สิบปี</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep14.html"><span class="ch-n">XIV</span>ไพ่ใบสุดท้าย</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep15.html"><span class="ch-n">XV</span>ความจริงในเงา</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep16.html"><span class="ch-n">XVI</span>คืนที่ฟรอสต์โฮลด์</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep17.html"><span class="ch-n">XVII</span>เงาคู่ของเซร่า</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep18.html"><span class="ch-n">XVIII</span>เมื่อราชินีพูด</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep19.html" class="current"><span class="ch-n">XIX</span>นิทานต้นสน</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep20.html"><span class="ch-n">XX</span>รุ่งอรุณที่สองอาณาจักร</a>
+    <div class="menu-divider"><div class="menu-divider-gem"></div></div>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/portSOTS.html" class="home-link"><span class="ch-n">⌂</span>กลับหน้าหลัก</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="header-ornament"><div class="ornament-line">✦ ♔ ❧ ♔ ✦</div></div>
+  <p class="series-title">นิยายแฟนตาซีโรแมนติก</p>
+  <p class="season-badge">· ภาคที่สอง · The Queens' Legacy ·</p>
+  <h1 class="main-title">เงาแห่งราชัน</h1>
+  <p class="subtitle">Shadow of the Sovereign</p>
+  <div class="chapter-badge">
+    <div class="badge-gem"></div><span>ตอนที่ ๑๙</span><div class="badge-gem"></div>
+  </div>
+  <h2 class="chapter-title">นิทานต้นสน</h2>
+  <button class="char-panel-btn" onclick="openCharPanel()">✦ ตัวละครในตอนนี้</button>
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="content">
+
+    <p>ฝนตกหนักที่แอชวาลด์ในคืนที่ลอร์ดเวรอน เคสตริล ถูกจับ</p>
+
+    <p>ทหารของกษัตริย์ธีเรียนสิบสองนายเดินเข้าห้องนอนของเขาในตอนเที่ยงคืน เขานอนหลับอยู่บนเตียง ตื่นขึ้นเห็นแสงคบเพลิงและดวงตาของคนที่เขาไม่คาดคิดมาก่อน — ราชินีมาเรียนยืนอยู่ที่ประตู</p>
+
+    <p>เขาไม่พูดอะไร</p>
+
+    <p>เธอก็ไม่พูดอะไร</p>
+
+    <p>เขาถูกนำออกไปในความเงียบของทั้งคู่ และเป็นความเงียบนั้นเองที่หนักที่สุด</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ ระเบียงฝั่งเหนือ · ฟรอสต์โฮลด์ ~</p>
+
+    <p>ข่าวมาถึงคาเอลในตอนเช้า เขาอ่านจดหมายจากเอลาร่าครั้งเดียวแล้วพับเก็บ ออกไปยืนที่ระเบียงในชุดเดินทางที่ยังไม่ได้ถอด เพราะเพิ่งขี่ม้ากลับจากชายแดนเมื่อคืน</p>
+
+    <p>ฟรอสต์โฮลด์ตอนเช้าฤดูหนาวมีหมอกเบาๆ ที่เกาะอยู่บนยอดต้นสนในสวน ต้นสนที่เขาปีนตอนเด็กเพราะแม่บอกว่าถ้าปีนได้ถึงยอด จะมองเห็นทะเลที่ไกลออกไปได้</p>
+
+    <p>เขาไม่เคยปีนถึงยอด เพราะกลัวความสูง แต่เขาเคยนั่งอยู่บนกิ่งที่สี่และฝันว่ามองเห็น</p>
+
+    <p class="inner-thought">แม่ครับ — มันจบแล้ว ลอร์ดเวรอนถูกจับแล้ว พยานและเอกสารครบ คราวนี้เขาจะไม่มีทางหลุดพ้น</p>
+
+    <p class="inner-thought">ผมนึกว่าตัวเองจะรู้สึกอะไรบางอย่างที่ชัดเจนกว่านี้ โล่งใจ หรือโกรธที่หมดแรง หรือร้องไห้ แต่ผมแค่ยืนอยู่ที่นี่ มองต้นสน และคิดว่าทำไมผมจึงไม่เคยปีนให้ถึงยอด</p>
+
+    <p>เสียงก้าวเดินเบาๆ ดังขึ้นข้างหลัง เอลาร่ามาถึงฟรอสต์โฮลด์ในตอนเช้า ซึ่งเร็วกว่าที่คาเอลคาดไว้</p>
+
+    <p>เธอเดินมายืนข้างๆ เขา ไม่พูด ไม่ถาม แค่มองต้นสนด้วยกัน</p>
+
+    <p>นาทีหนึ่งผ่านไป</p>
+
+    <p class="dialogue">"แม่ผมเขียนนิทานต้นสน" คาเอลพูดในที่สุด "คุณรู้ไหม ว่าจริงๆมันเกี่ยวกับอะไร"</p>
+
+    <p class="dialogue">"เกี่ยวกับต้นสนที่ใบไม่หลุดร่วงใบในฤดูหนาว" เอลาร่าตอบ</p>
+
+    <p class="dialogue">"ถูกแต่ไม่ทั้งหมด" คาเอลพูดเบาๆ "มันเกี่ยวกับการรอ ใบต้นสนไม่หลุดร่วงเพราะมันแข็งแกร่ง แต่เพราะมันรู้ว่าฤดูใบไม้ผลิจะมา และไม่ต้องการปล่อยตัวเองร่วงก่อนที่จะถึงเวลา"</p>
+
+    <p>เขาหยิบสมุดปกหนังสีน้ำเงินออกมาจากกระเป๋าใน สมุดที่พ่อให้ — ต้นฉบับที่มีรอยขีดฆ่า</p>
+
+    <p class="dialogue">"ฉันอยากฟัง" เอลาร่าพูดเบาๆ</p>
+
+    <p>คาเอลเปิดสมุด พลิกไปที่หน้าแรก ลายมือของเซร่าที่คมและเอนเล็กน้อยทางขวา และรอยขีดฆ่าที่หน้าแรกเต็มไปหมดเพราะเธอเริ่มใหม่ถึงสามครั้ง</p>
+
+    <div class="pine-story">
+      <p>กาลครั้งหนึ่ง ในป่าที่ฤดูหนาวยาวนานที่สุด มีต้นสนต้นหนึ่งที่ยืนอยู่ต้นเดียวบนเนินเขา</p>
+      <p>ต้นไม้รอบข้างทิ้งใบทุกปีเมื่อหิมะมา แต่ต้นสนต้นนั้นไม่ทิ้งใบแม้แต่ใบเดียว ไม่ใช่เพราะมันไม่รู้สึกหนาว แต่เพราะมันรู้ว่าใบของมันคือเรื่องราวที่ยังไม่จบ และเรื่องราวที่ยังไม่จบไม่ควรหลุดร่วงก่อนเวลา</p>
+      <p>วันหนึ่งมีนกเล็กๆ บินมาถามต้นสนว่า ทำไมไม่ทิ้งใบเหมือนต้นอื่น</p>
+      <p>ต้นสนตอบว่า เพราะฉันกำลังรอ</p>
+      <p>รออะไร นกถาม</p>
+      <p>ต้นสนเงียบไปครู่หนึ่ง แล้วตอบว่า รอวันที่ฉันจะรู้ว่าหิมะที่ตกลงมานั้น ตกเพื่อปกคลุม หรือตกเพื่อชำระล้าง บางครั้งสองอย่างไม่ต่างกัน แต่ก็บางครั้งมันต่างกันทุกอย่าง</p>
+      <p>นกไม่เข้าใจ แต่ก็ไม่ถามต่อ เพราะบางคำถามต้องรอคำตอบด้วยตัวเอง</p>
+      <p>ฤดูหนาวผ่านไป ต้นสนยังคงเหมือนเดิม และเมื่อฤดูใบไม้ผลิมา ใบของมันเป็นใบที่เขียวที่สุดในป่า ไม่ใช่เพราะมันแข็งแกร่งกว่าต้นอื่น แต่เพราะมันไม่เคยปล่อยตัวเองหลุดร่วงก่อนที่ฤดูกาลจะบอกว่าพร้อม</p>
+      <p>และในฤดูใบไม้ผลินั้น นกเล็กๆ กลับมา ทำรังในกิ่งของต้นสน เพราะรู้ว่าที่นี่คือที่ที่ปลอดภัยที่สุดในป่า</p>
+    </div>
+
+    <p>คาเอลปิดสมุด</p>
+
+    <p>เอลาร่าไม่พูดอะไรเลยตลอดที่เขาอ่าน และตอนนี้ก็ยังไม่พูด แต่มือข้างหนึ่งของเธอเอื้อมมาจับข้อมือเขาเบาๆ</p>
+
+    <p>คาเอลมองมือนั้น</p>
+
+    <p class="dialogue">"แม่ผมเขียนนิทานนี้สำหรับผม" เขาพูด "ผมรู้ตอนอ่านฉบับที่พ่อให้ครั้งแรก แต่ไม่รู้ว่ามันหมายความว่าอะไรจนกระทั่งตอนนี้"</p>
+
+    <p class="dialogue">"มันหมายความว่าอะไร ?"</p>
+
+    <p>คาเอลมองออกไปที่ต้นสน</p>
+
+    <p class="dialogue">"มันหมายความว่า เธอรู้ว่าจะตาย และเธอเขียนเรื่องนี้เพื่อบอกว่า บางทีการอยู่นิ่งไม่ใช่ความอ่อนแอ บางทีมันคือการเลือก"</p>
+
+    <p class="dialogue">"และนกที่ทำรังในกิ่งสน"</p>
+
+    <p>คาเอลหัวเราะเบาๆ ครั้งแรกในวันนี้</p>
+
+    <p class="dialogue">"เธออาจจะหมายถึงผม หรืออาจจะหมายถึงใครก็ได้ที่มาอยู่ตรงนั้นในที่สุด"</p>
+
+    <p>เอลาร่ากดมือเขาเล็กน้อย</p>
+
+    <p class="dialogue">"แล้วตอนนี้ ?  คุณรู้สึกอย่างไร"</p>
+
+    <p>คาเอลคิดสักครู่ มองต้นสนในหมอก</p>
+
+    <p class="dialogue">"ผมรู้สึกว่า — ยี่สิบสองปีที่ผ่านมา ผมเป็นคนที่รอโดยไม่รู้ว่ารออะไร ตอนนี้ผมรู้ว่ารออะไร และมันจบแล้ว"</p>
+
+    <p class="dialogue">"และหลังจากนี้ ?"</p>
+
+    <p class="dialogue">"หลังจากนี้" คาเอลหันมามอง เอลาร่าตรงๆ "ผมอยากเรียนรู้วิธีอยู่ในฤดูใบไม้ผลิ เพราะผมใช้เวลาส่วนใหญ่ในฤดูหนาวมานานเกินไป และผมไม่แน่ใจว่าตัวเองรู้วิธีแล้ว"</p>
+
+    <p>เอลาร่ามองเขา ดวงตาของเธออ่อนโยน</p>
+
+    <p class="dialogue">"ฉันก็ไม่แน่ใจว่าตัวเองรู้" เธอพูด "แต่เราเรียนรู้ไปด้วยกันได้"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ ห้องของเซร่า · เย็นวันนั้น ~</p>
+
+    <p>กษัตริย์อัลดริกนำต้นสนเล็กในกระถางมาจากห้องของเซร่า ลงไปปลูกในสวน ข้างๆ ต้นสนใหญ่ที่เธอชอบ</p>
+
+    <p>ต้นสนเล็กตายไปนานแล้ว แต่เขาปลูกมันในดิน ราดน้ำ และปล่อยให้มันอยู่กับดินฤดูหนาว</p>
+
+    <p>ลีน่าเดินผ่านมาเห็น หยุดดูอยู่ครู่ ไม่ถาม</p>
+
+    <p class="king-voice">"ต้นสนตายแล้วปลูกไม่ขึ้นอีก" พระองค์พูดโดยไม่ได้หันมา "แต่บางทีการปล่อยมันอยู่ในดินก็เพียงพอ"</p>
+
+    <p class="dialogue">"เพียงพอสำหรับอะไร ฝ่าบาท"</p>
+
+    <p class="king-voice">"สำหรับการส่งกลับ" พระองค์ตอบ "เซร่าชอบสวนนี้ ถ้าต้นไม้ของเธออยู่ที่นี่ได้ มันก็ควรอยู่"</p>
+
+    <p>ลีน่าพยักหน้า ไม่พูดอะไรเพิ่ม</p>
+
+    <p>กษัตริย์อัลดริกลุกขึ้น ปัดดินออกจากมือ มองต้นสนต้นใหญ่ข้างๆ</p>
+
+    <p class="king-voice">"ขอบคุณที่มา ลีน่า เธอรู้ว่าเซร่าภูมิใจในตัวเธอมาก"</p>
+
+    <p class="dialogue">"ฉันรู้" ลีน่าตอบ เสียงเธอนิ่งกว่าปกติ "เธอไม่พูดออกมาบ่อย แต่แสดงออกในแบบที่คนใกล้ชิดรู้"</p>
+
+    <p>กษัตริย์พยักหน้า</p>
+
+    <p class="king-voice">"เธอเป็นแบบนั้น"</p>
+
+    <p>ทั้งสองยืนอยู่ในสวนนิ่งๆ ในแสงบ่ายที่เริ่มเอียง ลมหนาวพัดเบาๆ ผ่านต้นสนทั้งหมดในสวน ทำให้มันส่งเสียงเบาๆ พร้อมกัน</p>
+
+    <p>เหมือนบางคนกำลังหายใจ</p>
+
+  </div>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="chapter-end">
+    <span class="end-mark">✦ ✦ ✦</span>
+    <p class="next-teaser">ตอนที่ ๒๐ : รุ่งอรุณที่สองอาณาจักร — บทสุดท้ายของภาคสอง และของเรื่องราวแห่งเงา</p>
+  </div>
+</div>
+
+<div class="char-panel-overlay" id="charPanelOverlay" onclick="closeCharPanel(event)">
+  <div class="char-panel" id="charPanel">
+    <button class="char-panel-close" onclick="closeCharPanel()">✕</button>
+    <h2>ตัวละครในตอนนี้</h2>
+    <p class="panel-sub">นิทานต้นสน · ตอนที่ ๑๙</p>
+    <div class="char-card">
+      <div class="char-name">คาเอล (เคเลน) ดอร์น</div>
+      <div class="char-role">ทายาทแห่งเวลมัวร์</div>
+      <p class="char-desc">ได้ยินข่าวการจับกุมลอร์ดเวรอน และยืนอยู่กับมันเงียบๆ ที่ระเบียง เปิดอ่านต้นฉบับนิทานต้นสนของแม่ให้เอลาร่าฟัง และเข้าใจเป็นครั้งแรกว่าเซร่าเขียนมันเพื่อส่งถึงเขาโดยเฉพาะ</p>
+    </div>
+    <div class="char-card">
+      <div class="char-name">เอลาร่า วินด์มาร์ค</div>
+      <div class="char-role">ที่ปรึกษา · แอชวาลด์</div>
+      <p class="char-desc">เดินทางมาฟรอสต์โฮลด์เร็วกว่าที่คาเอลคาด ยืนฟังนิทานต้นสนด้วยความเงียบ และพูดประโยคที่สำคัญที่สุดในวันนี้ด้วยคำน้อยที่สุด</p>
+    </div>
+    <div class="char-card">
+      <div class="char-name">กษัตริย์อัลดริก</div>
+      <div class="char-role">กษัตริย์แห่งเวลมัวร์</div>
+      <p class="char-desc">นำต้นสนจากห้องของเซร่าลงมาปลูกในสวนข้างต้นสนต้นใหญ่ การกระทำเล็กๆ ที่เป็นวิธีของเขาในการส่งคนที่รักกลับไปอยู่ในที่ที่ควรอยู่</p>
+    </div>
+    <div class="char-card">
+      <div class="char-name">ลีน่า</div>
+      <div class="char-role">ชาโดว์แฮนด์ · เวลมัวร์</div>
+      <p class="char-desc">ยังคงอยู่ที่ฟรอสต์โฮลด์หลังเสร็จภารกิจ และร่วมช่วงเวลาเงียบๆ กับกษัตริย์อัลดริกในสวน ในฐานะคนที่รู้จักเซร่าดีในแบบที่ต่างออกไป</p>
+    </div>
+    <div class="char-card">
+      <div class="char-name">ราชินีมาเรียน เรเวนเดล</div>
+      <div class="char-role">ราชินีแห่งแอชวาลด์</div>
+      <p class="char-desc">ยืนอยู่ที่ประตูห้องขณะทหารนำลอร์ดเวรอนออกไปโดยไม่พูดอะไรสักคำ ความเงียบของเธอคือคำตอบที่หนักที่สุด</p>
+    </div>
+  </div>
+</div>
+
+<div class="settings-bar">
+  <button class="settings-btn" onclick="setFont('sm')">A-</button>
+  <button class="settings-btn" onclick="setFont('md')">A</button>
+  <button class="settings-btn" onclick="setFont('lg')">A+</button>
+  <div class="settings-sep"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-text" id="progressText">0%</span>
+  </div>
+</div>
+
+<script>
+const sc=document.getElementById('stars');
+for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${Math.random()*4+2}s;--delay:${Math.random()*5}s;--bright:${Math.random()*0.4+0.15};`;sc.appendChild(s);}
+function toggleMenu(){const m=document.getElementById('sideMenu');const b=document.getElementById('menuBtn');const o=document.getElementById('overlay');m.classList.toggle('active');b.classList.toggle('open');o.classList.toggle('show');}
+function closeMenu(){document.getElementById('sideMenu').classList.remove('active');document.getElementById('menuBtn').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function setFont(s){document.body.classList.remove('fs-sm','fs-md','fs-lg');document.body.classList.add('fs-'+s);}
+function updateProgress(){const d=document.documentElement.scrollHeight-window.innerHeight;const p=d>0?Math.round((window.scrollY/d)*100):0;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressText').textContent=p+'%';}
+window.addEventListener('scroll',updateProgress);updateProgress();
+function openCharPanel(){document.getElementById('charPanelOverlay').classList.add('show');}
+function closeCharPanel(e){if(!e||e.target===document.getElementById('charPanelOverlay')||e.currentTarget===document.querySelector('.char-panel-close')){document.getElementById('charPanelOverlay').classList.remove('show');}}
+</script>
+</body>
+</html>
