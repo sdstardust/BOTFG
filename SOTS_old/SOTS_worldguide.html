@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน · แผนที่และตัวละคร</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: #0d0b07;
+  color: #e8dcc8;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 300;
+  line-height: 1.9;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 5%  70%, rgba(127,119,221,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 45% at 95% 75%, rgba(74,138,48,0.06) 0%, transparent 50%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── STARS ── */
+.stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.star { position: absolute; background: #e0b880; border-radius: 50%;
+  animation: twinkle var(--dur,3s) ease-in-out infinite;
+  animation-delay: var(--delay,0s); opacity: 0; }
+@keyframes twinkle {
+  0%,100% { opacity: 0; transform: scale(.5); }
+  50%      { opacity: var(--br,.4); transform: scale(1); }
+}
+
+/* ── LAYOUT ── */
+.page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 60px 32px 100px; }
+
+/* ── HEADER ── */
+.page-header { text-align: center; margin-bottom: 56px; }
+.ornament-line {
+  display: flex; align-items: center; justify-content: center;
+  gap: 14px; color: #a07840; font-size: 18px; letter-spacing: 6px; margin-bottom: 18px;
+}
+.ornament-line::before, .ornament-line::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, #a07840, transparent);
+}
+.series-label {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 6px;
+  color: #7a5f28; text-transform: uppercase; margin-bottom: 8px;
+}
+.main-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  color: #c9a84c;
+  text-shadow: 0 0 40px rgba(201,168,76,0.35), 0 2px 4px rgba(0,0,0,0.8);
+  margin-bottom: 6px; line-height: 1.3;
+}
+.en-title {
+  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 5px;
+  color: #7a6a50; margin-bottom: 16px;
+}
+.page-desc { font-size: 14px; color: #9a8a70; max-width: 560px; margin: 0 auto; }
+
+/* ── SECTION ── */
+.section { margin-bottom: 64px; }
+.section-header {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 6px;
+}
+.section-header::before, .section-header::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+}
+.section-label {
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px;
+  color: #c9a84c; text-transform: uppercase; white-space: nowrap;
+}
+.section-sub {
+  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px;
+  color: #7a6a50; text-transform: uppercase; text-align: center; margin-bottom: 20px;
+}
+
+/* ── CARD SHELL ── */
+.card {
+  background: #13100a;
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 4px;
+  padding: 1.5rem;
+}
+
+/* ── MAP ── */
+.map-svg { display: block; width: 100%; }
+
+/* ── FILTER BUTTONS ── */
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.filter-btn {
+  padding: 5px 14px;
+  border: 0.5px solid rgba(201,168,76,0.2);
+  background: rgba(201,168,76,0.04);
+  border-radius: 20px; font-size: 12px; cursor: pointer;
+  color: #9a8a70; transition: all .15s; font-family: 'Sarabun', sans-serif;
+}
+.filter-btn:hover { border-color: #c9a84c; color: #c9a84c; }
+.filter-btn.active { background: #c9a84c; border-color: #c9a84c; color: #0d0b07; font-weight: 600; }
+.filter-btn.active.velmoor  { background: #7f77dd; border-color: #7f77dd; color: #fff; }
+.filter-btn.active.ashwald  { background: #4a8a30; border-color: #4a8a30; color: #fff; }
+.filter-btn.active.mirefall { background: #b08830; border-color: #b08830; color: #fff; }
+.filter-btn.active.neutral  { background: #6a5a50; border-color: #6a5a50; color: #fff; }
+.filter-btn.velmoor:hover   { background: #7f77dd; border-color: #7f77dd; color: #fff; }
+.filter-btn.ashwald:hover   { background: #4a8a30; border-color: #4a8a30; color: #fff; }
+.filter-btn.mirefall:hover  { background: #b08830; border-color: #b08830; color: #fff; }
+.filter-btn.neutral:hover   { background: #6a5a50; border-color: #6a5a50; color: #fff; }
+
+/* ── CHARACTER SVG WRAP ── */
+.svg-wrap { position: relative; }
+.char-svg { display: block; width: 100%; }
+.char-node { cursor: pointer; }
+.char-node:hover .node-glow { stroke-opacity: 1 !important; stroke-width: 2.5 !important; }
+
+/* ── INFO CARD ── */
+.info-card {
+  position: absolute; z-index: 10;
+  padding: 12px 14px; border-radius: 6px;
+  border: 0.5px solid rgba(201,168,76,0.25);
+  background: #1e1a12; width: 220px;
+  pointer-events: none; display: none;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+}
+.info-card.show { display: block; }
+.ic-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 500; color: #c9a84c; margin-bottom: 3px; }
+.ic-role { font-size: 11px; color: #9a7a50; margin-bottom: 7px; line-height: 1.5; }
+.ic-desc { font-size: 11px; color: #9a8a70; line-height: 1.7; }
+
+/* ── LEGEND ── */
+.legend {
+  display: flex; flex-wrap: wrap; gap: 8px 16px;
+  padding: .75rem 1rem;
+  background: rgba(201,168,76,0.03);
+  border: 0.5px solid rgba(201,168,76,0.1);
+  border-radius: 4px; margin-top: .8rem;
+}
+.leg-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #7a6a50; }
+.leg-dot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.leg-line { width: 24px; height: 2px; flex-shrink: 0; }
+
+/* ── HINT ── */
+.hint { font-size: 11px; color: #5a4a30; text-align: center; margin-top: .6rem; letter-spacing: 1px; }
+
+/* ── EMBED GUIDE ── */
+.embed-guide {
+  background: #0f0d08;
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-top: 56px;
+}
+.embed-guide h3 {
+  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 3px;
+  color: #c9a84c; margin-bottom: 16px; text-transform: uppercase;
+}
+.embed-method { margin-bottom: 20px; }
+.embed-method h4 { font-size: 13px; color: #d4c4a0; margin-bottom: 6px; }
+.embed-method p  { font-size: 12px; color: #7a6a50; line-height: 1.8; margin-bottom: 8px; }
+.code-block {
+  background: #0a0806; border: 0.5px solid rgba(201,168,76,0.12);
+  border-radius: 3px; padding: 10px 14px;
+  font-family: 'Courier New', monospace; font-size: 12px;
+  color: #c9a84c; overflow-x: auto; white-space: pre; line-height: 1.7;
+}
+.copy-btn {
+  display: inline-block; margin-top: 6px; padding: 4px 12px;
+  background: rgba(201,168,76,0.07); border: 0.5px solid rgba(201,168,76,0.2);
+  border-radius: 3px; font-size: 11px; color: #9a7a40;
+  cursor: pointer; font-family: 'Sarabun', sans-serif; transition: all .15s;
+}
+.copy-btn:hover { background: rgba(201,168,76,0.14); color: #c9a84c; }
+
+/* ── FOOTER ── */
+.page-footer {
+  text-align: center; margin-top: 80px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+.footer-title { font-family: 'Cinzel Decorative', serif; font-size: 14px; color: #7a5f28; }
+.footer-sub   { font-size: 11px; color: #5a4a30; margin-top: 4px; letter-spacing: 2px; }
+
+@media (max-width: 600px) {
+  .page { padding: 50px 18px 80px; }
+}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="page-header">
+    <div class="ornament-line">✦ ♔ ❧ ♔ ✦</div>
+    <p class="series-label">นิยายแฟนตาซีโรแมนติก</p>
+    <h1 class="main-title">เงาแห่งราชัน</h1>
+    <p class="en-title">Shadow of the Sovereign</p>
+    <p class="page-desc">แผนที่โลกและผังความสัมพันธ์ตัวละครทั้งหมดในภาค ๑–๒</p>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       SECTION 1 : WORLD MAP
+  ══════════════════════════════════════ -->
+  <section class="section" id="map">
+    <div class="section-header">
+      <span class="section-label">✦ แผนที่โลก</span>
+    </div>
+    <p class="section-sub">World Map · สองอาณาจักรและดินแดนระหว่าง</p>
+
+    <div class="card">
+      <svg class="map-svg" viewBox="0 0 680 540" role="img">
+        <title>แผนที่โลกเงาแห่งราชัน</title>
+        <desc>แผนที่แสดงสองอาณาจักรหลัก เวลมัวร์และแอชวาลด์ พร้อมเมืองสำคัญ</desc>
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <pattern id="hv" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#9a8a70" stroke-width="0.4" stroke-opacity="0.28"/>
+          </pattern>
+          <pattern id="ha" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(135)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#4a7a30" stroke-width="0.4" stroke-opacity="0.22"/>
+          </pattern>
+        </defs>
+
+        <!-- land masses -->
+        <polygon points="40,40 340,40 340,280 260,320 180,310 80,290 40,260" fill="#2a2520" stroke="#6a5a40" stroke-width="0.8"/>
+        <polygon points="40,40 340,40 340,280 260,320 180,310 80,290 40,260" fill="url(#hv)"/>
+        <polygon points="60,300 280,320 340,290 400,270 440,300 460,360 440,440 300,480 140,470 60,420" fill="#1a2218" stroke="#3a6020" stroke-width="0.8"/>
+        <polygon points="60,300 280,320 340,290 400,270 440,300 460,360 440,440 300,480 140,470 60,420" fill="url(#ha)"/>
+        <polygon points="400,200 620,180 640,380 480,400 440,350 430,280" fill="#1c1a16" stroke="#4a4030" stroke-width="0.5" stroke-dasharray="4 3"/>
+
+        <!-- mountains -->
+        <g fill="#6a5a40" fill-opacity="0.55">
+          <polygon points="278,300 293,268 308,300"/><polygon points="298,308 315,272 332,308"/>
+          <polygon points="318,298 335,264 352,298"/><polygon points="248,310 263,280 278,310"/>
+        </g>
+
+        <!-- sea -->
+        <rect x="0" y="0" width="42" height="540" fill="#0a1520" fill-opacity="0.85"/>
+        <line x1="42" y1="0" x2="42" y2="540" stroke="#1a3050" stroke-width="0.5" stroke-dasharray="3 3"/>
+        <text x="21" y="300" font-family="Sarabun,sans-serif" font-size="9" fill="#1a3050" fill-opacity="0.8" transform="rotate(-90,21,300)">ทะเลตะวันตก</text>
+
+        <!-- VELMOOR label -->
+        <text font-family="'Cinzel',serif" font-size="14" font-weight="500" letter-spacing="3" x="80" y="72" fill="#7f77dd" fill-opacity="0.65">VELMOOR</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="80" y="87" fill="#6a5a80" fill-opacity="0.75">อาณาจักรเหนือ · ดินแดนน้ำแข็ง</text>
+
+        <!-- Frosthold -->
+        <circle cx="160" cy="155" r="20" fill="#1e1a2e" stroke="#7f77dd" stroke-width="1.5"/>
+        <circle cx="160" cy="155" r="7"  fill="#7f77dd"/>
+        <circle cx="152" cy="146" r="2"  fill="#c9a84c"/>
+        <circle cx="160" cy="143" r="2"  fill="#c9a84c"/>
+        <circle cx="168" cy="146" r="2"  fill="#c9a84c"/>
+        <text font-family="'Cinzel',serif" font-size="11" font-weight="500" x="187" y="151" fill="#c8b4e8">ฟรอสต์โฮลด์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="187" y="164" fill="#7a6a90">Frosthold · เมืองหลวงเวลมัวร์</text>
+
+        <!-- Ironpeak -->
+        <rect x="96" y="198" width="10" height="10" rx="2" fill="#2a2440" stroke="#7f77dd" stroke-width="0.8"/>
+        <text font-family="'Cinzel',serif" font-size="11" x="113" y="208" fill="#9a8aaa">Ironpeak</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="113" y="220" fill="#6a5a70">เมืองเหมืองแร่ทางตะวันตก</text>
+
+        <!-- Mirefall -->
+        <circle cx="370" cy="200" r="13" fill="#221a08" fill-opacity="0.95" stroke="#c9a84c" stroke-width="1.2"/>
+        <line x1="364" y1="194" x2="376" y2="206" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.8"/>
+        <line x1="376" y1="194" x2="364" y2="206" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.8"/>
+        <text font-family="'Cinzel',serif" font-size="11" font-weight="500" x="392" y="197" fill="#c9a84c">มิเรฟอลล์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="392" y="210" fill="#9a7a40">Mirefall · หอนักพยากรณ์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="392" y="222" fill="#6a5a38">ดินแดนกลาง · เป็นกลาง</text>
+
+        <!-- ASHWALD label -->
+        <text font-family="'Cinzel',serif" font-size="14" font-weight="500" letter-spacing="3" x="100" y="358" fill="#4a8a30" fill-opacity="0.65">ASHWALD</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="100" y="373" fill="#3a6a20" fill-opacity="0.75">อาณาจักรใต้ · ดินแดนป่าและทุ่ง</text>
+
+        <!-- Ashwald capital -->
+        <circle cx="220" cy="405" r="20" fill="#182218" stroke="#4a8a30" stroke-width="1.5"/>
+        <circle cx="220" cy="405" r="7"  fill="#4a8a30"/>
+        <circle cx="212" cy="396" r="2"  fill="#c9a84c"/>
+        <circle cx="220" cy="393" r="2"  fill="#c9a84c"/>
+        <circle cx="228" cy="396" r="2"  fill="#c9a84c"/>
+        <text font-family="'Cinzel',serif" font-size="11" font-weight="500" x="248" y="401" fill="#8ab870">เมืองหลวงแอชวาลด์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="248" y="414" fill="#4a7a28">Ashwald Capital · ราชสำนัก</text>
+
+        <!-- Ravendel -->
+        <rect x="108" y="332" width="10" height="10" rx="2" fill="#182218" stroke="#4a8a30" stroke-width="0.8"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="125" y="341" fill="#6a9a50">คฤหาสน์เรเวนเดล</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="125" y="353" fill="#3a6020">Ravendel Estate · บ้านตระกูลมาเรียน</text>
+
+        <!-- S. village -->
+        <circle cx="320" cy="455" r="5" fill="#182218" stroke="#4a8a30" stroke-width="0.8"/>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="332" y="459" fill="#3a6020">หมู่บ้านใต้แอชวาลด์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="332" y="471" fill="#2a4a18">ที่หลบซ่อนของเฮลม่า</text>
+
+        <!-- routes -->
+        <path fill="none" stroke="#7a6a50" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#arr)" d="M160 175 Q178 240 218 385"/>
+        <text font-family="Sarabun,sans-serif" font-size="9" x="145" y="268" fill="#5a4a38" text-anchor="middle" transform="rotate(-75,145,268)">เส้นทางหลวง</text>
+        <path fill="none" stroke="#c9a84c" stroke-width="1" stroke-dasharray="4 2" stroke-opacity="0.55" marker-end="url(#arr)" d="M236 405 Q298 358 356 214"/>
+        <path fill="none" stroke="#7f77dd" stroke-width="1" stroke-dasharray="3 2" stroke-opacity="0.65" marker-end="url(#arr)" d="M176 155 Q268 158 355 194"/>
+        <text font-family="Sarabun,sans-serif" font-size="9" x="268" y="152" fill="#6a5a80" text-anchor="middle">เส้นทางเนลลา</text>
+        <path fill="none" stroke="#4a8a30" stroke-width="0.8" stroke-dasharray="3 2" stroke-opacity="0.45" marker-end="url(#arr)" d="M118 342 Q158 368 200 391"/>
+
+        <!-- legend box -->
+        <rect x="480" y="40" width="185" height="280" rx="6" fill="#0f0d08" fill-opacity="0.97" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
+        <text font-family="'Cinzel',serif" font-size="11" font-weight="500" x="492" y="63" fill="#c9a84c" letter-spacing="2">สัญลักษณ์</text>
+
+        <circle cx="498" cy="82" r="7"  fill="#7f77dd"/>
+        <circle cx="498" cy="82" r="13" fill="none" stroke="#7f77dd" stroke-width="1"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="86" fill="#9a8a70">เมืองหลวง</text>
+
+        <rect x="491" y="102" width="12" height="12" rx="2" fill="#2a2440" stroke="#7f77dd" stroke-width="0.8"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="112" fill="#9a8a70">เมืองรอง</text>
+
+        <circle cx="498" cy="130" r="7"  fill="#221a08" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="494" y1="126" x2="502" y2="134" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="502" y1="126" x2="494" y2="134" stroke="#c9a84c" stroke-width="1"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="134" fill="#9a8a70">หอนักพยากรณ์</text>
+
+        <circle cx="498" cy="152" r="5" fill="#182218" stroke="#4a8a30" stroke-width="0.8"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="156" fill="#9a8a70">หมู่บ้านเล็ก</text>
+
+        <line x1="488" y1="174" x2="512" y2="174" stroke="#7a6a50" stroke-width="1.2" stroke-dasharray="4 2"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="178" fill="#9a8a70">เส้นทางหลวง</text>
+
+        <line x1="488" y1="192" x2="512" y2="192" stroke="#7f77dd" stroke-width="1" stroke-dasharray="3 2"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="196" fill="#9a8a70">เส้นทางเนลลา</text>
+
+        <line x1="488" y1="210" x2="512" y2="210" stroke="#c9a84c" stroke-width="1" stroke-dasharray="4 2"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="214" fill="#9a8a70">เส้นทางราชินี</text>
+
+        <rect x="488" y="224" width="16" height="10" rx="2" fill="#2a2520" stroke="#6a5a40" stroke-width="0.5"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="233" fill="#9a8a70">เวลมัวร์</text>
+
+        <rect x="488" y="242" width="16" height="10" rx="2" fill="#1a2218" stroke="#3a6020" stroke-width="0.5"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="251" fill="#9a8a70">แอชวาลด์</text>
+
+        <rect x="488" y="260" width="16" height="10" rx="2" fill="#1c1a16" stroke="#4a4030" stroke-width="0.5" stroke-dasharray="3 2"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="269" fill="#9a8a70">ดินแดนกลาง</text>
+
+        <!-- compass -->
+        <g transform="translate(562,340)">
+          <circle r="28" fill="#0f0d08" fill-opacity="0.92" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
+          <polygon points="0,-20 4,-6 0,-10 -4,-6" fill="#7f77dd" fill-opacity="0.75"/>
+          <polygon points="0,20 4,6 0,10 -4,6" fill="#3a3028"/>
+          <line x1="-20" y1="0" x2="20" y2="0" stroke="#3a3028" stroke-width="0.5"/>
+          <text font-family="'Cinzel',serif" font-size="9" text-anchor="middle" y="-22" fill="#c9a84c" font-weight="500">N</text>
+          <text font-family="'Cinzel',serif" font-size="8" text-anchor="middle" y="28" fill="#5a4a30">S</text>
+          <text font-family="'Cinzel',serif" font-size="8" x="24" y="3" fill="#5a4a30">E</text>
+          <text font-family="'Cinzel',serif" font-size="8" x="-24" y="3" text-anchor="end" fill="#5a4a30">W</text>
+        </g>
+
+        <text font-family="'Cinzel',serif" font-size="10" font-weight="500" x="482" y="388" fill="#c9a84c" letter-spacing="2">เงาแห่งราชัน</text>
+        <text font-family="'Cinzel',serif" font-size="9" x="482" y="402" fill="#6a5a40">Shadow of the Sovereign</text>
+        <text font-family="Sarabun,sans-serif" font-size="9" x="482" y="415" fill="#5a4a30">World Map · ภาค ๑–๒</text>
+
+        <text font-family="Sarabun,sans-serif" font-size="10" x="482" y="490" fill="#5a4a30">~ ฟรอสต์โฮลด์ → แอชวาลด์ : ๓ วัน</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="482" y="504" fill="#5a4a30">~ แอชวาลด์ → มิเรฟอลล์ : ๒ วัน</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="482" y="518" fill="#5a4a30">~ ฟรอสต์โฮลด์ → มิเรฟอลล์ : ๑ วัน</text>
+      </svg>
+    </div><!-- /card -->
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 2 : CHARACTER MAP
+  ══════════════════════════════════════ -->
+  <section class="section" id="characters">
+    <div class="section-header">
+      <span class="section-label">✦ ผังความสัมพันธ์ตัวละคร</span>
+    </div>
+    <p class="section-sub">Character Relationships · กดที่ตัวละครเพื่อดูรายละเอียด</p>
+
+    <div class="card">
+      <div class="filter-row">
+        <button class="filter-btn active all"     onclick="charFilter('all',this)">ทั้งหมด</button>
+        <button class="filter-btn velmoor"        onclick="charFilter('velmoor',this)">เวลมัวร์</button>
+        <button class="filter-btn ashwald"        onclick="charFilter('ashwald',this)">แอชวาลด์</button>
+        <button class="filter-btn mirefall"       onclick="charFilter('mirefall',this)">มิเรฟอลล์</button>
+        <button class="filter-btn neutral"        onclick="charFilter('neutral',this)">กลาง / ผู้ล่วงลับ</button>
+      </div>
+
+      <div class="svg-wrap" id="charWrap">
+        <svg id="charChart" class="char-svg" viewBox="0 0 680 600" role="img">
+          <title>ผังความสัมพันธ์ตัวละคร เงาแห่งราชัน</title>
+          <desc>แสดงความสัมพันธ์ระหว่างตัวละครหลักทั้งหมดในภาค 1 และ 2</desc>
+          <defs>
+            <marker id="aro" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+          <g id="cEdges"></g>
+          <g id="cNodes"></g>
+        </svg>
+        <div id="infoCard" class="info-card"></div>
+      </div>
+
+      <div class="legend">
+        <div class="leg-item"><div class="leg-dot" style="background:#7f77dd"></div>เวลมัวร์</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#4a8a30"></div>แอชวาลด์</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#b08830"></div>มิเรฟอลล์</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#6a5a50"></div>กลาง / ผู้ล่วงลับ</div>
+        <div class="leg-item"><div class="leg-line" style="background:#c9a84c;height:2px"></div>ความรัก / คู่</div>
+        <div class="leg-item"><div class="leg-line" style="background:#7f77dd;opacity:.7"></div>พ่อ-ลูก / ครอบครัว</div>
+        <div class="leg-item"><div class="leg-line" style="background:#4a8a30;opacity:.7"></div>พันธมิตร / ร่วมงาน</div>
+        <div class="leg-item"><div class="leg-line" style="background:#cc4444;opacity:.7"></div>ศัตรู / ขัดแย้ง</div>
+        <div class="leg-item"><div class="leg-line" style="background:#7a6a50;border-top:1px dashed #7a6a50"></div>ตึงเครียด</div>
+      </div>
+      <p class="hint">✦ กดที่ตัวละครเพื่อดูรายละเอียด · กดพื้นที่ว่างเพื่อปิด</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       EMBED GUIDE
+  ══════════════════════════════════════ -->
+  <div class="embed-guide" id="embed">
+    <h3>✦ วิธีนำไปฝังในหน้าอื่น</h3>
+
+    <div class="embed-method">
+      <h4>วิธี 1 — iframe (ง่ายที่สุด)</h4>
+      <p>เซฟไฟล์นี้ไว้ในโฟลเดอร์เดียวกันกับหน้าหลัก แล้ววางโค้ดนี้ในตำแหน่งที่ต้องการ</p>
+      <div class="code-block" id="code-iframe">&lt;iframe
+  src="SOTS_worldguide.html"
+  width="100%"
+  height="1400px"
+  frameborder="0"
+  style="border:none;"
+&gt;&lt;/iframe&gt;</div>
+      <button class="copy-btn" onclick="copyCode('code-iframe')">คัดลอก</button>
+    </div>
+
+    <div class="embed-method">
+      <h4>วิธี 2 — แผนที่อย่างเดียว (SVG snippet)</h4>
+      <p>คัดลอก SVG ด้านล่างไปวางตรงในหน้า HTML ที่ต้องการ แล้วเพิ่ม CSS font ด้านบน</p>
+      <div class="code-block" id="code-font">&lt;!-- ใส่ใน &lt;head&gt; ของหน้าปลายทาง --&gt;
+&lt;link href="https://fonts.googleapis.com/css2?
+  family=Cinzel:wght@400;500&amp;
+  family=Sarabun:wght@300;400&amp;
+  display=swap" rel="stylesheet"&gt;</div>
+      <button class="copy-btn" onclick="copyCode('code-font')">คัดลอก</button>
+      <p style="margin-top:10px">จากนั้นคัดลอกบล็อก <code style="color:#c9a84c;background:#0a0806;padding:2px 6px;border-radius:3px;font-size:11px">&lt;svg class="map-svg" ...&gt;...&lt;/svg&gt;</code> จากไฟล์นี้ไปวางในหน้าปลายทาง</p>
+    </div>
+
+    <div class="embed-method">
+      <h4>วิธี 3 — ผังตัวละครอย่างเดียว (HTML+JS snippet)</h4>
+      <p>ต้องการสามส่วนจากไฟล์นี้ คัดลอกทั้งหมดไปไว้ในหน้าปลายทาง</p>
+      <div class="code-block">1. CSS ทั้งหมดในบล็อก /* ── FILTER BUTTONS ── */ ถึง /* ── HINT ── */
+2. HTML ทั้งหมดในแท็ก &lt;section id="characters"&gt;...&lt;/section&gt;
+3. JavaScript ฟังก์ชัน charFilter() และ buildCharGraph() ทั้งหมด</div>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <p class="footer-title">เงาแห่งราชัน</p>
+    <p class="footer-sub">Shadow of the Sovereign · World Guide</p>
+  </footer>
+
+</div><!-- /page -->
+
+<script>
+/* ── STARS ── */
+const sc = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2 + .5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${Math.random()*4+2}s;--delay:${Math.random()*6}s;--br:${Math.random()*.35+.1};`;
+  sc.appendChild(s);
+}
+
+/* ── CHARACTER DATA ── */
+const CHARS = [
+  {id:'elara',   name:'เอลาร่า วินด์มาร์ค',    x:240, y:165, f:'ashwald',  role:'นักดาบ · ที่ปรึกษา แอชวาลด์',      desc:'ตัวนำหญิง อดีตนักรบมิเรฟอลล์ ปัจจุบันเป็นที่ปรึกษาเอกในแอชวาลด์ คู่ของคาเอล เป็นคนที่เซร่าดอร์น "เลือก" ให้อยู่กับลูกของเธอ', sz:28},
+  {id:'kael',    name:'คาเอล ดอร์น',             x:420, y:165, f:'velmoor',  role:'ทายาทแห่งเวลมัวร์',                desc:'อดีตชาโดว์แฮนด์ ลูกชายของกษัตริย์อัลดริกและเซร่า ดอร์น ตอนนี้เป็นทายาทอย่างเป็นทางการ ผู้ที่แม่ยอมตายเพื่อปกป้อง', sz:28},
+  {id:'nella',   name:'เนลลา วินด์มาร์ค',       x:140, y:310, f:'mirefall', role:'นักพยากรณ์ · มิเรฟอลล์',           desc:'น้องสาวของเอลาร่า พลังมองเห็นเส้นทางชีวิต สามารถแสดงอนาคตแก่ผู้อื่นได้ และรับข้อความจากผู้ล่วงลับได้ในบางครั้ง', sz:24},
+  {id:'aldric',  name:'กษัตริย์อัลดริก',         x:490, y:65,  f:'velmoor',  role:'กษัตริย์แห่งเวลมัวร์',             desc:'พ่อของคาเอล รักเซร่าแต่แต่งงานด้วยไม่ได้เพราะสถานะ รู้ความจริงเรื่องการตายของเซร่ามา 19 ปี ดูแลห้องของเธอสะอาดมาตลอด', sz:26},
+  {id:'sera',    name:'เซร่า ดอร์น',              x:555, y:230, f:'neutral',  role:'ผู้ล่วงลับ · มารดาของคาเอล',       desc:'นักรบหญิงที่เก่งที่สุดในยุค รู้ว่าตัวเองจะตายแต่เลือกอยู่เพื่อปกป้องคาเอลในวัยเด็ก ถูกฆ่าเมื่อ 20 ปีก่อนโดยลอร์ดเวรอน', sz:22},
+  {id:'marian',  name:'ราชินีมาเรียน',            x:240, y:65,  f:'ashwald',  role:'ราชินีแห่งแอชวาลด์',               desc:'ภรรยาของธีเรียน แต่งงานทางการเมือง รู้ว่าใครฆ่าเซร่ามา 9 ปี ตัดสินใจเปิดเผยความจริงในภาค 2 เลือกเส้นทางที่ยากที่สุด', sz:26},
+  {id:'theryon', name:'กษัตริย์ธีเรียน',          x:100, y:65,  f:'ashwald',  role:'กษัตริย์แห่งแอชวาลด์',             desc:'เคยรักเซร่าก่อนแต่งงานกับมาเรียน ความสัมพันธ์กับมาเรียนเย็นชา ไม่รู้ว่าเวรอนเป็นคนฆ่าเซร่า', sz:24},
+  {id:'orwin',   name:'ออร์วิน',                  x:55,  y:350, f:'mirefall', role:'นักพยากรณ์อาวุโส · มิเรฟอลล์',    desc:'อาจารย์ของเนลลา รู้ความจริงเรื่องเซร่ามาตลอดในฐานะนักพยากรณ์ แต่ไม่มีอำนาจดำเนินการ เก็บบันทึกพยานเอาไว้', sz:20},
+  {id:'lena',    name:'ลีน่า',                    x:615, y:140, f:'velmoor',  role:'ชาโดว์แฮนด์ · เวลมัวร์',           desc:'หนึ่งในสองชาโดว์แฮนด์ที่เหลืออยู่ ฝึกกับเซร่า ดอร์น รู้จักลอร์ดเวรอนตั้งแต่อายุ 13 ปี กุญแจสำคัญในการรวบรวมหลักฐาน', sz:20},
+  {id:'veron',   name:'ลอร์ดเวรอน เคสตริล',      x:100, y:200, f:'ashwald',  role:'ที่ปรึกษาอาวุโส แอชวาลด์ · ตัวร้าย', desc:'สั่งฆ่าเซร่า ดอร์น เมื่อ 20 ปีก่อน เพื่อไม่ให้ลูกนอกสมรสของอัลดริกมีอิทธิพล ตอนนี้กำลังทำลายการเจรจาสันติภาพ', sz:20},
+  {id:'eleana',  name:'เคาน์เตสเอเลียน่า',       x:360, y:65,  f:'ashwald',  role:'มารดาของราชินีมาเรียน',            desc:'หัวหน้าตระกูลเรเวนเดล รู้เรื่องเซร่าก่อนลูกสาว แต่ไม่บอกเพื่อปกป้องสถานะของมาเรียนในแอชวาลด์', sz:18},
+];
+
+const EDGES = [
+  {s:'elara',  t:'kael',    type:'love',   label:'คู่รัก'},
+  {s:'elara',  t:'nella',   type:'family', label:'พี่-น้อง'},
+  {s:'kael',   t:'aldric',  type:'family', label:'พ่อ-ลูก'},
+  {s:'kael',   t:'sera',    type:'family', label:'แม่-ลูก'},
+  {s:'aldric', t:'sera',    type:'love',   label:'รัก'},
+  {s:'marian', t:'theryon', type:'tense',  label:'คู่สมรส (ตึงเครียด)'},
+  {s:'theryon',t:'sera',    type:'love',   label:'เคยรัก'},
+  {s:'marian', t:'eleana',  type:'family', label:'แม่-ลูก'},
+  {s:'veron',  t:'sera',    type:'enemy',  label:'สั่งฆ่า'},
+  {s:'veron',  t:'theryon', type:'ally',   label:'ที่ปรึกษา'},
+  {s:'marian', t:'veron',   type:'enemy',  label:'รู้ความจริง'},
+  {s:'nella',  t:'orwin',   type:'ally',   label:'ครู-ศิษย์'},
+  {s:'elara',  t:'marian',  type:'ally',   label:'พันธมิตร'},
+  {s:'kael',   t:'lena',    type:'ally',   label:'ร่วมงาน'},
+  {s:'lena',   t:'sera',    type:'ally',   label:'ลูกศิษย์'},
+  {s:'nella',  t:'marian',  type:'ally',   label:'นักพยากรณ์'},
+  {s:'kael',   t:'veron',   type:'enemy',  label:'ต้องจัดการ'},
+  {s:'aldric', t:'veron',   type:'enemy',  label:'รู้ความจริง'},
+];
+
+const CCOLOR = {velmoor:'#7f77dd', ashwald:'#4a8a30', mirefall:'#b08830', neutral:'#6a5a50'};
+const CFILL  = {velmoor:'#1e1a30', ashwald:'#182218', mirefall:'#221a08', neutral:'#1e1a16'};
+const ECOL   = {love:'#c9a84c', family:'#7f77dd', ally:'#4a8a30', enemy:'#cc4444', tense:'#7a6a50'};
+const EDASH  = {love:'none', family:'none', ally:'none', enemy:'none', tense:'5 3'};
+
+let activeCharFilter = 'all';
+let selectedNode = null;
+const NS = 'http://www.w3.org/2000/svg';
+const getChar = id => CHARS.find(c => c.id === id);
+
+function buildCharGraph() {
+  document.getElementById('cEdges').innerHTML = '';
+  document.getElementById('cNodes').innerHTML = '';
+
+  EDGES.forEach(e => {
+    const s = getChar(e.s), t = getChar(e.t);
+    if (!s || !t) return;
+    const vis = activeCharFilter === 'all' || s.f === activeCharFilter || t.f === activeCharFilter;
+    const g = document.createElementNS(NS, 'g');
+    g.style.opacity = vis ? '1' : '0.06';
+    const line = document.createElementNS(NS, 'line');
+    Object.entries({x1:s.x,y1:s.y,x2:t.x,y2:t.y,
+      stroke:ECOL[e.type]||'#888',
+      'stroke-width': e.type==='love'?'2':'1.5',
+      'stroke-dasharray':EDASH[e.type]||'none',
+      opacity:'0.55'}).forEach(([k,v])=>line.setAttribute(k,v));
+    g.appendChild(line);
+    const lt = document.createElementNS(NS,'text');
+    Object.entries({x:(s.x+t.x)/2, y:(s.y+t.y)/2-5,
+      'text-anchor':'middle','font-size':'9',
+      'font-family':'Sarabun,sans-serif',
+      fill:ECOL[e.type]||'#888', opacity:'0.6'}).forEach(([k,v])=>lt.setAttribute(k,v));
+    lt.textContent = e.label;
+    g.appendChild(lt);
+    document.getElementById('cEdges').appendChild(g);
+  });
+
+  CHARS.forEach(c => {
+    const vis = activeCharFilter === 'all' || c.f === activeCharFilter;
+    const g = document.createElementNS(NS, 'g');
+    g.style.opacity = vis ? '1' : '0.08';
+    g.style.cursor = 'pointer';
+
+    const ring = document.createElementNS(NS,'circle');
+    Object.entries({cx:c.x,cy:c.y,r:c.sz+5,
+      fill:CFILL[c.f]||'#1a1a1a',
+      stroke:CCOLOR[c.f]||'#888',
+      'stroke-width':'1.5','stroke-opacity':'0.55',
+      class:'node-glow'}).forEach(([k,v])=>ring.setAttribute(k,v));
+    g.appendChild(ring);
+
+    const circ = document.createElementNS(NS,'circle');
+    Object.entries({cx:c.x,cy:c.y,r:c.sz,
+      fill:CCOLOR[c.f]||'#888',
+      opacity:c.f==='neutral'?'0.4':'0.75'}).forEach(([k,v])=>circ.setAttribute(k,v));
+    g.appendChild(circ);
+
+    if (c.f === 'neutral') {
+      const mk = document.createElementNS(NS,'text');
+      Object.entries({x:c.x,y:c.y+5,'text-anchor':'middle','font-size':'14',fill:'#c9a84c',opacity:'0.7'}).forEach(([k,v])=>mk.setAttribute(k,v));
+      mk.textContent='✦'; g.appendChild(mk);
+    }
+
+    const parts = c.name.split(' ');
+    const l1 = parts.slice(0,2).join(' '), l2 = parts.slice(2).join(' ');
+    const ty = c.y + c.sz + 15;
+    [[l1,'#d4c4a0','11','500'],[l2,'#9a8a70','10','400']].forEach(([txt,fill,fs,fw],i)=>{
+      if (!txt) return;
+      const t = document.createElementNS(NS,'text');
+      Object.entries({x:c.x,y:ty+i*13,'text-anchor':'middle','font-size':fs,
+        'font-weight':fw,'font-family':'Sarabun,sans-serif',fill}).forEach(([k,v])=>t.setAttribute(k,v));
+      t.textContent=txt; g.appendChild(t);
+    });
+
+    g.addEventListener('click', ev => { ev.stopPropagation(); showInfo(c, g); });
+    document.getElementById('cNodes').appendChild(g);
+  });
+}
+
+function showInfo(c, gEl) {
+  const card = document.getElementById('infoCard');
+  const svg  = document.getElementById('charChart');
+  const rect = svg.getBoundingClientRect();
+  const sx = 680 / rect.width;
+  const px = c.x / sx, py = c.y / sx;
+  card.innerHTML = `<div class="ic-name">${c.name}</div><div class="ic-role">${c.role}</div><div class="ic-desc">${c.desc}</div>`;
+  card.classList.add('show');
+  let left = px + 32;
+  if (left + 220 > rect.width) left = px - 252;
+  card.style.left = left + 'px';
+  card.style.top  = Math.max(0, py - 24) + 'px';
+  if (selectedNode) selectedNode.style.filter = '';
+  gEl.style.filter = `drop-shadow(0 0 8px ${CCOLOR[c.f]})`;
+  selectedNode = gEl;
+}
+
+document.getElementById('charWrap').addEventListener('click', () => {
+  document.getElementById('infoCard').classList.remove('show');
+  if (selectedNode) { selectedNode.style.filter = ''; selectedNode = null; }
+});
+
+function charFilter(faction, btn) {
+  activeCharFilter = faction;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildCharGraph();
+}
+
+/* ── COPY UTILITY ── */
+function copyCode(id) {
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    const btn = el.nextElementSibling;
+    btn.textContent = 'คัดลอกแล้ว ✓';
+    setTimeout(() => btn.textContent = 'คัดลอก', 2000);
+  });
+}
+
+buildCharGraph();
+</script>
+</body>
+</html>

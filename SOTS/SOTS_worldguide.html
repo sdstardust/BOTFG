@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน · World Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#0d0b07;color:#e8dcc8;font-family:'Sarabun',sans-serif;font-weight:300;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(201,168,76,.12) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at 5% 70%,rgba(127,119,221,.08) 0%,transparent 55%);}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;background:#e0b880;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite;animation-delay:var(--delay,0s);opacity:0;}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.5);}50%{opacity:var(--br,.4);transform:scale(1);}}
+
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.75rem 2rem;background:rgba(13,11,7,.95);border-bottom:1px solid rgba(201,168,76,.15);backdrop-filter:blur(10px);}
+.topnav-logo{font-family:'Cinzel Decorative',serif;font-size:.9rem;color:#c9a84c;text-decoration:none;letter-spacing:.04em;}
+.topnav-links{display:flex;gap:1.5rem;}
+.topnav-links a{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;color:#9a8a70;text-decoration:none;text-transform:uppercase;transition:color .2s;cursor:pointer;}
+.topnav-links a:hover{color:#c9a84c;}
+
+.page{position:relative;z-index:1;max-width:940px;margin:0 auto;padding:80px 28px 100px;}
+.page-header{text-align:center;margin-bottom:48px;}
+.ornament-line{display:flex;align-items:center;justify-content:center;gap:14px;color:#a07840;font-size:18px;letter-spacing:6px;margin-bottom:18px;}
+.ornament-line::before,.ornament-line::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#a07840,transparent);}
+.series-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:6px;color:#7a5f28;text-transform:uppercase;margin-bottom:8px;}
+.main-title{font-family:'Cinzel Decorative',serif;font-size:clamp(26px,5vw,44px);color:#c9a84c;text-shadow:0 0 40px rgba(201,168,76,.35);margin-bottom:6px;line-height:1.3;}
+.en-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;color:#7a6a50;}
+
+.tab-nav{display:flex;gap:0;margin-bottom:32px;border:1px solid rgba(201,168,76,.15);border-radius:4px;overflow:hidden;}
+.tab-btn{flex:1;padding:10px 4px;background:rgba(201,168,76,.04);border:none;border-right:1px solid rgba(201,168,76,.12);color:#9a8a70;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.tab-btn:last-child{border-right:none;}
+.tab-btn:hover{background:rgba(201,168,76,.08);color:#c9a84c;}
+.tab-btn.active{background:rgba(201,168,76,.12);color:#c9a84c;box-shadow:inset 0 -2px 0 #c9a84c;}
+
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:6px;}
+.section-header::before,.section-header::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);}
+.section-label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;white-space:nowrap;}
+.section-sub{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:#7a6a50;text-transform:uppercase;text-align:center;margin-bottom:20px;}
+.card{background:#13100a;border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:1.4rem;}
+
+/* MAP */
+.map-svg{display:block;width:100%;}
+
+/* CHARACTER PROFILES */
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.char-card{background:#13100a;border:1px solid rgba(201,168,76,.15);border-radius:4px;transition:all .2s;overflow:hidden;}
+.char-card:hover{border-color:rgba(201,168,76,.35);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.4);}
+.char-card-header{padding:14px 16px 10px;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid rgba(201,168,76,.08);}
+.char-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;border:1.5px solid;}
+.char-card-info{flex:1;min-width:0;}
+.char-card-name{font-family:'Cinzel',serif;font-size:13px;font-weight:500;color:#c9a84c;margin-bottom:2px;line-height:1.3;}
+.char-card-role{font-size:11px;color:#9a7a50;line-height:1.4;}
+.char-card-faction{display:inline-block;margin-top:4px;font-size:10px;letter-spacing:.1em;padding:2px 8px;border-radius:2px;font-family:'Cinzel',serif;}
+.char-card-body{padding:12px 16px 14px;}
+.char-detail-row{display:flex;gap:6px;margin-bottom:5px;flex-wrap:wrap;}
+.char-tag{font-size:10px;background:rgba(201,168,76,.05);border:0.5px solid rgba(201,168,76,.15);border-radius:2px;padding:2px 7px;color:#9a8a70;line-height:1.5;}
+.char-desc{font-size:12px;color:#9a8a70;line-height:1.85;margin-bottom:10px;}
+.char-traits-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.15em;color:#6a5a40;text-transform:uppercase;margin-bottom:5px;}
+.char-traits{display:flex;flex-wrap:wrap;gap:5px;}
+.char-trait{font-size:10px;padding:2px 7px;border-radius:2px;}
+.char-quote{border-left:2px solid rgba(201,168,76,.3);padding:6px 10px;margin-top:10px;font-size:11px;color:#b0a080;font-style:italic;line-height:1.7;}
+
+.f-velmoor{border-color:rgba(127,119,221,.25)!important;}
+.f-ashwald{border-color:rgba(74,138,48,.22)!important;}
+.f-mirefall{border-color:rgba(176,136,48,.22)!important;}
+.f-neutral,.f-deceased{border-color:rgba(106,90,80,.22)!important;}
+.avatar-velmoor{background:#1e1a30;border-color:#7f77dd;color:#c8b4e8;}
+.avatar-ashwald{background:#182218;border-color:#4a8a30;color:#8ab870;}
+.avatar-mirefall{background:#221a08;border-color:#b08830;color:#c9a84c;}
+.avatar-neutral,.avatar-deceased{background:#1e1a16;border-color:#6a5a50;color:#9a8a70;}
+.badge-velmoor{background:rgba(127,119,221,.1);color:#a9a1e8;border:0.5px solid rgba(127,119,221,.28);}
+.badge-ashwald{background:rgba(74,138,48,.1);color:#7aba50;border:0.5px solid rgba(74,138,48,.28);}
+.badge-mirefall{background:rgba(176,136,48,.1);color:#c9a84c;border:0.5px solid rgba(176,136,48,.28);}
+.badge-neutral,.badge-deceased{background:rgba(106,90,80,.1);color:#9a8a70;border:0.5px solid rgba(106,90,80,.28);}
+.trait-positive{background:rgba(74,138,48,.1);color:#7aba50;}
+.trait-complex{background:rgba(201,168,76,.08);color:#c9a84c;}
+.trait-negative{background:rgba(180,40,60,.1);color:#d07880;}
+
+/* RELATIONS */
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.2rem;}
+.filter-btn{padding:5px 14px;border:0.5px solid rgba(201,168,76,.2);background:rgba(201,168,76,.04);border-radius:20px;font-size:12px;cursor:pointer;color:#9a8a70;transition:all .15s;font-family:'Sarabun',sans-serif;}
+.filter-btn:hover{border-color:#c9a84c;color:#c9a84c;}
+.filter-btn.active{background:#c9a84c;border-color:#c9a84c;color:#0d0b07;font-weight:600;}
+.filter-btn.active.velmoor{background:#7f77dd;border-color:#7f77dd;color:#fff;}
+.filter-btn.active.ashwald{background:#4a8a30;border-color:#4a8a30;color:#fff;}
+.filter-btn.active.mirefall{background:#b08830;border-color:#b08830;color:#fff;}
+.filter-btn.active.neutral{background:#6a5a50;border-color:#6a5a50;color:#fff;}
+.filter-btn.velmoor:hover{background:#7f77dd;border-color:#7f77dd;color:#fff;}
+.filter-btn.ashwald:hover{background:#4a8a30;border-color:#4a8a30;color:#fff;}
+.filter-btn.mirefall:hover{background:#b08830;border-color:#b08830;color:#fff;}
+.filter-btn.neutral:hover{background:#6a5a50;border-color:#6a5a50;color:#fff;}
+.svg-wrap{position:relative;}
+.char-svg{display:block;width:100%;}
+.info-card{position:absolute;z-index:10;padding:12px 14px;border-radius:6px;border:0.5px solid rgba(201,168,76,.25);background:#1e1a12;width:220px;pointer-events:none;display:none;box-shadow:0 4px 24px rgba(0,0,0,.6);}
+.info-card.show{display:block;}
+.ic-name{font-family:'Cinzel',serif;font-size:13px;font-weight:500;color:#c9a84c;margin-bottom:3px;}
+.ic-role{font-size:11px;color:#9a7a50;margin-bottom:7px;line-height:1.5;}
+.ic-desc{font-size:11px;color:#9a8a70;line-height:1.7;}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;padding:.75rem 1rem;background:rgba(201,168,76,.03);border:0.5px solid rgba(201,168,76,.1);border-radius:4px;margin-top:.8rem;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#7a6a50;}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.leg-line{width:24px;height:2px;flex-shrink:0;}
+.hint{font-size:11px;color:#5a4a30;text-align:center;margin-top:.6rem;letter-spacing:1px;}
+
+.page-footer{text-align:center;margin-top:70px;padding-top:28px;border-top:1px solid rgba(201,168,76,.1);}
+.footer-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:#7a5f28;}
+.footer-sub{font-size:11px;color:#5a4a30;margin-top:4px;letter-spacing:2px;}
+
+@media(max-width:600px){
+  .page{padding:70px 14px 80px;}
+  .tab-btn{font-size:.55rem;padding:8px 3px;}
+  .char-grid{grid-template-columns:1fr;}
+  .topnav-links{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<nav class="topnav">
+  <a class="topnav-logo">เงาแห่งราชัน</a>
+  <div class="topnav-links">
+    <a onclick="switchTab('map')">แผนที่</a>
+    <a onclick="switchTab('profiles')">ตัวละคร</a>
+    <a onclick="switchTab('relations')">ความสัมพันธ์</a>
+  </div>
+</nav>
+
+<div class="page">
+  <header class="page-header">
+    <div class="ornament-line">✦ ♔ ❧ ♔ ✦</div>
+    <p class="series-label">นิยายแฟนตาซีโรแมนติก</p>
+    <h1 class="main-title">เงาแห่งราชัน</h1>
+    <p class="en-title">Shadow of the Sovereign · World Guide</p>
+  </header>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('map')">✦ แผนที่โลก</button>
+    <button class="tab-btn" onclick="switchTab('profiles')">✦ โปรไฟล์ตัวละคร</button>
+    <button class="tab-btn" onclick="switchTab('relations')">✦ ผังความสัมพันธ์</button>
+  </div>
+
+  <!-- MAP -->
+  <div class="tab-panel active" id="panel-map">
+    <div class="section-header"><span class="section-label">✦ แผนที่โลก</span></div>
+    <p class="section-sub">World Map · สองอาณาจักรและดินแดนระหว่าง</p>
+    <div class="card">
+      <svg class="map-svg" viewBox="0 0 680 540">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+          <pattern id="hv" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#9a8a70" stroke-width="0.4" stroke-opacity="0.28"/></pattern>
+          <pattern id="ha" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(135)"><line x1="0" y1="0" x2="0" y2="8" stroke="#4a7a30" stroke-width="0.4" stroke-opacity="0.22"/></pattern>
+        </defs>
+        <polygon points="40,40 340,40 340,280 260,320 180,310 80,290 40,260" fill="#2a2520" stroke="#6a5a40" stroke-width="0.8"/>
+        <polygon points="40,40 340,40 340,280 260,320 180,310 80,290 40,260" fill="url(#hv)"/>
+        <polygon points="60,300 280,320 340,290 400,270 440,300 460,360 440,440 300,480 140,470 60,420" fill="#1a2218" stroke="#3a6020" stroke-width="0.8"/>
+        <polygon points="60,300 280,320 340,290 400,270 440,300 460,360 440,440 300,480 140,470 60,420" fill="url(#ha)"/>
+        <polygon points="400,200 620,180 640,380 480,400 440,350 430,280" fill="#1c1a16" stroke="#4a4030" stroke-width="0.5" stroke-dasharray="4 3"/>
+        <g fill="#6a5a40" fill-opacity="0.55"><polygon points="278,300 293,268 308,300"/><polygon points="298,308 315,272 332,308"/><polygon points="318,298 335,264 352,298"/><polygon points="248,310 263,280 278,310"/></g>
+        <rect x="0" y="0" width="42" height="540" fill="#0a1520" fill-opacity="0.85"/>
+        <line x1="42" y1="0" x2="42" y2="540" stroke="#1a3050" stroke-width="0.5" stroke-dasharray="3 3"/>
+        <text x="21" y="300" font-family="Sarabun,sans-serif" font-size="9" fill="#1a3050" fill-opacity="0.8" transform="rotate(-90,21,300)">ทะเลตะวันตก</text>
+        <text font-family="'Cinzel',serif" font-size="14" letter-spacing="3" x="80" y="72" fill="#7f77dd" fill-opacity="0.65">VELMOOR</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="80" y="87" fill="#6a5a80" fill-opacity="0.75">อาณาจักรเหนือ · ดินแดนน้ำแข็ง</text>
+        <circle cx="160" cy="155" r="20" fill="#1e1a2e" stroke="#7f77dd" stroke-width="1.5"/><circle cx="160" cy="155" r="7" fill="#7f77dd"/>
+        <circle cx="152" cy="146" r="2" fill="#c9a84c"/><circle cx="160" cy="143" r="2" fill="#c9a84c"/><circle cx="168" cy="146" r="2" fill="#c9a84c"/>
+        <text font-family="'Cinzel',serif" font-size="11" x="187" y="151" fill="#c8b4e8">ฟรอสต์โฮลด์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="187" y="164" fill="#7a6a90">Frosthold · เมืองหลวงเวลมัวร์</text>
+        <rect x="96" y="198" width="10" height="10" rx="2" fill="#2a2440" stroke="#7f77dd" stroke-width="0.8"/>
+        <text font-family="'Cinzel',serif" font-size="11" x="113" y="208" fill="#9a8aaa">Ironpeak</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="113" y="220" fill="#6a5a70">เมืองเหมืองแร่ทางตะวันตก</text>
+        <circle cx="370" cy="200" r="13" fill="#221a08" fill-opacity="0.95" stroke="#c9a84c" stroke-width="1.2"/>
+        <line x1="364" y1="194" x2="376" y2="206" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.8"/><line x1="376" y1="194" x2="364" y2="206" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.8"/>
+        <text font-family="'Cinzel',serif" font-size="11" x="392" y="197" fill="#c9a84c">มิเรฟอลล์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="392" y="210" fill="#9a7a40">Mirefall · หอนักพยากรณ์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="392" y="222" fill="#6a5a38">ดินแดนกลาง · เป็นกลาง</text>
+        <text font-family="'Cinzel',serif" font-size="14" letter-spacing="3" x="100" y="358" fill="#4a8a30" fill-opacity="0.65">ASHWALD</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="100" y="373" fill="#3a6a20" fill-opacity="0.75">อาณาจักรใต้ · ดินแดนป่าและทุ่ง</text>
+        <circle cx="220" cy="405" r="20" fill="#182218" stroke="#4a8a30" stroke-width="1.5"/><circle cx="220" cy="405" r="7" fill="#4a8a30"/>
+        <circle cx="212" cy="396" r="2" fill="#c9a84c"/><circle cx="220" cy="393" r="2" fill="#c9a84c"/><circle cx="228" cy="396" r="2" fill="#c9a84c"/>
+        <text font-family="'Cinzel',serif" font-size="11" x="248" y="401" fill="#8ab870">เมืองหลวงแอชวาลด์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="248" y="414" fill="#4a7a28">Ashwald Capital · ราชสำนัก</text>
+        <rect x="108" y="332" width="10" height="10" rx="2" fill="#182218" stroke="#4a8a30" stroke-width="0.8"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="125" y="341" fill="#6a9a50">คฤหาสน์เรเวนเดล</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="125" y="353" fill="#3a6020">Ravendel Estate</text>
+        <circle cx="320" cy="455" r="5" fill="#182218" stroke="#4a8a30" stroke-width="0.8"/>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="332" y="459" fill="#3a6020">หมู่บ้านใต้แอชวาลด์</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="332" y="471" fill="#2a4a18">ที่หลบซ่อนของเฮลม่า</text>
+        <path fill="none" stroke="#7a6a50" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#arr)" d="M160 175 Q178 240 218 385"/>
+        <path fill="none" stroke="#c9a84c" stroke-width="1" stroke-dasharray="4 2" stroke-opacity="0.55" marker-end="url(#arr)" d="M236 405 Q298 358 356 214"/>
+        <path fill="none" stroke="#7f77dd" stroke-width="1" stroke-dasharray="3 2" stroke-opacity="0.65" marker-end="url(#arr)" d="M176 155 Q268 158 355 194"/>
+        <text font-family="Sarabun,sans-serif" font-size="9" x="268" y="152" fill="#6a5a80" text-anchor="middle">เส้นทางเนลลา</text>
+        <path fill="none" stroke="#4a8a30" stroke-width="0.8" stroke-dasharray="3 2" stroke-opacity="0.45" marker-end="url(#arr)" d="M118 342 Q158 368 200 391"/>
+        <rect x="480" y="40" width="185" height="272" rx="6" fill="#0f0d08" fill-opacity="0.97" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
+        <text font-family="'Cinzel',serif" font-size="11" x="492" y="63" fill="#c9a84c" letter-spacing="2">สัญลักษณ์</text>
+        <circle cx="498" cy="82" r="7" fill="#7f77dd"/><circle cx="498" cy="82" r="13" fill="none" stroke="#7f77dd" stroke-width="1"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="86" fill="#9a8a70">เมืองหลวง</text>
+        <rect x="491" y="102" width="12" height="12" rx="2" fill="#2a2440" stroke="#7f77dd" stroke-width="0.8"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="112" fill="#9a8a70">เมืองรอง</text>
+        <circle cx="498" cy="130" r="7" fill="#221a08" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="494" y1="126" x2="502" y2="134" stroke="#c9a84c" stroke-width="1"/><line x1="502" y1="126" x2="494" y2="134" stroke="#c9a84c" stroke-width="1"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="134" fill="#9a8a70">หอนักพยากรณ์</text>
+        <circle cx="498" cy="152" r="5" fill="#182218" stroke="#4a8a30" stroke-width="0.8"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="156" fill="#9a8a70">หมู่บ้านเล็ก</text>
+        <line x1="488" y1="174" x2="512" y2="174" stroke="#7a6a50" stroke-width="1.2" stroke-dasharray="4 2"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="178" fill="#9a8a70">เส้นทางหลวง</text>
+        <line x1="488" y1="192" x2="512" y2="192" stroke="#7f77dd" stroke-width="1" stroke-dasharray="3 2"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="196" fill="#9a8a70">เส้นทางเนลลา</text>
+        <line x1="488" y1="210" x2="512" y2="210" stroke="#c9a84c" stroke-width="1" stroke-dasharray="4 2"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="214" fill="#9a8a70">เส้นทางราชินี</text>
+        <rect x="488" y="224" width="16" height="10" rx="2" fill="#2a2520" stroke="#6a5a40" stroke-width="0.5"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="233" fill="#9a8a70">เวลมัวร์</text>
+        <rect x="488" y="242" width="16" height="10" rx="2" fill="#1a2218" stroke="#3a6020" stroke-width="0.5"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="251" fill="#9a8a70">แอชวาลด์</text>
+        <rect x="488" y="260" width="16" height="10" rx="2" fill="#1c1a16" stroke="#4a4030" stroke-width="0.5" stroke-dasharray="3 2"/>
+        <text font-family="Sarabun,sans-serif" font-size="11" x="520" y="269" fill="#9a8a70">ดินแดนกลาง</text>
+        <g transform="translate(562,340)">
+          <circle r="28" fill="#0f0d08" fill-opacity="0.92" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
+          <polygon points="0,-20 4,-6 0,-10 -4,-6" fill="#7f77dd" fill-opacity="0.75"/>
+          <polygon points="0,20 4,6 0,10 -4,6" fill="#3a3028"/>
+          <line x1="-20" y1="0" x2="20" y2="0" stroke="#3a3028" stroke-width="0.5"/>
+          <text font-family="'Cinzel',serif" font-size="9" text-anchor="middle" y="-22" fill="#c9a84c">N</text>
+          <text font-family="'Cinzel',serif" font-size="8" text-anchor="middle" y="28" fill="#5a4a30">S</text>
+          <text font-family="'Cinzel',serif" font-size="8" x="24" y="3" fill="#5a4a30">E</text>
+          <text font-family="'Cinzel',serif" font-size="8" x="-24" y="3" text-anchor="end" fill="#5a4a30">W</text>
+        </g>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="482" y="494" fill="#5a4a30">~ ฟรอสต์โฮลด์ → แอชวาลด์ : ๓ วัน</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="482" y="508" fill="#5a4a30">~ แอชวาลด์ → มิเรฟอลล์ : ๒ วัน</text>
+        <text font-family="Sarabun,sans-serif" font-size="10" x="482" y="522" fill="#5a4a30">~ ฟรอสต์โฮลด์ → มิเรฟอลล์ : ๑ วัน</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- PROFILES -->
+  <div class="tab-panel" id="panel-profiles">
+    <div class="section-header"><span class="section-label">✦ โปรไฟล์ตัวละคร</span></div>
+    <p class="section-sub">Character Profiles · ep.1–12 (ข้อมูลที่มีถึงตอนนี้)</p>
+    <div class="char-grid" id="charGrid"></div>
+  </div>
+
+  <!-- RELATIONS -->
+  <div class="tab-panel" id="panel-relations">
+    <div class="section-header"><span class="section-label">✦ ผังความสัมพันธ์ตัวละคร</span></div>
+    <p class="section-sub">Character Relationships · กดที่ตัวละครเพื่อดูรายละเอียด</p>
+    <div class="card">
+      <div class="filter-row">
+        <button class="filter-btn active all" onclick="charFilter('all',this)">ทั้งหมด</button>
+        <button class="filter-btn velmoor" onclick="charFilter('velmoor',this)">เวลมัวร์</button>
+        <button class="filter-btn ashwald" onclick="charFilter('ashwald',this)">แอชวาลด์</button>
+        <button class="filter-btn mirefall" onclick="charFilter('mirefall',this)">มิเรฟอลล์</button>
+        <button class="filter-btn neutral" onclick="charFilter('neutral',this)">กลาง / ผู้ล่วงลับ</button>
+      </div>
+      <div class="svg-wrap" id="charWrap">
+        <svg id="charChart" class="char-svg" viewBox="0 0 680 600">
+          <defs><marker id="aro" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+          <g id="cEdges"></g><g id="cNodes"></g>
+        </svg>
+        <div id="infoCard" class="info-card"></div>
+      </div>
+      <div class="legend">
+        <div class="leg-item"><div class="leg-dot" style="background:#7f77dd"></div>เวลมัวร์</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#4a8a30"></div>แอชวาลด์</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#b08830"></div>มิเรฟอลล์</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#6a5a50"></div>กลาง/ผู้ล่วงลับ</div>
+        <div class="leg-item"><div class="leg-line" style="background:#c9a84c;height:2px"></div>ความรัก</div>
+        <div class="leg-item"><div class="leg-line" style="background:#7f77dd;opacity:.7"></div>ครอบครัว</div>
+        <div class="leg-item"><div class="leg-line" style="background:#4a8a30;opacity:.7"></div>พันธมิตร</div>
+        <div class="leg-item"><div class="leg-line" style="background:#cc4444;opacity:.7"></div>ศัตรู</div>
+        <div class="leg-item"><div class="leg-line" style="background:#7a6a50;border-top:1px dashed #7a6a50"></div>ตึงเครียด</div>
+      </div>
+      <p class="hint">✦ กดที่ตัวละครเพื่อดูรายละเอียด</p>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <p class="footer-title">เงาแห่งราชัน</p>
+    <p class="footer-sub">Shadow of the Sovereign · World Guide</p>
+  </footer>
+</div>
+
+<script>
+/* STARS */
+const sc=document.getElementById('stars');
+for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+.5;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${Math.random()*4+2}s;--delay:${Math.random()*6}s;--br:${Math.random()*.35+.1};`;sc.appendChild(s);}
+
+/* TABS */
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  const idx={map:0,profiles:1,relations:2}[id];
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+}
+
+/* ═══ PROFILES DATA ═══ */
+const PROFILES=[
+  {id:'elara',name:'เอลาร่า วินด์มาร์ค',en:'Elara Windmark',faction:'ashwald',avatar:'⚔',role:'ที่ปรึกษาเอก · แอชวาลด์',age:'ประมาณ 28–30 ปี',origin:'มิเรฟอลล์',location:'แอชวาลด์ · ราชสำนัก',appearance:'ผมสีน้ำตาลเข้ม รวบแน่น ดวงตาคม ท่าทางสงบแต่ระมัดระวัง ทั้งนักรบและที่ปรึกษาในคนเดียว',desc:'อดีตนักรบมิเรฟอลล์ที่ออกมารับใช้แอชวาลด์ เป็นที่ปรึกษาเอกของกษัตริย์ธีเรียน ตรงไปตรงมา ไม่พูดมากกว่าที่จำเป็น เชื่อใน "หลักฐาน" มากกว่า "ความรู้สึก" จึงยังไม่พูดเรื่องเวรอนจนกว่าจะมีหลักฐานชัด ทำงานใกล้ชิดคาเอลในการเจรจาสันติภาพ',traits:[['ฉลาดเชิงกลยุทธ์','positive'],['ใจเย็น','positive'],['ตรงไปตรงมา','positive'],['ปกป้องคาเอล','complex']],relations:'คู่รักของคาเอล · พี่สาวของเนลลา · ที่ปรึกษาราชสำนักแอชวาลด์',quote:'ความต่างระหว่างสังเกตเห็นกับมีหลักฐาน — นั่นคือสิ่งที่ทำให้เราชนะหรือแพ้'},
+  {id:'kael',name:'คาเอล (เคเลน) ดอร์น',en:'Kael / Kelen Dorn',faction:'velmoor',avatar:'♔',role:'ทายาทแห่งเวลมัวร์',age:'ประมาณ 29–31 ปี',origin:'เวลมัวร์',location:'แอชวาลด์ · ตัวแทนเวลมัวร์',appearance:'ผมสีน้ำตาลอ่อน ตาสีเทา โครงหน้าคล้ายแม่ (เซร่า) ท่าทางนิ่ง ไม่แสดงอารมณ์ออกมาภายนอก แต่สังเกตทุกอย่าง',desc:'อดีตชาโดว์แฮนด์ที่ไม่รู้ว่าตัวเองเป็นใคร ค้นพบว่าเป็นลูกชายของกษัตริย์อัลดริกและเซร่า ดอร์น ได้รับการประกาศเป็นทายาทอย่างเป็นทางการ ทำงานกับเอลาร่าในการเจรจา เรียนภาษาเวลมัวร์ด้วยตัวเอง คิดถึงแม่อยู่เสมอแต่ไม่พูดกับใครยกเว้นเอลาร่า',traits:[['อ่านคนเก่ง','positive'],['เงียบขรึม','complex'],['ซื่อสัตย์','positive'],['แบกภาระคนเดียว','complex']],relations:'ลูกชายของอัลดริก · ลูกชายของเซร่า ดอร์น (ผู้ล่วงลับ) · คู่รักของเอลาร่า',quote:'ผมรู้ว่าตัวเองเป็นใครมาสักพักแล้ว แต่การประกาศอย่างเป็นทางการ มันรู้สึกต่างออกไป เหมือนก่อนหน้านั้นมันเป็นเรื่องส่วนตัว ตอนนี้มันเป็นเรื่องของโลก'},
+  {id:'nella',name:'เนลลา วินด์มาร์ค',en:'Nella Windmark',faction:'mirefall',avatar:'✦',role:'นักพยากรณ์ · มิเรฟอลล์',age:'23 ปี',origin:'มิเรฟอลล์ (อยู่มา 4 ปี)',location:'มิเรฟอลล์ · หอสังเกตการณ์',appearance:'ผมหยิกสีน้ำตาล รวบหลวมๆ ดวงตาที่มักมองในแบบที่คนรู้สึกว่ากำลังอ่านบางอย่างในตัว',desc:'น้องสาวของเอลาร่า พลังพยากรณ์ที่พัฒนาได้เร็วผิดปกติ เห็นอนาคตเหมือนอ่านแผนที่ ไม่ใช่ภาพ ในภาค 2 พลังกำลังพัฒนาอีกขั้น — เริ่มรับข้อความจากผู้ล่วงลับ (เซร่า ดอร์น) สิ่งที่ออร์วินก็อธิบายไม่ได้ทั้งหมด กำลังอยู่ระหว่างการฝึก "ฟัง" ตามคำแนะนำของออร์วิน',traits:[['พลังพิเศษ','positive'],['ฟังก่อนพูด','positive'],['เติบโตเร็ว','complex'],['เชื่อมกับสิ่งที่มองไม่เห็น','complex']],relations:'น้องสาวของเอลาร่า · ลูกศิษย์ออร์วิน · รับข้อความจากเซร่า ดอร์น',quote:'ออร์วินบอกว่านักพยากรณ์ส่วนใหญ่เห็นเหมือนดูภาพ ฉันเห็นเหมือนอ่านแผนที่'},
+  {id:'aldric',name:'กษัตริย์อัลดริก',en:'King Aldric',faction:'velmoor',avatar:'♚',role:'กษัตริย์แห่งเวลมัวร์',age:'ประมาณ 55–60 ปี',origin:'ฟรอสต์โฮลด์ · เวลมัวร์',location:'ฟรอสต์โฮลด์ · พระราชวัง',appearance:'ผมเทาเงิน ท่าทางสง่า มีน้ำหนักบางอย่างในดวงตา คนที่แบกความเสียใจมาตลอดชีวิตแต่ไม่ยอมให้มันทำลายตัวเอง',desc:'เคยรักเซร่า ดอร์น แต่แต่งงานด้วยไม่ได้เพราะสถานะ รู้ว่าใครฆ่าเซร่ามา 19 ปี แต่รอ "เวลาที่ถูกต้อง" ก่อนบอกลูกชาย ปัจจุบันรับข้อมูลจากลีน่าเรื่องการเคลื่อนไหวของเวรอน เก็บห้องของเซร่าสะอาดมาตลอด',traits:[['ทนฝืน','complex'],['รอบคอบ','positive'],['รักลึก','complex'],['แบกความลับคนเดียว','negative']],relations:'พ่อของคาเอล · เคยรักเซร่า · ทำงานกับลีน่า',quote:'รู้คือได้ยินคำ พร้อมรับคือสามารถทำอะไรกับมันได้โดยไม่ให้ความโกรธมาขัด'},
+  {id:'marian',name:'ราชินีมาเรียน เรเวนเดล',en:'Queen Marian Ravendel',faction:'ashwald',avatar:'♛',role:'ราชินีแห่งแอชวาลด์',age:'ประมาณ 33–36 ปี',origin:'คฤหาสน์เรเวนเดล',location:'แอชวาลด์ (ปกติ) · เรเวนเดล (ชั่วคราว ep12)',appearance:'ผมสีน้ำตาลเข้ม มักรวบเรียบ ใบหน้าที่ฝึกมาให้ไม่แสดงอารมณ์ ม้าประจำตัวชื่อ ซอลต์',desc:'แต่งงานกับธีเรียนด้วยเหตุผลทางการเมือง ทั้งสองอยู่ร่วมกันอย่างสุภาพแต่ไม่ใกล้ชิดจริงๆ รู้ว่าเวรอนฆ่าเซร่ามา 9 ปีจากการได้ยินโดยบังเอิญ ในภาค 2 ตัดสินใจเปิดเผยความจริง เริ่มจากบอกแม่ที่เรเวนเดล ค้นพบว่าแม่รู้ชื่อเดียวกัน และวางแผนส่งข้อความไปมิเรฟอลล์ต่อ',traits:[['อดทน','positive'],['ฉลาดเชิงการเมือง','positive'],['แบกความจริงคนเดียว','negative'],['กล้าหาญ','positive']],relations:'ภรรยาของธีเรียน · ลูกสาวของเอเลียน่า · รู้ความจริงเรื่องเวรอน',quote:'ฉันรู้ว่าจะทำอะไร แต่ต้องพูดให้ถูกวิธีและถูกคน เพราะนี่ไม่ใช่เรื่องที่ผิดพลาดได้'},
+  {id:'theryon',name:'กษัตริย์ธีเรียน',en:'King Theryon',faction:'ashwald',avatar:'♔',role:'กษัตริย์แห่งแอชวาลด์',age:'ประมาณ 40–45 ปี',origin:'แอชวาลด์',location:'แอชวาลด์ · ราชสำนัก',appearance:'ท่าทางสง่า ผมสีน้ำตาลเริ่มมีเทาปน ดวงตาที่ให้พื้นที่ทุกคนจนไม่มีใครเข้าถึงตัวเองได้จริงๆ ไม่ชอบฝน',desc:'กษัตริย์ที่ปกครองแอชวาลด์ได้ดี แต่ในเชิงส่วนตัวยังแบกความเสียใจจากการสูญเสียเซร่ามาตลอด ให้พื้นที่ส่วนตัวกับทุกคนมากเกินพอดีจนไม่มีใครเข้าถึงตัวเองได้จริงๆ ไม่รู้ว่าเวรอนฆ่าเซร่า รู้แค่ว่าเธอตาย',traits:[['เป็นทางการ','complex'],['ให้พื้นที่มากเกิน','complex'],['ยังโศกเศร้า','negative'],['ไม่รู้ความจริง','negative']],relations:'สามีของมาเรียน · เคยรักเซร่า · ถูกเวรอนหลอกมาตลอด',quote:'(หลังทูตเวลมัวร์ประกาศทายาท) — "ดี" แล้วยกถ้วยชา — คำยืนยันที่สั้นที่สุดในประวัติศาสตร์ราชสำนัก'},
+  {id:'sera',name:'เซร่า ดอร์น (ผู้ล่วงลับ)',en:'Sera Dorn',faction:'neutral',avatar:'✦',role:'ผู้ล่วงลับ · มารดาของคาเอล',age:'เสียชีวิต 20 ปีก่อน ขณะนั้นอายุราว 28–30 ปี',origin:'เวลมัวร์',location:'(ผู้ล่วงลับ) ปรากฏในนิมิตของเนลลา',appearance:'ผมสีน้ำตาล รวบหลวมๆ ดวงตาที่มีน้ำหนัก ห้องเก็บต้นสนในกระถาง หนังสือหลายเล่ม บันทึกลายมือที่คุ้นเคย',desc:'นักรบหญิงที่เก่งที่สุดในยุคของตน เป็นอาจารย์ของชาโดว์แฮนด์หลายคน รู้ว่าตัวเองจะตายแต่เลือกอยู่จนคาเอลโตพอ ถูกสั่งฆ่าโดยเวรอนเพื่อไม่ให้ลูกนอกสมรสของอัลดริกมีอิทธิพล ในภาค 2 ปรากฏในนิมิตของเนลลา ฝากข้อความ 2 ข้อ',traits:[['เก่งที่สุดในยุค','positive'],['เสียสละ','positive'],['รักลูก','positive'],['ยอมรับชะตากรรม','complex']],relations:'แม่ของคาเอล · คนรักของอัลดริก · ถูกสั่งฆ่าโดยเวรอน · อาจารย์ของลีน่า',quote:'บอกเขาว่าฉันไม่ได้โกรธ และบอกลูกชายว่าแม่เห็นเขาเสมอ'},
+  {id:'orwin',name:'ออร์วิน',en:'Orwin',faction:'mirefall',avatar:'◈',role:'นักพยากรณ์อาวุโส · มิเรฟอลล์',age:'ประมาณ 65–70 ปี',origin:'มิเรฟอลล์',location:'มิเรฟอลล์ · ห้องทำงาน (ไม่มีหน้าต่าง)',appearance:'ห้องทำงานที่ไม่มีหน้าต่างแต่มีช่องระบายอากาศให้แสงเข้าเป็นลำ บอกว่าห้องที่สว่างมากทำให้คิดช้า',desc:'อาจารย์ของเนลลา ฝึกเธอมา 4 ปี สังเกตเห็นว่าพลังกำลังเปลี่ยนในทิศทางผิดปกติ จึงขอให้อยู่ฝึก "ฟัง" อีกหนึ่งเดือน รู้เรื่องเซร่ามาตลอด (ในฐานะนักพยากรณ์) แต่ไม่มีอำนาจดำเนินการเอง เก็บบันทึกพยานการฆาตกรรม',traits:[['รอบรู้','positive'],['ระมัดระวัง','positive'],['อดทนรอ','complex'],['พูดน้อยแต่ทุกคำมีความหมาย','positive']],relations:'อาจารย์ของเนลลา · รู้เรื่องเซร่ามาตลอด',quote:'เธอเห็นอนาคตเหมือนอ่านแผนที่ ไม่ใช่ดูภาพ ซึ่งต่างกันมากกว่าที่คิด'},
+  {id:'lena',name:'ลีน่า',en:'Lena',faction:'velmoor',avatar:'◆',role:'ชาโดว์แฮนด์ · เวลมัวร์',age:'ประมาณ 34–36 ปี',origin:'เวลมัวร์',location:'ฟรอสต์โฮลด์ · รับใช้กษัตริย์อัลดริก',appearance:'ผมสีน้ำตาล รวบแน่น ดวงตาเย็นในแบบที่เป็นผลจากการฝึก ไม่ใช่นิสัย',desc:'หนึ่งในสองชาโดว์แฮนด์ที่เหลืออยู่ ฝึกโดยตรงจากเซร่า ดอร์นตั้งแต่อายุ 13 ปี รู้จักลอร์ดเวรอนมาตั้งแต่นั้น ปัจจุบันรายงานกษัตริย์อัลดริกเรื่องการเคลื่อนไหวในแอชวาลด์ กุญแจสำคัญในการรวบรวมหลักฐาน',traits:[['ฝีมือดีที่สุด','positive'],['ซื่อสัตย์','positive'],['รู้จักเวรอน','complex'],['แบกความทรงจำเซร่า','complex']],relations:'ลูกศิษย์ของเซร่า · รับใช้อัลดริก · รู้จักลอร์ดเวรอน',quote:'เขาไม่ได้ต้องการข้อมูล เขาต้องการเวลา'},
+  {id:'veron',name:'ลอร์ดเวรอน เคสตริล',en:'Lord Veron Kestril',faction:'ashwald',avatar:'◇',role:'ที่ปรึกษาอาวุโส · แอชวาลด์ · ตัวร้าย',age:'ประมาณ 60–65 ปี',origin:'แอชวาลด์',location:'แอชวาลด์ · ราชสำนัก',appearance:'ท่าทางสุภาพ คำพูดที่สมเหตุสมผลเสมอ ไม่มีอะไรที่โจ่งแจ้ง ซึ่งนั่นคือสิ่งที่น่ากลัวที่สุด',desc:'สั่งฆ่าเซร่า ดอร์น 20 ปีก่อน เพื่อไม่ให้ลูกนอกสมรสของอัลดริกมีอิทธิพล ตอนนี้ขัดขวางการเจรจาสันติภาพอย่างเป็นระบบ — ไม่ขัดตรงๆ แต่ตั้งคำถาม ชะลอ สร้างเหตุผลให้รอ ทุกอย่างอยู่ในขอบเขตของ "ที่ปรึกษาที่ระมัดระวัง" แต่ผลลัพธ์คือสันติภาพไม่เกิด',traits:[['ฉลาดและอันตราย','negative'],['ไม่ทิ้งร่องรอย','negative'],['ทำงานในเงา','negative'],['กลัวอิทธิพลคาเอล','complex']],relations:'ฆ่าเซร่า ดอร์น · ที่ปรึกษาของธีเรียน · ศัตรูของคาเอลและอัลดริก',quote:'(จากคำบอกเล่าของมาเรียน) — "เรื่องของดอร์นจัดการแล้ว ไม่มีใครรู้"'},
+  {id:'eleana',name:'เคาน์เตสเอเลียน่า เรเวนเดล',en:'Countess Eleana Ravendel',faction:'ashwald',avatar:'♖',role:'มารดาของราชินีมาเรียน',age:'65 ปี',origin:'คฤหาสน์เรเวนเดล',location:'คฤหาสน์เรเวนเดล',appearance:'ผมขาวรวบเรียบ ชุดสีเทาเข้ม ท่าทางของคนที่ผ่านอะไรมามากและไม่แสดงออก มือที่กอดหน้าอกเมื่อ "รอรับฟัง"',desc:'หัวหน้าตระกูลเรเวนเดล ทราบชื่อลอร์ดเวรอนจากจดหมายลับของคนในวังเวลมัวร์หลังการตายของเซร่า แต่ไม่บอกลูกสาวเพราะกลัวทำให้เธอเสียเปรียบ เก็บจดหมายนั้นไว้ตลอด 20 ปี มีช่องทางลับส่งข้อความไปมิเรฟอลล์ได้',traits:[['รักลูก','positive'],['เก็บความลับ','complex'],['มีประสบการณ์','positive'],['แก้ไขความผิดพลาดตัวเอง','complex']],relations:'แม่ของมาเรียน · รู้ชื่อเวรอนก่อนลูกสาว · มีช่องทางลับถึงมิเรฟอลล์',quote:'แม่แก่ ไม่ใช่ตาย'}
+];
+
+function renderProfiles(){
+  const grid=document.getElementById('charGrid');
+  const fLabel={velmoor:'เวลมัวร์',ashwald:'แอชวาลด์',mirefall:'มิเรฟอลล์',neutral:'กลาง',deceased:'ผู้ล่วงลับ'};
+  const getF=p=>p.id==='sera'?'deceased':p.faction;
+  PROFILES.forEach(p=>{
+    const fac=getF(p);
+    const el=document.createElement('div');
+    el.className=`char-card f-${fac}`;
+    el.innerHTML=`
+      <div class="char-card-header">
+        <div class="char-avatar avatar-${fac}">${p.avatar}</div>
+        <div class="char-card-info">
+          <div class="char-card-name">${p.name}</div>
+          <div class="char-card-role">${p.role}</div>
+          <span class="char-card-faction badge-${fac}">${fLabel[fac]}</span>
+        </div>
+      </div>
+      <div class="char-card-body">
+        <div class="char-detail-row">
+          <span class="char-tag">🎂 ${p.age}</span>
+          <span class="char-tag">📍 ${p.location}</span>
+        </div>
+        <div class="char-detail-row"><span class="char-tag">🏠 ${p.origin}</span></div>
+        ${p.appearance?`<div class="char-detail-row"><span class="char-tag" style="font-style:italic">👤 ${p.appearance}</span></div>`:''}
+        <p class="char-desc" style="margin-top:8px">${p.desc}</p>
+        <div class="char-traits-label">นิสัย / ลักษณะเด่น</div>
+        <div class="char-traits">${p.traits.map(([t,tp])=>`<span class="char-trait trait-${tp}">${t}</span>`).join('')}</div>
+        ${p.relations?`<div class="char-traits-label" style="margin-top:10px">ความสัมพันธ์</div><div class="char-desc" style="margin-bottom:0;font-size:11px">${p.relations}</div>`:''}
+        ${p.quote?`<div class="char-quote">"${p.quote}"</div>`:''}
+      </div>`;
+    grid.appendChild(el);
+  });
+}
+renderProfiles();
+
+/* ═══ RELATIONSHIP CHART ═══ */
+const CHARS=[
+  {id:'elara',name:'เอลาร่า วินด์มาร์ค',x:240,y:165,f:'ashwald',role:'ที่ปรึกษาเอก',desc:'อดีตนักรบมิเรฟอลล์ ที่ปรึกษาเอกแอชวาลด์ คู่ของคาเอล พี่สาวเนลลา รอหลักฐานก่อนพูดถึงเวรอน',sz:28},
+  {id:'kael',name:'คาเอล ดอร์น',x:420,y:165,f:'velmoor',role:'ทายาทแห่งเวลมัวร์',desc:'อดีตชาโดว์แฮนด์ ลูกชายอัลดริกและเซร่า ทายาทอย่างเป็นทางการ ทำงานกับเอลาร่าในแอชวาลด์',sz:28},
+  {id:'nella',name:'เนลลา วินด์มาร์ค',x:140,y:310,f:'mirefall',role:'นักพยากรณ์ · มิเรฟอลล์',desc:'น้องสาวเอลาร่า 23 ปี กำลังพัฒนาพลังขั้นใหม่ รับข้อความจากเซร่าได้ อยู่มิเรฟอลล์',sz:24},
+  {id:'aldric',name:'กษัตริย์อัลดริก',x:490,y:65,f:'velmoor',role:'กษัตริย์แห่งเวลมัวร์',desc:'พ่อของคาเอล เคยรักเซร่า รู้เรื่องเวรอนมา 19 ปี รอเวลาที่ถูกต้องก่อนบอกลูกชาย',sz:26},
+  {id:'sera',name:'เซร่า ดอร์น',x:555,y:230,f:'neutral',role:'ผู้ล่วงลับ · มารดาของคาเอล',desc:'นักรบที่เก่งที่สุดในยุค ถูกเวรอนสั่งฆ่า 20 ปีก่อน ปรากฏในนิมิตเนลลา ฝากข้อความ 2 ข้อ',sz:22},
+  {id:'marian',name:'ราชินีมาเรียน',x:240,y:65,f:'ashwald',role:'ราชินีแห่งแอชวาลด์',desc:'รู้เรื่องเวรอนมา 9 ปี เพิ่งบอกแม่ที่เรเวนเดล วางแผนส่งข้อความมิเรฟอลล์ต่อ',sz:26},
+  {id:'theryon',name:'กษัตริย์ธีเรียน',x:100,y:65,f:'ashwald',role:'กษัตริย์แห่งแอชวาลด์',desc:'เคยรักเซร่า แต่งงานมาเรียนแบบการเมือง ไม่รู้ว่าเวรอนฆ่าเซร่า ถูกหลอกมาตลอด',sz:24},
+  {id:'orwin',name:'ออร์วิน',x:55,y:350,f:'mirefall',role:'นักพยากรณ์อาวุโส',desc:'อาจารย์เนลลา รู้เรื่องเซร่ามาตลอด ขอให้เนลลาฝึกฟัง เก็บบันทึกพยาน',sz:20},
+  {id:'lena',name:'ลีน่า',x:615,y:140,f:'velmoor',role:'ชาโดว์แฮนด์ · เวลมัวร์',desc:'ลูกศิษย์เซร่า อายุ ~35 รับใช้อัลดริก รายงานการเคลื่อนไหวเวรอน กุญแจรวบรวมหลักฐาน',sz:20},
+  {id:'veron',name:'ลอร์ดเวรอน เคสตริล',x:100,y:200,f:'ashwald',role:'ที่ปรึกษาอาวุโส · ตัวร้าย',desc:'สั่งฆ่าเซร่า 20 ปีก่อน ขัดการเจรจาสันติภาพอย่างเป็นระบบโดยไม่ทิ้งร่องรอยชัดเจน',sz:20},
+  {id:'eleana',name:'เคาน์เตสเอเลียน่า',x:360,y:65,f:'ashwald',role:'มารดาของมาเรียน',desc:'65 ปี รู้ชื่อเวรอนจากจดหมายลับ เก็บไว้ 20 ปี มีช่องทางลับส่งข้อความมิเรฟอลล์',sz:18},
+];
+const EDGES=[
+  {s:'elara',t:'kael',type:'love',label:'คู่รัก'},
+  {s:'elara',t:'nella',type:'family',label:'พี่-น้อง'},
+  {s:'kael',t:'aldric',type:'family',label:'พ่อ-ลูก'},
+  {s:'kael',t:'sera',type:'family',label:'แม่-ลูก'},
+  {s:'aldric',t:'sera',type:'love',label:'รัก'},
+  {s:'marian',t:'theryon',type:'tense',label:'คู่สมรส (ตึงเครียด)'},
+  {s:'theryon',t:'sera',type:'love',label:'เคยรัก'},
+  {s:'marian',t:'eleana',type:'family',label:'แม่-ลูก'},
+  {s:'veron',t:'sera',type:'enemy',label:'สั่งฆ่า'},
+  {s:'veron',t:'theryon',type:'ally',label:'ที่ปรึกษา'},
+  {s:'marian',t:'veron',type:'enemy',label:'รู้ความจริง'},
+  {s:'nella',t:'orwin',type:'ally',label:'ครู-ศิษย์'},
+  {s:'elara',t:'marian',type:'ally',label:'พันธมิตร'},
+  {s:'kael',t:'lena',type:'ally',label:'ร่วมงาน'},
+  {s:'lena',t:'sera',type:'ally',label:'ลูกศิษย์'},
+  {s:'nella',t:'marian',type:'ally',label:'นักพยากรณ์'},
+  {s:'kael',t:'veron',type:'enemy',label:'ต้องจัดการ'},
+  {s:'aldric',t:'veron',type:'enemy',label:'รู้ความจริง'},
+];
+const CCOLOR={velmoor:'#7f77dd',ashwald:'#4a8a30',mirefall:'#b08830',neutral:'#6a5a50'};
+const CFILL={velmoor:'#1e1a30',ashwald:'#182218',mirefall:'#221a08',neutral:'#1e1a16'};
+const ECOL={love:'#c9a84c',family:'#7f77dd',ally:'#4a8a30',enemy:'#cc4444',tense:'#7a6a50'};
+const EDASH={love:'none',family:'none',ally:'none',enemy:'none',tense:'5 3'};
+const NS='http://www.w3.org/2000/svg';
+let activeFilter='all',selectedNode=null;
+const getChar=id=>CHARS.find(c=>c.id===id);
+
+function buildCharGraph(){
+  document.getElementById('cEdges').innerHTML='';
+  document.getElementById('cNodes').innerHTML='';
+  EDGES.forEach(e=>{
+    const s=getChar(e.s),t=getChar(e.t);if(!s||!t)return;
+    const vis=activeFilter==='all'||s.f===activeFilter||t.f===activeFilter;
+    const g=document.createElementNS(NS,'g');g.style.opacity=vis?'1':'0.06';
+    const line=document.createElementNS(NS,'line');
+    Object.entries({x1:s.x,y1:s.y,x2:t.x,y2:t.y,stroke:ECOL[e.type]||'#888','stroke-width':e.type==='love'?'2':'1.5','stroke-dasharray':EDASH[e.type]||'none',opacity:'0.55'}).forEach(([k,v])=>line.setAttribute(k,v));
+    g.appendChild(line);
+    const lt=document.createElementNS(NS,'text');
+    Object.entries({x:(s.x+t.x)/2,y:(s.y+t.y)/2-5,'text-anchor':'middle','font-size':'9','font-family':'Sarabun,sans-serif',fill:ECOL[e.type]||'#888',opacity:'0.6'}).forEach(([k,v])=>lt.setAttribute(k,v));
+    lt.textContent=e.label;g.appendChild(lt);
+    document.getElementById('cEdges').appendChild(g);
+  });
+  CHARS.forEach(c=>{
+    const vis=activeFilter==='all'||c.f===activeFilter;
+    const g=document.createElementNS(NS,'g');g.style.opacity=vis?'1':'0.08';g.style.cursor='pointer';
+    const ring=document.createElementNS(NS,'circle');
+    Object.entries({cx:c.x,cy:c.y,r:c.sz+5,fill:CFILL[c.f]||'#1a1a1a',stroke:CCOLOR[c.f]||'#888','stroke-width':'1.5','stroke-opacity':'0.55'}).forEach(([k,v])=>ring.setAttribute(k,v));
+    g.appendChild(ring);
+    const circ=document.createElementNS(NS,'circle');
+    Object.entries({cx:c.x,cy:c.y,r:c.sz,fill:CCOLOR[c.f]||'#888',opacity:c.f==='neutral'?'0.4':'0.75'}).forEach(([k,v])=>circ.setAttribute(k,v));
+    g.appendChild(circ);
+    if(c.f==='neutral'){const mk=document.createElementNS(NS,'text');Object.entries({x:c.x,y:c.y+5,'text-anchor':'middle','font-size':'14',fill:'#c9a84c',opacity:'0.7'}).forEach(([k,v])=>mk.setAttribute(k,v));mk.textContent='✦';g.appendChild(mk);}
+    const parts=c.name.split(' '),l1=parts.slice(0,2).join(' '),l2=parts.slice(2).join(' '),ty=c.y+c.sz+15;
+    [[l1,'#d4c4a0','11','500'],[l2,'#9a8a70','10','400']].forEach(([txt,fill,fs,fw],i)=>{
+      if(!txt)return;
+      const t=document.createElementNS(NS,'text');
+      Object.entries({x:c.x,y:ty+i*13,'text-anchor':'middle','font-size':fs,'font-weight':fw,'font-family':'Sarabun,sans-serif',fill}).forEach(([k,v])=>t.setAttribute(k,v));
+      t.textContent=txt;g.appendChild(t);
+    });
+    g.addEventListener('click',ev=>{ev.stopPropagation();showInfo(c,g);});
+    document.getElementById('cNodes').appendChild(g);
+  });
+}
+function showInfo(c,gEl){
+  const card=document.getElementById('infoCard');
+  const svg=document.getElementById('charChart');
+  const rect=svg.getBoundingClientRect();
+  const sx=680/rect.width,px=c.x/sx,py=c.y/sx;
+  card.innerHTML=`<div class="ic-name">${c.name}</div><div class="ic-role">${c.role}</div><div class="ic-desc">${c.desc}</div>`;
+  card.classList.add('show');
+  let left=px+32;if(left+220>rect.width)left=px-252;
+  card.style.left=left+'px';card.style.top=Math.max(0,py-24)+'px';
+  if(selectedNode)selectedNode.style.filter='';
+  gEl.style.filter=`drop-shadow(0 0 8px ${CCOLOR[c.f]})`;
+  selectedNode=gEl;
+}
+document.getElementById('charWrap').addEventListener('click',()=>{
+  document.getElementById('infoCard').classList.remove('show');
+  if(selectedNode){selectedNode.style.filter='';selectedNode=null;}
+});
+function charFilter(faction,btn){
+  activeFilter=faction;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  buildCharGraph();
+}
+buildCharGraph();
+</script>
+</body>
+</html>

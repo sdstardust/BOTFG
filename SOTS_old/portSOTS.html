@@ -1,0 +1,636 @@
+<a href="">ตอนที่ 1</a>
+<a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep2.html">ตอนที่ 2</a>
+<a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep3.html">ตอนที่ 3</a>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน — sdstardust</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #04030a;
+  --card: #0e0b1e;
+  --card2: #120f22;
+  --border: rgba(180,140,255,0.1);
+  --border-hover: rgba(180,140,255,0.3);
+  --star: #e8deff;
+  --dust: rgba(232,222,255,0.5);
+  --muted: rgba(232,222,255,0.28);
+  --purple: #9b6dff;
+  --purple-soft: #c4a8ff;
+  --rose: #ff6b9d;
+  --rose-soft: #ffb3d0;
+  --gold: #f0c060;
+  --teal: #4ecdc4;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--void);
+  color: var(--star);
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#starfield { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+.nebula { position:fixed; border-radius:50%; filter:blur(110px); pointer-events:none; z-index:0; }
+.nb1 {
+  width:650px; height:500px;
+  background: radial-gradient(ellipse, rgba(180,40,100,0.28) 0%, transparent 70%);
+  top:-120px; right:-100px;
+  animation: nd 26s ease-in-out infinite alternate;
+}
+.nb2 {
+  width:500px; height:600px;
+  background: radial-gradient(ellipse, rgba(60,20,140,0.3) 0%, transparent 70%);
+  bottom:5%; left:-100px;
+  animation: nd 20s ease-in-out infinite alternate-reverse;
+}
+.nb3 {
+  width:400px; height:350px;
+  background: radial-gradient(ellipse, rgba(240,192,96,0.1) 0%, transparent 70%);
+  top:45%; left:40%;
+  animation: nd 32s ease-in-out infinite alternate;
+}
+@keyframes nd { from{transform:translate(0,0);} to{transform:translate(35px,45px);} }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:1.2rem 5rem;
+  display:flex; align-items:center; justify-content:space-between;
+  background:linear-gradient(180deg,rgba(4,3,10,0.97) 0%,transparent 100%);
+}
+.logo { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:600; color:var(--star); text-decoration:none; letter-spacing:0.04em; }
+.logo em { color:var(--purple-soft); font-style:italic; font-weight:300; }
+.nav-back {
+  display:flex; align-items:center; gap:0.5rem;
+  font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none; transition:color 0.3s;
+}
+.nav-back:hover { color:var(--rose-soft); }
+.nav-back::before { content:'←'; font-size:1rem; }
+
+/* BANNER */
+.banner {
+  position:relative; z-index:1;
+  padding:9rem 5rem 5rem;
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:4rem;
+  align-items:end;
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.banner-bg-gradient {
+  position:absolute; inset:0;
+  background:linear-gradient(160deg, rgba(180,40,100,0.07) 0%, rgba(60,20,140,0.06) 50%, transparent 100%);
+  pointer-events:none;
+}
+
+/* COVER */
+.cover-wrap { width:240px; aspect-ratio:2/3; flex-shrink:0; }
+.cover-frame {
+  width:100%; height:100%;
+  background:linear-gradient(160deg,#18060e 0%,#2a0d1e 45%,#0e050c 100%);
+  border:1px solid rgba(255,107,157,0.2);
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.cover-glow {
+  position:absolute; width:220px; height:220px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,107,157,0.22) 0%, transparent 70%);
+  animation:gpulse 4.5s ease-in-out infinite;
+}
+.cover-glow2 {
+  position:absolute; width:150px; height:150px; border-radius:50%;
+  background:radial-gradient(circle, rgba(155,109,255,0.15) 0%, transparent 70%);
+  top:20%; left:15%;
+  animation:gpulse 6s ease-in-out infinite reverse;
+}
+@keyframes gpulse { 0%,100%{transform:scale(1);opacity:0.5;} 50%{transform:scale(1.2);opacity:1;} }
+.cover-icon { position:relative; z-index:2; font-size:4.8rem; filter:drop-shadow(0 0 28px rgba(255,107,157,0.5)); }
+.cover-title-overlay {
+  position:absolute; bottom:0; left:0; right:0; z-index:3;
+  padding:1.5rem 1rem 1rem;
+  background:linear-gradient(0deg,rgba(14,6,10,0.9) 0%,transparent 100%);
+  text-align:center;
+}
+.cover-title-text {
+  font-family:'Noto Serif Thai',serif;
+  font-size:0.78rem; font-weight:600; letter-spacing:0.05em;
+  color:var(--rose-soft); line-height:1.4;
+}
+.cover-corner { position:absolute; width:18px; height:18px; border-color:var(--rose); border-style:solid; opacity:0.5; }
+.cc-tl{top:8px;left:8px;border-width:1px 0 0 1px;}
+.cc-tr{top:8px;right:8px;border-width:1px 1px 0 0;}
+.cc-bl{bottom:8px;left:8px;border-width:0 0 1px 1px;}
+.cc-br{bottom:8px;right:8px;border-width:0 1px 1px 0;}
+
+/* BANNER INFO */
+.banner-info { padding-bottom:0.5rem; }
+.breadcrumb {
+  font-size:0.65rem; letter-spacing:0.3em; color:var(--muted);
+  text-transform:uppercase; margin-bottom:1.2rem;
+  display:flex; align-items:center; gap:0.5rem;
+}
+.breadcrumb a { color:var(--purple-soft); text-decoration:none; }
+.breadcrumb a:hover { text-decoration:underline; }
+
+.tag-row { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+.tag {
+  font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase;
+  padding:0.22rem 0.75rem; border-radius:2px;
+}
+.t-romance  { background:rgba(255,107,157,0.12); color:var(--rose);        border:1px solid rgba(255,107,157,0.25); }
+.t-thriller { background:rgba(78,205,196,0.12);  color:var(--teal);         border:1px solid rgba(78,205,196,0.25); }
+.t-ongoing  { background:rgba(155,109,255,0.12); color:var(--purple-soft);  border:1px solid rgba(155,109,255,0.28); }
+
+.banner-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4.2rem);
+  font-weight:600; line-height:1.1;
+  letter-spacing:0.02em; margin-bottom:0.5rem;
+}
+.banner-author { font-size:0.8rem; letter-spacing:0.1em; color:var(--muted); margin-bottom:2rem; }
+.banner-author span { color:var(--rose-soft); }
+
+.banner-desc {
+  font-family:'Noto Serif Thai',serif;
+  font-size:0.88rem; line-height:2.1; color:var(--dust);
+  max-width:580px; margin-bottom:2.5rem;
+  border-left:2px solid rgba(255,107,157,0.3);
+  padding-left:1.2rem;
+}
+
+.banner-stats {
+  display:flex; gap:3rem;
+  padding:1.5rem 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  margin-bottom:2rem;
+}
+.bstat-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem; font-weight:600; color:var(--rose-soft);
+  display:block; line-height:1;
+}
+.bstat-lbl { font-size:0.62rem; letter-spacing:0.18em; color:var(--muted); text-transform:uppercase; margin-top:0.2rem; display:block; }
+
+.banner-actions { display:flex; gap:0.8rem; flex-wrap:wrap; }
+.btn-start {
+  background:linear-gradient(135deg,#a0204a,#e0407a);
+  color:#fff; padding:0.75rem 2rem;
+  border:none; border-radius:2px;
+  font-family:'Noto Sans Thai',sans-serif;
+  font-size:0.8rem; font-weight:500; letter-spacing:0.1em;
+  cursor:pointer; text-decoration:none; transition:all 0.3s;
+  box-shadow:0 0 25px rgba(220,60,120,0.25);
+}
+.btn-start:hover { box-shadow:0 0 45px rgba(220,60,120,0.5); transform:translateY(-2px); }
+.btn-latest {
+  background:transparent; color:var(--dust);
+  padding:0.75rem 2rem;
+  border:1px solid rgba(255,107,157,0.3); border-radius:2px;
+  font-family:'Noto Sans Thai',sans-serif;
+  font-size:0.8rem; letter-spacing:0.1em;
+  cursor:pointer; text-decoration:none; transition:all 0.3s;
+}
+.btn-latest:hover { border-color:var(--rose); color:var(--rose-soft); transform:translateY(-2px); }
+
+/* CHAPTER SECTION */
+.chapter-section {
+  position:relative; z-index:1;
+  max-width:880px; margin:0 auto;
+  padding:4rem 4rem 7rem;
+}
+
+.ch-header {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;
+}
+.ch-label { font-size:0.62rem; letter-spacing:0.4em; color:var(--rose); text-transform:uppercase; }
+.ch-count-badge {
+  background:rgba(255,107,157,0.1);
+  border:1px solid rgba(255,107,157,0.2);
+  color:var(--rose-soft);
+  font-size:0.68rem; letter-spacing:0.1em;
+  padding:0.2rem 0.75rem; border-radius:999px;
+}
+
+.sort-row { display:flex; gap:0.5rem; }
+.sort-btn {
+  background:transparent; border:1px solid var(--border);
+  color:var(--muted); padding:0.3rem 0.9rem;
+  font-family:'Noto Sans Thai',sans-serif;
+  font-size:0.7rem; letter-spacing:0.08em;
+  border-radius:999px; cursor:pointer; transition:all 0.2s;
+}
+.sort-btn:hover, .sort-btn.active {
+  border-color:var(--rose); color:var(--rose-soft);
+  background:rgba(255,107,157,0.07);
+}
+
+/* Chapter list */
+.ch-list { display:flex; flex-direction:column; gap:0.4rem; }
+
+.ch-row {
+  display:grid;
+  grid-template-columns:3rem 1fr auto auto;
+  align-items:center; gap:1rem;
+  padding:1rem 1.3rem;
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:3px;
+  text-decoration:none; color:inherit;
+  transition:all 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
+  position:relative; overflow:hidden;
+}
+.ch-row::before {
+  content:'';
+  position:absolute; left:0; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg,var(--rose),var(--purple));
+  transform:scaleY(0); transition:transform 0.3s;
+  transform-origin:bottom;
+}
+.ch-row:hover {
+  border-color:rgba(255,107,157,0.3);
+  background:var(--card2);
+  transform:translateX(5px);
+}
+.ch-row:hover::before { transform:scaleY(1); }
+
+/* Latest badge */
+.ch-row.is-latest {
+  border-color:rgba(255,107,157,0.2);
+  background:rgba(255,107,157,0.04);
+}
+.ch-row.is-latest .ch-num { color:var(--rose-soft); }
+
+.latest-badge {
+  display:inline-block;
+  font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--gold); background:rgba(240,192,96,0.1);
+  border:1px solid rgba(240,192,96,0.25);
+  padding:0.1rem 0.45rem; border-radius:2px;
+  margin-left:0.5rem;
+  vertical-align:middle;
+}
+
+.ch-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem; font-weight:600;
+  color:var(--muted); text-align:center;
+  transition:color 0.25s;
+}
+.ch-row:hover .ch-num { color:var(--rose-soft); }
+
+.ch-info { min-width:0; }
+.ch-name {
+  font-family:'Noto Serif Thai',serif;
+  font-size:0.92rem; font-weight:600;
+  color:var(--star); line-height:1.35;
+  margin-bottom:0.12rem;
+}
+.ch-sub { font-size:0.67rem; color:var(--muted); letter-spacing:0.04em; }
+
+.ch-date { font-size:0.64rem; color:var(--muted); white-space:nowrap; text-align:right; }
+
+.ch-arrow {
+  color:var(--muted); font-size:0.85rem;
+  opacity:0; transition:all 0.25s;
+}
+.ch-row:hover .ch-arrow { color:var(--rose-soft); opacity:1; transform:translateX(3px); }
+
+/* Divider between chapters */
+.ch-divider {
+  display:flex; align-items:center; gap:0.8rem;
+  margin:1.5rem 0 1.2rem;
+}
+.ch-divider-line { flex:1; height:1px; background:linear-gradient(90deg,rgba(255,107,157,0.15),transparent); }
+.ch-divider-text { font-size:0.58rem; letter-spacing:0.3em; color:rgba(255,107,157,0.4); text-transform:uppercase; white-space:nowrap; }
+
+/* Coming soon row */
+.ch-row-soon {
+  display:flex; align-items:center; justify-content:center;
+  gap:0.8rem;
+  padding:1rem 1.3rem;
+  border:1px dashed rgba(255,107,157,0.15);
+  border-radius:3px;
+  color:var(--muted);
+  font-size:0.75rem; letter-spacing:0.15em;
+}
+.ch-row-soon .soon-icon { font-size:1rem; opacity:0.4; }
+
+/* FOOTER */
+footer {
+  position:relative; z-index:1;
+  border-top:1px solid var(--border);
+  padding:2.5rem 5rem;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+  background:rgba(4,3,10,0.9);
+}
+.f-logo { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--star); }
+.f-logo em { color:var(--purple-soft); font-style:italic; }
+.f-copy { font-size:0.65rem; color:rgba(232,222,255,0.18); letter-spacing:0.05em; }
+
+/* Animations */
+.fade-in { opacity:0; transform:translateY(18px); animation:fi 0.8s ease forwards; }
+@keyframes fi { to{opacity:1;transform:translateY(0);} }
+.reveal { opacity:0; transform:translateY(22px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+
+/* stagger */
+.ch-row:nth-child(1){animation-delay:0.05s}
+.ch-row:nth-child(2){animation-delay:0.10s}
+.ch-row:nth-child(3){animation-delay:0.15s}
+.ch-row:nth-child(4){animation-delay:0.20s}
+.ch-row:nth-child(5){animation-delay:0.25s}
+
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem;}
+  .banner{grid-template-columns:1fr;gap:2rem;padding:7rem 1.5rem 3rem;}
+  .cover-wrap{width:160px;}
+  .banner-stats{gap:1.5rem;}
+  .chapter-section{padding:2.5rem 1.5rem 5rem;}
+  .ch-row{grid-template-columns:2.5rem 1fr auto;}
+  .ch-date{display:none;}
+  footer{padding:2rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="nebula nb1"></div>
+<div class="nebula nb2"></div>
+<div class="nebula nb3"></div>
+<canvas id="starfield"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="https://sdstardust.github.io/BOTFG/">sd<em>stardust</em></a>
+  <a class="nav-back" href="https://sdstardust.github.io/BOTFG/">กลับหน้าหลัก</a>
+</nav>
+
+<!-- BANNER -->
+<div class="banner fade-in">
+  <div class="banner-bg-gradient"></div>
+
+  <div class="cover-wrap">
+    <div class="cover-frame">
+      <div class="cover-glow"></div>
+      <div class="cover-glow2"></div>
+      <div class="cover-icon">⚔️</div>
+      <div class="cover-title-overlay">
+        <div class="cover-title-text">เงาแห่งราชัน</div>
+      </div>
+      <div class="cover-corner cc-tl"></div>
+      <div class="cover-corner cc-tr"></div>
+      <div class="cover-corner cc-bl"></div>
+      <div class="cover-corner cc-br"></div>
+    </div>
+  </div>
+
+  <div class="banner-info">
+    <div class="breadcrumb">
+      <a href="https://sdstardust.github.io/BOTFG/">sdstardust</a>
+      <span>›</span>
+      <span>เงาแห่งราชัน</span>
+    </div>
+
+    <div class="tag-row">
+      <span class="tag t-romance">โรแมนติก</span>
+      <span class="tag t-thriller">ระทึกขวัญ</span>
+      <span class="tag t-ongoing">กำลังเขียน</span>
+    </div>
+
+    <h1 class="banner-title">เงาแห่งราชัน</h1>
+    <p class="banner-author">โดย <span>sdstardust</span></p>
+
+    <p class="banner-desc">
+      ในราชสำนักที่เต็มไปด้วยคำโกหกและเงาที่มืดมน
+      นักสู้ยอดฝืมือ หญิงสาวผู้มีพลัง...
+    </p>
+
+    <div class="banner-stats">
+      <div><span class="bstat-num">10</span><span class="bstat-lbl">ตอนปัจจุบัน</span></div>
+      <div><span class="bstat-num">จบแล้ว</span><span class="bstat-lbl">สถานะ</span></div>
+      <div><span class="bstat-num">โรแมนติก</span><span class="bstat-lbl">แนวเรื่อง</span></div>
+    </div>
+
+    <div class="banner-actions">
+      <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep1.html" class="btn-start">▶ อ่านตั้งแต่ต้น</a>
+      <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep5.html" class="btn-latest">ตอนล่าสุด →</a>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER LIST -->
+<div class="chapter-section">
+
+  <div class="ch-header reveal">
+    <div>
+      <div class="ch-label" style="margin-bottom:0.5rem;">✦ สารบัญ</div>
+      <span class="ch-count-badge">10 ตอน · จบแล้ว</span>
+    </div>
+    <div class="sort-row">
+      <button class="sort-btn active" id="sortAsc" onclick="sortChapters('asc',this)">เก่า → ใหม่</button>
+      <button class="sort-btn" id="sortDesc" onclick="sortChapters('desc',this)">ใหม่ → เก่า</button>
+    </div>
+  </div>
+
+  <div class="ch-list reveal" id="chList">
+
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep1.html" data-num="1">
+      <span class="ch-num">01</span>
+      <div class="ch-info">
+        <div class="ch-name">ดาบที่ไม่มีชื่อ</div>
+        <div class="ch-sub">ตอนที่ 1 · เปิดเรื่อง</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep2.html" data-num="2">
+      <span class="ch-num">02</span>
+      <div class="ch-info">
+        <div class="ch-name">ป่าแห่งความทรงจำ</div>
+        <div class="ch-sub">ตอนที่ 2</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep3.html" data-num="3">
+      <span class="ch-num">03</span>
+      <div class="ch-info">
+        <div class="ch-name">ป้อมปราการและความจริงที่ซ่อนอยู่</div>
+        <div class="ch-sub">ตอนที่ 3</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep4.html" data-num="4">
+      <span class="ch-num">04</span>
+      <div class="ch-info">
+        <div class="ch-name">กลับสู่ราชสำนัก</div>
+        <div class="ch-sub">ตอนที่ 4</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep5.html" data-num="5">
+      <span class="ch-num">05</span>
+      <div class="ch-info">
+        <div class="ch-name">
+          รากเหง้าใหม่
+        </div>
+        <div class="ch-sub">ตอนที่ 5</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+    
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep6.html" data-num="6">
+      <span class="ch-num">06</span>
+      <div class="ch-info">
+        <div class="ch-name">
+          ดินแดนแห่งน้ำแข็ง
+        </div>
+        <div class="ch-sub">ตอนที่ 6</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep7.html" data-num="7">
+      <span class="ch-num">07</span>
+      <div class="ch-info">
+        <div class="ch-name">
+          รอยร้าวในน้ำแข็ง
+        </div>
+        <div class="ch-sub">ตอนที่ 7</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep8.html" data-num="8">
+      <span class="ch-num">08</span>
+      <div class="ch-info">
+        <div class="ch-name">
+          รากเหง้าและทางกลับ
+        </div>
+        <div class="ch-sub">ตอนที่ 8</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+    <a class="ch-row" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep9.html" data-num="9">
+      <span class="ch-num">09</span>
+      <div class="ch-info">
+        <div class="ch-name">
+          กลับสู่แอชวาลด์
+        </div>
+        <div class="ch-sub">ตอนที่ 9</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+    <a class="ch-row is-latest" href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep10.html" data-num="10">
+      <span class="ch-num">10</span>
+      <div class="ch-info">
+        <div class="ch-name">ดินแดนแห่งน้ำแข็ง
+          <span class="latest-badge">ใหม่</span>
+        </div>
+        <div class="ch-sub">ตอนที่ 10 · ตอนล่าสุด</div>
+      </div>
+      <span class="ch-date">มี.ค. 69</span>
+      <span class="ch-arrow">→</span>
+    </a>
+
+
+  </div>
+
+  <div class="ch-divider reveal" style="margin-top:2rem;">
+    <div class="ch-divider-line"></div>
+    <div class="ch-divider-text">ตอนต่อไป ไม่มาแล้ว ดูก่อน</div>
+    <div class="ch-divider-line" style="background:linear-gradient(270deg,rgba(255,107,157,0.15),transparent);"></div>
+  </div>
+
+  <div class="ch-row-soon reveal">
+    <span class="soon-icon">🌹</span>
+    <span>ตอนที่ 10 — จบแล้ว</span>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">sd<em>stardust</em></div>
+  <p class="f-copy">© 2568 sdstardust · ลิขสิทธิ์เนื้อหาเป็นของผู้เขียน</p>
+</footer>
+
+<script>
+// ─── STARFIELD ───
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+function initStars(){
+  stars=[];
+  const n=Math.floor((canvas.width*canvas.height)/4000);
+  for(let i=0;i<n;i++){
+    stars.push({
+      x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+      r:Math.random()*1.2+0.2, alpha:Math.random()*0.6+0.1,
+      speed:Math.random()*0.004+0.001, phase:Math.random()*Math.PI*2,
+      hue:Math.random()>0.75 ? 330+Math.random()*30 : 240+Math.random()*60
+    });
+  }
+}
+function draw(t){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{
+    const a=s.alpha*(0.5+0.5*Math.sin(t*s.speed*50+s.phase));
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`hsla(${s.hue},65%,88%,${a})`; ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+resize(); initStars(); requestAnimationFrame(draw);
+window.addEventListener('resize',()=>{ resize(); initStars(); });
+
+// ─── SORT ───
+function sortChapters(dir, btn){
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const list = document.getElementById('chList');
+  const rows = Array.from(list.querySelectorAll('.ch-row'));
+  rows.sort((a,b)=>{
+    const na=parseInt(a.dataset.num||0);
+    const nb=parseInt(b.dataset.num||0);
+    return dir==='asc' ? na-nb : nb-na;
+  });
+  rows.forEach(r=>list.appendChild(r));
+}
+
+// ─── SCROLL REVEAL ───
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html> --> */

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงาแห่งราชัน | ร่องรอยในเงา</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#7a5f28;
+  --crimson:#8b1a1a;--crimson-light:#c0392b;
+  --dark:#0d0b07;--dark-mid:#1a1410;--dark-paper:#1e1812;
+  --parchment:#f5ead8;--parchment-dark:#d4c4a0;--text-body:#e8dcc8;--text-dim:#9a8a70;
+  --accent:#e0b880;--accent-dim:#a07840;--accent-glow:rgba(224,184,128,0.2);
+  --cream:#f0e8d8;--cream-dim:#d4c8b0;--dawn:#e0b880;--dawn-rose:#d8987a;--ice:#a8c8e8;
+  --menu-w:300px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background-color:var(--dark);color:var(--text-body);font-family:'Sarabun',serif;font-weight:300;line-height:1.95;font-size:17px;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 85% 40% at 50% 0%,rgba(224,184,128,0.20) 0%,transparent 55%),radial-gradient(ellipse 55% 60% at 10% 65%,rgba(201,168,76,0.14) 0%,transparent 55%),radial-gradient(ellipse 45% 55% at 90% 70%,rgba(168,200,232,0.08) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;background:var(--accent);border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite;animation-delay:var(--delay,0s);opacity:0;}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(0.5);}50%{opacity:var(--bright,0.5);transform:scale(1);}}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem 0 2rem;background:linear-gradient(180deg,rgba(13,10,7,0.97) 0%,rgba(13,10,7,0.85) 100%);border-bottom:1px solid rgba(224,184,128,0.22);backdrop-filter:blur(10px);}
+.topbar-left{display:flex;align-items:center;gap:1rem;}
+.topbar-logo{font-family:'Cinzel Decorative',serif;font-size:0.95rem;font-weight:400;color:var(--gold);text-decoration:none;letter-spacing:0.05em;text-shadow:0 0 20px rgba(201,168,76,0.3);white-space:nowrap;}
+.topbar-sep{color:var(--accent-dim);font-size:0.8rem;opacity:0.7;}
+.topbar-chapter{font-family:'Cinzel',serif;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px;}
+.topbar-chapter span{color:var(--accent);}
+.menu-btn{width:36px;height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;flex-shrink:0;border:1px solid rgba(224,184,128,0.22);border-radius:2px;transition:border-color 0.3s,background 0.3s;}
+.menu-btn:hover{border-color:var(--accent);background:rgba(224,184,128,0.2);}
+.menu-btn .bar{width:16px;height:1.5px;background:var(--accent);border-radius:1px;transition:all 0.3s ease;}
+.menu-btn.open .bar:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.menu-btn.open .bar:nth-child(2){opacity:0;transform:scaleX(0);}
+.menu-btn.open .bar:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.overlay{position:fixed;inset:0;background:rgba(4,2,2,0.7);backdrop-filter:blur(2px);z-index:800;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.overlay.show{opacity:1;pointer-events:all;}
+.side-menu{position:fixed;top:0;right:calc(-1 * var(--menu-w));width:var(--menu-w);height:100%;background:#110e08;border-left:1px solid rgba(224,184,128,0.22);z-index:900;transition:right 0.35s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;overflow:hidden;}
+.side-menu.active{right:0;}
+.menu-glow{position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(224,184,128,0.2) 0%,transparent 70%);pointer-events:none;}
+.menu-glow2{position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(139,26,26,0.1) 0%,transparent 70%);pointer-events:none;}
+.menu-header{padding:2rem 1.6rem 1.4rem;border-bottom:1px solid rgba(224,184,128,0.22);flex-shrink:0;text-align:center;}
+.menu-series-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.4em;color:var(--accent-dim);text-transform:uppercase;margin-bottom:0.6rem;}
+.menu-novel-title{font-family:'Cinzel Decorative',serif;font-size:1.05rem;color:var(--gold);letter-spacing:0.04em;text-shadow:0 0 25px rgba(201,168,76,0.35);margin-bottom:0.2rem;}
+.menu-subtitle{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.2em;color:var(--text-dim);}
+.menu-ornament{display:flex;align-items:center;gap:8px;padding:0.8rem 1.6rem;color:var(--accent-dim);font-size:0.6rem;letter-spacing:0.25em;flex-shrink:0;}
+.menu-ornament::before,.menu-ornament::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(224,184,128,0.22),transparent);}
+.menu-part-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--accent-dim);text-transform:uppercase;padding:0.5rem 1.6rem 0.2rem;opacity:0.7;}
+.menu-links{flex:1;overflow-y:auto;padding:0 0 1rem;}
+.menu-links::-webkit-scrollbar{width:3px;}
+.menu-links::-webkit-scrollbar-thumb{background:rgba(224,184,128,0.22);border-radius:2px;}
+.menu-links a{display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.6rem;text-decoration:none;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.08em;border-left:2px solid transparent;transition:all 0.22s;position:relative;}
+.menu-links a:hover{color:var(--parchment-dark);background:rgba(224,184,128,0.2);border-left-color:var(--accent-dim);}
+.menu-links a.current{color:var(--accent);background:rgba(224,184,128,0.2);border-left-color:var(--accent);}
+.menu-links a.current::before{content:'◆';position:absolute;right:1.2rem;font-size:0.4rem;color:var(--accent);opacity:0.7;}
+.menu-links a .ch-n{font-size:0.65rem;color:var(--accent-dim);min-width:1.8rem;font-family:'Cinzel',serif;}
+.menu-links a.current .ch-n{color:var(--accent);}
+.menu-divider{display:flex;align-items:center;gap:8px;margin:0.5rem 1.6rem;}
+.menu-divider::before,.menu-divider::after{content:'';flex:1;height:1px;background:rgba(224,184,128,0.22);}
+.menu-divider-gem{width:4px;height:4px;background:var(--accent-dim);transform:rotate(45deg);flex-shrink:0;}
+.menu-links .home-link{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;color:var(--text-dim);}
+.menu-links .home-link:hover{color:var(--parchment-dark);border-left-color:var(--accent);}
+.container{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:80px 40px 100px;}
+.header-ornament{text-align:center;margin-bottom:20px;animation:fadeDown 1.2s ease both;}
+.ornament-line{display:flex;align-items:center;justify-content:center;gap:16px;color:var(--accent-dim);font-size:22px;letter-spacing:8px;}
+.ornament-line::before,.ornament-line::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);}
+.series-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:6px;color:var(--gold-dim);text-transform:uppercase;text-align:center;margin-bottom:8px;animation:fadeDown 1.2s ease 0.1s both;}
+.season-badge{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:var(--crimson-light);text-transform:uppercase;text-align:center;margin-bottom:12px;animation:fadeDown 1.2s ease 0.15s both;opacity:0.85;}
+.main-title{font-family:'Cinzel Decorative',serif;font-size:clamp(32px,6vw,52px);color:var(--gold);text-align:center;line-height:1.3;text-shadow:0 0 40px rgba(201,168,76,0.4),0 2px 4px rgba(0,0,0,0.8);margin-bottom:10px;animation:fadeDown 1.2s ease 0.2s both;}
+.subtitle{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:var(--text-dim);text-align:center;margin-bottom:50px;animation:fadeDown 1.2s ease 0.3s both;}
+.chapter-badge{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:16px;animation:fadeDown 1s ease 0.4s both;}
+.chapter-badge span{font-family:'Cinzel',serif;font-size:12px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.badge-gem{width:6px;height:6px;background:var(--accent);transform:rotate(45deg);box-shadow:0 0 10px var(--accent);}
+.chapter-title{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,3.5vw,26px);color:var(--parchment);text-align:center;margin-bottom:50px;text-shadow:0 0 20px rgba(245,234,216,0.2);animation:fadeDown 1s ease 0.5s both;}
+.divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:40px 0;color:var(--accent-dim);}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(224,184,128,0.5),transparent);}
+.divider-gem{width:5px;height:5px;background:var(--accent-dim);transform:rotate(45deg);flex-shrink:0;}
+.content{animation:fadeUp 1.4s ease 0.6s both;}
+p{margin-bottom:24px;text-align:justify;text-indent:2em;}
+p.no-indent{text-indent:0;}
+.scene-title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:var(--accent);text-align:center;text-transform:uppercase;margin:50px 0 30px;opacity:0.85;}
+.dialogue{color:#ddd0b8;text-indent:2em;}
+.dramatic{color:var(--accent);font-style:italic;}
+.inner-thought{color:var(--text-dim);font-style:italic;}
+.queen-voice{color:#c8b4d8;text-indent:2em;}
+.queen-cold{color:#a89ab8;text-indent:2em;font-style:italic;}
+.king-voice{color:var(--gold-dim);text-indent:2em;font-style:italic;}
+.quote-block{border-left:2px solid var(--accent-dim);padding:16px 24px;margin:36px 0;background:rgba(224,184,128,0.04);font-style:italic;color:var(--parchment-dark);text-indent:0!important;}
+.combat{background:rgba(139,26,26,0.06);border:1px solid rgba(139,26,26,0.2);border-radius:2px;padding:24px;margin:30px 0;}
+.chapter-end{text-align:center;margin-top:70px;padding-top:40px;border-top:1px solid rgba(224,184,128,0.15);animation:fadeUp 1s ease 1s both;}
+.chapter-end .end-mark{font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--accent-dim);letter-spacing:6px;display:block;margin-bottom:12px;}
+.next-teaser{font-size:13px;color:var(--text-dim);font-style:italic;letter-spacing:1px;}
+.char-panel-btn{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(224,184,128,0.07);border:1px solid rgba(224,184,128,0.22);color:var(--accent-dim);padding:0.4rem 1rem;border-radius:2px;font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.1em;cursor:pointer;transition:all 0.25s;margin:2rem auto 0;display:flex;width:fit-content;}
+.char-panel-btn:hover{background:rgba(224,184,128,0.14);border-color:var(--accent);color:var(--accent);}
+.char-panel-overlay{position:fixed;inset:0;background:rgba(4,2,2,0.8);backdrop-filter:blur(4px);z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;}
+.char-panel-overlay.show{opacity:1;pointer-events:all;}
+.char-panel{background:#130f09;border:1px solid rgba(224,184,128,0.25);max-width:640px;width:90%;max-height:85vh;overflow-y:auto;border-radius:3px;padding:2.5rem 2rem;position:relative;animation:fadeUp 0.3s ease;}
+.char-panel h2{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--gold);text-align:center;margin-bottom:0.4rem;letter-spacing:0.05em;}
+.char-panel .panel-sub{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.3em;color:var(--text-dim);text-align:center;margin-bottom:2rem;text-transform:uppercase;}
+.char-card{border:1px solid rgba(224,184,128,0.15);background:rgba(224,184,128,0.03);border-radius:2px;padding:1.2rem 1.5rem;margin-bottom:1rem;}
+.char-card:last-child{margin-bottom:0;}
+.char-name{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.2rem;}
+.char-role{font-family:'Cinzel',serif;font-size:0.6rem;color:var(--text-dim);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.8rem;}
+.char-desc{font-size:0.82rem;color:var(--text-body);line-height:1.8;text-indent:0;}
+.char-panel-close{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid rgba(224,184,128,0.2);color:var(--text-dim);width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.8rem;transition:all 0.2s;border-radius:2px;}
+.char-panel-close:hover{border-color:var(--accent);color:var(--accent);}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px;}
+em{font-style:italic;color:var(--gold-light);}
+strong{font-weight:600;color:var(--parchment);}
+.settings-bar{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);z-index:400;display:flex;align-items:center;gap:0.4rem;background:rgba(13,10,7,0.94);border:1px solid rgba(224,184,128,0.22);border-radius:2px;padding:0.5rem 1.2rem;backdrop-filter:blur(12px);animation:fadeUp 1s ease 1.2s both;opacity:0;}
+.settings-btn{background:transparent;border:none;color:var(--text-dim);font-size:0.72rem;cursor:pointer;padding:0.3rem 0.65rem;letter-spacing:0.05em;font-family:'Cinzel',serif;transition:all 0.2s;border-radius:2px;}
+.settings-btn:hover{color:var(--accent);background:rgba(224,184,128,0.2);}
+.settings-sep{width:1px;height:14px;background:rgba(224,184,128,0.22);}
+.progress-bar{width:80px;height:1.5px;background:rgba(224,184,128,0.15);border-radius:999px;overflow:hidden;display:inline-block;vertical-align:middle;}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent-dim),var(--accent));border-radius:999px;transition:width 0.3s;}
+.progress-text{font-size:0.6rem;color:var(--text-dim);letter-spacing:0.08em;white-space:nowrap;font-family:'Cinzel',serif;}
+.progress-wrap{display:flex;align-items:center;gap:0.5rem;}
+body.fs-sm p{font-size:15px;}body.fs-md p{font-size:17px;}body.fs-lg p{font-size:19px;}
+@media(max-width:600px){.container{padding:70px 24px 80px;}p{text-align:left;}.topbar-chapter{display:none;}}
+</style>
+</head>
+<body class="fs-md">
+<div class="stars" id="stars"></div>
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-logo" href="https://sdstardust.github.io/BOTFG/">เงาแห่งราชัน</a>
+    <span class="topbar-sep">✦</span>
+    <div class="topbar-chapter"><span>ร่องรอยในเงา</span></div>
+  </div>
+  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+</div>
+
+<div id="sideMenu" class="side-menu">
+  <div class="menu-glow"></div><div class="menu-glow2"></div>
+  <div class="menu-header">
+    <div class="menu-series-label">นิยายแฟนตาซีโรแมนติก</div>
+    <div class="menu-novel-title">เงาแห่งราชัน</div>
+    <div class="menu-subtitle">Shadow of the Sovereign</div>
+  </div>
+  <div class="menu-ornament">✦ ✦ ✦</div>
+  <div class="menu-links">
+    <div class="menu-part-label">· ภาคที่หนึ่ง ·</div>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep1.html"><span class="ch-n">I</span>ดาบที่ไม่มีชื่อ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep2.html"><span class="ch-n">II</span>ป่าแห่งความทรงจำ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep3.html"><span class="ch-n">III</span>ป้อมปราการและความจริงที่ซ่อนอยู่</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep4.html"><span class="ch-n">IV</span>กลับสู่ราชสำนัก</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep5.html"><span class="ch-n">V</span>รากเหง้าใหม่</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep6.html"><span class="ch-n">VI</span>ดินแดนแห่งน้ำแข็ง</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep7.html"><span class="ch-n">VII</span>รอยร้าวในน้ำแข็ง</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep8.html"><span class="ch-n">VIII</span>รากเหง้าและทางกลับ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep9.html"><span class="ch-n">IX</span>กลับสู่แอชวาลด์</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep10.html"><span class="ch-n">X</span>บ้านที่มีมากกว่าหนึ่งที่</a>
+    <div class="menu-divider"><div class="menu-divider-gem"></div></div>
+    <div class="menu-part-label">· ภาคที่สอง ·</div>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep11.html"><span class="ch-n">XI</span>เงาที่ยังเหลืออยู่</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep12.html"><span class="ch-n">XII</span>ราชินีผู้ไม่ยอมเงียบ</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep13.html"><span class="ch-n">XIII</span>ห้องที่ปิดมายี่สิบปี</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep14.html"><span class="ch-n">XIV</span>ไพ่ใบสุดท้าย</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep15.html"><span class="ch-n">XV</span>ความจริงในเงา</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep16.html" class="current"><span class="ch-n">XVI</span>คืนที่ฟรอสต์โฮลด์</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep17.html"><span class="ch-n">XVII</span>เงาคู่ของเซร่า</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep18.html"><span class="ch-n">XVIII</span>เมื่อราชินีพูด</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep19.html"><span class="ch-n">XIX</span>นิทานต้นสน</a>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/SOTS_ep20.html"><span class="ch-n">XX</span>รุ่งอรุณที่สองอาณาจักร</a>
+    <div class="menu-divider"><div class="menu-divider-gem"></div></div>
+    <a href="https://sdstardust.github.io/BOTFG/SOTS/portSOTS.html" class="home-link"><span class="ch-n">⌂</span>กลับหน้าหลัก</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="header-ornament">
+    <div class="ornament-line">✦ ♔ ❧ ♔ ✦</div>
+  </div>
+
+  <p class="series-title">นิยายแฟนตาซีโรแมนติก</p>
+  <p class="season-badge">· ภาคที่สอง · The Queens' Legacy ·</p>
+  <h1 class="main-title">เงาแห่งราชัน</h1>
+  <p class="subtitle">Shadow of the Sovereign</p>
+
+  <div class="chapter-badge">
+    <div class="badge-gem"></div>
+    <span>ตอนที่ ๑๖</span>
+    <div class="badge-gem"></div>
+  </div>
+
+  <h2 class="chapter-title">ร่องรอยในเงา</h2>
+
+  <button class="char-panel-btn" onclick="openCharPanel()">✦ ตัวละครในตอนนี้</button>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="content">
+
+    <p>เอลาร่าไม่ได้วางแผนว่าจะเข้าห้องทำงานของลอร์ดเวรอน</p>
+
+    <p>มันเกิดขึ้นในลักษณะที่เธอเรียกว่า "บังเอิญที่มีเหตุผล" — สิ่งที่เกิดขึ้นโดยไม่ได้ตั้งใจ แต่เมื่อเกิดขึ้นแล้วก็รู้ว่าควรทำอะไรกับมัน</p>
+
+    <p>เช้านั้นเธอกำลังเดินไปห้องเก็บเอกสารฝั่งตะวันตก ซึ่งเป็นห้องที่เก็บบันทึกการประชุมย้อนหลังสิบปี เธอต้องการดูบันทึกจากรอบที่แปดที่ผ่านมา เพื่อเปรียบเทียบภาษาที่ใช้กับรอบปัจจุบัน</p>
+
+    <p>ทางเดินฝั่งตะวันตกยาวและเงียบในช่วงเช้า เพราะห้องส่วนใหญ่ในแนวนั้นเป็นห้องทำงานของขุนนางอาวุโสที่มักมาสายกว่าเธอ</p>
+
+    <p>ยกเว้นลอร์ดเวรอน ที่มาเช้าเสมอ</p>
+
+    <p>แต่เช้านี้ประตูห้องของเขาเปิดค้างไว้เล็กน้อย</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ วังแอชวาลด์ · ทางเดินฝั่งตะวันตก · เช้า ~</p>
+
+    <p>เอลาร่าเดินผ่านประตูนั้นในแบบที่คนทั่วไปเดินผ่านประตูที่เปิดค้างอยู่ — มองเข้าไปโดยอัตโนมัติ ไม่ใช่เพราะอยากดู แต่เพราะตาทำงานก่อนที่สมองจะสั่ง</p>
+
+    <p>ในห้องนั้นไม่มีลอร์ดเวรอน มีแค่โต๊ะทำงานที่มีเอกสารกางอยู่ เทียนสองเล่มที่ยังติดอยู่ และแสงเช้าที่เข้ามาจากหน้าต่างด้านหลัง</p>
+
+    <p>เอลาร่าหยุด</p>
+
+    <p>ไม่ใช่เพราะตั้งใจ แต่เพราะมุมบนขวาของเอกสารบนโต๊ะมีบางอย่างที่เธอรู้จัก</p>
+
+    <p>รูปแบบของตราประทับ</p>
+
+    <p class="inner-thought">ตราอาณาจักรตะวันออก ฉันเห็นมันในเอกสารทางการค้าที่ผ่านมาหลายฉบับ รูปแบบเฉพาะของขอบตราที่เป็นเส้นสองชั้น ซึ่งอาณาจักรตะวันออกใช้กับเอกสารที่มีน้ำหนักสูง ไม่ใช่จดหมายธรรมดา</p>
+
+    <p>เธอชั่งน้ำหนักในวินาทีเดียว</p>
+
+    <p>แล้วก็เดินเข้าไปในห้อง</p>
+
+    <p>ไม่แตะอะไร ยืนห่างจากโต๊ะสักสองก้าว อ่านจากระยะที่ตาไปถึง ในแบบที่เธอฝึกมาตั้งแต่เด็ก — รับข้อมูลเร็ว จำรายละเอียดสำคัญ ทิ้งร่องรอยให้น้อยที่สุด</p>
+
+    <p>จดหมายฉบับนั้นเขียนด้วยลายมือที่คุ้นเคยกับการเขียนอย่างเป็นทางการ แต่ไม่ใช่ลายมืออย่างเป็นทางการ เป็นลายมือของคนที่เขียนในฐานะส่วนตัว ลงชื่อด้วยนามแฝงที่เธอไม่รู้จัก แต่สำนวนภาษาบอกว่ารู้จักผู้รับดีพอที่จะเขียนโดยไม่ต้องอธิบายบริบท</p>
+
+    <p>เธออ่านช้าพอที่จะจำ เร็วพอที่จะไม่นานเกินไป</p>
+
+    <p>ประโยคที่หนักที่สุดอยู่ในย่อหน้าที่สาม</p>
+
+    <p><em>"ถ้าการเจรจาเกิดขึ้นจริง ส่วนของเราจะหายไปทั้งหมด ท่านรู้ดีว่าต้องทำอะไร และเราเชื่อว่าท่านยังทำได้อย่างที่ตกลงกันไว้"</em></p>
+
+    <p>เอลาร่าถอยออกมาสองก้าว ตรวจสอบว่าตำแหน่งของตัวเองไม่ได้ทิ้งร่องรอย แล้วเดินออกมาที่ทางเดิน</p>
+
+    <p>ปิดประตูกลับไปในตำแหน่งเดิม เปิดค้างเท่าเดิม</p>
+
+    <p>แล้วเดินต่อไปที่ห้องเก็บเอกสาร ทำธุระที่ตั้งใจ หยิบบันทึกที่ต้องการ กลับ</p>
+
+    <p>ใบหน้าไม่เปลี่ยน ท่าทางไม่เปลี่ยน</p>
+
+    <p>แต่ในหัว เธอกำลังเรียงลำดับทุกอย่างที่เพิ่งเห็น</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ แอชวาลด์ · ห้องทำงานร่วม · สักครู่ต่อมา ~</p>
+
+    <p>คาเอลเห็นทันทีว่าเอลาร่ามีบางอย่างเมื่อเธอเดินเข้ามา</p>
+
+    <p>ไม่ใช่จากสีหน้า เพราะสีหน้าของเธอเหมือนเดิมทุกอย่าง แต่จากวิธีที่เธอปิดประตู ระวังกว่าปกติ และวิธีที่เธอวางบันทึกลงบนโต๊ะ ช้ากว่าปกติ</p>
+
+    <p class="dialogue">"เห็นอะไร" เขาพูดก่อนที่เธอจะนั่ง</p>
+
+    <p>เอลาร่านั่งลง วางมือสองข้างบนโต๊ะ มองเขา</p>
+
+    <p class="dialogue">"จดหมายบนโต๊ะของเวรอน" เธอพูดเบาๆ แต่ชัด "ประตูห้องเขาเปิดค้างอยู่ เขาไม่อยู่ในห้อง ฉันเห็นตราอาณาจักรตะวันออกจากทางเดิน"</p>
+
+    <p class="dialogue">"เธอเข้าไปในห้อง"</p>
+
+    <p class="dialogue">"เข้าไป" เธอยืนยัน ไม่แก้ตัว "ไม่แตะอะไร ยืนอ่านจากระยะห่าง"</p>
+
+    <p>คาเอลนิ่งครู่หนึ่ง</p>
+
+    <p class="dialogue">"เนื้อหา"</p>
+
+    <p class="dialogue">"พูดถึง 'ข้อตกลงที่วางไว้' และระบุชัดว่าถ้าการเจรจาเกิดขึ้นจริง ส่วนของพวกเขาจะหายไปทั้งหมด" เอลาร่าพูด ทุกคำที่เลือกมาแม่นยำ เหมือนคนที่จำสิ่งที่อ่านมาคำต่อคำ "และบอกว่า 'ท่านรู้ดีว่าต้องทำอะไร และเราเชื่อว่าท่านยังทำได้อย่างที่ตกลงกันไว้'"</p>
+
+    <p>ห้องเงียบ</p>
+
+    <p class="dialogue">"นั่นยืนยันว่ามีการติดต่อ" คาเอลพูด</p>
+
+    <p class="dialogue">"ยืนยันว่ามีข้อตกลง และข้อตกลงนั้นเกี่ยวกับการขัดการเจรจา" เอลาร่าพูดต่อ "แต่..."</p>
+
+    <p class="dialogue">"แต่ยังไม่ใช่หลักฐานที่ใช้ได้" คาเอลพูดต่อ เพราะรู้คำนั้นดี</p>
+
+    <p class="dialogue">"ฉันอ่านมันโดยไม่ได้รับอนุญาต ไม่มีพยาน และถ้าเวรอนรู้ว่ามีคนเห็น เขาจะทำให้มันหายไปก่อนที่ใครจะได้มันมาอย่างเป็นทางการ"</p>
+
+    <p>คาเอลลุกขึ้น เดินไปที่หน้าต่าง มองออกไปที่สวน ระยะห่างของการคิด</p>
+
+    <p class="dialogue">"เวรอนเก็บจดหมายนั้นไว้บนโต๊ะ" เขาพูดช้าๆ</p>
+
+    <p class="dialogue">"ใช่"</p>
+
+    <p class="dialogue">"ประตูห้องเปิดค้างอยู่"</p>
+
+    <p class="dialogue">"ใช่"</p>
+
+    <p>คาเอลหัน มองเอลาร่า</p>
+
+    <p class="dialogue">"คนที่ระวังตัวอย่างเขาจะทิ้งเอกสารสำคัญไว้บนโต๊ะโดยที่ประตูเปิดค้าง" เขาพูด ไม่ใช่คำถาม แต่เป็นการคิดออกมาดังๆ "มีสองความเป็นไปได้ หนึ่ง — เขาไม่ได้คิดว่ามีใครจะสังเกต สอง — เขาตั้งใจ"</p>
+
+    <p>เอลาร่านิ่งครู่หนึ่ง</p>
+
+    <p class="dialogue">"ถ้าเป็นข้อสอง" เธอพูดช้าๆ "เขารู้ว่าเธอเดินผ่านทางนั้น"</p>
+
+    <p class="dialogue">"หรือเขาต้องการให้ใครบางคนเห็น แล้วตามมาหาเอกสารเพิ่มเติมเอง เพื่อที่เขาจะได้มีเหตุผลในการจัดการกับคนนั้น"</p>
+
+    <p>ห้องเงียบอีกครั้ง</p>
+
+    <p class="dialogue">"ถ้าเขาตั้งใจ" เอลาร่าพูดเงียบๆ "ฉันเพิ่งเดินเข้าไปในกับดัก"</p>
+
+    <p class="dialogue">"ยังไม่รู้" คาเอลพูด "เราไม่มีทางรู้ว่าเขารู้หรือเปล่า ถ้าเขารู้และกำลังรอให้เธอเคลื่อนต่อ การหยุดเคลื่อนคือทางออก"</p>
+
+    <p class="dialogue">"แต่ถ้าเขาไม่รู้ การหยุดก็หมายความว่าเราพลาดโอกาส"</p>
+
+    <p>คาเอลพยักหน้าช้าๆ เดินกลับมานั่ง มองเอกสารที่กางอยู่โดยไม่เห็น</p>
+
+    <p class="dialogue">"เราต้องการคนที่สามารถเข้าถึงห้องนั้นได้อย่างเป็นทางการ" เขาพูด "คนที่มีเหตุผลที่จะเข้าไปโดยไม่ต้องอธิบาย"</p>
+
+    <p class="dialogue">"หรือเราต้องการให้เวรอนนำเอกสารนั้นออกมาเอง" เอลาร่าพูด "ในสถานการณ์ที่มีพยาน"</p>
+
+    <p class="dialogue">"ทำได้ยาก"</p>
+
+    <p class="dialogue">"ใช่ แต่ถ้าเขารู้สึกว่ากำลังถูกกดดัน เขาอาจติดต่อคนที่ส่งจดหมายนั้นมาให้เขา และการติดต่อนั้นอาจทิ้งร่องรอย"</p>
+
+    <p>คาเอลมองเธอ ในดวงตาที่คิดอยู่</p>
+
+    <p class="dialogue">"เธอหมายความว่าให้เขากดดันตัวเอง"</p>
+
+    <p class="dialogue">"ให้เขาคิดว่าสถานการณ์กำลังเปลี่ยน และต้องเคลื่อน" เอลาร่าพูด "ซึ่งอาจหมายความว่าเราต้องแสดงให้เห็นว่าการเจรจากำลังจะสำเร็จ แม้ว่าจริงๆ แล้วยังไม่ถึงขั้นนั้น"</p>
+
+    <p class="dialogue">"หลอกล่อ"</p>
+
+    <p class="dialogue">"ใช้ข้อมูลเพื่อสร้างสถานการณ์" เธอแก้คำอย่างแม่นยำ "มันต่างกัน"</p>
+
+    <p>คาเอลนั่งนิ่งนาน มองเพดาน</p>
+
+    <p class="dialogue">"ถ้าทำพลาด เราอาจสูญเสียทุกอย่างที่มีอยู่"</p>
+
+    <p class="dialogue">"รู้" เอลาร่าพูดตรง "นั่นคือทำไมฉันไม่ได้บอกว่าให้ทำ แค่บอกว่ามันเป็นทางเลือก"</p>
+
+    <p>ทั้งสองเงียบกัน</p>
+
+    <p class="dialogue">"รอก่อน" คาเอลพูดในที่สุด "รอให้ราชินีมาเรียนกลับ ลีน่าบอกว่ามีบางอย่างจากมิเรฟอลล์ที่กำลังขยับ ถ้ามีข้อมูลเพิ่ม เราอาจไม่ต้องเสี่ยงแบบนั้น"</p>
+
+    <p class="dialogue">"เห็นด้วย" เอลาร่าพูด แล้วหยิบบันทึกที่ไปนำมาออกมากาง "ระหว่างนี้ ทำงานต่อไปตามปกติ อย่าให้เขารู้ว่าเราเห็น"</p>
+
+    <p class="dialogue">"ใช่" คาเอลพูด แล้วดึงเอกสารของตัวเองมาวางหน้า "ตามปกติ"</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ แอชวาลด์ · ห้องประชุม · บ่าย ~</p>
+
+    <p>ในช่วงบ่าย มีการประชุมรอบที่สิบเอ็ด</p>
+
+    <p>เอลาร่านั่งในฐานะที่ปรึกษา คาเอลนั่งในฐานะตัวแทนเวลมัวร์ ลอร์ดเวรอนนั่งในมุมที่เขามักนั่ง ข้างๆ ที่ปรึกษาอีกสองคนที่ไม่ค่อยพูด</p>
+
+    <p>เอลาร่ามองเวรอนในแบบที่เธอมองมาตลอด ไม่มากกว่าไม่น้อยกว่า ไม่เปลี่ยนแปลงอะไรในวิธีที่เธอดูเขา</p>
+
+    <p>เวรอนก็มองเธอในแบบที่เขามองมาตลอด ไม่มีอะไรในดวงตาของเขาที่บอกว่าเขารู้ว่าเธอเข้าห้องของเขา</p>
+
+    <p class="inner-thought">เขาไม่รู้ หรือเขาแกล้งทำเป็นไม่รู้ ฉันไม่มีทางรู้ในตอนนี้ และนั่นคือทำไมเราต้องรอ</p>
+
+    <p>การประชุมดำเนินไปเป็นชั่วโมง ฝ่ายเวลมัวร์เสนอแก้ไขส่วนที่หกของร่างข้อตกลง เวรอนตั้งคำถามสามข้อ ทุกข้อฟังดูสมเหตุสมผล ทุกข้อทำให้ต้องเลื่อนการตัดสินใจออกไป</p>
+
+    <p>เหมือนทุกรอบที่ผ่านมา</p>
+
+    <p class="inner-thought">รอบที่สิบเอ็ด รูปแบบเดิม คำถามใหม่ ผลลัพธ์เดิม ฉันจดทุกอย่างลงในสมุดส่วนตัว ตอนนี้มีรายการยาวพอที่ถ้าวางเรียงกัน จะเห็นชัดว่ามันเป็นระบบ ไม่ใช่ความบังเอิญ</p>
+
+    <p class="inner-thought">แต่ "เห็นชัด" ในสมุดส่วนตัวของฉัน ไม่ใช่สิ่งที่นำไปใช้ได้ในห้องประชุม</p>
+
+    <p>เมื่อประชุมเลิก เธอเก็บเอกสารของตัวเอง เดินออกไปพร้อมกับคนอื่น ไม่มองเวรอนเป็นพิเศษ ไม่พูดอะไรที่นอกเหนือจากที่จำเป็น</p>
+
+    <p>เวรอนออกไปก่อนเธอ ไม่หันหลัง ไม่พูดอะไร</p>
+
+    <p>เหมือนทุกรอบที่ผ่านมา</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ แอชวาลด์ · ห้องพักแขก · ค่ำ ~</p>
+
+    <p>กษัตริย์อัลดริกนั่งคุยกับลีน่าในห้องพักแขกที่วังจัดให้ ห้องเงียบ เทียนสี่เล่ม ชาที่เย็นแล้วบนโต๊ะ</p>
+
+    <p>ลีน่าทำรายงานปากเปล่าเรื่องการเคลื่อนไหวที่เธอสังเกตเห็นในช่วงสองวันที่อยู่แอชวาลด์</p>
+
+    <p class="dialogue">"เวรอนไม่เปลี่ยนพฤติกรรม" เธอพูด "ยังมาเช้า ยังออกไหน่าย ยังประชุมตามกำหนด เขาไม่ได้แสดงอาการกังวล"</p>
+
+    <p class="king-voice">"ซึ่งอาจหมายความว่าเขาไม่กังวล" กษัตริย์พูด "หรืออาจหมายความว่าเขาเก่งพอที่จะไม่แสดงออก"</p>
+
+    <p class="dialogue">"ใช่"</p>
+
+    <p class="king-voice">"ลีน่า" กษัตริย์พูดหลังจากนั้น เสียงที่ต่างจากเสียงราชการ "เธอรู้จักเซร่ามากที่สุดในจำนวนคนที่ยังมีชีวิตอยู่ เธอคิดว่าเธอจะทำอะไรถ้าอยู่ในสถานการณ์นี้"</p>
+
+    <p>ลีน่าเงียบนาน ในแบบที่ไม่ใช่ไม่รู้จะตอบ แต่เพราะคำถามนั้นหนักพอที่ต้องคิดให้ครบก่อน</p>
+
+    <p class="dialogue">"เซร่าจะไม่รีบ" ลีน่าพูดในที่สุด "เธอเป็นคนที่รู้ว่าความอดทนคือทักษะ ไม่ใช่แค่นิสัย เธอจะรวบรวมทุกอย่างก่อน แล้วเมื่อถึงเวลา เธอจะเคลื่อนในทางที่ตรงและเด็ดขาด ไม่มีการเตือนล่วงหน้า"</p>
+
+    <p class="king-voice">"และลูกชายเธอ"</p>
+
+    <p class="dialogue">"เขาเป็นอย่างเดียวกับเธอ" ลีน่าพูด "ฉันเห็นมาตั้งแต่เขาเริ่มทำงานที่แอชวาลด์ เขาฟังมากกว่าพูด เขาสังเกตมากกว่าถาม และเมื่อถึงเวลา เขาจะรู้ว่าต้องทำอะไร"</p>
+
+    <p class="king-voice">"ข้าแค่กังวลว่าความโกรธจะมาก่อนเวลา"</p>
+
+    <p class="dialogue">"ความโกรธของเขาไม่เหมือนคนอื่น" ลีน่าพูด เสียงมั่นใจ "มันไม่ออกมาทางปาก มันไปอยู่ที่มือที่นิ่งกว่าปกติ ตาที่มองลึกกว่าปกติ และการตัดสินใจที่แม่นยำกว่าปกติ" เธอหยุด "เซร่าก็เป็นแบบนั้น"</p>
+
+    <p>กษัตริย์อัลดริกมองลีน่า ในแบบที่ไม่ค่อยมองใคร</p>
+
+    <p class="king-voice">"ขอบคุณ" พระองค์พูดเบาๆ "สำหรับทุกอย่างที่เธอทำมา และที่เธอจำเซร่าไว้"</p>
+
+    <p>ลีน่าไม่พูดอะไร แค่พยักหน้าเล็กน้อย</p>
+
+    <p class="inner-thought">ฉันจะจำเธอตลอด ไม่ใช่เพราะมีหน้าที่ แต่เพราะเธอเป็นคนที่สอนฉันว่าการเป็นคนแข็งแกร่งไม่ได้แปลว่าไม่มีอะไรที่เสียใจ มันแค่แปลว่าความเสียใจนั้นไม่หยุดให้เดินต่อ</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ แอชวาลด์ · ปีกราชินี · เย็น ~</p>
+
+    <p>ราชินีมาเรียนนั่งอยู่ในห้องส่วนตัว จดหมายตอบรับจากมิเรฟอลล์กางอยู่หน้าเธอ</p>
+
+    <p>เธออ่านมันสามรอบแล้ว แต่ยังถือมันไว้เพราะการถือมันทำให้รู้สึกว่ามันจริง</p>
+
+    <p>จดหมายเขียนสั้น ไม่เกินสามบรรทัด แต่สามบรรทัดนั้นบอกทุกอย่างที่ต้องการรู้</p>
+
+    <p><em>"ยินดีพบ มาได้เมื่อพร้อม มิเรฟอลล์รอ"</em></p>
+
+    <p class="inner-thought">ไม่มีชื่อ ไม่มีตำแหน่ง แค่ "มิเรฟอลล์รอ" ซึ่งอาจหมายความว่าทั้งองค์กร หรืออาจหมายความว่าแค่คนเดียว แต่ไม่ว่าจะหมายความว่าอะไร คำตอบคือใช่</p>
+
+    <p>เธอพับจดหมาย วางลงในกล่องที่ล็อคได้</p>
+
+    <p>วางแผนในหัว สองวันเพื่อเตรียม หนึ่งวันเพื่อเดินทางถ้าขี่ม้าเร็ว</p>
+
+    <p class="inner-thought">ฉันจะไปมิเรฟอลล์ บอกธีเรียนว่าไปตรวจดูสถานการณ์ตามแนวชายแดนเหนือ ซึ่งไม่ใช่เรื่องแปลก ราชินีมีหน้าที่ดูแลพื้นที่ที่ตระกูลตัวเองดูแลอยู่</p>
+
+    <p class="inner-thought">มันเป็นความจริงบางส่วน ซึ่งดีกว่าโกหกทั้งหมด</p>
+
+    <p>เธอเรียกเยลล่า หญิงรับใช้คนสนิท เพื่อเตรียมชุดเดินทาง</p>
+
+    <p class="queen-voice">"เหมือนครั้งที่แล้ว" เธอบอก "ชุดธรรมดา ม้าซอลต์ องครักษ์สองคน"</p>
+
+    <p class="dialogue">"ค่ะราชินี จะออกเดินทางเมื่อไหรคะ"</p>
+
+    <p class="queen-voice">"อีกสองวัน"</p>
+
+    <p>เยลล่าพยักหน้า ไม่ถาม</p>
+
+    <p>มาเรียนนั่งคนเดียวในห้อง มองออกไปที่หน้าต่างที่ตะวันเริ่มลด</p>
+
+    <p class="inner-thought">ถ้าทอมยังอยู่ที่มิเรฟอลล์ ฉันจะพบเขา ถ้าพบเขา ฉันจะมีพยานที่พูดได้ต่อหน้า ถ้ามีพยาน ฉันจะมีบางอย่างที่มากกว่าแค่สิ่งที่ฉันได้ยินมาเอง</p>
+
+    <p class="inner-thought">และถ้ามีบางอย่างที่มากกว่าแค่ตัวฉัน — นั่นแหละที่ทำให้เรื่องนี้เดินต่อไปได้</p>
+
+    <div class="divider"><div class="divider-gem"></div></div>
+
+    <p class="scene-title">~ มิเรฟอลล์ · ดาดฟ้า · คืนนั้น ~</p>
+
+    <p>เนลลายืนอยู่บนดาดฟ้าในคืนที่ดาวขึ้นชัด อากาศเย็นแต่ไม่หนาวจนทนไม่ได้ เธอมาที่นี่ไม่ใช่เพื่อฝึก แต่เพื่อฟัง</p>
+
+    <p>วันนี้เป็นวันที่สิบห้าของเดือนที่ออร์วินขอให้เธออยู่ที่มิเรฟอลล์ เหลืออีกสิบห้าวัน แต่เธอรู้สึกว่าสิ่งที่ออร์วินต้องการให้เธอเรียนรู้กำลังเกิดขึ้นแล้ว ไม่ใช่ในแบบที่เรียนรู้จากตำรา แต่ในแบบที่เรียนรู้จากการอยู่กับบางอย่างนานพอ</p>
+
+    <p class="inner-thought">สิ่งที่ฉันเรียนรู้ในสิบห้าวันนี้ไม่ใช่วิธีใช้พลัง มันเป็นวิธีอยู่กับพลัง ความต่างของสองสิ่งนั้นใหญ่กว่าที่คิด</p>
+
+    <p class="inner-thought">ก่อนหน้านี้ฉันมักพยายามทำให้พลังทำงาน ใช้ความตั้งใจ ใช้ความพยายาม ตอนนี้ฉันเรียนรู้ว่าบางทีสิ่งที่ดีที่สุดคือแค่อยู่ และให้มันมาหาเอง</p>
+
+    <p>ลมเย็นพัดผ่านดาดฟ้า ต้นสนด้านล่างส่ายเบาๆ</p>
+
+    <p>เนลลาหลับตา</p>
+
+    <p>ในความมืดนั้น เธอรู้สึกถึงสิ่งที่กำลังเคลื่อนที่อยู่รอบๆ มิเรฟอลล์ ไม่ใช่ในความหมายของร่างกาย แต่ในความหมายของน้ำหนักและทิศทาง</p>
+
+    <p class="inner-thought">บางอย่างจากทางใต้ กำลังมา ไม่ใช่วันนี้ ไม่ใช่พรุ่งนี้ แต่เร็วๆ นี้ มันมีน้ำหนักของคนที่แบกบางอย่างมานานมาก และกำลังจะวางมันลง</p>
+
+    <p class="inner-thought">บางอย่างจากทางเหนือ ยังอยู่ที่แอชวาลด์ แต่จะเคลื่อนในเวลาที่ถูกต้อง มันมีน้ำหนักต่างออกไป เหมือนคนที่รู้แล้วว่าจะทำอะไร แต่ยังรอจังหวะ</p>
+
+    <p class="inner-thought">และที่มิเรฟอลล์เอง มีทอม ชายที่แบกความทรงจำมาสิบแปดปี รอคนที่จะมาถามคำถามที่เขาเตรียมคำตอบไว้แล้ว</p>
+
+    <p>เนลลาเปิดตา มองดาว</p>
+
+    <p class="inner-thought">ทุกสิ่งกำลังขยับมาสู่จุดเดียวกัน และจุดนั้นอยู่ที่มิเรฟอลล์</p>
+
+    <p>เธอไม่แน่ใจว่ารู้สึกแบบนั้นเพราะพลัง หรือเพราะตรรกะของสิ่งที่เธอรู้ในทางปกติ บางทีทั้งสองอย่างมันไม่ได้แยกจากกันอย่างที่ตำราบอก</p>
+
+    <p>เธอนั่งลงบนพื้นดาดฟ้า หลังพิงกำแพง มองดาวต่อ</p>
+
+    <p class="inner-thought">ออร์วินบอกให้ฟัง ฉันฟัง และสิ่งที่ฟังได้คืน — ไม่ว่าจะหนักแค่ไหน ไม่ว่าจะซับซ้อนแค่ไหน มันจะผ่านไปได้ เพราะมีคนหลายคนแบกมันร่วมกัน ไม่ใช่คนเดียว</p>
+
+    <p class="inner-thought">นั่นคือสิ่งที่เซร่าเข้าใจตั้งแต่ต้น เธอฝากสิ่งที่เธอรู้ไว้กับหลายคน ไม่ใช่คนเดียว เพื่อให้มันรวมกลับมาในวันที่ถูกต้อง</p>
+
+    <p>ลมพัดอีกครั้ง เบาและเย็น</p>
+
+    <p>เนลลาปล่อยลมหายใจออกยาว แล้วก็รู้สึก — ไม่ใช่เสียง ไม่ใช่ภาพ แต่เป็นความอบอุ่นเบาๆ ที่ไม่ใช่จากอากาศ</p>
+
+    <p>เหมือนมีใครบางคนนั่งอยู่ข้างๆ โดยไม่ต้องพูด</p>
+
+    <p>เนลลาไม่ขยับ แค่รับความรู้สึกนั้นไว้</p>
+
+    <p class="inner-thought">ฉันรู้ว่าเธอยังอยู่ ไม่ต้องพูด ฉันรู้</p>
+
+  </div>
+
+  <div class="divider"><div class="divider-gem"></div><div class="divider-gem"></div><div class="divider-gem"></div></div>
+
+  <div class="chapter-end">
+    <span class="end-mark">✦ ✦ ✦</span>
+    <p class="next-teaser">ตอนที่ ๑๗ : ราชินีมาเรียนถึงมิเรฟอลล์ — พบเนลลาที่รู้ว่าเธอคือใครตั้งแต่ต้น และพบทอม ชายชราที่รอคำถามนี้มาสิบแปดปี</p>
+  </div>
+
+</div>
+
+<div class="char-panel-overlay" id="charPanelOverlay" onclick="closeCharPanel(event)">
+  <div class="char-panel" id="charPanel">
+    <button class="char-panel-close" onclick="closeCharPanel()">✕</button>
+    <h2>ตัวละครในตอนนี้</h2>
+    <p class="panel-sub">ร่องรอยในเงา · ตอนที่ ๑๖</p>
+
+    <div class="char-card">
+      <div class="char-name">เอลาร่า วินด์มาร์ค</div>
+      <div class="char-role">ที่ปรึกษาเอก · แอชวาลด์</div>
+      <p class="char-desc">เดินผ่านประตูเปิดค้างของเวรอน เห็นจดหมายตราอาณาจักรตะวันออกบนโต๊ะ เข้าไปอ่านจากระยะห่างโดยไม่แตะ เนื้อหาพูดถึง "ข้อตกลงที่วางไว้" และ "ท่านรู้ดีว่าต้องทำอะไร" แจ้งคาเอล ทั้งสองตัดสินใจรอให้มาเรียนกลับก่อนเคลื่อนต่อ</p>
+    </div>
+
+    <div class="char-card">
+      <div class="char-name">คาเอล (เคเลน) ดอร์น</div>
+      <div class="char-role">ทายาทแห่งเวลมัวร์</div>
+      <p class="char-desc">รับข้อมูลจากเอลาร่า วิเคราะห์ว่าเวรอนอาจ "ตั้งใจ" ทิ้งเอกสารหรืออาจแค่ประมาท ตัดสินใจว่าการตอบสนองที่ดีที่สุดคือ "ทำตามปกติ" และรอข้อมูลจากมิเรฟอลล์ก่อน เข้าประชุมรอบที่สิบเอ็ด เวรอนขัดตามรูปแบบเดิม</p>
+    </div>
+
+    <div class="char-card">
+      <div class="char-name">กษัตริย์อัลดริก</div>
+      <div class="char-role">กษัตริย์แห่งเวลมัวร์</div>
+      <p class="char-desc">ยังอยู่แอชวาลด์อีกสองสามวัน คุยกับลีน่าค่ำนี้ ถามว่าเซร่าจะทำอะไรในสถานการณ์นี้ ลีน่าตอบว่า "เซร่าจะไม่รีบ จะรวบรวมทุกอย่างก่อน แล้วเคลื่อนเมื่อถึงเวลาอย่างตรงและเด็ดขาด" และบอกว่าคาเอลเป็นอย่างเดียวกัน</p>
+    </div>
+
+    <div class="char-card">
+      <div class="char-name">ลีน่า</div>
+      <div class="char-role">ชาโดว์แฮนด์ · เวลมัวร์</div>
+      <p class="char-desc">ยังอยู่แอชวาลด์ รายงานกษัตริย์ว่าเวรอนไม่เปลี่ยนพฤติกรรม ไม่แสดงอาการกังวล บอกกษัตริย์ว่าความโกรธของคาเอลไม่เหมือนคนอื่น — มันไปอยู่ที่ "มือที่นิ่งกว่าปกติ ตาที่มองลึกกว่าปกติ และการตัดสินใจที่แม่นยำกว่าปกติ เหมือนเซร่า"</p>
+    </div>
+
+    <div class="char-card">
+      <div class="char-name">ราชินีมาเรียน เรเวนเดล</div>
+      <div class="char-role">ราชินีแห่งแอชวาลด์</div>
+      <p class="char-desc">อยู่ปีกราชินี อ่านจดหมายตอบรับจากมิเรฟอลล์สามรอบ "มิเรฟอลล์รอ" สามคำที่เพียงพอ กำลังเตรียมเดินทางอีกสองวัน จะบอกธีเรียนว่าไปตรวจแนวชายแดนเหนือ ซึ่งเป็นความจริงบางส่วน</p>
+    </div>
+
+    <div class="char-card">
+      <div class="char-name">เนลลา วินด์มาร์ค</div>
+      <div class="char-role">นักพยากรณ์ · มิเรฟอลล์</div>
+      <p class="char-desc">วันที่สิบห้าบนดาดฟ้า เรียนรู้ความต่างระหว่าง "ใช้พลัง" กับ "อยู่กับพลัง" รู้สึกถึงบางอย่างจากทางใต้กำลังมา (มาเรียน) และบางอย่างที่แอชวาลด์รอจังหวะ คืนนั้นรู้สึกถึงความอบอุ่นเบาๆ ข้างๆ โดยไม่มีเสียง รู้ว่าเซร่ายังอยู่โดยไม่ต้องถาม</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="settings-bar">
+  <button class="settings-btn" onclick="setFont('sm')">A-</button>
+  <button class="settings-btn" onclick="setFont('md')">A</button>
+  <button class="settings-btn" onclick="setFont('lg')">A+</button>
+  <div class="settings-sep"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-text" id="progressText">0%</span>
+  </div>
+</div>
+
+<script>
+const sc=document.getElementById('stars');
+for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${Math.random()*4+2}s;--delay:${Math.random()*5}s;--bright:${Math.random()*0.4+0.15};`;sc.appendChild(s);}
+function toggleMenu(){const m=document.getElementById('sideMenu');const b=document.getElementById('menuBtn');const o=document.getElementById('overlay');m.classList.toggle('active');b.classList.toggle('open');o.classList.toggle('show');}
+function closeMenu(){document.getElementById('sideMenu').classList.remove('active');document.getElementById('menuBtn').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function setFont(s){document.body.classList.remove('fs-sm','fs-md','fs-lg');document.body.classList.add('fs-'+s);}
+function updateProgress(){const d=document.documentElement.scrollHeight-window.innerHeight;const p=d>0?Math.round((window.scrollY/d)*100):0;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressText').textContent=p+'%';}
+window.addEventListener('scroll',updateProgress);updateProgress();
+function openCharPanel(){document.getElementById('charPanelOverlay').classList.add('show');}
+function closeCharPanel(e){if(!e||e.target===document.getElementById('charPanelOverlay')||e.currentTarget===document.querySelector('.char-panel-close')){document.getElementById('charPanelOverlay').classList.remove('show');}}
+</script>
+</body>
+</html>
