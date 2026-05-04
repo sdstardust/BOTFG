@@ -1,0 +1,986 @@
+/* ============================================================
+   ALMA — Chapter Two : Roots Deep
+   Aesthetic override: Stone grey + deep teal + wind blue
+   Layered on top of style.css (inherited)
+   ============================================================ */
+
+:root {
+  /* Chapter 2 palette — cooler, greener, more grounded */
+  --stone: #3a3830;
+  --stone-light: #6a6558;
+  --teal: #2a5a5a;
+  --teal-mid: #3d7a7a;
+  --teal-bright: #5aabab;
+  --wind: #6080a0;
+  --wind-light: #90b0d0;
+  --root-dark: #1a2810;
+  --root-mid: #2a4020;
+  --ch2-parchment: #eee8da;
+  --char-osse: #7a5a30;
+  --char-tovan: #3a7030;
+  /* Re-map ember vars for this chapter's accent */
+  --chapter-accent: #3d7a7a;
+  --chapter-accent-dim: #254848;
+  --chapter-accent-bright: #5aabab;
+}
+
+/* ============================================================
+   BODY OVERRIDE
+   ============================================================ */
+.ch2-body {
+  background: #0d1210;
+}
+
+/* ============================================================
+   MIST PARTICLES
+   ============================================================ */
+.mist-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: hidden;
+}
+
+.mist-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(90, 171, 171, 0.12) 0%, transparent 70%);
+  animation: mist-drift linear infinite;
+  filter: blur(8px);
+}
+
+@keyframes mist-drift {
+  0% { transform: translateX(-20px) translateY(10px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 0.6; }
+  100% { transform: translateX(var(--drift-x)) translateY(var(--drift-y)); opacity: 0; }
+}
+
+/* ============================================================
+   COVER — Chapter 2 Override
+   ============================================================ */
+.ch2-cover {
+  background: #0d1210 !important;
+}
+
+.ch2-cover-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.stone-layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.sl-far {
+  bottom: 0;
+  height: 60%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(30, 40, 35, 0.4) 30%,
+    rgba(20, 30, 25, 0.8) 70%,
+    #0f1812 100%
+  );
+}
+
+.sl-mid {
+  bottom: 0;
+  height: 40%;
+  background: radial-gradient(ellipse 100% 80% at 50% 100%,
+    #1a2a20 0%,
+    transparent 70%
+  );
+}
+
+.stone-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+}
+
+.stone-rings::before,
+.stone-rings::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(90, 171, 171, 0.06);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring-pulse 8s ease-in-out infinite;
+}
+
+.stone-rings::before {
+  width: 300px;
+  height: 300px;
+  animation-delay: 0s;
+}
+
+.stone-rings::after {
+  width: 500px;
+  height: 500px;
+  animation-delay: 3s;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.02); }
+}
+
+.root-lines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* ============================================================
+   CHAPTER NAV
+   ============================================================ */
+.ch-nav {
+  position: absolute;
+  top: -6rem;
+  left: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.ch-nav-link {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--stone-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.ch-nav-link:hover {
+  color: var(--teal-bright);
+}
+
+/* ============================================================
+   COVER OVERRIDES for Ch2
+   ============================================================ */
+.ch2-cover .cover-content {
+  position: relative;
+}
+
+.ch2-cover .eyebrow-text,
+.ch2-cover .title-chapter {
+  color: var(--chapter-accent-dim) !important;
+}
+
+.ch2-cover .eyebrow-line {
+  background: linear-gradient(90deg, transparent, var(--chapter-accent-dim)) !important;
+}
+
+.ch2-cover .eyebrow-line:last-child {
+  background: linear-gradient(90deg, var(--chapter-accent-dim), transparent) !important;
+}
+
+.ch2-cover .title-name {
+  color: var(--ch2-parchment) !important;
+  text-shadow: 0 0 60px rgba(61, 122, 122, 0.35), 0 2px 4px rgba(0,0,0,0.6) !important;
+}
+
+.ch2-cover .begin-btn {
+  border-color: var(--chapter-accent-dim) !important;
+  color: var(--teal-bright) !important;
+}
+
+.ch2-cover .begin-btn:hover {
+  background: rgba(61, 122, 122, 0.12) !important;
+  border-color: var(--teal-mid) !important;
+  box-shadow: 0 0 20px rgba(61, 122, 122, 0.2) !important;
+}
+
+/* ============================================================
+   STORY OVERRIDE for Ch2
+   ============================================================ */
+.ch2-story {
+  background: var(--ch2-parchment) !important;
+}
+
+.ch2-story::before {
+  background: linear-gradient(180deg, #0d1210 0%, #1a2a20 40%, var(--ch2-parchment) 100%) !important;
+}
+
+/* Act marker accent */
+.ch2-story .act-number {
+  color: var(--teal-mid) !important;
+}
+
+.ch2-story .act-title-wrap {
+  border-left-color: var(--teal-mid) !important;
+}
+
+/* ============================================================
+   DIALOGUE — Sereth gets new color in ch2
+   ============================================================ */
+.dialogue-speaker.sereth { color: var(--char-sereth); }
+.dialogue-speaker.osse { color: var(--char-osse); }
+
+.sereth-scene {
+  border-left: 3px solid var(--char-sereth);
+  background: rgba(90, 48, 96, 0.04);
+}
+
+.kel-interrupt {
+  border-left: 3px solid var(--char-kel);
+  background: rgba(58, 96, 128, 0.04);
+}
+
+.raina-answer {
+  border-left: 3px solid var(--char-raina);
+}
+
+.night-talk {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.sisters-talk {
+  background: rgba(42, 90, 90, 0.04);
+}
+
+.sisters-talk.light {
+  background: rgba(42, 90, 90, 0.02);
+}
+
+.npc-talk {
+  background: rgba(0,0,0,0.03);
+}
+
+.assessment {
+  border: 1px solid var(--ash);
+}
+
+/* ============================================================
+   THREE QUESTIONS
+   ============================================================ */
+.three-questions {
+  margin: 2.5rem 0;
+  padding: 0;
+}
+
+.q-header {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+}
+
+.question-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.6rem;
+  border-left: 2px solid transparent;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.question-card:hover {
+  background: rgba(0,0,0,0.03);
+}
+
+.question-card.q1 { border-color: var(--ember-dim); }
+.question-card.q2 { border-color: var(--teal); }
+.question-card.q3 { border-color: var(--char-sereth); }
+
+.q-num {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  min-width: 60px;
+  padding-top: 0.15rem;
+}
+
+.question-card p {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-family: var(--font-italic);
+  font-size: 0.97rem;
+}
+
+/* ============================================================
+   KEL OBSERVATION
+   ============================================================ */
+.kel-observation {
+  margin: 2rem 0;
+  padding: 1.8rem 2rem;
+  background: rgba(58, 96, 128, 0.06);
+  border-left: 3px solid var(--char-kel);
+  position: relative;
+}
+
+.kel-obs-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--char-kel);
+  margin-bottom: 0.8rem;
+  opacity: 0.7;
+}
+
+.kel-observation p {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--char-kel);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.kel-obs-expand {
+  font-family: var(--font-italic) !important;
+  font-style: italic;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  color: var(--text-secondary) !important;
+  letter-spacing: 0 !important;
+}
+
+/* ============================================================
+   ELEMENT COMPARE
+   ============================================================ */
+.element-compare {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.elem-card {
+  flex: 1;
+  padding: 1.5rem;
+  border: 1px solid var(--ash);
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.elem-card.earth {
+  opacity: 0.5;
+}
+
+.elem-card.fire.active-elem {
+  border-color: var(--ember);
+  background: rgba(212, 98, 42, 0.04);
+  box-shadow: 0 0 20px rgba(212, 98, 42, 0.08);
+}
+
+.elem-symbol {
+  font-size: 1.5rem;
+  color: var(--ash);
+  margin-bottom: 0.6rem;
+}
+
+.fire.active-elem .elem-symbol {
+  color: var(--ember);
+  text-shadow: 0 0 10px rgba(212, 98, 42, 0.4);
+}
+
+.elem-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.fire.active-elem .elem-name {
+  color: var(--ember);
+}
+
+.elem-quality {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-italic);
+}
+
+.elem-chosen {
+  position: absolute;
+  top: -0.6rem;
+  right: 0.8rem;
+  background: var(--ember);
+  color: white;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  padding: 0.15rem 0.5rem;
+}
+
+.elem-vs {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   WARNING BLOCK
+   ============================================================ */
+.warning-block {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  margin: 2rem 0;
+  padding: 1.5rem 1.8rem;
+  background: rgba(138, 58, 22, 0.05);
+  border: 1px solid rgba(138, 58, 22, 0.2);
+}
+
+.warn-icon {
+  font-size: 1rem;
+  color: var(--ember-dim);
+  flex-shrink: 0;
+  padding-top: 0.1rem;
+}
+
+.warning-block p {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.97rem;
+}
+
+/* ============================================================
+   TRAINING LOG
+   ============================================================ */
+.training-log {
+  margin: 2.5rem 0;
+  border: 1px solid var(--ash);
+}
+
+.tlog-header {
+  padding: 0.8rem 1.5rem;
+  background: rgba(0,0,0,0.04);
+  border-bottom: 1px solid var(--ash);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tlog-round {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.9rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  align-items: flex-start;
+}
+
+.tlog-round:last-child {
+  border-bottom: none;
+}
+
+.tlog-round-num {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--teal);
+  min-width: 80px;
+  flex-shrink: 0;
+  padding-top: 0.1rem;
+}
+
+.tlog-round p {
+  font-size: 0.93rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   ALMA TEACHING
+   ============================================================ */
+.alma-teaching {
+  margin: 2.5rem 0;
+  border: 1px solid rgba(61, 122, 122, 0.25);
+  background: rgba(42, 90, 90, 0.03);
+}
+
+.alma-teach-title {
+  padding: 0.8rem 2rem;
+  border-bottom: 1px solid rgba(61, 122, 122, 0.2);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--teal-mid);
+}
+
+.teach-block {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(61, 122, 122, 0.1);
+  align-items: flex-start;
+}
+
+.teach-block:last-child { border-bottom: none; }
+
+.teach-num {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: rgba(61, 122, 122, 0.4);
+  min-width: 25px;
+  padding-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.teach-content {
+  flex: 1;
+}
+
+.teach-line {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+  font-size: 0.97rem;
+  line-height: 1.8;
+}
+
+.teach-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.sereth-personal {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(90, 48, 96, 0.05);
+  border-left: 2px solid var(--char-sereth);
+}
+
+.sp-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--char-sereth);
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+}
+
+.sereth-personal p {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   MEDITATION SPLIT
+   ============================================================ */
+.meditation-split {
+  margin: 2.5rem 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  border: 1px solid var(--ash);
+}
+
+.med-pov {
+  padding: 1.8rem;
+}
+
+.med-pov-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.raina-l { color: var(--char-raina); }
+.kel-l { color: var(--char-kel); }
+
+.med-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.8rem;
+  line-height: 1.8;
+}
+
+.med-content p:last-child { margin-bottom: 0; }
+
+.med-inner {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  background: rgba(212, 98, 42, 0.06);
+  border-left: 2px solid var(--ember-dim);
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--ember-dim);
+}
+
+.kel-inner {
+  background: rgba(58, 96, 128, 0.06) !important;
+  border-left-color: var(--char-kel) !important;
+  color: var(--char-kel) !important;
+}
+
+.med-divider {
+  width: 1px;
+  background: var(--ash);
+}
+
+/* ============================================================
+   ATMOSPHERE NOTE
+   ============================================================ */
+.atmosphere-note {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1rem 0;
+  margin: 0.5rem 0;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   ASSESSMENT
+   ============================================================ */
+.assessment-item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.asmt-name {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  min-width: 50px;
+  padding-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.raina-a .asmt-name { color: var(--char-raina); }
+.kel-a .asmt-name { color: var(--char-kel); }
+
+/* ============================================================
+   NPC ENCOUNTER
+   ============================================================ */
+.npc-encounter {
+  margin: 2.5rem 0;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--ash);
+}
+
+.npc-name {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.npc-note {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   DAILY ROUTINE
+   ============================================================ */
+.daily-routine {
+  margin: 2.5rem 0;
+  border: 1px solid var(--ash);
+}
+
+.routine-title {
+  padding: 0.8rem 1.5rem;
+  background: rgba(0,0,0,0.04);
+  border-bottom: 1px solid var(--ash);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.routine-items { }
+
+.routine-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1.5rem;
+  padding: 0.9rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  align-items: baseline;
+}
+
+.routine-item:last-child { border-bottom: none; }
+
+.ri-time {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+.ri-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   INTEL BLOCK
+   ============================================================ */
+.intel-block {
+  margin: 2rem 0;
+  border: 1px solid rgba(138, 58, 22, 0.2);
+  padding: 1.5rem;
+}
+
+.intel-header {
+  margin-bottom: 1rem;
+}
+
+.intel-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ember-dim);
+}
+
+.intel-item {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+}
+
+.intel-bullet {
+  color: var(--ash);
+  flex-shrink: 0;
+}
+
+.warn-intel {
+  color: var(--ember-dim) !important;
+  font-style: italic;
+}
+
+.warn-intel .intel-bullet {
+  color: var(--ember-dim) !important;
+}
+
+/* ============================================================
+   FINAL QUESTION BLOCK
+   ============================================================ */
+.final-question-block {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: rgba(90, 48, 96, 0.05);
+  border: 1px solid rgba(90, 48, 96, 0.2);
+}
+
+.fq-sereth {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--char-sereth);
+  margin-bottom: 0.6rem;
+}
+
+.fq-line {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.fq-answers {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.fq-answer {
+  flex: 1;
+  padding: 1.2rem;
+  border: 1px solid var(--ash);
+  text-align: center;
+}
+
+.fqa-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.fqa-word {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+.fqa-note {
+  display: block;
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.kel-ans .fqa-name { color: var(--char-kel); }
+.kel-ans .fqa-word { color: var(--char-kel); }
+.kel-ans { border-color: rgba(58, 96, 128, 0.3); }
+
+.raina-ans .fqa-name { color: var(--char-raina); }
+.raina-ans .fqa-word { color: var(--char-raina); }
+.raina-ans { border-color: rgba(138, 58, 22, 0.3); }
+
+/* ============================================================
+   CHAPTER CLOSING
+   ============================================================ */
+.chapter-closing {
+  margin: 4rem 0 2rem;
+  text-align: center;
+  padding: 2.5rem;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%,
+    rgba(42, 90, 90, 0.06) 0%,
+    transparent 100%
+  );
+}
+
+.cc-line {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.97rem;
+  margin-bottom: 1rem;
+  line-height: 1.9;
+}
+
+.cc-waiting {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(42, 90, 90, 0.2);
+}
+
+.cc-waiting p:first-child {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-italic);
+  margin-bottom: 0.8rem;
+}
+
+.cc-wait-word {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.4em;
+  color: var(--teal-mid);
+  text-shadow: 0 0 30px rgba(61, 122, 122, 0.4);
+  animation: wait-pulse 4s ease-in-out infinite;
+}
+
+@keyframes wait-pulse {
+  0%, 100% { opacity: 0.6; letter-spacing: 0.4em; }
+  50% { opacity: 1; letter-spacing: 0.5em; text-shadow: 0 0 50px rgba(61, 122, 122, 0.6); }
+}
+
+/* ============================================================
+   SMILE NOTE
+   ============================================================ */
+.smile-note {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top: 1px solid var(--ash);
+  border-bottom: 1px solid var(--ash);
+  margin: 1.5rem 0;
+}
+
+/* ============================================================
+   OVERRIDE scroll hint & progress bar color for ch2
+   ============================================================ */
+.ch2-body .scroll-line {
+  background: linear-gradient(180deg, transparent, var(--teal-mid), transparent) !important;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .meditation-split {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .med-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .fq-answers {
+    flex-direction: column;
+  }
+
+  .element-compare {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .elem-vs { display: none; }
+
+  .elem-card.earth { opacity: 0.4; }
+
+  .routine-item {
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+  }
+
+  .teach-block {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}

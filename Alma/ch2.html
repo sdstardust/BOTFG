@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ออลม่า — บทที่สอง : รากที่ฝังลึก</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ch2.css" />
+</head>
+<body class="ch2-body">
+
+  <div class="noise-overlay"></div>
+  <div class="mist-container" id="mistContainer"></div>
+
+  <!-- Cover Chapter 2 -->
+  <section class="cover ch2-cover" id="cover">
+    <div class="ch2-cover-bg">
+      <div class="stone-layer sl-far"></div>
+      <div class="stone-layer sl-mid"></div>
+      <div class="stone-rings"></div>
+      <div class="root-lines" id="rootLines"></div>
+    </div>
+
+    <div class="cover-content">
+      <div class="ch-nav">
+        <a href="index.html" class="ch-nav-link">← บทที่หนึ่ง</a>
+      </div>
+      <div class="cover-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">ออลม่า</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      <h1 class="cover-title">
+        <span class="title-chapter">บทที่สอง</span>
+        <span class="title-name">รากที่<br>ฝังลึก</span>
+      </h1>
+      <p class="cover-subtitle">What is buried deepest holds the firmest.</p>
+      <button class="begin-btn" id="beginBtn">
+        <span>เริ่มอ่าน</span>
+        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1L13 7L7 13M1 7H13" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="scroll-hint"><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- Story -->
+  <main class="story ch2-story" id="story">
+
+    <!-- ตอน 1 -->
+    <article class="act" id="act1">
+      <div class="act-marker">
+        <div class="act-number">๑</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">บ้านหินและชาที่ยังร้อน</h2>
+        </div>
+      </div>
+
+      <div class="prose-block opening-block">
+        <p class="drop-cap">บ<span>้านของ Sereth เล็กกว่าที่ไรน่าคาดไว้</span></p>
+        <p>ห้องเดียว ผนังหิน เพดานต่ำพอที่ออร์เรนจะต้องก้มหัวถ้าเดินเข้ามา มีหน้าต่างแคบสองบาน หนังสือเรียงซ้อนกันตามผนังในวิธีที่ดูเหมือนไม่มีระเบียบ แต่เมื่อไรน่ามองนานขึ้นก็พบว่ามีระบบอะไรบางอย่างที่เธอยังไม่เข้าใจ บนโต๊ะมีเครื่องใช้ทำอาหารเล็กๆ และแผนที่ที่ถูกพับไม่เรียบร้อยทับกันหลายชั้น</p>
+        <p>Sereth วางผ้าคลุมไว้ที่ตะขอข้างประตู ไม่รีบ ไม่อธิบาย แล้วก็เดินไปยังเตาเล็กๆ ที่มุมห้อง</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"นั่งลงได้"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่ามองไปรอบๆ มีเก้าอี้ไม้สองตัวและม้านั่งยาวตัวหนึ่ง เคลเดินไปนั่งบนม้านั่งทันที ไรน่าเลือกเก้าอี้ที่หันหน้าไปทางประตู</p>
+        <p class="em-line">นิสัยเก่า</p>
+        <p>เสียงน้ำเดือดดังขึ้น Sereth รินชาใส่ถ้วยดินเผาสามใบโดยไม่ถาม แล้ววางลงบนโต๊ะตรงกลาง</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ดื่มก่อน แล้วค่อยเล่า"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่ายกถ้วยขึ้น ความร้อนซึมผ่านฝ่ามือที่เย็นชา รสชาติขมเล็กน้อย มีกลิ่นสมุนไพรที่เธอจำไม่ได้ว่าเคยได้ยินชื่อ</p>
+        <p>เคลจิบช้าๆ สายตายังวนอยู่กับเข็มทิศที่ถือไว้ในมืออีกข้าง</p>
+        <p>Sereth นั่งลงบนเก้าอี้ตัวที่เหลือ ตรงข้ามพวกเธอ วางถ้วยไว้บนเข่า แล้วก็รอ</p>
+        <p>ไรน่าชอบที่เธอไม่รีบ</p>
+        <p class="em-line">คนที่รีบให้คนอื่นพูดมักจะได้ยินแค่ครึ่งเรื่อง</p>
+      </div>
+
+      <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+      <div class="prose-block">
+        <p>ไรน่าเล่าตามลำดับ ตั้งแต่คืนที่ตื่นขึ้นมาเพราะพื้นดินสั่น แสงสีส้มจากทางใต้ของหมู่บ้าน เสียงทหาร เสียงที่พ่อไม่ได้พูดแต่หมายความชัดเจน และการที่ออร์เรนหยุดอยู่หน้าทหารสามนายโดยบอกให้เธอวิ่งต่อไป</p>
+        <p>เธอเล่าตรงๆ ไม่ตัดสิ่งที่รู้สึกออก แต่ก็ไม่ยัดอารมณ์เข้าไปในถ้อยคำมากกว่าที่จำเป็น</p>
+        <p>Sereth ฟังโดยไม่ขัด สายตาจดจ่อที่ไรน่าตลอด ยกเว้นบางครั้งที่เลื่อนไปที่เคล ไม่นานแต่ไม่ใช่ไม่มีความหมาย</p>
+        <p>เมื่อไรน่าพูดถึงเข็มทิศ Sereth วางถ้วยชาลงบนโต๊ะ</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ให้ข้าดูได้ไหม"</p>
+        <p class="dialogue-note">เคลส่งเข็มทิศให้โดยไม่ลังเล มากกว่าที่ไรน่าคาดไว้</p>
+      </div>
+
+      <div class="prose-block">
+        <p>Sereth รับมาด้วยมือทั้งสอง ไม่ใช่แค่หยิบ แต่เหมือนรับบางอย่างที่มีน้ำหนัก เธอพลิกดูด้านหลัง สายตาหยุดอยู่ที่บางจุดที่ไรน่ามองไม่เห็นจากมุมนั่ง แล้วก็หายใจออกช้าๆ</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เซธาน"</p>
+        <p class="dialogue-note">เบาๆ ราวกับพูดกับตัวเอง</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"คุณรู้จักพ่อของพวกเรา?"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"รู้จักชื่อ"</p>
+        <p class="dialogue-note">เธอวางเข็มทิศลงบนโต๊ะระหว่างพวกเธอ เข็มยังชี้ตรงมายังที่ตั้งของ Sereth เหมือนก่อน</p>
+        <p class="dialogue-line">"แต่ไม่ได้รู้จักตัวเขา คนที่ทำเข็มทิศนี้กับคนที่ส่งมันมาไม่ใช่คนเดียวกัน"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หมายความว่า?"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"หมายความว่ามีคนที่รู้จักพ่อของเจ้าดีกว่าข้า และตัดสินใจว่าข้าคือที่ที่ปลอดภัยพอจะส่งลูกสาวสองคนมาฝากไว้"</p>
+        <p class="dialogue-note">มองไรน่า</p>
+        <p class="dialogue-line">"คนนั้นไว้วางใจข้ามาก ข้าหวังว่าพ่อของเจ้าจะรู้ว่าเขาตั้งความหวังนั้นไว้กับใคร"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าไม่แน่ใจว่าจะตีความประโยคนั้นอย่างไร แต่ก็ไม่ได้ถาม</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ชื่อที่พ่อเขียนในกระดาษ มืดไปเห็นไม่ชัด"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ชื่อข้าในกระดาษนั้นไม่ใช่ชื่อที่ข้าใช้ตอนนี้ มันเป็นชื่อที่เก่ากว่า ข้าใช้ Sereth เพราะมันสั้นกว่า และเพราะคนที่รู้ชื่อเก่านั้นส่วนมากไม่ได้อยู่แล้ว"</p>
+      </div>
+
+      <div class="atmosphere-note">
+        ห้องเงียบ ลมทะเลพัดผ่านช่องหน้าต่างแคบ ทำให้เปลวเทียนบนโต๊ะสั่นเล็กน้อย
+      </div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ก่อนที่จะถามอะไรกันต่อ ข้าต้องถามเจ้าสองคนบางอย่าง แล้วข้าต้องการคำตอบที่ตรงไปตรงมา ไม่ใช่คำตอบที่เจ้าคิดว่าข้าอยากได้ยิน เข้าใจไหม"</p>
+        <p class="dialogue-note">ไรน่าพยักหน้า เคลทำเช่นกัน</p>
+        <p class="dialogue-line">"ดี"</p>
+      </div>
+    </article>
+
+    <!-- ตอน 2 -->
+    <article class="act" id="act2">
+      <div class="act-marker">
+        <div class="act-number">๒</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">คำถามที่ไม่มีคำตอบง่ายๆ</h2>
+        </div>
+      </div>
+
+      <div class="three-questions" id="threeQuestions">
+        <div class="q-header">คำถามของ Sereth</div>
+        <div class="question-card q1" data-q="1">
+          <div class="q-num">หนึ่ง</div>
+          <p>เจ้ารู้เรื่องออลม่ามากแค่ไหน</p>
+        </div>
+        <div class="question-card q2" data-q="2">
+          <div class="q-num">สอง</div>
+          <p>เจ้าถนัดธาตุไหน</p>
+        </div>
+        <div class="question-card q3" data-q="3">
+          <div class="q-num">สาม</div>
+          <p>เจ้าต้องการอะไร — หลังจากทุกอย่างที่เกิดขึ้น</p>
+        </div>
+      </div>
+
+      <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ออลม่า — เจ้าสองคนมีมัน ข้ารู้สึกได้ตั้งแต่ก่อนเดินลงมาถึงชายหาด คำถามแรก — เจ้ารู้เรื่องนี้มากแค่ไหน"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"รู้ว่าพ่อมี รู้ว่าออร์เรนถูกสอน รู้ว่าตัวเองมีบางอย่างอยู่ข้างใน แต่ไม่เคยได้เรียนอย่างเป็นระบบ"</p>
+        <p class="dialogue-note">หยุด</p>
+        <p class="dialogue-line">"เคลสังเกตของคนอื่นได้ดีกว่าของตัวเอง"</p>
+      </div>
+
+      <div class="dialogue-block kel-interrupt">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"ข้ารู้สึกออลม่าของคนอื่นได้"</p>
+        <p class="dialogue-note">พูดขึ้นก่อนที่ไรน่าจะพูดแทน เสียงตรงแบบที่ทำให้ไรน่าแปลกใจเล็กน้อย</p>
+        <p class="dialogue-line">"เหมือนรู้สึกน้ำหนักของอากาศรอบคนๆ นั้น ของพี่สาวหนักแต่ปิดอยู่ ของคุณ Sereth..."</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เธอหยุด</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"พูดต่อ"</p>
+        <p class="dialogue-note">ไม่ใช่คำสั่ง แต่มีน้ำหนัก</p>
+      </div>
+
+      <div class="kel-observation">
+        <div class="kel-obs-label">เคลบอก Sereth ตรงๆ</div>
+        <p>"เหนื่อย"</p>
+        <p class="kel-obs-expand">ออลม่าของคุณเหนื่อย ไม่ใช่อ่อนแอ แต่เหนื่อย เหมือนคนที่แบกของหนักมานานจนลืมไปแล้วว่าตอนไม่ได้แบกมันรู้สึกยังไง</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ห้องเงียบมากขึ้น</p>
+        <p>ไรน่ามองน้องสาว ไม่ใช่ครั้งแรกที่เธอประหลาดใจกับสิ่งที่เคลพูด แต่เป็นครั้งแรกที่เธอสังเกตว่าเคลพูดสิ่งเหล่านี้โดยไม่ได้รู้ตัวว่ามันอาจจะมากเกินไปสำหรับคนแปลกหน้า</p>
+        <p>Sereth นิ่งอยู่สักครู่ แล้วก็ขยับเพียงเล็กน้อย</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าไม่ผิด"</p>
+        <p class="dialogue-note">เสียงเรียบกว่าเดิม</p>
+        <p class="dialogue-line">"คำถามที่สอง — ธาตุ เจ้าสองคนรู้ไหมว่าตัวเองถนัดธาตุไหน"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าส่ายหัว เคลทำเช่นกัน</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เดาได้บ้างไหม จากสิ่งที่รู้สึก"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ไม่รู้แน่ชัด แต่มันรู้สึกหนัก ถ้าจะเปรียบก็เหมือนดิน"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"หรือไฟ"</p>
+        <p class="dialogue-note">ไม่ใช่แก้ แต่เพิ่มเติม</p>
+        <p class="dialogue-line">"ทั้งสองมีความหนักเหมือนกัน แต่ดินนิ่ง ไฟร้อน เจ้ารู้สึกอันไหนมากกว่ากัน"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"...ร้อน"</p>
+      </div>
+
+      <div class="element-compare">
+        <div class="elem-card earth">
+          <div class="elem-symbol">◈</div>
+          <div class="elem-name">ดิน</div>
+          <div class="elem-quality">นิ่ง · หนัก · คงทน</div>
+        </div>
+        <div class="elem-vs">หรือ</div>
+        <div class="elem-card fire active-elem">
+          <div class="elem-symbol">◈</div>
+          <div class="elem-name">ไฟ</div>
+          <div class="elem-quality">ร้อน · หนัก · ลุกขึ้น</div>
+          <div class="elem-chosen">ไรน่า</div>
+        </div>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"และเจ้า"</p>
+        <p class="dialogue-note">มองไปที่เคล</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หนู... ไม่ค่อยรู้สึกถึงของตัวเอง ส่วนใหญ่รู้สึกของคนอื่นได้ชัดกว่า"</p>
+        <p class="dialogue-note">หยุด</p>
+        <p class="dialogue-line">"แต่บางทีเวลาลมพัดแรง รู้สึกเหมือนมันพัดผ่านหนูไปด้วย ไม่ใช่พัดชน"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>Sereth ไม่พูดทันที เธอมองเคลนานกว่าที่ไรน่าคาดไว้</p>
+      </div>
+
+      <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"คำถามสุดท้าย และนี่สำคัญที่สุด"</p>
+        <p class="dialogue-note">มองทั้งสองคน สายตาไม่มีอารมณ์พิเศษ แต่หนักพอที่จะทำให้ไรน่ารู้สึกว่าคำถามนี้ไม่มีคำตอบที่ผิดหรือถูก มีแต่คำตอบที่จริงหรือไม่จริง</p>
+        <p class="dialogue-line">"หลังจากทุกอย่างที่เกิดขึ้น — พ่อ พี่ชาย หมู่บ้าน — เจ้าสองคนต้องการอะไร?"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าไม่ตอบทันที</p>
+        <p>ไม่ใช่เพราะไม่รู้ แต่เพราะคำถามนั้นใหญ่กว่าที่เธอได้นั่งคิดมาก่อน ตลอดคืนที่ผ่านมาเธอไม่มีเวลาต้องการอะไร มีแค่ก้าวต่อไป ก้าวต่อไป ก้าวต่อไป</p>
+        <p>เธอมองไปที่น้องสาว</p>
+        <p>เคลนั่งนิ่ง ผมหยักศกยังกระจายอยู่ ถ้วยชาถือไว้ในมือทั้งสองแต่ไม่ได้ดื่ม สายตามองออกไปยังหน้าต่างแคบ ที่มีท้องฟ้าสีเทาของเกาะ <span class="place-name">Khar-Zunmora</span> เห็นอยู่ลิบๆ</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หนูอยากรู้ว่าพ่อยังอยู่ไหม"</p>
+        <p class="dialogue-note">น้ำเสียงเรียบแต่มีบางอย่างตึงอยู่ข้างใน</p>
+        <p class="dialogue-line">"และถ้าพ่อยังอยู่ หนูอยากไปหาพ่อ"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าหายใจออก</p>
+        <p>มันตรงกับสิ่งที่เธอรู้สึก แต่เธอไม่แน่ใจว่าพูดออกมาได้ไหม เพราะการพูดมันออกมาแปลว่ายอมรับว่าอาจจะไม่ได้รับ</p>
+      </div>
+
+      <div class="dialogue-block raina-answer">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ฉันก็ต้องการแบบเดียวกัน แต่..."</p>
+        <p class="dialogue-note">หยุด ปรับคำ</p>
+        <p class="dialogue-line">"ตอนนี้เราไม่มีทางรู้ว่าพ่อหรือออร์เรนอยู่ที่ไหน เราไม่มีทรัพยากร ไม่มีข้อมูล และไม่มีทักษะพอจะไปหาใครในโลกที่เราแทบไม่รู้จัก"</p>
+        <p class="dialogue-note">มองตรงไปที่ Sereth</p>
+        <p class="dialogue-line">"ฉันต้องการพื้นที่ที่ปลอดภัยพอจะหยุดหายใจและคิด ก่อนจะตัดสินใจว่าจะทำอะไรต่อ"</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"คำตอบที่ดี ทั้งสองคำตอบ"</p>
+        <p class="dialogue-note">พยักหน้าช้าๆ</p>
+      </div>
+    </article>
+
+    <!-- ตอน 3 -->
+    <article class="act" id="act3">
+      <div class="act-marker">
+        <div class="act-number">๓</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">สิ่งที่ Sereth เลือกบอก</h2>
+        </div>
+      </div>
+
+      <div class="prose-block opening-block">
+        <p class="drop-cap">ช<span>าหมดถ้วยแล้ว แต่ไม่มีใครลุกไปรินเพิ่ม</span></p>
+      </div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ข้าจะบอกเจ้าสิ่งที่ข้ารู้ เกี่ยวกับสถานการณ์ที่เจ้าบอกมา และเกี่ยวกับเกาะนี้"</p>
+        <p class="dialogue-note">ลุกขึ้นเดินไปยังหน้าต่าง มองออกไปยังเมืองเล็กๆ ด้านล่าง หันหลังพิงผนังหิน ไขว้แขน</p>
+        <p class="dialogue-line">"Soldier Empire ไม่ได้บุก Punja โดยไม่มีเหตุผล เกาะนั้นไม่มีทรัพยากรมีค่า ไม่มีตำแหน่งยุทธศาสตร์ที่น่าสนใจ มีแค่ชาวประมง และ..."</p>
+        <p class="dialogue-note">หยุด</p>
+        <p class="dialogue-line">"ครอบครัวหนึ่งที่ย้ายมาอยู่เมื่อสิบสองปีก่อน"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"พวกเขามาตามพ่อ"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"น่าจะเป็นแบบนั้น"</p>
+        <p class="dialogue-note">ไม่ปฏิเสธ ไม่ยืนยัน</p>
+        <p class="dialogue-line">"ซึ่งแปลว่าพ่อของเจ้าสำคัญพอที่ใครบางคนในจักรวรรดิจะส่งกองกำลังมาขนาดนั้น และพ่อของเจ้ารู้เรื่องนี้มาก่อน"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"รู้มาก่อน?"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เขาเตรียมถุงนั้นไว้แล้ว เตรียมเส้นทางหนีไว้แล้ว เตรียมให้ลูกชายรู้ว่าต้องทำอะไร นั่นไม่ใช่การตัดสินใจในคืนนั้น นั่นคือสิ่งที่วางแผนไว้นานแล้ว"</p>
+      </div>
+
+      <div class="thought-block">
+        <p>ไรน่าย้อนคิดถึงพ่อที่นั่งอยู่หน้าโต๊ะในดึกดื่น นัยน์ตาที่เพ่งมองผนังว่างๆ ด้วยแววที่เธอนิยามว่า "กำลังคำนวณบางอย่าง"</p>
+        <p class="thought-follow">บางทีเขาคำนวณคืนนั้นมานานแล้ว</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"แล้วเกาะนี้ มันปลอดภัยแค่ไหน Soldier Empire รู้จัก Khar-Zunmora ไหม"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>Sereth นิ่งนานกว่าที่ไรน่าชอบ</p>
+      </div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"รู้จัก แต่ยังไม่มาถึง ด้วยเหตุผลหลายอย่าง หนึ่งในนั้นคือเกาะนี้ไม่ได้ง่ายต่อการเข้าถึง กระแสน้ำรอบเกาะไม่เป็นมิตรกับเรือขนาดใหญ่"</p>
+        <p class="dialogue-note">มองไรน่า</p>
+        <p class="dialogue-line">"เรือเล็กของเจ้าเข้ามาได้เพราะมันเบาพอ และเพราะออลม่าในเข็มทิศนั้นอาจช่วยนำทางโดยที่เจ้าไม่รู้ตัว"</p>
+      </div>
+
+      <div class="warning-block">
+        <div class="warn-icon">⚠</div>
+        <p>"แต่ถ้าจักรวรรดิตัดสินใจจะมาจริงๆ พวกเขามาได้ ข้าไม่อยากให้เจ้าสองคนคิดว่าที่นี่คือป้อมปราการ มันไม่ใช่"</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"แล้วทำไมคุณยังอยู่ที่นี่"</p>
+        <p class="dialogue-note">คำถามออกมาก่อนที่เธอจะกรองมัน</p>
+      </div>
+
+      <div class="prose-block">
+        <p>Sereth ไม่ดูขุ่นเคือง เธอมองไรน่าสักครู่</p>
+      </div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เพราะข้าออกไปไม่ได้"</p>
+        <p class="dialogue-note">น้ำเสียงเรียบที่ซ่อนสิ่งที่ไรน่ายังเข้าไม่ถึง</p>
+        <p class="dialogue-line">"ไม่ใช่ออกไปไม่ได้ทางร่างกาย แต่มีเหตุผลที่ข้าต้องอยู่ที่นี่"</p>
+        <p class="dialogue-note">หยุด</p>
+        <p class="dialogue-line">"วันหนึ่งเจ้าอาจจะเข้าใจ แต่ไม่ใช่วันนี้"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่ายอมรับคำตอบนั้น มันไม่ใช่การปิดบัง มันเป็นการบอกว่า ยังไม่ใช่เวลา</p>
+      </div>
+
+      <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ข้าจะพูดสิ่งที่ข้าเสนอได้ เจ้าพักที่นี่ได้ มีห้องว่างในบ้านข้างๆ ที่ชาวบ้านใช้สำหรับคนเดินทางผ่านมา ข้าจะบอกให้เขาจัดให้"</p>
+        <p class="dialogue-note">มองพวกเธอ</p>
+        <p class="dialogue-line">"ระหว่างที่อยู่ที่นี่ ถ้าเจ้าต้องการ ข้าจะสอนเจ้าควบคุมออลม่า และฝึกร่างกาย ทักษะที่เจ้าต้องการถ้าจะออกไปในโลกนั้น"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"แลกกับอะไร"</p>
+        <p class="dialogue-note">ถามทันที</p>
+      </div>
+
+      <div class="prose-block">
+        <p>Sereth มองเธอ ริมฝีปากขยับเล็กน้อย ไม่ใช่รอยยิ้มเต็มๆ แต่มีอะไรอยู่ในนั้น</p>
+      </div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าตรงดี ข้าชอบ"</p>
+        <p class="dialogue-note">หยุด</p>
+        <p class="dialogue-line">"ไม่แลกกับอะไรที่เจ้าต้องกังวล ข้าไม่ต้องการสิ่งตอบแทน ข้าอยู่ที่นี่มานาน ไม่ค่อยได้สอนคนที่ควรค่าแก่การสอน ถ้าพ่อของเจ้าส่งเจ้ามาที่นี่ ข้าเชื่อว่าเจ้าสองคนควรค่า"</p>
+        <p class="dialogue-note">หยิบถ้วยชาขึ้นมา ดูว่างแล้ว วางลง</p>
+        <p class="dialogue-line">"และตามความเป็นจริง ข้าอยู่คนเดียวมานานพอแล้ว"</p>
+      </div>
+    </article>
+
+    <!-- ตอน 4 -->
+    <article class="act" id="act4">
+      <div class="act-marker">
+        <div class="act-number">๔</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">คืนแรก</h2>
+        </div>
+      </div>
+
+      <div class="prose-block opening-block">
+        <p class="drop-cap">บ<span>้านข้างๆ เล็กแต่สะอาด</span></p>
+        <p>หญิงชราร่างเล็กที่ Sereth เรียกว่า "Maret" นำพวกเธอมาและไม่พูดมาก แต่นำผ้าห่มหนาสองผืนมาวางไว้บนที่นอน และหม้อน้ำร้อนที่ยังมีไอพวยขึ้น ก่อนจะปิดประตูออกไปเงียบๆ</p>
+        <p>ไรน่านอนลงบนที่นอน เพดานหินต่ำ ไม่มีรอยไหม้</p>
+        <p>เคลนอนอยู่ข้างๆ กอดถุงผ้าของพ่อ เข็มทิศอยู่ข้างหมอน</p>
+      </div>
+
+      <div class="dialogue-block night-talk">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"พี่คิดว่า Sereth บอกความจริงทั้งหมดไหม"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"บอกความจริงในสิ่งที่บอก แต่มีสิ่งที่ไม่ได้บอก"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หนูรู้สึกแบบนั้นเหมือนกัน แต่ออลม่าของเธอไม่รู้สึกโกหก มันแค่...ปิดบางส่วนไว้"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่ามองเพดาน</p>
+      </div>
+
+      <div class="dialogue-block night-talk">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"เราไม่มีทางเลือกดีกว่านี้ตอนนี้"</p>
+        <p class="dialogue-note">ไม่ใช่คำถาม</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หนูรู้"</p>
+        <p class="dialogue-note">เงียบ แล้วพูดต่อ</p>
+        <p class="dialogue-line">"ออร์เรนสู้เก่งใช่ไหม"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"เก่งมาก"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"งั้นก็โอเค แล้วพ่อก็เก่งกว่าพี่ออร์เรน"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าจำภาพพ่อที่ยืนกลางลาน มือข้างขวาเปิดออก และออลม่าที่บิดแสงรอบตัวเขาได้</p>
+      </div>
+
+      <div class="dialogue-block night-talk">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ใช่"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"งั้นก็โอเค"</p>
+        <p class="dialogue-note">แบบที่ฟังดูเหมือนไม่ใช่การสรุป แต่เป็นการตั้งใจที่จะเชื่อในสิ่งที่พิสูจน์ไม่ได้ตอนนี้</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าไม่พูดอะไรเพิ่ม</p>
+        <p>เธอฟังเสียงลมที่พัดผ่านหินรอบเกาะ เสียงคลื่นที่ไกลออกไป และเสียงหายใจของน้องสาวที่ค่อยๆ ช้าลงจนสม่ำเสมอ</p>
+        <p>เธอหลับตา</p>
+        <p class="em-line">ครั้งนี้เธอหลับได้</p>
+      </div>
+    </article>
+
+    <!-- ตอน 5 -->
+    <article class="act" id="act5">
+      <div class="act-marker">
+        <div class="act-number">๕</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">รุ่งเช้าของวันใหม่</h2>
+        </div>
+      </div>
+
+      <div class="prose-block opening-block">
+        <p class="drop-cap">เ<span>ซเรธรอพวกเธออยู่ที่ลานหินหน้าบ้านตัวเอง ตั้งแต่ฟ้ายังเป็นสีม่วงอ่อนก่อนแดดขึ้น</span></p>
+        <p>เธอใส่เสื้อคลุมบางกว่าเมื่อวาน ไม่มีผ้าโลหะ มือเปล่า ยืนตรงและนิ่งในแบบที่ทำให้ไรน่านึกถึงต้นไม้ที่หยั่งรากลึก</p>
+      </div>
+
+      <div class="training-log">
+        <div class="tlog-header">บันทึกการฝึก — วันแรก</div>
+        <div class="tlog-round">
+          <div class="tlog-round-num">รอบที่ ๓</div>
+          <p>ไรน่าเริ่มสังเกตว่า Sereth ไม่ได้แค่ยืนดู เธอสังเกตท่าทาง จังหวะก้าวเท้า วิธีที่แขนเคลื่อน</p>
+        </div>
+        <div class="tlog-round">
+          <div class="tlog-round-num">รอบที่ ๖</div>
+          <p>เคลเริ่มหอบ แต่ไม่หยุด</p>
+        </div>
+        <div class="tlog-round">
+          <div class="tlog-round-num">รอบที่ ๑๐</div>
+          <p>พวกเธอหยุด ฝ่ามือเท้าบนเข่า</p>
+        </div>
+      </div>
+
+      <div class="dialogue-block sereth-scene assessment">
+        <div class="dialogue-speaker sereth">Sereth — ประเมินผล</div>
+        <div class="assessment-item raina-a">
+          <span class="asmt-name">ไรน่า</span>
+          <p class="dialogue-line">"ก้าวเท้าดีกว่าน้อง แต่ไหล่ตึงเกินไป เวลาวิ่งหนีมักจะตึกแบบนั้น"</p>
+        </div>
+        <div class="assessment-item kel-a">
+          <span class="asmt-name">เคล</span>
+          <p class="dialogue-line">"หายใจไม่เป็นจังหวะ บางรอบถี่เกินไปบางรอบช้าเกินไป"</p>
+        </div>
+        <p class="dialogue-line">"ทั้งสองคนรู้สึกตรงไหนที่ร่างกายต่อต้านมากที่สุด"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ขาล่าง"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หายใจ"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ดี ตอบตามความจริง นั่งลง หายใจให้นิ่งก่อน"</p>
+      </div>
+
+      <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+      <div class="alma-teaching">
+        <div class="alma-teach-title">คำสอนเรื่องออลม่า</div>
+
+        <div class="teach-block">
+          <div class="teach-num">I</div>
+          <div class="teach-content">
+            <p class="teach-line">"ออลม่าไม่ใช่พลังงานภายนอก มันไม่ได้มาจากดาว จากเทพเจ้า หรือจากสิ่งลึกลับใดๆ มันเป็นส่วนหนึ่งของสิ่งมีชีวิต เหมือนเลือดหรือลมหายใจ"</p>
+            <p class="teach-sub">คนที่ไม่มีออลม่าไม่ใช่เพราะอ่อนแอ แต่เพราะมันไม่ได้ถูกปลุก เหมือนกล้ามเนื้อที่ไม่เคยถูกใช้</p>
+          </div>
+        </div>
+
+        <div class="teach-block">
+          <div class="teach-num">II</div>
+          <div class="teach-content">
+            <p class="teach-line">"ธาตุคือภาษา ออลม่าไม่ได้ถูกจำกัดโดยธาตุ แต่แต่ละคนมีภาษาที่พูดได้คล่องต่างกัน"</p>
+            <p class="teach-sub">ไฟ · ดิน · น้ำ · ลม — มีอีกหลายอย่างที่คนส่วนใหญ่ไม่ได้แตะถึง บางคนมีภาษาเดียว บางคนมีสอง</p>
+          </div>
+        </div>
+
+        <div class="teach-block">
+          <div class="teach-num">III</div>
+          <div class="teach-content">
+            <p class="teach-line">"ภาษาที่สองมาช้ากว่า และแพงกว่าเสมอ"</p>
+            <div class="sereth-personal">
+              <div class="sp-label">Sereth เล่าเอง</div>
+              <p>"ลมเป็นภาษาแรกของข้า ข้าใช้มันได้นาน ดินเป็นภาษาที่สอง ทุกครั้งที่ข้าใช้มันหนักเกินไป มันใช้เวลานานกว่าปกติในการฟื้นตัว มันเหมือนรูที่ปะแล้วแต่รอยยังอยู่ ถ้าปะมากครั้งเกินไป รอยนั้นจะอ่อนแอลงเรื่อยๆ"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>เธอพูดเรื่องนี้ราวกับว่ามันเป็นข้อเท็จจริงอย่างหนึ่ง ไม่มีความขมขื่น ไม่มีการสงสาร</p>
+        <p>ไรน่าเคารพมัน</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าไม่ต้องกังวลแทนข้า ข้ารู้ขอบเขตของตัวเอง วันนี้ข้าจะแค่บอกให้เจ้าสองคนทำสิ่งเดียว"</p>
+        <p class="dialogue-note">มองพวกเธอ</p>
+        <p class="dialogue-line">"นิ่งลง แล้วฟัง"</p>
+      </div>
+    </article>
+
+    <!-- ตอน 6 -->
+    <article class="act" id="act6">
+      <div class="act-marker">
+        <div class="act-number">๖</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">สิ่งที่อยู่ข้างในหิน</h2>
+        </div>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"ฟังอะไร"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ออลม่าของที่นี่ เกาะนี้มีมากกว่าที่อื่น เจ้าบอกเองว่ารู้สึกได้ตั้งแต่แตะทราย ใช้ประโยชน์จากมัน ปล่อยให้มันสอนเจ้าว่ารู้สึกมันอย่างไร ก่อนที่จะพยายามใช้มัน"</p>
+        <p class="dialogue-note">ลุกขึ้น</p>
+        <p class="dialogue-line">"ข้าจะอยู่ที่นี่ ถ้าเจ้าต้องการข้าก็จะตอบ ถ้าไม่ต้องการก็แค่นิ่ง"</p>
+      </div>
+
+      <div class="meditation-split">
+        <div class="med-pov raina-pov">
+          <div class="med-pov-label raina-l">มุมมองไรน่า</div>
+          <div class="med-content">
+            <p>ในตอนแรกมีแค่ลมเย็น เสียงคลื่น เสียงนกทะเล กลิ่นเกลือ สิ่งที่ร่างกายรับรู้ตามปกติ</p>
+            <p>แล้วเธอก็เริ่มรู้สึกสิ่งอื่น — มันเริ่มจากใต้เท้า ช้าๆ เหมือนความอุ่นที่ขึ้นมาจากพื้นหิน ไม่ใช่ความร้อนจากแดด แต่เป็นบางอย่างที่อยู่ข้างในหินนั้นเอง</p>
+            <p>เธอนึกถึงถ่านไฟในอก ความอบอุ่นเล็กๆ ที่เคยนิ่งๆ อยู่ตรงนั้น และตอนนี้มันตอบสนองต่อบางอย่าง เหมือนเส้นด้ายที่สั่นเมื่อมีลมพัดผ่าน</p>
+            <div class="med-inner">ไฟ — มันรู้สึกเหมือนอยากลุกขึ้น แต่ถูกกักไว้ในแบบที่เธอไม่รู้ว่าตัวเองทำ</div>
+          </div>
+        </div>
+
+        <div class="med-divider"></div>
+
+        <div class="med-pov kel-pov">
+          <div class="med-pov-label kel-l">มุมมองเคล</div>
+          <div class="med-content">
+            <p>เธอรู้สึกไรน่าก่อน ออลม่าของพี่สาวที่ร้อนและนิ่งพร้อมกัน กำลังตื่นขึ้นเล็กน้อยในรูปแบบที่เคลไม่เคยสังเกตเห็นตอนอยู่ที่ Punja</p>
+            <p>เธอรู้สึก Sereth ที่นั่งอยู่ห่างออกไปสิบก้าว เก่าและหนักและเจ็บปวดในแบบที่เคยพูดถึงแล้ว</p>
+            <p>แล้วก็มีบางอย่างอื่น — ไม่ใช่ออลม่าของคน มันเป็นออลม่าของเกาะ ใหญ่กว่าออลม่าของคนมาก เคลื่อนช้ากว่า เหมือนลมหายใจที่นับเป็นชั่วโมงไม่ใช่วินาที</p>
+            <div class="med-inner kel-inner">และมันไม่ได้ไม่รู้ว่ามีเธออยู่</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลเปิดตาออกมาเร็วกว่าที่ตั้งใจ</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เป็นอย่างไรบ้าง"</p>
+        <p class="dialogue-note">เงียบๆ</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"รู้สึกได้ว่ามีอะไรอยู่ข้างใน แต่ยังเข้าไม่ถึง เหมือนรู้ว่าประตูอยู่ที่ไหน แต่ยังหาด้ามจับไม่เจอ"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"เกาะนี้...รู้ว่ามีเราอยู่"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>Sereth ไม่ตอบทันที สายตาจดจ่อที่เคล</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"รู้สึกอะไรอีกไหม"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"มันไม่ใช่แค่ออลม่าของที่นี่ มันเหมือน...มีบางอย่างอยู่ข้างล่างที่ฟังอยู่ ไม่ใช่ดิน ไม่ใช่หิน แต่บางอย่างที่อยู่ข้างใต้ลงไปอีก"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>Sereth หายใจออกช้าๆ</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าไวมาก"</p>
+        <p class="dialogue-note">ไม่ใช่คำชม แต่เป็นการสังเกต</p>
+        <p class="dialogue-line">"เร็วกว่าที่ข้าคาดไว้"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"มันคืออะไร"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"อย่าเพิ่งรีบถาม มีบางอย่างที่ต้องรู้ในเวลาที่ถูกต้อง ไม่ใช่เวลาที่เร็วที่สุด"</p>
+        <p class="dialogue-note">มองเคล</p>
+        <p class="dialogue-line">"เจ้ารู้สึกมันได้ นั่นสำคัญกว่าการรู้ว่ามันชื่ออะไร"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลจะเถียง ไรน่ารู้จากการที่ไหล่น้องสาวขยับขึ้น แต่เคลก็ไม่เถียง</p>
+        <p>เธอพยักหน้า</p>
+      </div>
+    </article>
+
+    <!-- ตอน 7 -->
+    <article class="act" id="act7">
+      <div class="act-marker">
+        <div class="act-number">๗</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">ชาวบ้าน Khar-Zunmora</h2>
+        </div>
+      </div>
+
+      <div class="daily-routine">
+        <div class="routine-title">สามวัน — รูปแบบที่เริ่มมีโครงสร้าง</div>
+        <div class="routine-items">
+          <div class="routine-item">
+            <div class="ri-time">เช้าตรู่</div>
+            <div class="ri-desc">ร่างกาย · วิ่ง · ยืด — Sereth สังเกตและแก้ไขโดยไม่พูดมากกว่าที่จำเป็น</div>
+          </div>
+          <div class="routine-item">
+            <div class="ri-time">กลางเช้า</div>
+            <div class="ri-desc">ออลม่า · นั่งนิ่ง · รับรู้ · รายงาน</div>
+          </div>
+          <div class="routine-item">
+            <div class="ri-time">กลางวัน</div>
+            <div class="ri-desc">พักและกินข้าวกับ Maret ที่รินน้ำชาให้โดยไม่ถามว่าต้องการไหม</div>
+          </div>
+          <div class="routine-item">
+            <div class="ri-time">บ่าย</div>
+            <div class="ri-desc">เวลาของพวกเธอเอง</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+      <div class="prose-block">
+        <p>ในช่วงบ่ายของวันที่สอง ไรน่าเดินออกไปยังตลาดเล็กๆ ในหมู่บ้าน</p>
+        <p>ชาวบ้าน <span class="place-name">Khar-Zunmora</span> ไม่ได้ตั้งข้อสงสัยกับคนแปลกหน้ามากนัก ไรน่าสังเกตว่าพวกเขาพูดน้อยกว่าชาว Punja แต่ไม่ได้เย็นชา มันเหมือนคนที่เคยชินกับการได้รับคนเดินทางมาและส่งคนเดินทางออกไป จนไม่รู้สึกว่าจำเป็นต้องทำอะไรพิเศษ</p>
+      </div>
+
+      <div class="npc-encounter">
+        <div class="npc-name">Osse — หญิงชราที่ขายผักแห้ง</div>
+        <div class="dialogue-block npc-talk">
+          <div class="dialogue-speaker osse">Osse</div>
+          <p class="dialogue-line">"มากับ Sereth"</p>
+          <p class="dialogue-note">ไม่ใช่คำถาม</p>
+          <div class="dialogue-speaker raina">ไรน่า</div>
+          <p class="dialogue-line">"ใช่"</p>
+          <div class="dialogue-speaker osse">Osse</div>
+          <p class="dialogue-line">"งั้นก็อยู่ได้นาน เธอไม่รับคนโดยไม่มีเหตุผล"</p>
+          <div class="dialogue-speaker raina">ไรน่า</div>
+          <p class="dialogue-line">"คุณรู้จักเธอดีไหม"</p>
+          <div class="dialogue-speaker osse">Osse</div>
+          <p class="dialogue-line">"รู้จักมาตั้งแต่เกิด แต่ก็ยังไม่แน่ใจว่าเธอชอบกินอะไร"</p>
+        </div>
+        <div class="npc-note">ไรน่าหัวเราะเล็กน้อย — ครั้งแรกในหลายวัน</div>
+      </div>
+
+      <div class="npc-encounter">
+        <div class="npc-name">Tovan — เด็กชายที่ขายปลาแห้ง</div>
+        <div class="prose-block">
+          <p>เขาเดินตามเคลในตลาดอยู่พักหนึ่งก่อนจะถามว่าเคลมาจากเกาะไหน เคลนั่งลงคุยกับเขาเป็นเวลานาน ไรน่ายืนดูจากระยะห่าง เห็นน้องสาวเล่าเรื่องด้วยมือที่ขยับประกอบ เด็กชายฟังตาโต</p>
+          <p class="em-line">น้องสาวยังเล่าเรื่องเก่งอยู่ แม้จะมีเรื่องในคืนนั้นแบกอยู่</p>
+        </div>
+        <div class="npc-note">ไรน่าหันหน้าออกไปยังทะเล มองขอบฟ้าทิศตะวันตก — Punja อยู่ที่นั่นไหนสักแห่ง และพ่อกับออร์เรนก็อยู่ที่ไหนสักแห่งในโลกนั้น</div>
+      </div>
+    </article>
+
+    <!-- ตอน 8 -->
+    <article class="act" id="act8">
+      <div class="act-marker">
+        <div class="act-number">๘</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">บทสนทนาระหว่างพี่น้อง</h2>
+        </div>
+      </div>
+
+      <div class="prose-block opening-block">
+        <p class="drop-cap">บ<span>่ายของวันที่สาม</span></p>
+        <p>ไรน่าและเคลนั่งอยู่บนโขดหินที่มองเห็นทะเล ห่างจากหมู่บ้านพอที่จะพูดโดยไม่มีใครได้ยิน ลมพัดเข้าหาชายฝั่ง เคลปล่อยผมหยักศกลงมา มันสั้นกว่าของไรน่าและฟูกว่ามาก ลมพัดให้ฟุ้งขึ้นเล็กน้อย</p>
+      </div>
+
+      <div class="dialogue-block sisters-talk">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"พี่คิดว่าพ่ออยู่ที่ไหน"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ไม่รู้"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"แต่ถ้าเดา"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ถ้าพ่อสู้ออกมาได้ เขาจะไม่อยู่ใน Punja แน่นอน เขาจะไปที่ที่ปลอดภัย ที่ที่เขาวางแผนไว้ล่วงหน้า เหมือนกับที่ส่งพวกเรามาที่นี่"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"แปลว่าพ่อมีแผนอื่นด้วย"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"น่าจะใช่"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"แต่เราไม่รู้ว่าแผนนั้นคืออะไร"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ไม่รู้"</p>
+      </div>
+
+      <div class="atmosphere-note">เงียบ ลมพัด คลื่นชนหินเบื้องล่าง</div>
+
+      <div class="dialogue-block sisters-talk">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หนูคิดว่าพี่ออร์เรนโอเค ไม่ใช่แค่อยากเชื่อ แต่รู้สึกแบบนั้น ออลม่าของพี่ออร์เรน..."</p>
+        <p class="dialogue-note">หยุด</p>
+        <p class="dialogue-line">"ตอนที่หนูสังเกตมันครั้งสุดท้าย มันยังร้อนอยู่ มันไม่ได้รู้สึกดับ"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"เธอรู้สึกออลม่าของคนที่อยู่ห่างออกไปได้ด้วย?"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"ไม่รู้ว่าเป็นแบบนั้นจริงๆ ไหม หรือแค่อยากเชื่อ"</p>
+        <p class="dialogue-note">ตอบตามความจริง</p>
+        <p class="dialogue-line">"แต่บางทีทั้งสองอย่างก็ให้ความรู้สึกเหมือนกัน"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าไม่โต้แย้ง เธอไม่รู้ว่าเคลทำได้จริงหรือเปล่า แต่เธอก็ไม่รู้ว่าเคลทำไม่ได้</p>
+      </div>
+
+      <div class="dialogue-block sisters-talk">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"เราจะอยู่ที่นี่นานแค่ไหน"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ไม่รู้เหมือนกัน แต่เราไม่มีทางไปหาพ่อหรือออร์เรนได้ตอนนี้ เราไม่รู้ว่าพวกเขาอยู่ที่ไหน เราไม่มีทรัพยากร และถ้า Soldier Empire กำลังตามล่าพ่อ พวกเขาอาจตามล่าพวกเราด้วย"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"งั้นเราต้องแข็งแกร่งขึ้นก่อน"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ใช่"</p>
+      </div>
+
+      <div class="atmosphere-note">เคลพยักหน้า แล้วก็มองออกไปยังทะเล</div>
+
+      <div class="dialogue-block sisters-talk light">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หนูอยากได้ยินว่าพ่อบอกอีกครั้งว่า 'นั่งตัวตรง เคล' "</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"พ่อไม่ได้พูดแค่กับเธอคนเดียว"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"พูดกับพี่น้อยกว่า พี่นั่งตัวตรงอยู่แล้ว"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"เพราะฉันฝึกตัวเองก่อน"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"พี่แปลกนะ"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ขอบคุณ"</p>
+      </div>
+
+      <div class="smile-note">
+        เคลยิ้ม — ครั้งแรกที่ไรน่าเห็นนับตั้งแต่คืนนั้น ไม่ใช่รอยยิ้มเต็มๆ แต่มันออกมาจริง
+      </div>
+    </article>
+
+    <!-- ตอน 9 -->
+    <article class="act" id="act9">
+      <div class="act-marker">
+        <div class="act-number">๙</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">สิ่งที่ Sereth บอกในวันที่สี่</h2>
+        </div>
+      </div>
+
+      <div class="prose-block opening-block">
+        <p class="drop-cap">ว<span>ันที่สี่ตอนเช้า หลังจากวิ่งและนั่งนิ่ง Sereth พูดมากกว่าปกติ</span></p>
+      </div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ข้าวิเคราะห์สิ่งที่เจ้าบอกมาเรื่อง Soldier Empire ถ้าพวกเขาส่งกองกำลังขนาดนั้นไปยังเกาะเล็กๆ อย่าง Punja พวกเขาต้องมีข้อมูลล่วงหน้า และถ้าพวกเขาตามล่าพ่อของเจ้า พวกเขาก็รู้ว่าเขามีออลม่า"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"Soldier Empire ไม่ชอบออลม่า?"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ซับซ้อนกว่านั้น พวกเขาไม่ได้ไม่ชอบมัน พวกเขาต้องการควบคุมมัน มีความแตกต่างอยู่"</p>
+        <p class="dialogue-note">หยุดชงชา</p>
+        <p class="dialogue-line">"ออลม่าที่ไม่อยู่ภายใต้การควบคุมของจักรวรรดิคือสิ่งที่พวกเขาจะไม่ยอมทน"</p>
+      </div>
+
+      <div class="intel-block">
+        <div class="intel-header">
+          <span class="intel-label">ข้อมูล — Soldier Empire</span>
+        </div>
+        <div class="intel-item">
+          <span class="intel-bullet">◈</span>
+          <span>ไม่ต่อต้านออลม่า — ต้องการ<em>ควบคุม</em>มัน</span>
+        </div>
+        <div class="intel-item">
+          <span class="intel-bullet">◈</span>
+          <span>รู้จัก Khar-Zunmora แต่ยังไม่มา — เพราะเข้าถึงยาก</span>
+        </div>
+        <div class="intel-item warn-intel">
+          <span class="intel-bullet">⚠</span>
+          <span>ถ้าพวกเขารู้ว่าไรน่าและเคลอยู่ที่นี่ — สมการนั้นอาจเปลี่ยน</span>
+        </div>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"เพราะเราเป็นลูกของพ่อ"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"อาจจะใช่ หรืออาจจะเพราะสิ่งที่เจ้าสองคนมีในตัวเอง"</p>
+        <p class="dialogue-note">พูดตรงๆ</p>
+        <p class="dialogue-line">"ข้าไม่รู้ว่าธาตุของเจ้าคืออะไรจนกว่าจะเห็น แต่ตามที่ข้ารู้สึกได้ มันไม่ใช่สิ่งธรรมดา"</p>
+      </div>
+
+      <div class="thought-block">
+        <p>เธอคิดถึงพ่อที่ส่งลูกสาวสองคนมาในเรือเล็กพร้อมเข็มทิศและเหรียญสิบเหรียญ</p>
+        <p class="thought-follow">เขาต้องรู้ว่าพวกเธอมีอะไรอยู่ข้างใน</p>
+        <p class="thought-follow">เขาเพียงแต่ไม่บอก</p>
+      </div>
+
+      <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+      <div class="dialogue-block sereth-scene">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าสองคนมีเป้าหมายที่ชัดเจน — หาพ่อและพี่ชาย นั่นดี มันให้ทิศทาง แต่ทิศทางไม่มีประโยชน์ถ้าขาไม่แข็งแรงพอจะเดิน"</p>
+        <p class="dialogue-note">มองทั้งสอง</p>
+        <p class="dialogue-line">"ข้าไม่รู้ว่าเจ้าจะอยู่ที่นี่นานแค่ไหน ขึ้นอยู่กับเจ้า ไม่ใช่ข้า แต่ทุกวันที่อยู่ที่นี่ ให้เจ้าใช้มันให้คุ้ม ไม่ใช่เพราะเร่งรีบ แต่เพราะโลกที่เจ้าจะออกไปนั้นไม่ได้รอ"</p>
+      </div>
+
+      <div class="final-question-block">
+        <div class="fq-sereth">Sereth</div>
+        <p class="fq-line">"เจ้าสองคนพร้อมไหม ถ้าต้องเริ่มจริงๆ ตั้งแต่พรุ่งนี้ ไม่ใช่แค่นั่งนิ่ง แต่ฝึกจนเจ็บ"</p>
+        <div class="fq-answers">
+          <div class="fq-answer kel-ans">
+            <span class="fqa-name">เคล</span>
+            <span class="fqa-word">พร้อม</span>
+            <span class="fqa-note">ไม่ลังเล ตอบก่อน</span>
+          </div>
+          <div class="fq-answer raina-ans">
+            <span class="fqa-name">ไรน่า</span>
+            <span class="fqa-word">พร้อม</span>
+            <span class="fqa-note">นึกถึงพ่อที่ยืนกลางลาน ออลม่าที่บิดแสง มือที่เธอแทบไม่เคยเห็นสั่น</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>Sereth พยักหน้า</p>
+        <p>แล้วก็หยิบถ้วยชาขึ้นมาดื่มครั้งสุดท้าย</p>
+      </div>
+
+      <div class="chapter-closing">
+        <p class="cc-line">เสียงลมของ <span class="place-name">Khar-Zunmora</span> ผ่านหินที่กัดเซาะจนมีรูปทรงแปลก ดังอย่างเงียบ ในแบบที่เกาะนี้ทำมาตลอดนับล้านปี</p>
+        <p class="cc-line">และข้างใต้หิน ข้างใต้ทะเล ข้างใต้ทุกอย่างที่มองเห็น</p>
+        <div class="cc-waiting">
+          <p>บางสิ่งที่เคลรู้สึกได้ในวันแรก</p>
+          <p class="cc-wait-word">ยังคงรอ</p>
+        </div>
+      </div>
+    </article>
+
+    <div class="chapter-footer">
+      <div class="footer-ornament">✦</div>
+      <div class="footer-text">ยังมีต่อ</div>
+      <div class="footer-ornament">✦</div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="ch2.js"></script>
+</body>
+</html>

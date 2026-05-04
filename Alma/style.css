@@ -1,0 +1,914 @@
+/* ============================================================
+   ALMA — Chapter One : Ash and Breath
+   Aesthetic: Deep ocean dark / aged manuscript / ember glow
+   ============================================================ */
+
+:root {
+  --ink: #0d0b09;
+  --parchment: #f4ede0;
+  --ash: #c8bfb0;
+  --ember: #d4622a;
+  --ember-dim: #8a3a16;
+  --ember-bright: #f08050;
+  --sea-deep: #0a1520;
+  --sea-mid: #112233;
+  --sea-light: #1a3a55;
+  --gold: #c9a84c;
+  --gold-dim: #7a6030;
+  --smoke: #3a3530;
+  --text-primary: #2a2018;
+  --text-secondary: #5a4e3e;
+  --text-muted: #8a7e6e;
+  --char-raina: #8a3a16;
+  --char-kel: #3a6080;
+  --char-orren: #4a6040;
+  --char-father: #6a4a20;
+  --char-sereth: #5a3060;
+  --reading-width: 680px;
+  --font-serif: 'Noto Serif Thai', 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Cinzel', 'Cormorant Garamond', serif;
+  --font-italic: 'Cormorant Garamond', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+
+/* Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.6;
+}
+
+/* ============================================================
+   EMBER PARTICLES
+   ============================================================ */
+.ember-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.ember-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ember-bright) 0%, var(--ember) 60%, transparent 100%);
+  animation: ember-float linear infinite;
+  opacity: 0;
+}
+
+@keyframes ember-float {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 0.8; }
+  80% { opacity: 0.4; }
+  100% { transform: translateY(-80vh) translateX(var(--drift)) scale(0.3); opacity: 0; }
+}
+
+/* ============================================================
+   COVER
+   ============================================================ */
+.cover {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--sea-deep);
+}
+
+.cover-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.sea-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sea-far {
+  height: 30%;
+  background: linear-gradient(180deg, transparent 0%, #0e2030 40%, #0a1828 100%);
+  animation: sea-sway 12s ease-in-out infinite;
+}
+
+.sea-mid {
+  height: 20%;
+  background: linear-gradient(180deg, transparent 0%, #0c1a28 60%, #08121e 100%);
+  animation: sea-sway 8s ease-in-out infinite reverse;
+  clip-path: ellipse(55% 60% at 50% 100%);
+}
+
+.sea-near {
+  height: 12%;
+  background: linear-gradient(180deg, transparent 0%, #0a1520 100%);
+  animation: sea-sway 5s ease-in-out infinite;
+}
+
+@keyframes sea-sway {
+  0%, 100% { transform: translateX(-1%) scaleX(1.02); }
+  50% { transform: translateX(1%) scaleX(0.98); }
+}
+
+.smoke-layer {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 40% 30% at 30% 60%, rgba(210, 90, 30, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 70% 40%, rgba(180, 70, 20, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 80%, rgba(10, 20, 32, 0.8) 0%, transparent 100%);
+  animation: smoke-drift 15s ease-in-out infinite;
+}
+
+@keyframes smoke-drift {
+  0%, 100% { opacity: 1; transform: translateX(0); }
+  50% { opacity: 0.85; transform: translateX(1%); }
+}
+
+.cover-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 2rem;
+  animation: cover-reveal 2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes cover-reveal {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.cover-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: cover-reveal 1.5s ease 0.5s forwards;
+}
+
+.eyebrow-line {
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim));
+}
+
+.eyebrow-line:last-child {
+  background: linear-gradient(90deg, var(--gold-dim), transparent);
+}
+
+.eyebrow-text {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+.cover-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: cover-reveal 1.5s ease 0.8s forwards;
+}
+
+.title-chapter {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--ember-dim);
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.title-divider {
+  display: none;
+}
+
+.title-name {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 300;
+  color: var(--parchment);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 60px rgba(210, 98, 42, 0.3), 0 2px 4px rgba(0,0,0,0.6);
+}
+
+.cover-subtitle {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  animation: cover-reveal 1.5s ease 1.1s forwards;
+}
+
+.begin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: transparent;
+  border: 1px solid var(--ember-dim);
+  color: var(--ember-bright);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: cover-reveal 1.5s ease 1.4s forwards;
+}
+
+.begin-btn:hover {
+  background: rgba(212, 98, 42, 0.1);
+  border-color: var(--ember);
+  box-shadow: 0 0 20px rgba(212, 98, 42, 0.2);
+  letter-spacing: 0.4em;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(180deg, transparent, var(--ember-dim), transparent);
+  margin: 0 auto;
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ============================================================
+   STORY WRAPPER
+   ============================================================ */
+.story {
+  background: var(--parchment);
+  position: relative;
+}
+
+.story::before {
+  content: '';
+  display: block;
+  height: 120px;
+  background: linear-gradient(180deg, var(--ink) 0%, var(--sea-deep) 40%, var(--parchment) 100%);
+}
+
+/* ============================================================
+   ACT SECTIONS
+   ============================================================ */
+.act {
+  max-width: var(--reading-width);
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+.act-marker {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding-top: 3rem;
+}
+
+.act-number {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--ember);
+  opacity: 0.25;
+  min-width: 60px;
+  text-align: right;
+  font-weight: 400;
+}
+
+.act-title-wrap {
+  border-left: 2px solid var(--ember-dim);
+  padding-left: 1.5rem;
+}
+
+.act-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   PROSE BLOCKS
+   ============================================================ */
+.prose-block {
+  margin-bottom: 1.8rem;
+}
+
+.prose-block p {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.prose-block p:last-child {
+  margin-bottom: 0;
+}
+
+.opening-block {
+  margin-bottom: 2.5rem;
+}
+
+/* Drop Cap */
+.drop-cap {
+  position: relative;
+}
+
+.drop-cap::first-letter,
+.drop-cap > :first-child::before {
+  content: '';
+}
+
+/* Using a different approach: wrap first letter in span */
+.prose-block .drop-cap {
+  line-height: 1.8;
+}
+
+/* Manual drop cap via JS wrapping — done in the HTML */
+.drop-cap::first-letter {
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.75;
+  padding-right: 0.12em;
+  padding-top: 0.08em;
+  font-family: var(--font-display);
+  color: var(--ember);
+  font-weight: 400;
+}
+
+.em-line {
+  font-style: italic;
+  color: var(--text-secondary) !important;
+  font-family: var(--font-italic);
+}
+
+.char-name {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.place-name {
+  font-style: italic;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   INNER VOICE
+   ============================================================ */
+.inner-voice {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 1.2rem 0;
+}
+
+.iv-border {
+  width: 3px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent, var(--ember-dim), transparent);
+  flex-shrink: 0;
+}
+
+.inner-voice p {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   CHARACTER INTRO
+   ============================================================ */
+.char-intro {
+  background: rgba(0,0,0,0.04);
+  border-left: 3px solid var(--ember);
+  padding: 1.5rem 2rem;
+  margin: 2.5rem 0;
+}
+
+.char-intro-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.char-intro-desc {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   SCENE BREAKS
+   ============================================================ */
+.scene-break {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 0;
+}
+
+.scene-break span:first-child,
+.scene-break span:last-child {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ash));
+}
+
+.scene-break span:last-child {
+  background: linear-gradient(90deg, var(--ash), transparent);
+}
+
+.scene-glyph {
+  color: var(--ash);
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  flex: none !important;
+  height: auto !important;
+  background: none !important;
+}
+
+/* ============================================================
+   SOUND EFFECTS
+   ============================================================ */
+.sound-effect-sequence {
+  margin: 2.5rem 0;
+  padding: 0 1rem;
+}
+
+.sound-effect {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--ember);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  opacity: 0.85;
+}
+
+.sound-effect.s2 {
+  font-size: 2.6rem;
+  opacity: 0.95;
+}
+
+.sound-effect.heavy {
+  font-size: 3rem;
+  color: var(--ember-dim);
+}
+
+.sound-desc {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+/* ============================================================
+   DIALOGUE
+   ============================================================ */
+.dialogue-block {
+  margin: 2rem 0;
+  padding: 1.5rem 1.8rem;
+  background: rgba(0,0,0,0.03);
+  border-radius: 2px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.dialogue-block.whisper {
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.dialogue-speaker {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.dialogue-speaker:first-child {
+  margin-top: 0;
+}
+
+.dialogue-speaker.raina { color: var(--char-raina); }
+.dialogue-speaker.kel { color: var(--char-kel); }
+.dialogue-speaker.orren { color: var(--char-orren); }
+.dialogue-speaker.father { color: var(--char-father); }
+.dialogue-speaker.sereth { color: var(--char-sereth); }
+
+.dialogue-line {
+  color: var(--text-primary);
+  padding-left: 1rem;
+  font-size: 0.97rem;
+  margin-bottom: 0 !important;
+}
+
+.dialogue-note {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding-left: 1rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0 !important;
+}
+
+.father-scene {
+  border-left: 3px solid var(--char-father);
+}
+
+.final-dialogue {
+  border: 1px solid var(--char-sereth);
+  border-left: 3px solid var(--char-sereth);
+  background: rgba(90, 48, 96, 0.04);
+}
+
+/* ============================================================
+   THOUGHT BLOCK
+   ============================================================ */
+.thought-block {
+  margin: 2rem 0 2rem 2rem;
+  padding-left: 1.5rem;
+  border-left: 1px dashed var(--ash);
+}
+
+.thought-block p {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
+.thought-follow {
+  font-size: 0.95rem !important;
+  color: var(--text-muted) !important;
+}
+
+/* ============================================================
+   ALMA REVEAL
+   ============================================================ */
+.alma-reveal {
+  margin: 3rem 0;
+  text-align: center;
+  padding: 2.5rem;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(212, 98, 42, 0.07) 0%, transparent 100%);
+  position: relative;
+}
+
+.alma-reveal::before, .alma-reveal::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ember-dim), transparent);
+}
+
+.alma-reveal::before { top: 0; }
+.alma-reveal::after { bottom: 0; }
+
+.alma-text {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 0.4em;
+  color: var(--ember);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 30px rgba(212, 98, 42, 0.4);
+  animation: alma-pulse 3s ease-in-out infinite;
+}
+
+@keyframes alma-pulse {
+  0%, 100% { text-shadow: 0 0 30px rgba(212, 98, 42, 0.4); }
+  50% { text-shadow: 0 0 50px rgba(212, 98, 42, 0.7), 0 0 20px rgba(240, 128, 80, 0.4); }
+}
+
+.alma-reveal.subtle .alma-text {
+  font-size: 1.6rem;
+  color: var(--ember-dim);
+  animation: alma-pulse-subtle 4s ease-in-out infinite;
+}
+
+@keyframes alma-pulse-subtle {
+  0%, 100% { text-shadow: 0 0 20px rgba(138, 58, 22, 0.3); opacity: 0.7; }
+  50% { text-shadow: 0 0 35px rgba(212, 98, 42, 0.5); opacity: 1; }
+}
+
+.alma-desc {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   LIE REVEAL
+   ============================================================ */
+.lie-reveal {
+  margin: 1.5rem 0;
+  padding: 1.2rem 1.5rem;
+  background: rgba(138, 58, 22, 0.06);
+}
+
+.lie-reveal p:first-child {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  color: var(--ember-dim);
+  margin-bottom: 0.5rem;
+}
+
+.lie-sub {
+  font-family: var(--font-italic) !important;
+  font-style: italic;
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+}
+
+/* ============================================================
+   INVENTORY
+   ============================================================ */
+.inventory-block {
+  margin: 2rem 0;
+  border: 1px solid var(--ash);
+  padding: 1.5rem 2rem;
+}
+
+.inv-title {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.inv-item {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.93rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.inv-icon {
+  color: var(--ash);
+  flex-shrink: 0;
+  font-family: var(--font-display);
+}
+
+.inv-item.lack {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.inv-item.lack .inv-icon {
+  color: var(--ember-dim);
+}
+
+/* ============================================================
+   LETTER
+   ============================================================ */
+.letter-block {
+  margin: 2.5rem 0;
+  background: #ede4d0;
+  border: 1px solid #c8b898;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 3px 3px 12px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.letter-header {
+  padding: 1.5rem 2rem 1rem;
+  border-bottom: 1px solid #c8b898;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.letter-seal {
+  font-size: 1.5rem;
+  color: var(--ember-dim);
+  margin-bottom: 0.3rem;
+}
+
+.letter-from {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.letter-body {
+  padding: 1.8rem 2.5rem 2rem;
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 1rem;
+  color: #3a2e1e;
+  line-height: 2;
+}
+
+.letter-body p {
+  margin-bottom: 1rem;
+}
+
+.letter-closing {
+  margin-top: 1.5rem !important;
+  color: var(--text-muted);
+}
+
+.letter-sig {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: var(--ember-dim);
+  margin-bottom: 0 !important;
+}
+
+/* ============================================================
+   CHAR ENTRANCE
+   ============================================================ */
+.char-entrance {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: rgba(90, 48, 96, 0.04);
+  border-left: 3px solid var(--char-sereth);
+}
+
+.entrance-desc {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.97rem;
+  line-height: 1.9;
+}
+
+.entrance-detail {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-italic);
+}
+
+/* ============================================================
+   CHAPTER END
+   ============================================================ */
+.chapter-end {
+  margin: 4rem 0 2rem;
+  text-align: center;
+}
+
+.place-reveal {
+  display: inline-block;
+  padding: 1.5rem 4rem;
+  border: 1px solid var(--char-sereth);
+  position: relative;
+}
+
+.place-reveal::before, .place-reveal::after {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--char-sereth);
+  font-size: 0.6rem;
+  opacity: 0.5;
+}
+
+.place-reveal::before { left: 1rem; }
+.place-reveal::after { right: 1rem; }
+
+.place-reveal-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.3em;
+  color: var(--char-sereth);
+  text-shadow: 0 0 20px rgba(90, 48, 96, 0.3);
+}
+
+/* ============================================================
+   CHAPTER FOOTER
+   ============================================================ */
+.chapter-footer {
+  max-width: var(--reading-width);
+  margin: 0 auto;
+  padding: 2rem 2rem 6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.footer-ornament {
+  color: var(--ash);
+  font-size: 0.7rem;
+}
+
+.footer-text {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+
+  .act { padding: 0 1.2rem 3rem; }
+
+  .act-marker { gap: 1rem; }
+  .act-number { font-size: 2.5rem; min-width: 45px; }
+  .act-title { font-size: 1.1rem; }
+
+  .letter-body { padding: 1.2rem 1.5rem; }
+
+  .cover-content { padding: 1.5rem 1.5rem; }
+
+  .sound-effect { font-size: 1.6rem; }
+  .sound-effect.s2 { font-size: 2rem; }
+  .sound-effect.heavy { font-size: 2.2rem; }
+
+  .alma-text { font-size: 1.7rem; }
+
+  .dialogue-block { padding: 1.2rem 1.2rem; }
+
+  .char-intro { padding: 1.2rem 1.5rem; }
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
