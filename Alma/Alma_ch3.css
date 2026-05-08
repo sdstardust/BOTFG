@@ -1,0 +1,799 @@
+/* ============================================================
+   ALMA — Chapter Three : ดาบ ฟ้าร้อง และจดหมาย
+   Aesthetic: Iron grey + lightning gold + open ocean
+   Layered on top of style.css (inherited)
+   ============================================================ */
+
+:root {
+  /* Chapter 3 palette — harder, warmer, more kinetic */
+  --iron: #2e2c28;
+  --iron-light: #5a5650;
+  --storm: #1a2535;
+  --storm-mid: #2a3d55;
+  --storm-bright: #4a6080;
+  --lightning: #c8a040;
+  --lightning-dim: #7a5e20;
+  --lightning-bright: #e8c060;
+  --sand: #d8cdb8;
+  --ch3-parchment: #ede6d4;
+  --char-golem: #5a4830;
+  --depart-gold: #b89040;
+  --chapter-accent: #c8a040;
+  --chapter-accent-dim: #7a5e20;
+  --chapter-accent-bright: #e8c060;
+}
+
+/* ============================================================
+   BODY OVERRIDE
+   ============================================================ */
+.ch3-body {
+  background: #0e0e0c;
+}
+
+/* ============================================================
+   SPARK PARTICLES (replaces mist for ch3)
+   ============================================================ */
+.spark-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: hidden;
+}
+
+.spark-particle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(200, 160, 64, 0.9) 0%, rgba(200, 160, 64, 0.3) 50%, transparent 100%);
+  border-radius: 50%;
+  animation: spark-fly linear forwards;
+  opacity: 0;
+}
+
+@keyframes spark-fly {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  70%  { opacity: 0.6; }
+  100% { transform: translate(var(--sx), var(--sy)) scale(0.1); opacity: 0; }
+}
+
+/* ============================================================
+   COVER — Chapter 3
+   ============================================================ */
+.ch3-cover {
+  background: #0e0e0c !important;
+}
+
+.ch3-cover-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Arena floor lines */
+.arena-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(46, 44, 40, 0.4) 0%, transparent 100%);
+}
+
+.arena-line {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 160, 64, 0.15), transparent);
+}
+
+/* Lightning strike on cover */
+.lightning-cover {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(200, 160, 64, 0.08) 30%,
+    rgba(200, 160, 64, 0.25) 55%,
+    rgba(200, 160, 64, 0.04) 80%,
+    transparent 100%
+  );
+  filter: blur(2px);
+  animation: lightning-flicker 6s ease-in-out infinite;
+}
+
+@keyframes lightning-flicker {
+  0%, 90%, 100% { opacity: 0.3; }
+  92%  { opacity: 1; width: 4px; }
+  94%  { opacity: 0.1; }
+  96%  { opacity: 0.9; width: 3px; }
+  98%  { opacity: 0.2; }
+}
+
+/* Cover chapter 3 text overrides */
+.ch3-cover .cover-title .title-name {
+  color: var(--lightning-bright);
+  text-shadow: 0 0 60px rgba(200, 160, 64, 0.4);
+}
+
+/* ============================================================
+   WEAPON CHOICE DISPLAY
+   ============================================================ */
+.weapon-choice {
+  display: flex;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+  align-items: stretch;
+}
+
+.weapon-card {
+  flex: 1;
+  padding: 1.8rem;
+  border: 1px solid var(--ash);
+  background: rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.weapon-card.chosen {
+  border-color: var(--lightning-dim);
+  background: rgba(200, 160, 64, 0.03);
+}
+
+.weapon-owner {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.weapon-owner.raina-w { color: var(--char-raina); }
+.weapon-owner.kel-w   { color: var(--char-kel); }
+
+.weapon-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.weapon-desc {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.weapon-reason {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   GOLEM ENCOUNTER
+   ============================================================ */
+.golem-block {
+  margin: 2.5rem 0;
+  padding: 1.8rem 2rem;
+  background: rgba(46, 44, 40, 0.06);
+  border: 1px solid rgba(90, 72, 48, 0.25);
+  position: relative;
+}
+
+.golem-label {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--char-golem);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.golem-desc {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.93rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 0.8rem;
+}
+
+.golem-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-italic);
+}
+
+/* ============================================================
+   COMBAT LOG — สัปดาห์ต่อสัปดาห์
+   ============================================================ */
+.combat-log {
+  margin: 2.5rem 0;
+  border: 1px solid var(--ash);
+}
+
+.clog-header {
+  padding: 0.8rem 1.5rem;
+  background: rgba(0,0,0,0.04);
+  border-bottom: 1px solid var(--ash);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.clog-week {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  align-items: baseline;
+}
+
+.clog-week:last-child { border-bottom: none; }
+
+.clog-week-num {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--iron-light);
+  flex-shrink: 0;
+}
+
+.clog-week p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.clog-week .progress-note {
+  margin-top: 0.4rem;
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-italic);
+}
+
+/* ============================================================
+   SWORD-WHIP ENTRANCE (Sereth enters arena)
+   ============================================================ */
+.sereth-entrance {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  border-top: 2px solid rgba(90, 48, 96, 0.25);
+  border-bottom: 2px solid rgba(90, 48, 96, 0.25);
+  background: rgba(90, 48, 96, 0.03);
+  text-align: center;
+}
+
+.se-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--char-sereth);
+  margin-bottom: 0.8rem;
+  opacity: 0.8;
+}
+
+.se-weapon {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--char-sereth);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.se-desc {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   LIGHTNING BURST — moment of accident
+   ============================================================ */
+.lightning-burst {
+  margin: 3rem 0;
+  padding: 2.5rem;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%,
+    rgba(200, 160, 64, 0.06) 0%,
+    transparent 70%
+  );
+  border: 1px solid rgba(200, 160, 64, 0.2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.lightning-burst::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(200, 160, 64, 0.3), transparent);
+  animation: lb-pulse 3s ease-in-out infinite;
+}
+
+@keyframes lb-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.9; }
+}
+
+.lb-moment {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--lightning-dim);
+  margin-bottom: 1.2rem;
+}
+
+.lb-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--lightning);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 30px rgba(200, 160, 64, 0.4);
+  margin-bottom: 1rem;
+  animation: lb-title-glow 3s ease-in-out infinite;
+}
+
+@keyframes lb-title-glow {
+  0%, 100% { text-shadow: 0 0 20px rgba(200, 160, 64, 0.3); }
+  50%       { text-shadow: 0 0 50px rgba(200, 160, 64, 0.7); }
+}
+
+.lb-desc {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+.lb-reaction {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(200, 160, 64, 0.12);
+}
+
+.lbr-item {
+  text-align: center;
+}
+
+.lbr-name {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  color: var(--text-muted);
+}
+
+.lbr-name.raina-n { color: var(--char-raina); }
+.lbr-name.kel-n   { color: var(--char-kel); }
+.lbr-name.sereth-n { color: var(--char-sereth); }
+
+.lbr-reaction {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 160px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   MEMORY SURFACE — เคลนึกถึงปู่
+   ============================================================ */
+.memory-surface {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: rgba(58, 96, 128, 0.04);
+  border: 1px solid rgba(58, 96, 128, 0.2);
+  position: relative;
+}
+
+.ms-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--char-kel);
+  margin-bottom: 1.2rem;
+  opacity: 0.8;
+}
+
+.ms-fragment {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.93rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin-bottom: 0.8rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(58, 96, 128, 0.2);
+}
+
+.ms-gap {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-italic);
+  text-align: center;
+  padding: 0.5rem 0;
+  letter-spacing: 0.15em;
+}
+
+/* ============================================================
+   COMPASS EXPLANATION — เซเรธอธิบายเข็มทิศ
+   ============================================================ */
+.compass-explanation {
+  margin: 2.5rem 0;
+  border: 1px solid rgba(90, 48, 96, 0.2);
+  background: rgba(90, 48, 96, 0.02);
+}
+
+.compass-header {
+  padding: 0.8rem 1.8rem;
+  border-bottom: 1px solid rgba(90, 48, 96, 0.15);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--char-sereth);
+  opacity: 0.8;
+}
+
+.compass-mechanic {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 1.8rem;
+  border-bottom: 1px solid rgba(90, 48, 96, 0.08);
+  align-items: flex-start;
+}
+
+.compass-mechanic:last-child { border-bottom: none; }
+
+.cm-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  padding-top: 0.15rem;
+  color: var(--char-sereth);
+  opacity: 0.6;
+}
+
+.cm-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   WORLD UPDATE — Soldier Empire
+   ============================================================ */
+.world-update {
+  margin: 2.5rem 0;
+  padding: 1.8rem;
+  border: 1px solid rgba(138, 58, 22, 0.22);
+  background: rgba(138, 58, 22, 0.03);
+}
+
+.wu-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.wu-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ember-dim);
+  flex-shrink: 0;
+  animation: wu-pulse 2s ease-in-out infinite;
+}
+
+@keyframes wu-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.wu-title {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ember-dim);
+}
+
+.wu-item {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.7rem;
+  line-height: 1.7;
+}
+
+.wu-bullet {
+  color: var(--ember-dim);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* ============================================================
+   ELEMENT TRAINING — ไรน่าและเคลฝึกควบคุมธาตุ
+   ============================================================ */
+.element-training {
+  margin: 2.5rem 0;
+  border: 1px solid rgba(200, 160, 64, 0.15);
+  background: rgba(200, 160, 64, 0.02);
+}
+
+.et-header {
+  padding: 0.8rem 1.8rem;
+  border-bottom: 1px solid rgba(200, 160, 64, 0.12);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--lightning-dim);
+}
+
+.et-session {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.2rem 1.8rem;
+  border-bottom: 1px solid rgba(200, 160, 64, 0.06);
+  align-items: flex-start;
+}
+
+.et-session:last-child { border-bottom: none; }
+
+.et-who {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  min-width: 55px;
+  padding-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.et-who.raina-et { color: var(--char-raina); }
+.et-who.kel-et   { color: var(--char-kel); }
+
+.et-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.et-note {
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-italic);
+}
+
+/* ============================================================
+   DEPARTURE MOMENT
+   ============================================================ */
+.departure-block {
+  margin: 3.5rem 0 2rem;
+  padding: 2.5rem;
+  background: radial-gradient(ellipse 70% 50% at 50% 50%,
+    rgba(200, 160, 64, 0.04) 0%,
+    transparent 100%
+  );
+  border-top: 1px solid rgba(200, 160, 64, 0.15);
+  border-bottom: 1px solid rgba(200, 160, 64, 0.15);
+  text-align: center;
+}
+
+.dep-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--lightning-dim);
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.dep-gifts {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.dep-gift {
+  flex: 1;
+  max-width: 200px;
+  padding: 1.2rem;
+  border: 1px solid var(--ash);
+  text-align: center;
+}
+
+.dep-gift-owner {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.dep-gift-owner.raina-g { color: var(--char-raina); }
+.dep-gift-owner.kel-g   { color: var(--char-kel); }
+
+.dep-gift-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.dep-gift-note {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.dep-words {
+  margin-top: 0.5rem;
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.97rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   FAREWELL SERETH — final words block
+   ============================================================ */
+.sereth-farewell {
+  margin: 2rem 0;
+  padding: 1.8rem 2rem;
+  background: rgba(90, 48, 96, 0.05);
+  border: 1px solid rgba(90, 48, 96, 0.2);
+}
+
+.sf-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--char-sereth);
+  margin-bottom: 0.8rem;
+  opacity: 0.75;
+}
+
+.sf-words {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   CHAPTER CLOSING — ch3
+   ============================================================ */
+.ch3-closing {
+  margin: 4rem 0 2rem;
+  text-align: center;
+  padding: 3rem 2.5rem;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%,
+    rgba(200, 160, 64, 0.05) 0%,
+    transparent 100%
+  );
+}
+
+.ch3-cc-line {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.97rem;
+  margin-bottom: 1rem;
+  line-height: 1.9;
+}
+
+.ch3-waiting {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(200, 160, 64, 0.15);
+}
+
+.ch3-waiting p:first-child {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-italic);
+  margin-bottom: 0.8rem;
+}
+
+.ch3-wait-word {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.4em;
+  color: var(--lightning);
+  text-shadow: 0 0 30px rgba(200, 160, 64, 0.35);
+  animation: ch3-wait-pulse 4s ease-in-out infinite;
+}
+
+@keyframes ch3-wait-pulse {
+  0%, 100% { opacity: 0.6; letter-spacing: 0.4em; }
+  50% { opacity: 1; letter-spacing: 0.5em; text-shadow: 0 0 50px rgba(200, 160, 64, 0.55); }
+}
+
+/* ============================================================
+   OVERRIDE scroll line for ch3
+   ============================================================ */
+.ch3-body .scroll-line {
+  background: linear-gradient(180deg, transparent, var(--lightning-dim), transparent) !important;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .weapon-choice {
+    flex-direction: column;
+  }
+  .lb-reaction {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  .dep-gifts {
+    flex-direction: column;
+    align-items: center;
+  }
+  .dep-gift {
+    max-width: 100%;
+    width: 100%;
+  }
+  .et-session {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .clog-week {
+    grid-template-columns: 70px 1fr;
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ออลม่า — บทที่สาม : ดาบ ฟ้าร้อง และจดหมาย</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="Alma_ch3.css" />
+</head>
+<body class="ch3-body">
+
+  <div class="noise-overlay"></div>
+  <div class="spark-container" id="sparkContainer"></div>
+
+  <!-- Cover Chapter 3 -->
+  <section class="cover ch3-cover" id="cover">
+    <div class="ch3-cover-bg">
+      <div class="arena-floor"></div>
+      <div class="arena-line"></div>
+      <div class="lightning-cover"></div>
+      <div id="arenaLines" style="position:absolute;inset:0;"></div>
+    </div>
+
+    <div class="cover-content">
+      <div class="ch-nav">
+        <a href="Alma_ch2.html" class="ch-nav-link">← บทที่สอง</a>
+      </div>
+      <div class="cover-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">ออลม่า</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      <h1 class="cover-title">
+        <span class="title-chapter">บทที่สาม</span>
+        <span class="title-name">ดาบ ฟ้าร้อง<br>และจดหมาย</span>
+      </h1>
+      <p class="cover-subtitle">A weapon learns its owner before the owner learns it.</p>
+      <button class="begin-btn" id="beginBtn">
+        <span>เริ่มอ่าน</span>
+        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1L13 7L7 13M1 7H13" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="scroll-hint"><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- Story -->
+  <main class="story" id="story">
+
+    <!-- ตอน 1 -->
+    <article class="act" id="act1">
+      <div class="act-marker">
+        <div class="act-number">๑</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">คลังอาวุธ</h2>
+        </div>
+      </div>
+
+      <div class="prose-block opening-block">
+        <p class="drop-cap">ค<span>ลังอาวุธของเซเรธอยู่ใต้ดิน ลงบันไดหินสิบสองขั้นแล้วเลี้ยวซ้าย มีกลิ่นน้ำมันเก่าและเหล็กที่ผ่านอากาศเค็มมานานจนสี</span></p>
+        <p>ไรน่าหยุดอยู่ที่ประตูสักครู่ก่อนก้าวเข้าไป</p>
+        <p>เซเรธยืนอยู่ตรงกลาง มือเปล่า สายตาสำรวจพวกเธอสองคนในแบบที่ไรน่าเริ่มรู้จักแล้ว — ไม่ตัดสิน แต่ก็ไม่มองข้าม</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เลือกสิ่งที่จะอยู่กับเจ้านานกว่าการฝึก ไม่ใช่สิ่งที่ดูน่าประทับใจที่สุด"</p>
+        <p class="dialogue-note">เธอไม่บอกว่าเลือกอะไร ไม่ให้คำแนะนำเพิ่ม แค่หันหลังไปยืนที่มุมห้องและรอ</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าเดินช้าๆ ตามแนวชั้นวาง มือแตะด้ามบ้างอย่างเบามือ บ้างก็แค่ดู ดาบยาวสองเล่มที่วางอยู่ด้านหน้าสุดแวววาวและสวยงาม เธอผ่านมันไปโดยไม่หยุด</p>
+        <p>เธอจำสิ่งที่พ่อเคยพูดเกี่ยวกับอาวุธได้ว่า อาวุธที่ดีที่สุดคืออาวุธที่เจ้าจะไม่หวงเมื่อถึงเวลาต้องทิ้ง</p>
+        <p>ตรงมุมในของชั้นล่าง มีดาบเล่มหนึ่งที่ไม่มีอะไรพิเศษ ใบยาวพอดีกับแขนเธอ ด้ามหนังเก่าที่มีรอยจับจากคนใช้มาก่อน</p>
+        <p>เธอหยิบขึ้นมา ลองจับน้ำหนัก</p>
+      </div>
+
+      <div class="inner-voice">
+        <div class="iv-border"></div>
+        <p>รู้สึกถูก</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลใช้เวลานานกว่า เธอเดินวนรอบห้องสองรอบ หยิบขึ้นแล้วก็วางลง แตะแล้วปล่อย จนในที่สุดก็หยุดอยู่ที่ชั้นที่ไรน่าไม่เคยสังเกตเห็น</p>
+        <p>กาตาร์คู่หนึ่ง ใบสั้น ด้ามครอบมือทำจากเหล็กเส้น</p>
+      </div>
+
+      <div class="weapon-choice">
+        <div class="weapon-card chosen">
+          <div class="weapon-owner raina-w">ไรน่า</div>
+          <div class="weapon-name">ดาบสั้นเก่า</div>
+          <div class="weapon-desc">ใบยาวพอดีกับแขน ด้ามหนังมีรอยจับของคนใช้มาก่อน ไม่ประดับ ไม่วิจิตร</div>
+          <div class="weapon-reason">เธอไม่ได้เลือกเพราะสวย เธอเลือกเพราะมันรู้สึกเหมือนของที่เคยผ่านอะไรมาบ้างแล้ว</div>
+        </div>
+        <div class="weapon-card chosen">
+          <div class="weapon-owner kel-w">เคล</div>
+          <div class="weapon-name">กาตาร์</div>
+          <div class="weapon-desc">ใบสั้นคู่ ด้ามครอบมือเหล็กเส้น เหมาะกับคนที่ต้องการระยะใกล้และความคล่องตัว</div>
+          <div class="weapon-reason">เคลไม่ได้อธิบายว่าเพราะอะไร แต่ออลม่าของเธอนิ่งลงทันทีที่หยิบขึ้นมา — เหมือนเจอบางอย่างที่ตามหาอยู่นานโดยไม่รู้ตัว</div>
+        </div>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ดี"</p>
+        <p class="dialogue-note">สั้นและเรียบ แต่ไรน่าสังเกตว่าเซเรธไม่แปลกใจกับสิ่งที่ทั้งสองเลือก ราวกับรู้อยู่แล้วว่าจะออกมาเป็นแบบนี้</p>
+      </div>
+    </article>
+
+    <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+    <!-- ตอน 2 -->
+    <article class="act" id="act2">
+      <div class="act-marker">
+        <div class="act-number">๒</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">โกเล็มหิน</h2>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>สนามฝึกของเซเรธคือลานหินกว้างด้านหลังบ้าน ล้อมด้วยหน้าผาทั้งสามด้าน ด้านที่สี่เปิดออกสู่ทะเล</p>
+        <p>เช้าวันแรกที่ออกมาพร้อมอาวุธ เซเรธยืนอยู่กลางลาน มือแตะพื้นหิน</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ข้าจะให้สิ่งที่เจ้าสู้ได้โดยไม่ต้องกังวลว่าจะทำร้ายมันหนักเกินไป"</p>
+      </div>
+
+      <div class="golem-block">
+        <div class="golem-label">โกเล็มหิน — สร้างจากพลังธาตุดิน</div>
+        <p class="golem-desc">มันลุกขึ้นจากพื้นลานช้าๆ หินก้อนเล็กก้อนน้อยดึงเข้าหากัน ก่อตัวเป็นรูปร่างที่คล้ายคนแต่ไม่ใช่คน สูงกว่าไรน่าครึ่งหัว ไม่มีใบหน้า ไม่มีอาวุธ</p>
+        <p class="golem-desc">แต่มันเคลื่อนไหวได้ และมันหนักมาก</p>
+        <p class="golem-note">เซเรธสร้างมันขึ้นมาโดยไม่เปลี่ยนสีหน้า — เหมือนทำอะไรที่เคยทำมาหลายร้อยครั้งแล้ว</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่ามองโกเล็มที่ยืนนิ่งรอคำสั่ง รู้สึกถึงออลม่าของเซเรธที่เชื่อมกับมันอยู่ เส้นบางๆ ที่มองไม่เห็น แต่เธอรู้สึกได้ว่ามีอยู่</p>
+        <p>เคลก้าวออกมาก่อน</p>
+        <p>กาตาร์สองเล่มในมือ เธอเข้าหาโกเล็มเร็วกว่าที่ไรน่าคาดไว้ — ไม่ใช่เพราะกล้า แต่เพราะเธออ่านการเคลื่อนไหวของมันได้ก่อนที่มันจะเริ่ม</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เคล อย่าโจมตีตรง มันแข็งกว่าเจ้า ใช้ความเร็ว"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"รู้แล้ว"</p>
+        <p class="dialogue-note">เธอพูดขณะถอยเพื่อหลบกำปั้นหินที่ปัดมา ไม่มีเวลาโกรธ</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าเข้าจากด้านข้างพร้อมกัน ดาบสั้นที่มือขวา เธอเคยฝึกกับพ่อและออร์เรนมาก่อน แต่นั่นคือการฝึกที่สนใจท่าทาง ไม่ใช่การต่อสู้จริงที่ต้องคิดและตัดสินใจพร้อมกัน</p>
+        <p>สองชั่วโมงแรกคือการล้มลุก</p>
+      </div>
+
+      <div class="training-log">
+        <div class="tlog-header">บันทึกการฝึก — วันแรกกับโกเล็ม</div>
+        <div class="tlog-round">
+          <div class="tlog-round-num">รอบที่ ๑–๓</div>
+          <p>ไรน่าถูกกวาดล้มสองครั้ง เคลถูกกดจนหลังแตะพื้นหนึ่งครั้ง ทั้งสองทำงานแยกกัน ต่างคนต่างสู้</p>
+        </div>
+        <div class="tlog-round">
+          <div class="tlog-round-num">รอบที่ ๔–๖</div>
+          <p>เริ่มสังเกตกันและกัน ไรน่าดึงความสนใจโกเล็ม เคลเข้าจากจุดบอด แต่จังหวะยังไม่ตรง</p>
+        </div>
+        <div class="tlog-round">
+          <div class="tlog-round-num">รอบที่ ๗</div>
+          <p>ครั้งแรกที่ทั้งสองเคลื่อนไปพร้อมกันโดยไม่ต้องพูด ไรน่าสะดุดใจตัวเองหลังจบรอบ เคลยิ้มเล็กน้อยแต่ไม่พูดอะไร</p>
+        </div>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth — ประเมินผล</div>
+        <p class="dialogue-note">เมื่อสิ้นวัน</p>
+        <div class="assessment-item raina-a">
+          <span class="asmt-name">ไรน่า</span>
+          <p class="dialogue-line">"เจ้าอ่านสถานการณ์ได้ดีกว่าเคล แต่ตัดสินใจช้ากว่า บางครั้งการคิดถูกทำให้เจ้าลังเล"</p>
+        </div>
+        <div class="assessment-item kel-a">
+          <span class="asmt-name">เคล</span>
+          <p class="dialogue-line">"เจ้าเร็วเกินไปในช่วงแรก แต่ดีขึ้นเรื่อยๆ ในช่วงหลัง เจ้าเรียนรู้ขณะสู้ ไม่ใช่ก่อนสู้ นั่นคุ้มค่า"</p>
+        </div>
+      </div>
+    </article>
+
+    <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+    <!-- ตอน 3 -->
+    <article class="act" id="act3">
+      <div class="act-marker">
+        <div class="act-number">๓</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">หลายสัปดาห์</h2>
+        </div>
+      </div>
+
+      <div class="combat-log">
+        <div class="clog-header">บันทึกการฝึก — สัปดาห์ที่ผ่านไป</div>
+        <div class="clog-week">
+          <div class="clog-week-num">สัปดาห์ที่ ๑–๒</div>
+          <div>
+            <p>โกเล็มเดียว สู้พร้อมกัน เริ่มรู้จังหวะของกัน</p>
+            <p class="progress-note">เคลใช้ความคล่องตัวของกาตาร์ได้ดีขึ้น ไรน่าเริ่มตัดสินใจเร็วขึ้นแม้จะยังคิดมากอยู่</p>
+          </div>
+        </div>
+        <div class="clog-week">
+          <div class="clog-week-num">สัปดาห์ที่ ๓</div>
+          <div>
+            <p>โกเล็มสองตัว เซเรธเพิ่มขึ้นมาโดยไม่บอกล่วงหน้า ทั้งสองล้มในรอบแรก แต่ฟื้นได้เร็วกว่าที่เซเรธคาดไว้</p>
+            <p class="progress-note">ไรน่าสังเกตว่าเคลเริ่มเคลื่อนที่เหมือนรู้ว่าโกเล็มจะไปไหนก่อนที่มันจะเคลื่อน</p>
+          </div>
+        </div>
+        <div class="clog-week">
+          <div class="clog-week-num">สัปดาห์ที่ ๔</div>
+          <div>
+            <p>ฝึกเดี่ยว ทีละคน เซเรธเฝ้าดูทีละคนโดยไม่ให้อีกคนมองอยู่ใกล้ๆ</p>
+            <p class="progress-note">ไรน่ารู้สึกว่าการสู้คนเดียวต่างจากการสู้ด้วยกัน — เหงากว่า แต่ก็ทำให้เธอต้องพึ่งตัวเองมากขึ้น</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>วันหนึ่งตอนเย็น เซเรธนำน้ำชามาให้ที่ลานหินหลังฝึก นั่งลงข้างๆ โดยไม่ถามว่าจะนั่งได้ไหม</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าสองคนมีพื้นฐานมาบ้างแล้ว พ่อเจ้าสอนไว้"</p>
+        <p class="dialogue-note">ไม่ใช่คำถาม</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"พ่อและพี่ออร์เรน แต่ไม่เคยสู้จริงๆ มีแค่ฝึก"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"รู้ อ่านออกจากท่าทาง เซธานรู้ว่าเขาสอนอะไรได้และสอนอะไรไม่ได้"</p>
+        <p class="dialogue-note">เงียบครู่หนึ่ง</p>
+        <p class="dialogue-line">"เขาเลือกสอนสิ่งที่จะให้เจ้าอยู่รอดได้นานพอจะเจอคนที่สอนสิ่งที่เหลือได้"</p>
+      </div>
+
+      <div class="thought-block">
+        <p>ไรน่าไม่ได้ถามว่าเซเรธหมายถึงตัวเองหรือเปล่า</p>
+        <p class="thought-follow">คำถามบางอย่างมีคำตอบอยู่แล้วในการที่ถามมันไม่ออก</p>
+      </div>
+    </article>
+
+    <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+    <!-- ตอน 4 -->
+    <article class="act" id="act4">
+      <div class="act-marker">
+        <div class="act-number">๔</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">เซเรธลงสนาม</h2>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>เช้าวันนั้นเซเรธไม่ได้ยืนที่ขอบลาน</p>
+        <p>เธอยืนกลางลาน</p>
+      </div>
+
+      <div class="sereth-entrance">
+        <div class="se-label">Sereth เข้าสนาม</div>
+        <div class="se-weapon">Sword Whip — ดาบแซ่</div>
+        <p class="se-desc">มันดูเหมือนดาบธรรมดาในฝักก่อนที่เธอจะดึงออกมา แต่เมื่อเธอเหวี่ยง ใบดาบแยกออกเป็นปล้องๆ เชื่อมกันด้วยโซ่บางที่มองเกือบไม่เห็น เคลื่อนไหวในอากาศเหมือนมีชีวิต</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลหยุดนิ่งครู่หนึ่ง</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"...หนูไม่เคยเห็นอาวุธแบบนั้น"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าจะเห็นบ่อยขึ้น"</p>
+        <p class="dialogue-note">ไม่ยิ้ม แต่มีบางอย่างในน้ำเสียงที่ใกล้เคียงกับมัน</p>
+        <p class="dialogue-line">"มาเลย"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าไม่รู้ว่าตัวเองกำลังจะสู้กับใคร — โกเล็มที่เซเรธควบคุมอยู่กระทั่งตอนนี้ หรือเซเรธเอง</p>
+        <p>คำตอบคือทั้งสอง</p>
+        <p>เซเรธสู้กับทั้งสองคนพร้อมกัน ไม่หนักเกินจนไม่มีทาง แต่หนักพอที่จะทำให้ทุกการตัดสินใจมีราคา สายดาบแซ่เชื่อมพื้นที่รอบตัวเธอทำให้เข้าใกล้ตรงๆ ไม่ได้ง่าย แต่ก็ไม่ได้บังคับให้ทั้งสองถอย มันแค่ต้องการให้คิดก่อนเดิน</p>
+      </div>
+
+      <div class="atmosphere-note">ลาน Khar-Zunmora มีแค่เสียงโลหะ เสียงหิน และเสียงหายใจ</div>
+
+      <div class="prose-block">
+        <p>หลังจากฝึกไปได้หลายรอบ ไรน่าสังเกตว่าเซเรธไม่ได้พยายามชนะ เธอพยายามสอน แต่บทเรียนที่เธอสอนไม่ได้มาพร้อมคำอธิบาย มันมาพร้อมการที่ทำผิดแล้วรู้สึกได้ทันทีว่าผิดตรงไหน</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"หยุดก่อน"</p>
+        <p class="dialogue-note">เธอพูดระหว่างรอบ หายใจไม่ทัน</p>
+        <p class="dialogue-line">"ตอนเจ้าเหวี่ยงดาบแซ่ครั้งที่สาม ฉันรู้สึกว่าจะมาจากซ้าย แต่มันมาจากขวา ทำได้อย่างไร"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าดูสายดาบ ไม่ดูข้า ดาบแซ่ไปทางที่ข้าอยากให้ไป ไม่ใช่ทางที่มันดูเหมือนจะไป"</p>
+        <p class="dialogue-note">เธอเก็บดาบแซ่กลับฝัก</p>
+        <p class="dialogue-line">"เวลาสู้กับคน จงดูตา ไม่ใช่อาวุธ"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลพยักหน้าช้าๆ เหมือนยืนยันสิ่งที่รู้สึกอยู่แล้ว</p>
+        <p>ไรน่าจดจำ</p>
+      </div>
+    </article>
+
+    <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+    <!-- ตอน 5 -->
+    <article class="act" id="act5">
+      <div class="act-marker">
+        <div class="act-number">๕</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">ฟ้าร้อง</h2>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>มันเกิดขึ้นในสัปดาห์ที่ห้า ตอนบ่าย แสงกำลังเฉียง เงาของหน้าผาทอดยาวข้ามลานฝึก</p>
+        <p>เซเรธสร้างโกเล็มสองตัว เคลเข้าหาตัวที่ใกล้กว่า ไรน่าอีกตัว สนามฝึกเงียบยกเว้นเสียงก้าวเท้าและเสียงอาวุธกระทบหิน</p>
+        <p>แล้วมันก็เกิดขึ้น</p>
+        <p>ไม่มีสัญญาณเตือน</p>
+      </div>
+
+      <div class="lightning-burst">
+        <div class="lb-moment">ช่วงเวลาที่ไม่ได้ตั้งใจ</div>
+        <div class="lb-title">ฟ้าฟาด</div>
+        <p class="lb-desc">จากฝ่ามือข้างขวาของเคลที่กำลังจะตีโกเล็ม แสงสีฟ้าขาวระเบิดออกมาในแบบที่เธอไม่ได้สั่ง ไม่ได้รู้สึกล่วงหน้า ไม่ได้เข้าใจ มันออกมาเหมือนน้ำที่ระเบิดออกจากท่อที่อัดจนเกินไป เสียงดังไปทั่วเกาะ</p>
+        <div class="lb-reaction">
+          <div class="lbr-item">
+            <div class="lbr-name raina-n">ไรน่า</div>
+            <div class="lbr-reaction">หยุดนิ่ง มือรัดด้ามดาบแน่นขึ้น</div>
+          </div>
+          <div class="lbr-item">
+            <div class="lbr-name kel-n">เคล</div>
+            <div class="lbr-reaction">หน้าซีด ถอยหลังหนึ่งก้าว มองมือตัวเอง</div>
+          </div>
+          <div class="lbr-item">
+            <div class="lbr-name sereth-n">Sereth</div>
+            <div class="lbr-reaction">ออลม่าหินกันไว้ทัน — แต่ใช้เวลาครึ่งวินาทีมากกว่าที่ตั้งใจ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>เสียงสะท้อนจางลง</p>
+        <p>ไม่มีใครพูดอะไรทันที</p>
+        <p>ชาวบ้าน Khar-Zunmora บางคนออกมาดูจากระยะไกล เสียงที่ดังออกไปถึงหมู่บ้าน</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าไม่เป็นอะไร"</p>
+        <p class="dialogue-note">ไม่ใช่คำถาม มีน้ำหนักของการยืนยัน</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"ขอโทษ ข้าไม่ได้..."</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"รู้"</p>
+        <p class="dialogue-note">เธอมองเคลนานสักครู่ สายตาไม่ตัดสิน แต่หนักในแบบที่ทำให้เคลอยู่นิ่งๆ</p>
+        <p class="dialogue-line">"เคยมีใครบอกเจ้าบ้างไหมว่าเจ้ามีอะไรอยู่ข้างใน"</p>
+      </div>
+
+      <div class="memory-surface">
+        <div class="ms-label">เคล — สิ่งที่นึกขึ้นได้</div>
+        <p class="ms-fragment">ตอนอายุสิบสี่ ก่อนที่ปู่จะเสียชีวิต เขาจับมือเธอไว้นานกว่าปกติ บอกว่ามีบางอย่างที่อยากให้เธอรู้ก่อนที่เขาจะไม่อยู่แล้ว</p>
+        <p class="ms-gap">· · ·</p>
+        <p class="ms-fragment">เธอจำได้ว่ามีความอุ่นไหลจากมือปู่เข้ามาในมือเธอ ในแบบที่ไม่ใช่แค่ความร้อนของร่างกาย มันลึกกว่านั้น เข้าไปถึงจุดที่เธอไม่รู้ว่าจุดนั้นมีอยู่</p>
+        <p class="ms-gap">· · ·</p>
+        <p class="ms-fragment">ปู่ไม่ได้บอกว่ามันคืออะไร บอกแค่ว่า "เก็บไว้ดีๆ" แล้วก็หัวเราะเบาๆ ราวกับมีเรื่องขำที่เธอไม่รู้ จากนั้นก็ไม่มีโอกาสได้ถามอีก</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"ปู่เคยส่งบางอย่างมาให้ก่อนเสียชีวิต แต่ไม่เคยบอกว่าคืออะไร"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ตอนนี้เจ้ารู้แล้วว่าเป็นบางส่วนของอะไร"</p>
+        <p class="dialogue-note">ไม่ใช่คำถาม</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"...ฟ้า"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ฟ้าหรือพายุ นัยสำคัญต่างกัน แต่ต้องใช้เวลาหาคำตอบ"</p>
+        <p class="dialogue-note">เงียบสักพัก</p>
+        <p class="dialogue-line">"และนั่นอยู่นอกสิ่งที่ข้าจะสอนได้ดีพอ"</p>
+      </div>
+    </article>
+
+    <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+    <!-- ตอน 6 -->
+    <article class="act" id="act6">
+      <div class="act-marker">
+        <div class="act-number">๖</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">เข็มทิศที่ปรับใหม่</h2>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>เย็นวันนั้น เซเรธวางของบนโต๊ะ</p>
+        <p>ไรน่าจำเข็มทิศได้ทันที — อันเดิมที่พวกเธอพกมาตั้งแต่ต้น แต่บางอย่างข้างในมันต่างไป เข็มไม่ได้ชี้มาที่เซเรธอีกต่อไป</p>
+      </div>
+
+      <div class="compass-explanation">
+        <div class="compass-header">เซเรธอธิบายการทำงานของเข็มทิศ</div>
+        <div class="compass-mechanic">
+          <div class="cm-icon">◈</div>
+          <div class="cm-text">ในช่องเล็กๆ ของเข็มทิศ ใส่วัสดุชิ้นเล็กๆ ไว้ได้ เข็มทิศถูกสร้างจากบางอย่างพิเศษที่จำกลิ่นของวัสดุต่างๆ ได้ และสามารถนำทางไปยังสถานที่ที่วัสดุเหล่านั้นมาจาก</div>
+        </div>
+        <div class="compass-mechanic">
+          <div class="cm-icon">◈</div>
+          <div class="cm-text">ก่อนหน้านี้มีบางอย่างในนั้นที่นำทางมาหาข้า ตอนนี้ข้าเปลี่ยนไปแล้ว ใส่สิ่งที่จะนำทางพวกเจ้าไปหาคนที่จะช่วยเรื่องของเคลได้</div>
+        </div>
+        <div class="compass-mechanic">
+          <div class="cm-icon">◈</div>
+          <div class="cm-text">ข้าไม่รู้ว่าระยะทางแค่ไหน เข็มทิศบอกทิศทาง ไม่ได้บอกระยะเวลา แต่เป็นคนที่ข้าไว้ใจไม่ต่างจากพ่อของพวกเจ้า</div>
+        </div>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ใคร"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"เจ้าจะรู้เมื่อเจอ ข้าให้จดหมายฝากไปด้วย เขาจะรู้ว่าทำอะไรต่อ"</p>
+        <p class="dialogue-note">ยื่นจดหมายปิดผนึก</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"จดหมายบอกอะไร"</p>
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ว่าเจ้าสองคนเป็นใคร และข้าคิดอะไรกับพวกเจ้า"</p>
+        <p class="dialogue-note">เธอวางจดหมายลงบนโต๊ะระหว่างพวกเธอ</p>
+        <p class="dialogue-line">"ข้าไม่บังคับ แต่ข้าขอพูดบางอย่าง"</p>
+      </div>
+
+      <div class="world-update">
+        <div class="wu-header">
+          <div class="wu-dot"></div>
+          <div class="wu-title">โลกภายนอก — สิ่งที่เซเรธบอก</div>
+        </div>
+        <div class="wu-item"><span class="wu-bullet">—</span><span>Soldier Empire ไม่ได้หยุดรุกรานในขณะที่พวกเราฝึกอยู่ที่นี่</span></div>
+        <div class="wu-item"><span class="wu-bullet">—</span><span>หมู่บ้านที่พวกเขาถูกโจมตีก่อนหน้านี้ไม่ได้เป็นที่เดียว</span></div>
+        <div class="wu-item"><span class="wu-bullet">—</span><span>คนที่มีออลม่าแข็งแกร่งมีราคาสำหรับพวกเขา ไม่ว่าจะในฐานะใด</span></div>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ข้าไม่ได้บอกเพื่อให้เจ้ากลัว ข้าบอกเพื่อให้เจ้าตัดสินใจโดยรู้ว่าตัดสินใจอะไร เมื่อไหร่ที่เจ้าพร้อม นั่นคือเวลาของเจ้า ไม่ใช่ของข้า"</p>
+        <p class="dialogue-note">มองทั้งสองคน</p>
+        <p class="dialogue-line">"คิดให้ดี"</p>
+      </div>
+    </article>
+
+    <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+    <!-- ตอน 7 -->
+    <article class="act" id="act7">
+      <div class="act-marker">
+        <div class="act-number">๗</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">ระหว่างรอการตัดสินใจ</h2>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>เซเรธให้เวลาแต่ไม่ได้ปล่อยให้ว่าง</p>
+        <p>ในช่วงที่ทั้งสองคิด การฝึกยังดำเนินต่อ แต่เปลี่ยนจากการฝึกร่างกายมาเป็นการฝึกควบคุมธาตุ ช้าลง นุ่มนวลขึ้น เซเรธนั่งใกล้ๆ แทนที่จะยืนอยู่ขอบลาน</p>
+      </div>
+
+      <div class="element-training">
+        <div class="et-header">การฝึกควบคุมธาตุ — ช่วงก่อนออกเดินทาง</div>
+        <div class="et-session">
+          <div class="et-who raina-et">ไรน่า</div>
+          <div>
+            <div class="et-text">เธอยังไม่สามารถดึงไฟออกมาได้อย่างที่ต้องการ แต่เธอเริ่มรู้สึกถึงมันได้ชัดขึ้น ความร้อนเล็กๆ ที่เคยรู้สึกเหมือนอยู่ข้างหลังประตูที่ล็อคอยู่ ตอนนี้เธอรู้สึกได้ว่าด้ามจับประตูนั้นอยู่ที่ไหน</div>
+            <div class="et-note">เซเรธบอกว่านั่นคือสิ่งที่ต้องการจากการฝึกนี้ ไม่ใช่การเปิดประตู แต่การรู้ว่าด้ามจับอยู่ที่ไหน</div>
+          </div>
+        </div>
+        <div class="et-session">
+          <div class="et-who kel-et">เคล</div>
+          <div>
+            <div class="et-text">เซเรธสอนเรื่องการกักเก็บก่อนปล่อย เหมือนหายใจก่อนพูด เคลเริ่มเข้าใจว่าสาเหตุที่พลังระเบิดออกมาโดยไม่ตั้งใจคือเธอไม่เคยรู้ว่ามันสะสมอยู่ ไม่ใช่เพราะมันแรง แต่เพราะเธอไม่เคยรู้สึกมันจนกว่ามันจะล้นออกมา</div>
+            <div class="et-note">ยังเกิดได้อีก — เซเรธพูดตรงๆ — แต่ตอนนี้เธอรู้สึกถึงมันก่อนที่จะล้น มีเวลาเตือนตัวเองได้</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>คืนหนึ่งก่อนนอน ไรน่านอนฟังเสียงทะเลของ Khar-Zunmora</p>
+        <p>เคลนอนอยู่ข้างๆ แต่ยังไม่หลับ ไรน่ารู้จากเสียงหายใจ</p>
+      </div>
+
+      <div class="dialogue-block night-talk">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"พี่คิดว่าพ่อรู้ว่าปู่ให้หนูอะไรไหม"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"น่าจะรู้ พ่อรู้อะไรหลายอย่างที่เราไม่รู้"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"งั้นทำไมไม่บอก"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าไม่ตอบทันที เธอนึกถึงพ่อที่ยืนกลางลาน ออลม่าที่บิดแสง มือที่เธอแทบไม่เคยเห็นสั่น</p>
+        <p>นึกถึงออร์เรนที่บอกว่ารีบมา ไม่รอให้ถาม</p>
+        <p>นึกถึงถุงผ้าเล็กๆ ที่พ่อกดให้เคล</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"เพราะบางอย่างต้องเจออยู่คนเดียวก่อนถึงจะได้ยินคำอธิบาย ถ้าพ่อบอกตั้งแต่ต้น เราก็แค่รู้ ไม่ได้เข้าใจ"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"แต่มันเกือบทำร้ายเซเรธ"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ใช่"</p>
+        <p class="dialogue-note">ไม่หาเหตุผลมาลบล้าง</p>
+        <p class="dialogue-line">"แต่ตอนนี้เจ้ารู้สึกมันได้ ก่อนที่มันจะล้น นั่นสำคัญกว่าที่จะรู้ทุกอย่างมาตั้งแต่แรก"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลเงียบนานพอที่ไรน่าจะคิดว่าเธอหลับแล้ว</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หนูพร้อมแล้ว"</p>
+        <p class="dialogue-note">เบาๆ แต่ไม่ใช่คำถาม</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"หนูแน่ใจ"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"พี่แน่ใจเหรอ ว่าหนูพร้อม"</p>
+        <p class="dialogue-note">เงียบ</p>
+        <p class="dialogue-line">"ไม่ใช่ถามว่าพี่พร้อมนะ ถามว่าพี่คิดว่าหนูพร้อมไหม"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่ามองเพดานหิน</p>
+        <p>เธอนึกถึงเคลที่กาตาร์ในมือ เคลที่รู้ว่าโกเล็มจะเคลื่อนไปไหนก่อนที่มันจะเคลื่อน เคลที่ตอบ "พร้อม" ก่อนไรน่าทุกครั้งที่เซเรธถาม</p>
+        <p>เคลที่มองมือตัวเองหลังพลังระเบิดออกมา ไม่ตกใจ ไม่ร้องไห้ แค่มองราวกับว่าเจอบางอย่างที่รู้อยู่แล้วว่ามีอยู่แต่ยังนึกไม่ออกว่าตั้งอยู่ที่ไหน</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"แน่ใจ"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลไม่พูดอะไรอีก</p>
+        <p>ไม่นานเธอก็หลับ</p>
+        <p>ไรน่าตามมาช้ากว่า แต่ก็หลับในที่สุด</p>
+      </div>
+    </article>
+
+    <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+    <!-- ตอน 8 -->
+    <article class="act" id="act8">
+      <div class="act-marker">
+        <div class="act-number">๘</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">เช้าก่อนออกเดินทาง</h2>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>พวกเธอบอกเซเรธตอนเช้า</p>
+        <p>เธอพยักหน้า ไม่แสดงว่าแปลกใจหรือไม่แปลกใจ แค่บอกว่าให้พักผ่อนก่อนวันสุดท้าย</p>
+        <p>ชาวบ้าน Khar-Zunmora ออกมาที่ท่าเรือในเช้าวันรุ่งขึ้น บางคนนำอาหารแห้งมาให้ บางคนแค่ยืนดู Maret อยู่แถวหน้า มือสองข้างประกบกันเงียบๆ</p>
+      </div>
+
+      <div class="departure-block">
+        <div class="dep-label">ของที่เซเรธมอบให้</div>
+        <div class="dep-gifts">
+          <div class="dep-gift">
+            <div class="dep-gift-owner raina-g">ไรน่า</div>
+            <div class="dep-gift-name">ดาบสั้น</div>
+            <div class="dep-gift-note">อันเดิมที่เธอเลือกจากคลัง รับกลับคืนในฐานะของขวัญ ไม่ใช่อุปกรณ์ฝึก</div>
+          </div>
+          <div class="dep-gift">
+            <div class="dep-gift-owner kel-g">เคล</div>
+            <div class="dep-gift-name">กาตาร์</div>
+            <div class="dep-gift-note">คู่เดิมที่เธอหยิบขึ้นมาตอนแรกและไม่เคยอยากวางลง</div>
+          </div>
+        </div>
+        <div class="dep-words">พร้อมจดหมายปิดผนึกและเข็มทิศที่ปรับใหม่</div>
+      </div>
+
+      <div class="sereth-farewell">
+        <div class="sf-label">สิ่งที่เซเรธพูดก่อนทั้งสองออกเดินทาง</div>
+        <p class="sf-words">"ระวังตัวเสมอ อย่าเชื่อใจใครง่ายๆ — ไม่ใช่เพราะโลกนี้ไม่มีคนดี แต่เพราะการตัดสินใจว่าใครดีพอที่จะไว้ใจ นั่นคือสิ่งที่เจ้าต้องทำด้วยตัวเองเท่านั้น ข้าให้อาวุธได้ แต่ให้สิ่งนั้นไม่ได้"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่ากลั้นคำที่อยากพูดหลายคำไว้</p>
+        <p>แต่เธอพูดแค่ว่า</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"ขอบคุณที่ไม่รีบให้เราไป"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เซเรธมองเธอสักครู่</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker sereth">Sereth</div>
+        <p class="dialogue-line">"ข้าไม่ได้ทำเพื่อเจ้า ข้าทำเพราะคนที่ออกไปก่อนพร้อมมักไม่มีโอกาสกลับมา"</p>
+        <p class="dialogue-note">เงียบสักพัก</p>
+        <p class="dialogue-line">"แต่ถ้าเจ้าอยากคิดว่าข้าทำเพื่อเจ้า ข้าก็ไม่ว่า"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลยิ้มก่อน ไรน่าตามมาช้ากว่าเล็กน้อย</p>
+        <p>เซเรธไม่ยิ้มตอบ แต่ก็ไม่ได้เมิน</p>
+      </div>
+    </article>
+
+    <div class="scene-break"><span></span><span class="scene-glyph">⋯</span><span></span></div>
+
+    <!-- ตอน 9 -->
+    <article class="act" id="act9">
+      <div class="act-marker">
+        <div class="act-number">๙</div>
+        <div class="act-title-wrap">
+          <h2 class="act-title">ออกจากท่า</h2>
+        </div>
+      </div>
+
+      <div class="prose-block">
+        <p>เรือลำเดิม น้ำเดิม แต่ทุกอย่างอื่นต่างไป</p>
+        <p>ไรน่าดึงเชือกออกจากเสาและพายออกจากท่า เคลนั่งทางหัวเรือถือเข็มทิศ เข็มชี้ไปทางตะวันออกเฉียงเหนือ</p>
+        <p>ชาวบ้านยืนอยู่บนท่าจนเรือลำเล็กห่างออกไปจนมองไม่เห็นรายละเอียด Maret ยกมือโบกหนึ่งครั้งแล้วก็เดินกลับ</p>
+        <p>เซเรธยืนอยู่คนสุดท้าย มือสองข้างข้างลำตัว ไม่โบกมือ แค่ยืนดูจนเรือหายไปในหมอก</p>
+      </div>
+
+      <div class="prose-block">
+        <p>เคลมองกลับไปที่เกาะจนหายเข้าในหมอกทะเล</p>
+      </div>
+
+      <div class="dialogue-block">
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"พี่คิดว่าเซเรธโอเคไหม อยู่คนเดียวที่นั่น"</p>
+        <div class="dialogue-speaker raina">ไรน่า</div>
+        <p class="dialogue-line">"เธออยู่ที่นั่นมาก่อนที่เราจะมา และจะยังอยู่ที่นั่นต่อ"</p>
+        <div class="dialogue-speaker kel">เคล</div>
+        <p class="dialogue-line">"หนูรู้ แต่ก็ถามอยู่ดี"</p>
+      </div>
+
+      <div class="prose-block">
+        <p>ไรน่าไม่ตอบ</p>
+        <p>เธอมองไปข้างหน้า เข็มทิศในมือน้องสาวชี้ตรง ทะเลข้างหน้าสีเทาอมเขียวในแสงเช้า</p>
+        <p>เธอพายต่อ</p>
+      </div>
+
+      <div class="ch3-closing">
+        <p class="ch3-cc-line">ใต้ดาดฟ้าเรือลำเล็ก ดาบสั้นและกาตาร์นอนอยู่ในฝักผ้าที่เซเรธทำให้</p>
+        <p class="ch3-cc-line">เข็มทิศชี้ไปในทิศทางที่ยังไม่มีชื่อสำหรับทั้งสองคน</p>
+        <p class="ch3-cc-line">และในฝ่ามือของเคลที่กำเข็มทิศไว้ บางอย่างอุ่นขึ้นเล็กน้อยอย่างเงียบๆ ราวกับว่ามันรู้ว่ากำลังจะได้ออกไปในที่สุด</p>
+        <div class="ch3-waiting">
+          <p>ข้างหน้ายังไม่รู้จัก</p>
+          <p class="ch3-wait-word">แต่เข็มรู้ทาง</p>
+        </div>
+      </div>
+    </article>
+
+    <div class="chapter-footer">
+      <div class="footer-ornament">✦</div>
+      <div class="footer-text">ยังมีต่อ</div>
+      <div class="footer-ornament">✦</div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="Alma_ch3.js"></script>
+</body>
+</html>
